@@ -28,6 +28,7 @@ const Component = () => {
       justifyContent={'center'}
       bg={'red.700'}
       h="100vh"
+      px={100}
     ></Flex>
   )
 }
