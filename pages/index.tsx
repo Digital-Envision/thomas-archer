@@ -1,3 +1,4 @@
+import { ChakraProvider, Text } from '@chakra-ui/react'
 import { PreviewSuspense } from '@sanity/preview-kit'
 import IndexPage from 'components/IndexPage'
 import { getAllPosts, getSettings } from 'lib/sanity.client'
@@ -27,13 +28,15 @@ export default function Page(props: PageProps) {
 
   if (preview) {
     return (
-      <PreviewSuspense
-        fallback={
-          <IndexPage loading preview posts={posts} settings={settings} />
-        }
-      >
-        <PreviewIndexPage token={token} />
-      </PreviewSuspense>
+      <ChakraProvider>
+        <PreviewSuspense
+          fallback={
+            <IndexPage loading preview posts={posts} settings={settings} />
+          }
+        >
+          <PreviewIndexPage token={token} />
+        </PreviewSuspense>
+      </ChakraProvider>
     )
   }
 
