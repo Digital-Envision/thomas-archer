@@ -21,6 +21,7 @@
     "@sanity/image-url": "1.0.2",
     "@sanity/vision": "3.7.1",
     "@vercel/og": "0.4.1",
+    "chakra-react-select": "^4.6.0",
     "classnames": "^2.3.2",
     "date-fns": "^2.29.3",
     "framer-motion": "^10.9.1",
