@@ -17,34 +17,44 @@ const variants = {
   white: {
     bg: '#FFFFFF',
     color: '#000000',
-    _hover: {},
-    _focus: {},
-    _active: {},
+    border: '1px solid #FFFFFF',
+    _hover: {
+      bg: 'transparent',
+      border: '1px solid #FFFFFF',
+      borderColor: '#FFFFFF',
+      color: '#FFFFFF',
+    },
   },
   black: {
     bg: '#000000',
     color: '#FFFFFF',
-    _hover: {},
-    _focus: {},
-    _active: {},
+    border: '1px solid #000000',
+    _hover: {
+      bg: 'transparent',
+      border: '1px solid #000000',
+      borderColor: '#000000',
+      color: '#000000',
+    },
   },
   whiteLine: {
     bg: 'transparent',
     border: '1px solid #FFFFFF',
     borderColor: '#FFFFFF',
     color: '#FFFFFF',
-    _hover: {},
-    _focus: {},
-    _active: {},
+    _hover: {
+      bg: '#000000',
+      color: '#FFFFFF',
+    },
   },
   blackLine: {
     bg: 'transparent',
     border: '1px solid #000000',
     borderColor: '#000000',
     color: '#000000',
-    _hover: {},
-    _focus: {},
-    _active: {},
+    _hover: {
+      bg: '#000000',
+      color: '#FFFFFF',
+    },
   },
 }
 
@@ -55,9 +65,9 @@ const Button: React.FC<Props> = ({ children, variant, ...props }) => {
       fontWeight={300}
       fontSize={'14px'}
       lineHeight={'17px'}
-      px={8}
-      py={2}
+      px={'24px'}
       borderRadius={'25px'}
+      fontFamily={'Helvetica Neue LT Pro'}
       {...props}
     >
       {children}

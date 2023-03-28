@@ -8,14 +8,14 @@ import {
 } from '@chakra-ui/react'
 import { ReactNode } from 'react'
 import { HiArrowSmallRight } from 'react-icons/hi2'
-import Text, { ParagraphProps, textBaseProps } from 'components/base/Text'
+import Text from 'components/base/Text'
 
 interface LinkProps extends ChakraLinkProps {
   children: ReactNode
   href: string
   isExternal?: boolean
   width?: string
-  textProps?: ParagraphProps
+  textProps?: TextProps
 }
 
 const dropdownTextStyle: TextProps = {
@@ -44,7 +44,6 @@ const DropdownItem = ({
     <Link
       href={href}
       isExternal={isExternal}
-      paddingX={2}
       paddingY={2}
       borderBottom="1px"
       borderColor="#898989"
@@ -53,6 +52,7 @@ const DropdownItem = ({
         bg: '#FFFFFF',
         border: 0,
       }}
+      {...props}
     >
       <Flex align="center" justifyContent="space-between" width={width}>
         <Text {...dropdownTextStyle} {...textProps}>

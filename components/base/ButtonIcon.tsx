@@ -9,6 +9,7 @@ export enum Variants {
 export interface Props extends IconButtonProps {
   children: React.ReactNode
   variant?: Variants
+  href?: string
 }
 
 const variants = {
