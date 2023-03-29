@@ -6,29 +6,41 @@ interface PortfolioCardProps {
   linkUrl: string
   label: string
   width?: string
+  height?: string
 }
 
 /**
  * usage:
- *  <PortfolioCard
+ * <PortfolioCard
     imageUrl="https://via.placeholder.com/500x500"
     linkUrl="https://www.google.com/"
     label="test"
-    />
+   />
  */
 
 const PortfolioCard: React.FC<PortfolioCardProps> = ({
   imageUrl,
   linkUrl,
   label,
-  width = '450px',
+  width = '360px',
+  height = '540px',
 }) => {
   return (
-    <Box overflow="hidden" width={width}>
-      <Image src={imageUrl} alt={label} />
-      <Box p="6" mt="4">
+    <Box overflow="hidden" width={width} height={height}>
+      <Box display="flex" justifyContent="center" alignItems="center">
+        <Image
+          src={imageUrl}
+          alt={label}
+          maxW="360px"
+          maxH="500px"
+          w="full"
+          h="auto"
+          objectFit="cover"
+        />
+      </Box>
+      <Box px={2} py={1}>
         <Link href={linkUrl} isExternal textDecor="underline">
-          <Text fontSize={'14px'} mb="4">
+          <Text noOfLines={1} fontSize={'14px'}>
             {label}
           </Text>
         </Link>
