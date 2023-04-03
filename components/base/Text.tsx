@@ -12,9 +12,8 @@ export interface ParagraphProps extends TextProps {
 export const textBaseProps = {
   fontWeight: 300,
   color: '#000000',
-  fontFamily: 'Helvetica Neue LT Pro',
-  fontSize: '14px',
-  lineHeight: '20px',
+  fontSize: 'sm', //14px
+  lineHeight: 'shorter',
 }
 
 const Text = ({ children, ...props }: ParagraphProps) => {

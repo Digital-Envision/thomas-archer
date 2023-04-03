@@ -15,7 +15,6 @@ const Heading2 = ({ children, ...props }: HeaderProps) => {
       as="h2"
       fontWeight={400}
       color={'#000000'}
-      fontFamily={'Iskry'}
       fontSize={'28px'}
       lineHeight={'25px'}
       {...props}

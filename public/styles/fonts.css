@@ -1,0 +1,68 @@
+@font-face {
+  font-family: 'Iskry';
+  src: url('/fonts/Iskry/Iskry-Regular.woff2') format('woff2'),
+    url('/fonts/Iskry/Iskry-Regular.woff') format('woff'),
+    url('/fonts/Iskry/Iskry-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Iskry';
+  src: url('/fonts/Iskry/Iskry-Bold.woff2') format('woff2'),
+    url('/fonts/Iskry/Iskry-Bold.woff') format('woff'),
+    url('/fonts/Iskry/Iskry-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue LT Std';
+  src: url('/fonts/HelveticaNeueLTStd/HelveticaNeueLTStd-Lt.woff2')
+      format('woff2'),
+    url('/fonts/HelveticaNeueLTStd/HelveticaNeueLTStd-Lt.woff') format('woff'),
+    url('/fonts/HelveticaNeueLTStd/HelveticaNeueLTStd-Lt.ttf')
+      format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue LT Std';
+  src: url('/fonts/HelveticaNeueLTStd/HelveticaNeueLTStd-Bd.woff2')
+      format('woff2'),
+    url('/fonts/HelveticaNeueLTStd/HelveticaNeueLTStd-Bd.woff') format('woff'),
+    url('/fonts/HelveticaNeueLTStd/HelveticaNeueLTStd-Bd.ttf')
+      format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue LT Std';
+  src: url('/fonts/HelveticaNeueLTStd/HelveticaNeueLTStd-Md.woff2')
+      format('woff2'),
+    url('/fonts/HelveticaNeueLTStd/HelveticaNeueLTStd-Md.woff') format('woff'),
+    url('/fonts/HelveticaNeueLTStd/HelveticaNeueLTStd-Md.ttf')
+      format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue LT Std';
+  src: url('/fonts/HelveticaNeueLTStd/HelveticaNeueLTStd-Roman.woff2')
+      format('woff2'),
+    url('/fonts/HelveticaNeueLTStd/HelveticaNeueLTStd-Roman.woff')
+      format('woff'),
+    url('/fonts/HelveticaNeueLTStd/HelveticaNeueLTStd-Roman.ttf')
+      format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

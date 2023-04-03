@@ -1,8 +1,6 @@
 import { Box, Image, Button, Icon, Flex, Link } from '@chakra-ui/react'
 import Heading3 from '../base/Heading3'
 import Text from '../base/Text'
-import { isEmpty } from 'lodash'
-import { HiArrowSmallRight } from 'react-icons/hi2'
 import { BsArrowRight } from 'react-icons/bs'
 
 type PortfolioListingCardProps = {
