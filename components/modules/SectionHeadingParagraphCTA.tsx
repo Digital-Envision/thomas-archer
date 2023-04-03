@@ -20,6 +20,7 @@ const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
       width={'w-full'}
       maxWidth={'1440px'}
       direction={{ base: 'column', md: isOffset ? 'column' : 'row' }}
+      px={'5rem'}
     >
       <Flex direction={'row'} flex={1}>
         <Flex flex={1}>

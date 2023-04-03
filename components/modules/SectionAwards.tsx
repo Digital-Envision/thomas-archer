@@ -53,12 +53,7 @@ const SectionAwards: React.FC<SectionAwardsProps> = ({
 }) => {
   return (
     // @ts-ignore: 2590
-    <Flex
-      direction={'column'}
-      width={'w-full'}
-      maxWidth={'1440px'}
-      borderWidth={1}
-    >
+    <Flex direction={'column'} width={'w-full'} maxWidth={'1440px'} px={'5rem'}>
       <Heading1>{heading}</Heading1>
       <Flex direction={{ base: 'column', md: 'row' }}>
         <Flex flex={1} direction={'column'} width={'100%'} pr={8}>
