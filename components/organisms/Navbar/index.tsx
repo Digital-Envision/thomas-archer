@@ -106,7 +106,7 @@ const Navbar = () => {
   }, [LogoVariantBreakpoint])
 
   return (
-    <Box width={'full'} position={'fixed'} height={'auto'}>
+    <Box width={'full'} position={'fixed'} height={'auto'} zIndex={99}>
       <Flex
         height={{
           base: '110px',

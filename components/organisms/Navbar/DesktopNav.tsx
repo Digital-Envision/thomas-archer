@@ -79,7 +79,9 @@ const DesktopNav: React.FC<Props> = ({
                     {link.label}
                   </Text>
                 </Link>
-                {link.children && <DesktopSubNav links={link.children} />}
+                {link.children && (
+                  <DesktopSubNav links={link.children} title={link.label} />
+                )}
               </Box>
             )
           })}

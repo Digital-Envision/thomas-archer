@@ -7,12 +7,13 @@ import { NavLinksInterfaces } from '.'
 
 export interface Props {
   NAV_ITEMS: Array<NavLinksInterfaces>
+  title: string
 }
 
-const MobileNavLevel2: React.FC<Props> = ({ NAV_ITEMS }) => {
+const MobileNavLevel2: React.FC<Props> = ({ NAV_ITEMS, title }) => {
   return (
     <Box>
-      <Heading1 mb={8}>About</Heading1>
+      <Heading1 mb={8}>{title}</Heading1>
       <Stack direction={'column'} spacing={0} width={'full'}>
         {NAV_ITEMS.map((link, key) => {
           return (

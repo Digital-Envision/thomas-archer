@@ -8,7 +8,7 @@ import { LinksInterface, NavLinksInterfaces } from '.'
 
 export interface Props {
   NAV_ITEMS: Array<NavLinksInterfaces>
-  setSubLinks: (links: Array<LinksInterface>) => void
+  setSubLinks: (links: Array<LinksInterface>, title: string) => void
 }
 
 const MobileNavLevel1: React.FC<Props> = ({ NAV_ITEMS, setSubLinks }) => {
@@ -24,7 +24,7 @@ const MobileNavLevel1: React.FC<Props> = ({ NAV_ITEMS, setSubLinks }) => {
                 isExternal={link.children ? false : link.externalLink}
                 as={link.children ? 'button' : 'a'}
                 onClick={() =>
-                  link.children ? setSubLinks(link.children) : {}
+                  link.children ? setSubLinks(link.children, link.label) : {}
                 }
                 width={'auto'}
                 paddingX={0}
@@ -34,7 +34,6 @@ const MobileNavLevel1: React.FC<Props> = ({ NAV_ITEMS, setSubLinks }) => {
                   fontSize: '1.3em',
                   lineHeight: '1.57em',
                 }}
-                onClick={() => setSubLinks(link.children)}
               >
                 {link.label}
               </DropdownItem>

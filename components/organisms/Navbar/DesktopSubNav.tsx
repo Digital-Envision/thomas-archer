@@ -16,9 +16,10 @@ import { LinksInterface } from '.'
 
 export interface Props {
   links: Array<LinksInterface>
+  title: string
 }
 
-const DesktopSubNav: React.FC<Props> = ({ links }) => {
+const DesktopSubNav: React.FC<Props> = ({ links, title }) => {
   return (
     <Box
       bg={'rgba(255,255,255,0.9)'}
@@ -43,7 +44,7 @@ const DesktopSubNav: React.FC<Props> = ({ links }) => {
     >
       <Grid templateColumns={'repeat(11, 1fr)'} mb={'76px'}>
         <GridItem colSpan={4}>
-          <Heading1 fontSize={'34px'}>About</Heading1>
+          <Heading1 fontSize={'34px'}>{title}</Heading1>
         </GridItem>
         <GridItem colSpan={7}>
           <SimpleGrid columns={2} spacingX={10} spacingY={1}>

@@ -17,7 +17,8 @@ const MobileCollapse: React.FC<Props> = ({
   setOnOpenLevel2,
 }) => {
   const [boxHeight, setBoxHeight] = useState('calc(100vh - 110px)')
-  const [subLinks, setSubLinks] = useState([])
+  const [subLinks, setSubLinks] = useState([]);
+  const [subTitle, setSubTitle] = useState('');
 
   useEffect(() => {
     function calculateHeight() {
@@ -31,8 +32,9 @@ const MobileCollapse: React.FC<Props> = ({
     return () => window.removeEventListener('resize', calculateHeight)
   }, [])
 
-  const handleOpenLevel2 = (links: Array<LinksInterface>) => {
+  const handleOpenLevel2 = (links: Array<LinksInterface>, title: string) => {
     setSubLinks(links)
+    setSubTitle(title)
     setOnOpenLevel2(true)
   }
 
@@ -68,12 +70,11 @@ const MobileCollapse: React.FC<Props> = ({
           <GridItem>
             <MobileNavLevel1
               NAV_ITEMS={NAV_ITEMS}
-              onOpenLevel2={onOpenLevel2}
               setSubLinks={handleOpenLevel2}
             />
           </GridItem>
           <GridItem>
-            <MobileNavLevel2 NAV_ITEMS={subLinks} onOpenLevel2={onOpenLevel2} />
+            <MobileNavLevel2 NAV_ITEMS={subLinks} title={subTitle} />
           </GridItem>
         </Grid>
       </Flex>
