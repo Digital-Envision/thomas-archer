@@ -98,7 +98,9 @@ const DesktopSubNav: React.FC<Props> = ({ links, title }) => {
                 </Link>
               </Flex>
             </Flex>
-            <Text>info@thomasarcher.com.au</Text>
+            <Link href={'mailto:info@thomasarcher.com.au'}>
+              <Text>info@thomasarcher.com.au</Text>
+            </Link>
           </SimpleGrid>
         </GridItem>
       </Grid>

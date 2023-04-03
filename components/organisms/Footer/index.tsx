@@ -50,18 +50,22 @@ const Footer = () => {
               <Text fontSize={'12px'}>Heatherton VIC 3202</Text>
             </GridItem>
             <GridItem>
-              <Text>
-                <Text as={'span'} fontSize={'12px'} fontWeight={700} mr={2}>
-                  p.
+              <Link href={'tel:0399995967'}>
+                <Text>
+                  <Text as={'span'} fontSize={'12px'} fontWeight={700} mr={2}>
+                    p.
+                  </Text>
+                  03 9999 5967
                 </Text>
-                03 9999 5967
-              </Text>
-              <Text>
-                <Text as={'span'} fontSize={'12px'} fontWeight={700} mr={2}>
-                  e.
+              </Link>
+              <Link href={'mailto:info@thomasarcher.com.au'}>
+                <Text>
+                  <Text as={'span'} fontSize={'12px'} fontWeight={700} mr={2}>
+                    e.
+                  </Text>
+                  info@thomasarcher.com.au
                 </Text>
-                info@thomasarcher.com.au
-              </Text>
+              </Link>
             </GridItem>
           </Grid>
           <Flex
