@@ -6,7 +6,7 @@ import Dash from 'components/base/Dash'
 type SectionTextFeaturedProps = {
   leftHeading: string
   rightHeading: string
-  postedBy: boolean
+  postedBy: string
 }
 
 /**

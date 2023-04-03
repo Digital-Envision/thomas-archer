@@ -1,11 +1,7 @@
 import { Box, Flex, HStack, Image, VStack } from '@chakra-ui/react'
 import Text from '../base/Text'
-import Heading1 from 'components/base/Heading1'
-import Button from 'components/base/Button'
-import Divider, { HeightVariants } from 'components/base/Divider'
 
 type SectionImageAwardsProps = {
-  heading: string
   imageUrl: string
   awards: { label: string; value: string }[]
 }
@@ -40,7 +36,6 @@ type SectionImageAwardsProps = {
  */
 
 const SectionImageAwards: React.FC<SectionImageAwardsProps> = ({
-  heading,
   imageUrl,
   awards,
 }) => {
@@ -53,13 +48,7 @@ const SectionImageAwards: React.FC<SectionImageAwardsProps> = ({
       borderWidth={1}
     >
       <Box alignSelf={'center'}>
-        <Image
-          src={imageUrl}
-          alt={heading}
-          objectFit="cover"
-          width="100%"
-          height="80vh"
-        />
+        <Image src={imageUrl} objectFit="cover" width="100%" height="80vh" />
       </Box>
       <Flex
         direction={'column'}
