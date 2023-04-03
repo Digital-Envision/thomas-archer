@@ -16,8 +16,8 @@ const Logo = ({ variant, ...props }: LogoProps) => {
       objectFit="cover"
       src={
         variant === LogoVariants.white
-          ? '/images/logo/logo-white.svg'
-          : '/images/logo/logo-black.svg'
+          ? '/images/logo/TA-logo-white.svg'
+          : '/images/logo/TA-logo-black.svg'
       }
       alt="logo"
       {...props}
