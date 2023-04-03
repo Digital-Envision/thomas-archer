@@ -41,12 +41,7 @@ const SectionImageAwards: React.FC<SectionImageAwardsProps> = ({
 }) => {
   return (
     // @ts-ignore: 2590
-    <Flex
-      direction={'column'}
-      width={'100%'}
-      maxWidth={'1440px'}
-      borderWidth={1}
-    >
+    <Flex direction={'column'} width={'w-full'} maxWidth={'1440px'} px={'5rem'}>
       <Box alignSelf={'center'}>
         <Image src={imageUrl} objectFit="cover" width="100%" height="80vh" />
       </Box>

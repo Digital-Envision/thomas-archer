@@ -19,6 +19,7 @@ const SectionHeadingParagraphCTAImage: React.FC<
       direction={{ base: 'column', md: 'row' }}
       width={'w-full'}
       maxWidth={'1440px'}
+      px={'5rem'}
     >
       <Flex flex={1} direction={'row'} align={'center'}>
         <Flex flex={1} direction={'column'} justify={'center'} align={'center'}>
