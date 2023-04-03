@@ -12,6 +12,19 @@ type SectionImageTextMosaicType1Props = {
   leftImageUrl: string
 }
 
+/**
+ * Usage
+ * <SectionImageTextMosaicType1
+    heading="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+      feugiat, lectus et viverra ullamcorper, nulla dui ullamcorper quam,
+      et dictum arcu ipsum vel risus. Curabitur quis orci viverra,
+      efficitur nunc in."
+    rightImageUrl="https://via.placeholder.com/727x455/"
+    leftImageUrl="https://via.placeholder.com/500x500/"
+  />
+ */
+
 const SectionImageTextMosaicType1: React.FC<
   SectionImageTextMosaicType1Props
 > = ({ heading, paragraph, rightImageUrl, leftImageUrl }) => {

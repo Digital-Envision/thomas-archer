@@ -1,7 +1,8 @@
-import { Box, Image, Button, Flex } from '@chakra-ui/react'
+import { Box, Image, Flex } from '@chakra-ui/react'
 import Heading3 from '../base/Heading3'
 import Text from '../base/Text'
 import { isEmpty } from 'lodash'
+import Button, { Variants } from 'components/base/Button'
 
 type ArticleBlogCardProps = {
   imageUrl: string
@@ -11,7 +12,7 @@ type ArticleBlogCardProps = {
   width?: string
   height?: string
   buttonText: string
-  buttonOnClick: () => {}
+  buttonOnClick: () => void
 }
 
 /**
@@ -63,10 +64,9 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
           </Text>
         </Box>
 
-        {/* TODO: using base button later */}
         <Box mt="auto">
-          <Button variant="outline" onClick={buttonOnClick}>
-            {buttonText}
+          <Button variant={Variants.blackLine} onClick={buttonOnClick}>
+            {'Why Thomas Archer'}
           </Button>
         </Box>
       </Flex>
