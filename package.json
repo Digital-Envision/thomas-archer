@@ -32,6 +32,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.9",
     "react-icons": "^4.8.0",
+    "react-scroll": "^1.8.9",
     "sanity": "3.7.1",
     "sanity-plugin-asset-source-unsplash": "1.0.6",
     "suspend-react": "0.0.9",
@@ -39,6 +40,7 @@
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
+    "@types/react-scroll": "^1.8.6",
     "autoprefixer": "^10.4.14",
     "eslint": "^8.35.0",
     "eslint-config-next": "13.2.4",
