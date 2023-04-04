@@ -1,4 +1,5 @@
 import { Flex, Box } from '@chakra-ui/react'
+import SectionHeroImageBig from 'components/modules/SectionHeroImageBig'
 import Navbar from 'components/organisms/Navbar'
 import React from 'react'
 import Footer from '../components/organisms/Footer'
@@ -34,7 +35,9 @@ const Component = () => {
       flexDir={'column'}
     >
       <Navbar />
-      <Box flex={1}></Box>
+      <Box flex={1}>
+        <SectionHeroImageBig />
+      </Box>
       <Footer />
     </Box>
   )

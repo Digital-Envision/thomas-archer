@@ -42,8 +42,8 @@ const variants = {
     borderColor: '#FFFFFF',
     color: '#FFFFFF',
     _hover: {
-      bg: '#000000',
-      color: '#FFFFFF',
+      bg: '#FFFFFF',
+      color: '#000000',
     },
   },
   blackLine: {
