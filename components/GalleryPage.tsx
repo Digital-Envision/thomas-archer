@@ -9,19 +9,17 @@ import * as demo from 'lib/demo.data'
 import type { Post, Settings } from 'lib/sanity.queries'
 import PageBuilder from 'components/templates/PageBuilder'
 
-export interface IndexPageProps {
+export interface GalleryPageProps {
   preview?: boolean
   loading?: boolean
-  posts: Post[]
-  pages?: any[]
+  pages: any[]
   settings: Settings
 }
 
-export default function IndexPage(props: IndexPageProps) {
+export default function GalleryPage(props: GalleryPageProps) {
   // console.log('🔥IndexPage props', props)
 
-  const { preview, loading, posts, settings, pages } = props
-  const [heroPost, ...morePosts] = posts || []
+  const { preview, loading, settings, pages } = props
   const { title = demo.title, description = demo.description } = settings || {}
 
   return (
@@ -30,19 +28,6 @@ export default function IndexPage(props: IndexPageProps) {
 
       <Layout preview={preview} loading={loading}>
         <Container>
-          {/* <BlogHeader title={title} description={description} level={1} />
-          {heroPost && (
-            <HeroPost
-              title={heroPost.title}
-              coverImage={heroPost.coverImage}
-              date={heroPost.date}
-              author={heroPost.author}
-              slug={heroPost.slug}
-              excerpt={heroPost.excerpt}
-            />
-          )}
-          {morePosts.length > 0 && <MoreStories posts={morePosts} />}*/}
-
           <PageBuilder {...pages} />
         </Container>
       </Layout>

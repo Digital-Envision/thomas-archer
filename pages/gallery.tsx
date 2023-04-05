@@ -1,5 +1,5 @@
 import { PreviewSuspense } from '@sanity/preview-kit'
-import IndexPage from 'components/IndexPage'
+import GalleryPage from 'components/GalleryPage'
 import { getAllPages, getAllPosts, getSettings } from 'lib/sanity.client'
 import { Post, Settings } from 'lib/sanity.queries'
 import { GetStaticProps } from 'next'
@@ -23,21 +23,15 @@ interface PreviewData {
   token?: string
 }
 
-export default function HomePage(props: PageProps) {
-  // console.log('✅pages/index', props)
+export default function Gallery(props: PageProps) {
+  console.log('✅pages/GalleryPage', props)
   const { posts, settings, preview, token, pages } = props
 
   if (preview) {
     return (
       <PreviewSuspense
         fallback={
-          <IndexPage
-            loading
-            preview
-            posts={posts}
-            settings={settings}
-            pages={pages}
-          />
+          <GalleryPage loading preview settings={settings} pages={pages} />
         }
       >
         <PreviewIndexPage token={token} />
@@ -45,7 +39,7 @@ export default function HomePage(props: PageProps) {
     )
   }
 
-  return <IndexPage posts={posts} settings={settings} pages={pages} />
+  return <GalleryPage settings={settings} pages={pages} />
 }
 
 export const getStaticProps: GetStaticProps<
@@ -58,7 +52,7 @@ export const getStaticProps: GetStaticProps<
   const [settings, posts = [], pages = []] = await Promise.all([
     getSettings(),
     getAllPosts(), // can remove
-    getAllPages('Home'),
+    getAllPages('Gallery'),
   ])
 
   return {

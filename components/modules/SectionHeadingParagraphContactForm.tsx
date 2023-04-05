@@ -65,7 +65,7 @@ const SectionHeadingParagraphContactForm: React.FC<
       direction={{ base: 'column', md: 'row' }}
       width={'w-full'}
       maxWidth={'1440px'}
-      px={'5rem'}
+      px={'1rem'}
     >
       <Flex direction={'column'} flex={1} px={2}>
         <Heading1>{heading}</Heading1>

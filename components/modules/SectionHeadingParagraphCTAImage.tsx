@@ -4,22 +4,24 @@ import Heading1 from 'components/base/Heading1'
 import Button, { Variants } from 'components/base/Button'
 import Dash from 'components/base/Dash'
 import Divider, { HeightVariants } from 'components/base/Divider'
+import { urlForImage } from 'lib/sanity.image'
 
 type SectionHeadingParagraphCTAImageProps = {
   heading: string
   paragraph: string
-  imageUrl: string
+  image?: any // sanity io image
+  imageUrl?: string // load image from url; test purpose
 }
 
 const SectionHeadingParagraphCTAImage: React.FC<
   SectionHeadingParagraphCTAImageProps
-> = ({ heading, paragraph, imageUrl }) => {
+> = ({ heading, paragraph, imageUrl, image }) => {
   return (
     <Flex
       direction={{ base: 'column', md: 'row' }}
       width={'w-full'}
       maxWidth={'1440px'}
-      px={'5rem'}
+      px={'1rem'}
     >
       <Flex flex={1} direction={'row'} align={'center'}>
         <Flex flex={1} direction={'column'} justify={'center'} align={'center'}>
@@ -48,7 +50,11 @@ const SectionHeadingParagraphCTAImage: React.FC<
       </Flex>
 
       <Flex flex={1.2} justify={'center'}>
-        <Image objectFit={'cover'} src={imageUrl} alt={heading} />
+        <Image
+          objectFit={'cover'}
+          src={imageUrl || urlForImage(image).url()}
+          alt={heading}
+        />
       </Flex>
     </Flex>
   )

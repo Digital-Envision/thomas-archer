@@ -13,9 +13,22 @@ import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
 import authorType from 'schemas/author'
 import postType from 'schemas/post'
 import settingsType from 'schemas/settings'
+import pageType from 'schemas/page'
+import fixedComponentType from 'schemas/fixedComponent'
+import SectionHeadingParagraphCTAType from 'schemas/sections/SectionHeadingParagraphCTA'
+import SectionHeadingParagraphCTAImageType from 'schemas/sections/SectionHeadingParagraphCTAImage'
+import DividerType from 'schemas/sections/Divider'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
+
+
+/**
+ * 1. create schema
+ * 2. import schema to this types below
+ * 3. create query function, and adjust query  
+ * 4. load dataset on getStaticProps from designated page
+ */
 
 export default defineConfig({
   basePath: '/studio',
@@ -24,7 +37,7 @@ export default defineConfig({
   title,
   schema: {
     // If you want more content types, you can add them to this array
-    types: [authorType, postType, settingsType],
+    types: [authorType, postType, settingsType, pageType, fixedComponentType, SectionHeadingParagraphCTAType, SectionHeadingParagraphCTAImageType, DividerType],
   },
   plugins: [
     deskTool({

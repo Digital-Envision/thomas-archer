@@ -17,6 +17,13 @@ export const indexQuery = groq`
   ${postFields}
 }`
 
+export const pageQuery = (page) => {
+  if (page) {
+    return groq`*[_type == "page" && title=="${page}"]`
+  }
+  return groq`*[_type == "page"]`
+}
+
 export const postAndMoreStoriesQuery = groq`
 {
   "post": *[_type == "post" && slug.current == $slug] | order(_updatedAt desc) [0] {
@@ -53,6 +60,10 @@ export interface Post {
   author?: Author
   slug?: string
   content?: any
+}
+export interface Pet {
+  _id: string
+  name?: string
 }
 
 export interface Settings {
