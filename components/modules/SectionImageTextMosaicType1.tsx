@@ -33,7 +33,7 @@ const SectionImageTextMosaicType1: React.FC<
       direction={{ base: 'column', md: 'row' }}
       width={'w-full'}
       maxWidth={'1440px'}
-      px={'5rem'}
+      px={'1rem'}
     >
       <Flex
         flex={1}

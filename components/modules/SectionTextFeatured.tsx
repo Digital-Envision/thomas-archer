@@ -40,7 +40,7 @@ const SectionTextFeatured: React.FC<SectionTextFeaturedProps> = ({
       width={'w-full'}
       maxWidth={'1440px'}
       borderWidth={1}
-      px={'5rem'}
+      px={'1rem'}
     >
       <Flex>
         <Flex flex={2} px={2}>
