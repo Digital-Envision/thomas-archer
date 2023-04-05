@@ -1,5 +1,5 @@
 import { Flex, Box } from '@chakra-ui/react'
-import SectionHeroImageBig from 'components/modules/SectionHeroImageBig'
+import SectionHeroImageDefault from 'components/modules/SectionHeroImageDefault'
 import Navbar from 'components/organisms/Navbar'
 import React from 'react'
 import Footer from '../components/organisms/Footer'
@@ -36,7 +36,7 @@ const Component = () => {
     >
       <Navbar />
       <Box flex={1}>
-        <SectionHeroImageBig />
+        <SectionHeroImageDefault />
       </Box>
       <Footer />
     </Box>
