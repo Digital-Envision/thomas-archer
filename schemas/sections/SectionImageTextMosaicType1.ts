@@ -3,8 +3,8 @@ import { enumToArrayOfObjects } from "lib/utils"
 
 export default {
     type: 'object',
-    name: 'SectionHeadingParagraphCTA',
-    title: 'SectionHeadingParagraphCTA',
+    name: 'SectionImageTextMosaicType1',
+    title: 'SectionImageTextMosaicType1',
     fields: [
         {
             name: 'heading',
@@ -15,8 +15,24 @@ export default {
             type: 'text',
         },
         {
-            name: 'isOffset',
-            type: 'boolean'
+            name: 'leftImage',
+            title: 'Left Image',
+            description:
+                'This image will be displayed on the left section.',
+            type: 'image',
+            options: {
+                hotspot: false,
+            },
+        },
+        {
+            name: 'rightImage',
+            title: 'Right Image',
+            description:
+                'This image will be displayed on the right section.',
+            type: 'image',
+            options: {
+                hotspot: false,
+            },
         },
         {
             title: 'Margin Top',
@@ -45,13 +61,13 @@ export default {
     ],
     preview: {
         select: {
-            title: 'heading',
+            title: 'leftHeading',
             subtitle: 'label',
             disabled: 'disabled'
         },
         prepare({ title, disabled }) {
             return {
-                title: `SectionHeadingParagraphCTA: ${disabled ? 'DISABLED' : title}`
+                title: `SectionImageTextMosaicType1`
             }
         }
     }

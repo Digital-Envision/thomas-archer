@@ -1,3 +1,5 @@
+import { HeightVariants } from 'components/base/Divider';
+import { enumToArrayOfObjects } from 'lib/utils';
 export default {
     type: 'object',
     name: 'SectionBlog',
@@ -12,7 +14,31 @@ export default {
             name: 'Section3ColsCards',
             title: 'Section3ColsCards',
             type: 'Section3ColsCards',
-        }
+        },
+        {
+            title: 'Margin Top',
+            name: 'marginTop',
+            type: 'string',
+            options: {
+                list: [
+                    ...enumToArrayOfObjects(HeightVariants)
+                ],
+            },
+
+            layout: 'dropdown'
+        },
+        {
+            title: 'Margin Bottom',
+            name: 'marginBottom',
+            type: 'string',
+            options: {
+                list: [
+                    ...enumToArrayOfObjects(HeightVariants)
+                ],
+            },
+
+            layout: 'dropdown'
+        },
     ],
     preview: {
         select: {

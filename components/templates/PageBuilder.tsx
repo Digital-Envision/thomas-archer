@@ -3,6 +3,8 @@ import SectionAwards from 'components/modules/SectionAwards'
 import SectionHeadingParagraphContactForm from 'components/modules/SectionHeadingParagraphContactForm'
 import SectionHeadingParagraphCTA from 'components/modules/SectionHeadingParagraphCTA'
 import SectionHeadingParagraphCTAImage from 'components/modules/SectionHeadingParagraphCTAImage'
+import SectionImageTextMosaicType1 from 'components/modules/SectionImageTextMosaicType1'
+import SectionTextFeatured from 'components/modules/SectionTextFeatured'
 import Footer from 'components/organisms/Footer'
 import Navbar from 'components/organisms/Navbar'
 import Section3ColsCards from 'components/organisms/Section3ColsCards'
@@ -23,6 +25,12 @@ const PageBuilder = (props) => {
         case 'SectionHeadingParagraphCTAImage':
           el = <SectionHeadingParagraphCTAImage {...c} />
           break
+        case 'SectionImageTextMosaicType1':
+          el = <SectionImageTextMosaicType1 {...c} />
+          break
+        case 'SectionTextFeatured':
+          el = <SectionTextFeatured {...c} />
+          break
         case 'Divider':
           el = <Divider {...c} />
           break
@@ -38,9 +46,9 @@ const PageBuilder = (props) => {
         case 'SectionAwards':
           el = <SectionAwards {...c} />
           break
-        case 'SectionBlog':
-          el = <SectionBlog {...c} />
-          break
+        // case 'SectionBlog':
+        //   el = <SectionBlog {...c} />
+        //   break
         case 'SectionHeadingParagraphContactForm':
           el = <SectionHeadingParagraphContactForm {...c} />
           break

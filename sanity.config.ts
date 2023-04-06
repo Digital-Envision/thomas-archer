@@ -25,6 +25,8 @@ import SectionAwards from 'schemas/sections/SectionAwards'
 import ArticleBlogCard from 'schemas/subSections/ArticleBlogCard'
 import PortfolioCard from 'schemas/subSections/PortfolioCard'
 import PortfolioListingCard from 'schemas/subSections/PortfolioListingCard'
+import SectionTextFeatured from 'schemas/sections/SectionTextFeatured'
+import SectionImageTextMosaicType1 from 'schemas/sections/SectionImageTextMosaicType1'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -56,9 +58,11 @@ export default defineConfig({
       SectionHeadingParagraphCTAImageType,
       DividerType,
       Section3ColsCards,
-      SectionBlog,
+      // SectionBlog, // TODO LATER
       SectionHeadingParagraphContactForm,
       SectionAwards,
+      SectionTextFeatured,
+      SectionImageTextMosaicType1,
 
       // -- subSection
       ArticleBlogCard,

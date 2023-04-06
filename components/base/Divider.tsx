@@ -12,7 +12,15 @@ type DividerProps = {
 }
 
 const Divider = ({ variant: heightVariant }: DividerProps) => {
-  return <Box w="full" h={heightVariant} />
+  return (
+    <Box
+      height={'1px'}
+      marginX={'3rem'}
+      marginTop={heightVariant}
+      marginBottom={heightVariant}
+      backgroundColor="gray.400"
+    />
+  )
 }
 
 export default Divider

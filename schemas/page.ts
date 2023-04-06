@@ -18,9 +18,11 @@ export default {
                 { type: 'SectionHeadingParagraphCTAImage' },
                 { type: 'Divider' },
                 { type: 'Section3ColsCards' },
-                { type: 'SectionBlog' },
+                // { type: 'SectionBlog' }, //TODO LATER
                 { type: 'SectionHeadingParagraphContactForm' },
                 { type: 'SectionAwards' },
+                { type: 'SectionTextFeatured' },
+                { type: 'SectionImageTextMosaicType1' },
                 // { type: 'fixedComponent' },
             ],
         },

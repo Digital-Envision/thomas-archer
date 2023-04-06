@@ -12,6 +12,8 @@ type SectionAwardsProps = {
   image?: any // sanity io image
   imageUrl?: string // load image from url; test purpose
   awards: { name: string; description: string }[]
+  marginTop: HeightVariants
+  marginBottom: HeightVariants
 }
 
 /**
@@ -53,16 +55,25 @@ const SectionAwards: React.FC<SectionAwardsProps> = ({
   imageUrl,
   image,
   awards,
+  marginTop,
+  marginBottom,
 }) => {
   return (
     // @ts-ignore: 2590
-    <Flex direction={'column'} width={'w-full'} maxWidth={'1440px'} px={'1rem'}>
+    <Flex
+      direction={'column'}
+      width={'w-full'}
+      maxWidth={'1440px'}
+      px={'1rem'}
+      marginTop={marginTop}
+      marginBottom={marginBottom}
+    >
       <Heading1>{heading}</Heading1>
       <Flex direction={{ base: 'column', md: 'row' }}>
         <Flex flex={1} direction={'column'} width={'100%'} pr={8}>
-          <Divider variant={HeightVariants.less} />
+          <Box pt={HeightVariants.less} />
           <Text>{paragraph}</Text>
-          <Divider variant={HeightVariants.less} />
+          <Box pt={HeightVariants.less} />
           <Box>
             <Button variant={Variants.blackLine} onClick={onPressMore}>
               {'Find Out More'}
