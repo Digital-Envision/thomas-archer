@@ -3,12 +3,15 @@ import Text from '../base/Text'
 import Heading1 from 'components/base/Heading1'
 import Button, { Variants } from 'components/base/Button'
 import Dash from 'components/base/Dash'
+import { HeightVariants } from 'components/base/Divider'
 
 type SectionHeadingParagraphCTAProps = {
   heading: string
   paragraph: string
   isOffset: boolean
   showButton?: boolean
+  marginTop: HeightVariants
+  marginBottom: HeightVariants
 }
 
 const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
@@ -16,6 +19,8 @@ const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
   paragraph,
   isOffset,
   showButton = true,
+  marginTop,
+  marginBottom,
 }) => {
   return (
     <Flex
@@ -23,6 +28,8 @@ const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
       maxWidth={'1440px'}
       direction={{ base: 'column', md: isOffset ? 'column' : 'row' }}
       px={'1rem'}
+      marginTop={marginTop}
+      marginBottom={marginBottom}
     >
       <Flex direction={'row'} flex={1}>
         <Flex flex={1}>

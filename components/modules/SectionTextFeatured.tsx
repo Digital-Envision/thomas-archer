@@ -2,11 +2,14 @@ import { Box, Flex } from '@chakra-ui/react'
 import Text from '../base/Text'
 import Heading1 from 'components/base/Heading1'
 import Dash from 'components/base/Dash'
+import { HeightVariants } from 'components/base/Divider'
 
 type SectionTextFeaturedProps = {
   leftHeading: string
   rightHeading: string
   postedBy: string
+  marginTop: HeightVariants
+  marginBottom: HeightVariants
 }
 
 /**
@@ -32,6 +35,8 @@ const SectionTextFeatured: React.FC<SectionTextFeaturedProps> = ({
   leftHeading,
   rightHeading,
   postedBy,
+  marginTop,
+  marginBottom,
 }) => {
   return (
     // @ts-ignore: 2590
@@ -39,8 +44,9 @@ const SectionTextFeatured: React.FC<SectionTextFeaturedProps> = ({
       direction={'column'}
       width={'w-full'}
       maxWidth={'1440px'}
-      borderWidth={1}
       px={'1rem'}
+      marginTop={marginTop}
+      marginBottom={marginBottom}
     >
       <Flex>
         <Flex flex={2} px={2}>

@@ -6,17 +6,22 @@ import Button, { Variants } from 'components/base/Button'
 import ArticleBlogCard, {
   ArticleBlogCardProps,
 } from 'components/modules/ArticleBlogCard'
+import { HeightVariants } from 'components/base/Divider'
 
 type Section3ColsCardsProps = {
   ArticleBlogCard1: ArticleBlogCardProps
   ArticleBlogCard2: ArticleBlogCardProps
   ArticleBlogCard3: ArticleBlogCardProps
+  marginTop: HeightVariants
+  marginBottom: HeightVariants
 }
 
 const Section3ColsCards: React.FC<Section3ColsCardsProps> = ({
   ArticleBlogCard1,
   ArticleBlogCard2,
   ArticleBlogCard3,
+  marginTop,
+  marginBottom,
 }) => {
   return (
     <Flex
@@ -26,6 +31,8 @@ const Section3ColsCards: React.FC<Section3ColsCardsProps> = ({
       align={'center'}
       maxWidth={'1440px'}
       px={'1rem'}
+      marginTop={marginTop}
+      marginBottom={marginBottom}
     >
       <Stack direction={{ base: 'column', md: 'row' }} spacing={'1rem'}>
         <ArticleBlogCard {...ArticleBlogCard1} />

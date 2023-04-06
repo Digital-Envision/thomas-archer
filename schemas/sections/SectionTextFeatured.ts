@@ -3,20 +3,20 @@ import { enumToArrayOfObjects } from "lib/utils"
 
 export default {
     type: 'object',
-    name: 'SectionHeadingParagraphCTA',
-    title: 'SectionHeadingParagraphCTA',
+    name: 'SectionTextFeatured',
+    title: 'SectionTextFeatured',
     fields: [
         {
-            name: 'heading',
+            name: 'leftHeading',
             type: 'text',
         },
         {
-            name: 'paragraph',
+            name: 'rightHeading',
             type: 'text',
         },
         {
-            name: 'isOffset',
-            type: 'boolean'
+            name: 'postedBy',
+            type: 'string',
         },
         {
             title: 'Margin Top',
@@ -45,13 +45,13 @@ export default {
     ],
     preview: {
         select: {
-            title: 'heading',
+            title: 'leftHeading',
             subtitle: 'label',
             disabled: 'disabled'
         },
         prepare({ title, disabled }) {
             return {
-                title: `SectionHeadingParagraphCTA: ${disabled ? 'DISABLED' : title}`
+                title: `SectionTextFeatured`
             }
         }
     }

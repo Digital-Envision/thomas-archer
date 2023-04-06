@@ -1,4 +1,5 @@
 import {
+  Box,
   Flex,
   FormControl,
   FormErrorMessage,
@@ -25,6 +26,8 @@ type SectionHeadingParagraphContactFormProps = {
   paragraph: string
   tnc: string
   onSubmit: (args: any) => void
+  marginTop: HeightVariants
+  marginBottom: HeightVariants
 }
 
 /**
@@ -43,7 +46,7 @@ type SectionHeadingParagraphContactFormProps = {
 
 const SectionHeadingParagraphContactForm: React.FC<
   SectionHeadingParagraphContactFormProps
-> = ({ heading, paragraph, onSubmit, tnc }) => {
+> = ({ heading, paragraph, onSubmit, tnc, marginTop, marginBottom }) => {
   const {
     register,
     handleSubmit,
@@ -66,10 +69,12 @@ const SectionHeadingParagraphContactForm: React.FC<
       width={'w-full'}
       maxWidth={'1440px'}
       px={'1rem'}
+      marginTop={marginTop}
+      marginBottom={marginBottom}
     >
       <Flex direction={'column'} flex={1} px={2}>
         <Heading1>{heading}</Heading1>
-        <Divider variant={HeightVariants.less} />
+        <Box pt={HeightVariants.less} />
         <Text>{paragraph}</Text>
         <Divider
           variant={{
@@ -199,6 +204,7 @@ const SectionHeadingParagraphContactForm: React.FC<
             </Flex>
           </VStack>
 
+          <Box pt={HeightVariants.less} />
           <Divider variant={HeightVariants.default} />
           <Text>{tnc}</Text>
         </form>

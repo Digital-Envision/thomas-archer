@@ -1,9 +1,12 @@
-import { Box, Flex, HStack, Image, VStack } from '@chakra-ui/react'
+import { Box, Flex, Image, VStack } from '@chakra-ui/react'
+import { HeightVariants } from 'components/base/Divider'
 import Text from '../base/Text'
 
 type SectionImageAwardsProps = {
   imageUrl: string
   awards: { label: string; value: string }[]
+  marginTop: HeightVariants
+  marginBottom: HeightVariants
 }
 
 /**
@@ -38,10 +41,19 @@ type SectionImageAwardsProps = {
 const SectionImageAwards: React.FC<SectionImageAwardsProps> = ({
   imageUrl,
   awards,
+  marginTop,
+  marginBottom,
 }) => {
   return (
     // @ts-ignore: 2590
-    <Flex direction={'column'} width={'w-full'} maxWidth={'1440px'} px={'1rem'}>
+    <Flex
+      direction={'column'}
+      width={'w-full'}
+      maxWidth={'1440px'}
+      px={'1rem'}
+      marginTop={marginTop}
+      marginBottom={marginBottom}
+    >
       <Box alignSelf={'center'}>
         <Image src={imageUrl} objectFit="cover" width="100%" height="80vh" />
       </Box>

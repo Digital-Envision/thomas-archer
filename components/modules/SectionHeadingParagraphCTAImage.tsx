@@ -11,17 +11,21 @@ type SectionHeadingParagraphCTAImageProps = {
   paragraph: string
   image?: any // sanity io image
   imageUrl?: string // load image from url; test purpose
+  marginTop: HeightVariants
+  marginBottom: HeightVariants
 }
 
 const SectionHeadingParagraphCTAImage: React.FC<
   SectionHeadingParagraphCTAImageProps
-> = ({ heading, paragraph, imageUrl, image }) => {
+> = ({ heading, paragraph, imageUrl, image, marginTop, marginBottom }) => {
   return (
     <Flex
       direction={{ base: 'column', md: 'row' }}
       width={'w-full'}
       maxWidth={'1440px'}
       px={'1rem'}
+      marginTop={marginTop}
+      marginBottom={marginBottom}
     >
       <Flex flex={1} direction={'row'} align={'center'}>
         <Flex flex={1} direction={'column'} justify={'center'} align={'center'}>
@@ -38,8 +42,8 @@ const SectionHeadingParagraphCTAImage: React.FC<
                   {'Why Thomas Archer'}
                 </Button>
               </Box>
-              <Divider
-                variant={{
+              <Box
+                pt={{
                   base: HeightVariants.less,
                   md: HeightVariants.none,
                 }}
