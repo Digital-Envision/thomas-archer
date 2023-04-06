@@ -200,25 +200,25 @@ const Component = () => {
               imageUrl="/images/logo/HIA-logo.png"
               awards={[
                 {
-                  label: 'Finalist 2021',
-                  value:
+                  name: 'Finalist 2021',
+                  description:
                     'HIA Eastern Victorian Custom Build Home $750,001 - $1M',
                 },
                 {
-                  label: 'Winner 2020',
-                  value: 'HIA Australian Project Home Winner',
+                  name: 'Winner 2020',
+                  description: 'HIA Australian Project Home Winner',
                 },
                 {
-                  label: 'Winner 2019',
-                  value: 'HIA Victorian Project Home',
+                  name: 'Winner 2019',
+                  description: 'HIA Victorian Project Home',
                 },
                 {
-                  label: 'Winner 2019',
-                  value: 'HIA Victorian Project Home over $500,001',
+                  name: 'Winner 2019',
+                  description: 'HIA Victorian Project Home over $500,001',
                 },
                 {
-                  label: 'Winner 2018',
-                  value: 'HIA Victorian Project Home over $400,001',
+                  name: 'Winner 2018',
+                  description: 'HIA Victorian Project Home over $400,001',
                 },
               ]}
             />

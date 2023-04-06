@@ -1,3 +1,4 @@
+import { Box, Flex } from '@chakra-ui/react'
 import AlertBanner from 'components/AlertBanner'
 
 export default function BlogLayout({
@@ -13,7 +14,9 @@ export default function BlogLayout({
     <>
       <div className="min-h-screen">
         <AlertBanner preview={preview} loading={loading} />
-        <main>{children}</main>
+        <Flex direction={'column'} align={'center'}>
+          {children}
+        </Flex>
       </div>
     </>
   )

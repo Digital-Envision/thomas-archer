@@ -8,12 +8,14 @@ type SectionHeadingParagraphCTAProps = {
   heading: string
   paragraph: string
   isOffset: boolean
+  showButton?: boolean
 }
 
 const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
   heading,
   paragraph,
   isOffset,
+  showButton = true,
 }) => {
   return (
     <Flex
@@ -48,9 +50,11 @@ const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
           <Flex direction={'column'}>
             <Text>{paragraph}</Text>
             <Box pt={5}>
-              <Button variant={Variants.blackLine}>
-                {'Why Thomas Archer'}
-              </Button>
+              {showButton && (
+                <Button variant={Variants.blackLine}>
+                  {'Why Thomas Archer'}
+                </Button>
+              )}
             </Box>
           </Flex>
         </Flex>

@@ -1,27 +1,28 @@
 export default {
     type: 'object',
-    name: 'SectionHeadingParagraphCTA',
-    title: 'SectionHeadingParagraphCTA',
+    name: 'SectionHeadingParagraphContactForm',
+    title: 'SectionHeadingParagraphContactForm',
     fields: [
         {
             name: 'heading',
-            type: 'text',
+            title: 'Heading',
+            type: 'string',
         },
         {
             name: 'paragraph',
+            title: 'Paragraph',
             type: 'text',
-        },
-        // TODO add isOffset 
+        }
     ],
     preview: {
         select: {
-            title: 'heading',
+            title: 'placeholder',
             subtitle: 'label',
             disabled: 'disabled'
         },
         prepare({ title, disabled }) {
             return {
-                title: `SectionHeadingParagraphCTA: ${disabled ? 'DISABLED' : title}`
+                title: `SectionHeadingParagraphContactForm`
             }
         }
     }

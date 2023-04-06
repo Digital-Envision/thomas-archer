@@ -1,6 +1,12 @@
 import Divider from 'components/base/Divider'
+import SectionAwards from 'components/modules/SectionAwards'
+import SectionHeadingParagraphContactForm from 'components/modules/SectionHeadingParagraphContactForm'
 import SectionHeadingParagraphCTA from 'components/modules/SectionHeadingParagraphCTA'
 import SectionHeadingParagraphCTAImage from 'components/modules/SectionHeadingParagraphCTAImage'
+import Footer from 'components/organisms/Footer'
+import Navbar from 'components/organisms/Navbar'
+import Section3ColsCards from 'components/organisms/Section3ColsCards'
+import SectionBlog from 'components/organisms/SectionBlog'
 import React, { useState } from 'react'
 
 const PageBuilder = (props) => {
@@ -19,6 +25,24 @@ const PageBuilder = (props) => {
           break
         case 'Divider':
           el = <Divider {...c} />
+          break
+        case 'Section3ColsCards':
+          el = <Section3ColsCards {...c} />
+          break
+        case 'Navbar':
+          el = <Navbar {...c} />
+          break
+        case 'Footer':
+          el = <Footer {...c} />
+          break
+        case 'SectionAwards':
+          el = <SectionAwards {...c} />
+          break
+        case 'SectionBlog':
+          el = <SectionBlog {...c} />
+          break
+        case 'SectionHeadingParagraphContactForm':
+          el = <SectionHeadingParagraphContactForm {...c} />
           break
         case 'fixedComponent':
           switch (c.name) {
