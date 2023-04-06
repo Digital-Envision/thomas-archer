@@ -3,13 +3,15 @@ import Text from '../base/Text'
 import Heading1 from 'components/base/Heading1'
 import Button, { Variants } from 'components/base/Button'
 import Divider, { HeightVariants } from 'components/base/Divider'
+import { urlForImage } from 'lib/sanity.image'
 
 type SectionAwardsProps = {
   heading: string
   paragraph: string
   onPressMore: () => void
-  imageUrl: string
-  awards: { label: string; value: string }[]
+  image?: any // sanity io image
+  imageUrl?: string // load image from url; test purpose
+  awards: { name: string; description: string }[]
 }
 
 /**
@@ -21,24 +23,24 @@ type SectionAwardsProps = {
       imageUrl="/images/logo/HIA-logo.png"
       awards={[
         {
-          label: 'Finalist 2021',
-          value: 'HIA Eastern Victorian Custom Build Home $750,001 - $1M',
+          name: 'Finalist 2021',
+          description: 'HIA Eastern Victorian Custom Build Home $750,001 - $1M',
         },
         {
-          label: 'Winner 2020',
-          value: 'HIA Australian Project Home Winner',
+          name: 'Winner 2020',
+          description: 'HIA Australian Project Home Winner',
         },
         {
-          label: 'Winner 2019',
-          value: 'HIA Victorian Project Home',
+          name: 'Winner 2019',
+          description: 'HIA Victorian Project Home',
         },
         {
-          label: 'Winner 2019',
-          value: 'HIA Victorian Project Home over $500,001',
+          name: 'Winner 2019',
+          description: 'HIA Victorian Project Home over $500,001',
         },
         {
-          label: 'Winner 2018',
-          value: 'HIA Victorian Project Home over $400,001',
+          name: 'Winner 2018',
+          description: 'HIA Victorian Project Home over $400,001',
         },
       ]}
     />
@@ -49,6 +51,7 @@ const SectionAwards: React.FC<SectionAwardsProps> = ({
   paragraph,
   onPressMore,
   imageUrl,
+  image,
   awards,
 }) => {
   return (
@@ -75,14 +78,19 @@ const SectionAwards: React.FC<SectionAwardsProps> = ({
 
         <Flex flex={1} width={'w-full'}>
           <Flex direction={'row'}>
-            <Image src={imageUrl} alt={heading} maxW={'90px'} maxH={'95px'} />
+            <Image
+              alt={heading}
+              maxW={'90px'}
+              maxH={'95px'}
+              src={imageUrl || urlForImage(image).url()}
+            />
             <Box pr={3} />
             <VStack spacing={8} align="stretch">
-              {awards.map((o) => {
+              {awards?.map((o) => {
                 return (
                   <Box>
-                    <Text fontWeight="bold">{o?.label}</Text>
-                    <Text>{o?.value}</Text>
+                    <Text fontWeight="bold">{o?.name}</Text>
+                    <Text>{o?.description}</Text>
                   </Box>
                 )
               })}

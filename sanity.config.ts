@@ -18,6 +18,13 @@ import fixedComponentType from 'schemas/fixedComponent'
 import SectionHeadingParagraphCTAType from 'schemas/sections/SectionHeadingParagraphCTA'
 import SectionHeadingParagraphCTAImageType from 'schemas/sections/SectionHeadingParagraphCTAImage'
 import DividerType from 'schemas/sections/Divider'
+import Section3ColsCards from 'schemas/sections/Section3ColsCards'
+import SectionBlog from 'schemas/sections/SectionBlog'
+import SectionHeadingParagraphContactForm from 'schemas/sections/SectionHeadingParagraphContactForm'
+import SectionAwards from 'schemas/sections/SectionAwards'
+import ArticleBlogCard from 'schemas/subSections/ArticleBlogCard'
+import PortfolioCard from 'schemas/subSections/PortfolioCard'
+import PortfolioListingCard from 'schemas/subSections/PortfolioListingCard'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -37,7 +44,27 @@ export default defineConfig({
   title,
   schema: {
     // If you want more content types, you can add them to this array
-    types: [authorType, postType, settingsType, pageType, fixedComponentType, SectionHeadingParagraphCTAType, SectionHeadingParagraphCTAImageType, DividerType],
+    types: [
+      // authorType,
+      // postType,
+
+      // -- section
+      settingsType,
+      pageType,
+      fixedComponentType,
+      SectionHeadingParagraphCTAType,
+      SectionHeadingParagraphCTAImageType,
+      DividerType,
+      Section3ColsCards,
+      SectionBlog,
+      SectionHeadingParagraphContactForm,
+      SectionAwards,
+
+      // -- subSection
+      ArticleBlogCard,
+      // PortfolioCard, // TODO LATER
+      // PortfolioListingCard // TODO LATER
+    ],
   },
   plugins: [
     deskTool({

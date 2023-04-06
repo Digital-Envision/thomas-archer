@@ -3,9 +3,11 @@ import Heading3 from '../base/Heading3'
 import Text from '../base/Text'
 import { isEmpty } from 'lodash'
 import Button, { Variants } from 'components/base/Button'
+import { urlForImage } from 'lib/sanity.image'
 
-type ArticleBlogCardProps = {
-  imageUrl: string
+export type ArticleBlogCardProps = {
+  image?: any // sanity io image
+  imageUrl?: string // load image from url; test purpose
   createdAt?: string
   heading: string
   description: string
@@ -29,19 +31,19 @@ type ArticleBlogCardProps = {
 
 const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
   imageUrl,
+  image,
   createdAt,
   heading,
   description,
   width = '470px',
-  height = '730px',
-  buttonText,
+  height = '700px',
   buttonOnClick,
 }) => {
   return (
     <Flex direction={'column'} overflow="hidden" width={width} height={height}>
       <Box display="flex" justifyContent="center" alignItems="center">
         <Image
-          src={imageUrl}
+          src={imageUrl || urlForImage(image).url()}
           alt={heading}
           maxW="470px"
           maxH="500px"
@@ -64,7 +66,7 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
           </Text>
         </Box>
 
-        <Box mt="auto">
+        <Box>
           <Button variant={Variants.blackLine} onClick={buttonOnClick}>
             {'Why Thomas Archer'}
           </Button>
