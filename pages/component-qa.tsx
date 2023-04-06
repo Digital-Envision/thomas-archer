@@ -15,6 +15,7 @@ import SectionImageTextMosaicType1 from 'components/modules/SectionImageTextMosa
 import Navbar from 'components/organisms/Navbar'
 import Footer from 'components/organisms/Footer'
 import Heading1 from 'components/base/Heading1'
+import { HeightVariants } from 'components/base/Divider'
 
 /**
  *
@@ -106,6 +107,8 @@ const Component = () => {
               leftHeading="“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed feugiat, lectus et viverra ullamcorper, nulla dui ullamcorper quam,"
               rightHeading="Sed feugiat, lectus et viverra ullamcorper, nulla dui ullamcorper quam, et dictum arcu ipsum vel risus.”"
               postedBy="Frank Tarulli, Director Thomas Archer"
+              marginTop={HeightVariants.none}
+              marginBottom={HeightVariants.none}
             />
           </Box>
         </Box>
@@ -128,6 +131,8 @@ const Component = () => {
           dui ullamcorper quam, et dictum arcu ipsum vel risus. Curabitur quis
           orci viverra, efficitur nunc in. Sed feugiat, lectus et viverra
           ullamcorper, nulla dui ullamcorper quam."
+              marginTop={HeightVariants.none}
+              marginBottom={HeightVariants.none}
             />
           </Box>
         </Box>
@@ -146,6 +151,8 @@ const Component = () => {
                 'By submitting this form you are consenting to receive marketing communications from Thomas Archer in future, on the understanding that you have read and agree to our Privacy and Data Collection Statement and that you can opt-out at any time.'
               }
               onSubmit={(data) => console.log('submitData', data)}
+              marginTop={HeightVariants.none}
+              marginBottom={HeightVariants.none}
             />
           </Box>
         </Box>
@@ -166,6 +173,8 @@ const Component = () => {
           orci viverra, efficitur nunc in. Sed feugiat, lectus et viverra
           ullamcorper, nulla dui ullamcorper quam."
               imageUrl="https://via.placeholder.com/727x455/"
+              marginTop={HeightVariants.none}
+              marginBottom={HeightVariants.none}
             />
           </Box>
         </Box>
@@ -184,6 +193,8 @@ const Component = () => {
                 'By submitting this form you are consenting to receive marketing communications from Thomas Archer in future, on the understanding that you have read and agree to our Privacy and Data Collection Statement and that you can opt-out at any time.'
               }
               onSubmit={(data) => console.log('submitData', data)}
+              marginTop={HeightVariants.none}
+              marginBottom={HeightVariants.none}
             />
           </Box>
         </Box>
@@ -221,6 +232,8 @@ const Component = () => {
                   description: 'HIA Victorian Project Home over $400,001',
                 },
               ]}
+              marginTop={HeightVariants.none}
+              marginBottom={HeightVariants.none}
             />
           </Box>
         </Box>
@@ -255,6 +268,8 @@ const Component = () => {
                   value: 'HIA Victorian Project Home over $400,001',
                 },
               ]}
+              marginTop={HeightVariants.none}
+              marginBottom={HeightVariants.none}
             />
           </Box>
         </Box>
@@ -272,6 +287,8 @@ const Component = () => {
           efficitur nunc in."
               rightImageUrl="https://via.placeholder.com/727x455/"
               leftImageUrl="https://via.placeholder.com/500x500/"
+              marginTop={HeightVariants.none}
+              marginBottom={HeightVariants.none}
             />
           </Box>
         </Box>

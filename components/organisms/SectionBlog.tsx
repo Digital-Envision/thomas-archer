@@ -68,6 +68,8 @@ const SectionBlog: React.FC<SectionBlogProps> = (
           orci viverra, efficitur nunc in. Sed feugiat, lectus et viverra
           ullamcorper, nulla dui ullamcorper quam."
         showButton={false}
+        marginTop={HeightVariants.less}
+        marginBottom={HeightVariants.less}
       />
 
       <Divider

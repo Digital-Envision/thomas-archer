@@ -79,8 +79,8 @@ const SectionAwards: React.FC<SectionAwardsProps> = ({
               {'Find Out More'}
             </Button>
           </Box>
-          <Divider
-            variant={{
+          <Box
+            pt={{
               base: HeightVariants.less,
               md: HeightVariants.none,
             }}
