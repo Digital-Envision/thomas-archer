@@ -1,5 +1,7 @@
-import { Flex, Box } from '@chakra-ui/react'
+import { Flex, Box, Spacer } from '@chakra-ui/react'
+import Carousel from 'components/modules/Carousel'
 import SectionHeroImageDefault from 'components/modules/SectionHeroImageDefault'
+import SectionImageHeadingCTA from 'components/modules/SectionImageHeadingCTA'
 import Navbar from 'components/organisms/Navbar'
 import React from 'react'
 import Footer from '../components/organisms/Footer'
@@ -30,13 +32,15 @@ const Component = () => {
       //alignItems={'center'}
       //justifyContent={'center'}
       bg={'blue.700'}
-      h="200vh"
+      minH="200vh"
       display={'flex'}
       flexDir={'column'}
     >
       <Navbar />
       <Box flex={1}>
         <SectionHeroImageDefault />
+        <Spacer mb={'500px'} />
+        <Spacer mb={'500px'} />
       </Box>
       <Footer />
     </Box>
