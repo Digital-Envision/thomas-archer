@@ -1,0 +1,21 @@
+import React from 'react'
+import { Box, Drawer, DrawerContent, DrawerOverlay } from '@chakra-ui/react'
+import SectionHeadingParagraphContactForm from 'components/modules/SectionHeadingParagraphContactForm'
+import { HeightVariants } from 'components/base/Divider'
+import Heading1 from 'components/base/Heading1'
+
+const EnquireFlyout = () => {
+  return (
+    <Drawer isOpen={true} placement={'right'} onClose={() => {}} size={'lg'}>
+      <DrawerOverlay />
+      <DrawerContent>
+        <Box>
+          <Heading1>We’re here to help.</Heading1>
+          <Box pt={HeightVariants.less}/>
+        </Box>
+      </DrawerContent>
+    </Drawer>
+  )
+}
+
+export default EnquireFlyout
