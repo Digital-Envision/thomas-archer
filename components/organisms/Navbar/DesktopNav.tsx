@@ -19,6 +19,7 @@ import DesktopSubNav from './DesktopSubNav'
 import { NavLinksInterfaces } from '.'
 
 export interface Props {
+  openDrawer?: () => void
   onLightNavbar?: boolean
   parentHover?: boolean
   NAV_ITEMS: Array<NavLinksInterfaces>
@@ -26,6 +27,7 @@ export interface Props {
 }
 
 const DesktopNav: React.FC<Props> = ({
+  openDrawer,
   onLightNavbar,
   parentHover,
   NAV_ITEMS,
@@ -145,6 +147,7 @@ const DesktopNav: React.FC<Props> = ({
               ? ButtonVariants.black
               : ButtonVariants.white
           }
+          onClick={openDrawer}
         >
           Enquire
         </Button>

@@ -6,19 +6,21 @@ import MobileNavLevel1 from './MobileNavLevel1'
 import MobileNavLevel2 from './MobileNavLevel2'
 
 export interface Props {
+  openDrawer?: () => void
   NAV_ITEMS: Array<NavLinksInterfaces>
   onOpenLevel2: boolean
   setOnOpenLevel2: (status: boolean) => void
 }
 
 const MobileCollapse: React.FC<Props> = ({
+  openDrawer,
   NAV_ITEMS,
   onOpenLevel2,
   setOnOpenLevel2,
 }) => {
   const [boxHeight, setBoxHeight] = useState('calc(100vh - 110px)')
-  const [subLinks, setSubLinks] = useState([]);
-  const [subTitle, setSubTitle] = useState('');
+  const [subLinks, setSubLinks] = useState([])
+  const [subTitle, setSubTitle] = useState('')
 
   useEffect(() => {
     function calculateHeight() {
@@ -69,6 +71,7 @@ const MobileCollapse: React.FC<Props> = ({
         <Grid templateColumns={'repeat(2, 1fr)'} width={'full'} gap={'10%'}>
           <GridItem>
             <MobileNavLevel1
+              openDrawer={openDrawer}
               NAV_ITEMS={NAV_ITEMS}
               setSubLinks={handleOpenLevel2}
             />

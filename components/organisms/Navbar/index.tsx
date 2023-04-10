@@ -4,6 +4,7 @@ import Logo, { LogoVariants } from 'components/base/Logo'
 import DesktopNav from './DesktopNav'
 import MobileNav from './MobileNav'
 import MobileCollapse from './MobileCollapse'
+import EnquireFlyout from '../EnquireFlyout'
 
 export interface LinksInterface {
   label: string
@@ -21,6 +22,8 @@ const Navbar = () => {
   const [onHover, setOnHover] = useState(false)
   const [onOpenDropdown, setOnOpenDropdown] = useState(false)
   const [onOpenLevel2, setOnOpenLevel2] = useState(false)
+
+  const [openDrawer, setOpenDrawer] = useState(false)
 
   useEffect(() => {
     function handleScroll() {
@@ -106,81 +109,86 @@ const Navbar = () => {
   }, [LogoVariantBreakpoint])
 
   return (
-    <Box width={'full'} position={'fixed'} height={'auto'} zIndex={99}>
-      <Flex
-        height={{
-          base: '110px',
-          xl: '113px',
-        }}
-        bg={{
-          base: onOpenDropdown
-            ? '#FFFFFF'
-            : onLightNavbar
-            ? '#FFFFFF'
-            : 'transparent',
-          xl: onLightNavbar ? '#FFFFFF' : 'transparent',
-        }}
-        transition={'all .2s'}
-        _hover={{
-          bg: {
-            xl: '#FFFFFF',
-          },
-        }}
-        onMouseEnter={() => setOnHover(true)}
-        onMouseLeave={() => setOnHover(false)}
-        px={{
-          base: '27.58px',
-          md: '70.48px',
-        }}
-        pt={{
-          lg: 0,
-        }}
-        alignItems={{
-          base: 'center',
-          xl: 'normal',
-        }}
-      >
-        <Box
+    <>
+      <EnquireFlyout isOpen={openDrawer} onClose={() => setOpenDrawer(false)} />
+      <Box width={'full'} position={'fixed'} height={'auto'} zIndex={99}>
+        <Flex
           height={{
-            base: '25.67px',
-            xl: '21.08px',
+            base: '110px',
+            xl: '113px',
           }}
-          width={{
-            base: '228.85px',
-            xl: '189.05px',
+          bg={{
+            base: onOpenDropdown
+              ? '#FFFFFF'
+              : onLightNavbar
+              ? '#FFFFFF'
+              : 'transparent',
+            xl: onLightNavbar ? '#FFFFFF' : 'transparent',
+          }}
+          transition={'all .2s'}
+          _hover={{
+            bg: {
+              xl: '#FFFFFF',
+            },
+          }}
+          onMouseEnter={() => setOnHover(true)}
+          onMouseLeave={() => setOnHover(false)}
+          px={{
+            base: '27.58px',
+            md: '70.48px',
           }}
           pt={{
-            xl: '3.4em',
+            lg: 0,
+          }}
+          alignItems={{
+            base: 'center',
+            xl: 'normal',
           }}
         >
-          <Logo variant={LogoVariantBreakpoint.variant} />
-        </Box>
-        <Box ml={'auto'}>
-          <DesktopNav
-            onLightNavbar={onLightNavbar}
-            parentHover={onHover}
-            NAV_ITEMS={NAV_ITEMS}
-            TELEPHONE={TELEPHONE}
-          />
-          <MobileNav
-            onLightNavbar={onLightNavbar}
-            onOpenDropdown={onOpenDropdown}
-            handleOpenDropdown={handleOpenDropdown}
-            TELEPHONE={TELEPHONE}
-          />
-        </Box>
-      </Flex>
+          <Box
+            height={{
+              base: '25.67px',
+              xl: '21.08px',
+            }}
+            width={{
+              base: '228.85px',
+              xl: '189.05px',
+            }}
+            pt={{
+              xl: '3.4em',
+            }}
+          >
+            <Logo variant={LogoVariantBreakpoint.variant} />
+          </Box>
+          <Box ml={'auto'}>
+            <DesktopNav
+              openDrawer={() => setOpenDrawer(true)}
+              onLightNavbar={onLightNavbar}
+              parentHover={onHover}
+              NAV_ITEMS={NAV_ITEMS}
+              TELEPHONE={TELEPHONE}
+            />
+            <MobileNav
+              onLightNavbar={onLightNavbar}
+              onOpenDropdown={onOpenDropdown}
+              handleOpenDropdown={handleOpenDropdown}
+              TELEPHONE={TELEPHONE}
+            />
+          </Box>
+        </Flex>
 
-      <Box height={'87%'}>
-        <Collapse in={onOpenDropdown} endingHeight={'100%'}>
-          <MobileCollapse
-            NAV_ITEMS={NAV_ITEMS}
-            onOpenLevel2={onOpenLevel2}
-            setOnOpenLevel2={setOnOpenLevel2}
-          />
-        </Collapse>
+        <Box height={'87%'}>
+          <Collapse in={onOpenDropdown} endingHeight={'100%'}>
+            <MobileCollapse
+              openDrawer={() => setOpenDrawer(true)}
+              NAV_ITEMS={NAV_ITEMS}
+              onOpenLevel2={onOpenLevel2}
+              setOnOpenLevel2={setOnOpenLevel2}
+            />
+          </Collapse>
+        </Box>
       </Box>
-    </Box>
+    </>
   )
 }
 
