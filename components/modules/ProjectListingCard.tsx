@@ -1,11 +1,13 @@
-import { Box, Image, Button, Icon, Flex, Link } from '@chakra-ui/react'
+import { Box, Image, Icon, Flex, Link } from '@chakra-ui/react'
 import Heading3 from '../base/Heading3'
 import Text from '../base/Text'
 import { BsArrowRight } from 'react-icons/bs'
+import { urlForImage } from 'lib/sanity.image'
 
-type PortfolioListingCardProps = {
-  imageUrl: string
-  href: string
+export type ProjectListingCardProps = {
+  image?: any // sanity io image
+  imageUrl?: string // load image from url; test purpose
+  link: string
   heading: string
   subHeading: string
   description: string
@@ -24,9 +26,10 @@ type PortfolioListingCardProps = {
    />
  */
 
-const PortfolioListingCard: React.FC<PortfolioListingCardProps> = ({
+const ProjectListingCard: React.FC<ProjectListingCardProps> = ({
   imageUrl,
-  href,
+  image,
+  link,
   heading,
   subHeading,
   description,
@@ -38,7 +41,7 @@ const PortfolioListingCard: React.FC<PortfolioListingCardProps> = ({
     <Box overflow="hidden" width={width} height={height} borderBottomWidth={1}>
       <Box display="flex" justifyContent="center" alignItems="center">
         <Image
-          src={imageUrl}
+          src={imageUrl || urlForImage(image).url()}
           alt={heading}
           maxW="400px"
           maxH="280px"
@@ -59,7 +62,7 @@ const PortfolioListingCard: React.FC<PortfolioListingCardProps> = ({
         </Text>
 
         <Link
-          href={href}
+          href={link}
           isExternal={isExternal}
           borderBottom="1px"
           borderColor="#898989"
@@ -79,4 +82,4 @@ const PortfolioListingCard: React.FC<PortfolioListingCardProps> = ({
   )
 }
 
-export default PortfolioListingCard
+export default ProjectListingCard

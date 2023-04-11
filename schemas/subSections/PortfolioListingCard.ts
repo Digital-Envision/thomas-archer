@@ -1,14 +1,22 @@
 export default {
     type: 'object',
-    name: 'ProjectListingCard',
-    title: 'ProjectListingCard',
+    name: 'PortfolioListingCard',
+    title: 'PortfolioListingCard',
     fields: [
         {
             name: 'heading',
             type: 'text',
         },
         {
-            name: 'paragraph',
+            name: 'subHeading',
+            type: 'text',
+        },
+        {
+            name: 'description',
+            type: 'text',
+        },
+        {
+            name: 'link',
             type: 'text',
         },
         {
@@ -28,7 +36,7 @@ export default {
         },
         prepare({ title, disabled }) {
             return {
-                title: `ProjectListingCard: ${disabled ? 'DISABLED' : title}`
+                title: `PortfolioListingCard: ${disabled ? 'DISABLED' : title}`
             }
         }
     }

@@ -4,7 +4,7 @@ import Text from 'components/base/Text'
 import DropdownItem from 'components/modules/DropdownItem'
 import ArticleBlogCard from 'components/modules/ArticleBlogCard'
 import PortfolioCard from 'components/modules/PortfolioCard'
-import PortfolioListingCard from 'components/modules/PortfolioListingCard'
+import ProjectListingCard from 'components/modules/ProjectListingCard'
 import SectionHeadingParagraphCTA from 'components/modules/SectionHeadingParagraphCTA'
 import SectionTextFeatured from 'components/modules/SectionTextFeatured'
 import SectionHeadingParagraphCTAImage from 'components/modules/SectionHeadingParagraphCTAImage'
@@ -89,9 +89,9 @@ const Component = () => {
             PortfolioListingCard
           </Link>
           <Box borderWidth={1}>
-            <PortfolioListingCard
+            <ProjectListingCard
               imageUrl="https://via.placeholder.com/400x1000/"
-              href="https://www.google.com/"
+              link="https://www.google.com/"
               heading="House Name"
               subHeading="Suburb Name"
               description="Landmark Custom Design"
@@ -247,25 +247,25 @@ const Component = () => {
               imageUrl="https://via.placeholder.com/1296x730/"
               awards={[
                 {
-                  label: 'Finalist 2021',
-                  value:
+                  name: 'Finalist 2021',
+                  description:
                     'HIA Eastern Victorian Custom Build Home $750,001 - $1M',
                 },
                 {
-                  label: 'Winner 2020',
-                  value: 'HIA Australian Project Home Winner',
+                  name: 'Winner 2020',
+                  description: 'HIA Australian Project Home Winner',
                 },
                 {
-                  label: 'Winner 2019',
-                  value: 'HIA Victorian Project Home',
+                  name: 'Winner 2019',
+                  description: 'HIA Victorian Project Home',
                 },
                 {
-                  label: 'Winner 2019',
-                  value: 'HIA Victorian Project Home over $500,001',
+                  name: 'Winner 2019',
+                  description: 'HIA Victorian Project Home over $500,001',
                 },
                 {
-                  label: 'Winner 2018',
-                  value: 'HIA Victorian Project Home over $400,001',
+                  name: 'Winner 2018',
+                  description: 'HIA Victorian Project Home over $400,001',
                 },
               ]}
               marginTop={HeightVariants.none}

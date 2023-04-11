@@ -13,7 +13,7 @@ export default {
         },
         {
             name: 'createdAt',
-            type: 'string',
+            type: 'date',
         },
         {
             name: 'image',

@@ -19,11 +19,13 @@ export default {
                 { type: 'SectionHeadingParagraphCTAImage' },
                 { type: 'Divider' },
                 { type: 'Section3ColsCards' },
-                // { type: 'SectionBlog' }, //TODO LATER
+                // { type: 'SectionBlog' }, //TODO LATER SPRINT 3
+                { type: 'SectionProjectListing' },
                 { type: 'SectionHeadingParagraphContactForm' },
                 { type: 'SectionAwards' },
                 { type: 'SectionTextFeatured' },
                 { type: 'SectionImageTextMosaicType1' },
+                { type: 'SectionImageAwards' },
                 // { type: 'fixedComponent' },
             ],
         },

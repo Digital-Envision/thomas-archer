@@ -1,10 +1,12 @@
 import { Box, Flex, Image, VStack } from '@chakra-ui/react'
 import { HeightVariants } from 'components/base/Divider'
+import { urlForImage } from 'lib/sanity.image'
 import Text from '../base/Text'
 
 type SectionImageAwardsProps = {
-  imageUrl: string
-  awards: { label: string; value: string }[]
+  imageUrl: string // load image from url; test purpose
+  image?: any // sanity io image
+  awards: { name: string; description: string }[]
   marginTop: HeightVariants
   marginBottom: HeightVariants
 }
@@ -15,24 +17,24 @@ type SectionImageAwardsProps = {
         imageUrl="https://via.placeholder.com/1296x730/"
         awards={[
           {
-            label: 'Finalist 2021',
-            value: 'HIA Eastern Victorian Custom Build Home $750,001 - $1M',
+            name: 'Finalist 2021',
+            description: 'HIA Eastern Victorian Custom Build Home $750,001 - $1M',
           },
           {
-            label: 'Winner 2020',
-            value: 'HIA Australian Project Home Winner',
+            name: 'Winner 2020',
+            description: 'HIA Australian Project Home Winner',
           },
           {
-            label: 'Winner 2019',
-            value: 'HIA Victorian Project Home',
+            name: 'Winner 2019',
+            description: 'HIA Victorian Project Home',
           },
           {
-            label: 'Winner 2019',
-            value: 'HIA Victorian Project Home over $500,001',
+            name: 'Winner 2019',
+            description: 'HIA Victorian Project Home over $500,001',
           },
           {
-            label: 'Winner 2018',
-            value: 'HIA Victorian Project Home over $400,001',
+            name: 'Winner 2018',
+            description: 'HIA Victorian Project Home over $400,001',
           },
         ]}
       />
@@ -40,6 +42,7 @@ type SectionImageAwardsProps = {
 
 const SectionImageAwards: React.FC<SectionImageAwardsProps> = ({
   imageUrl,
+  image,
   awards,
   marginTop,
   marginBottom,
@@ -55,7 +58,12 @@ const SectionImageAwards: React.FC<SectionImageAwardsProps> = ({
       marginBottom={marginBottom}
     >
       <Box alignSelf={'center'}>
-        <Image src={imageUrl} objectFit="cover" width="100%" height="80vh" />
+        <Image
+          src={imageUrl || urlForImage(image).url()}
+          objectFit="cover"
+          width="100%"
+          height="80vh"
+        />
       </Box>
       <Flex
         direction={'column'}
@@ -69,9 +77,9 @@ const SectionImageAwards: React.FC<SectionImageAwardsProps> = ({
             return (
               <Flex direction={'row'}>
                 <Text fontWeight="bold" pr={2}>
-                  {o?.label}
+                  {o?.name}
                 </Text>
-                <Text>{o?.value}</Text>
+                <Text>{o?.description}</Text>
               </Flex>
             )
           })}
