@@ -15,7 +15,7 @@ const MobileNavLevel2: React.FC<Props> = ({ NAV_ITEMS, title }) => {
     <Box>
       <Heading1 mb={8}>{title}</Heading1>
       <Stack direction={'column'} spacing={0} width={'full'}>
-        {NAV_ITEMS.map((link, key) => {
+        {NAV_ITEMS?.map((link, key) => {
           return (
             <>
               <DropdownItem

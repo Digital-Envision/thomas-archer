@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import { Box, Collapse, Flex, useBreakpointValue } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import Logo, { LogoVariants } from 'components/base/Logo'
@@ -16,7 +17,11 @@ export interface NavLinksInterfaces extends LinksInterface {
   children?: Array<LinksInterface>
 }
 
-const Navbar = () => {
+const Navbar = ({ links }) => {
+  const Links = _.isArray(links)
+    ? links.filter((c) => c.title === 'Navigation Links')[0]?.content
+    : []
+
   const [onLightNavbar, setOnLightNavbar] = useState(false)
 
   const [onHover, setOnHover] = useState(false)
@@ -165,7 +170,7 @@ const Navbar = () => {
               openDrawer={() => setOpenDrawer(true)}
               onLightNavbar={onLightNavbar}
               parentHover={onHover}
-              NAV_ITEMS={NAV_ITEMS}
+              NAV_ITEMS={Links}
               TELEPHONE={TELEPHONE}
             />
             <MobileNav
@@ -181,7 +186,7 @@ const Navbar = () => {
           <Collapse in={onOpenDropdown} endingHeight={'100%'}>
             <MobileCollapse
               openDrawer={() => setOpenDrawer(true)}
-              NAV_ITEMS={NAV_ITEMS}
+              NAV_ITEMS={Links}
               onOpenLevel2={onOpenLevel2}
               setOnOpenLevel2={setOnOpenLevel2}
             />
@@ -193,114 +198,5 @@ const Navbar = () => {
 }
 
 const TELEPHONE = '+611234567890'
-
-const NAV_ITEMS = [
-  {
-    label: 'Gallery',
-    href: '',
-    externalLink: false,
-    children: [
-      {
-        label: 'Inspiration Moodboards',
-        href: '#',
-        externalLink: false,
-      },
-      {
-        label: 'Portofolio',
-        href: '#',
-        externalLink: false,
-      },
-      {
-        label: 'Upcoming Projects',
-        href: '#',
-        externalLink: false,
-      },
-    ],
-  },
-  {
-    label: 'Custom Build',
-    href: '#',
-    externalLink: false,
-  },
-  {
-    label: 'Home Designs',
-    href: '#',
-    externalLink: false,
-    children: [
-      {
-        label: 'Evolve',
-        href: '#',
-        externalLink: true,
-      },
-      {
-        label: 'Expressions Series',
-        href: '#',
-        externalLink: false,
-      },
-      {
-        label: 'View Range',
-        href: '#',
-        externalLink: false,
-      },
-      {
-        label: 'Inclusions',
-        href: '#',
-        externalLink: false,
-      },
-      {
-        label: 'Facades',
-        href: '#',
-        externalLink: false,
-      },
-    ],
-  },
-  {
-    label: 'Display Home',
-    href: '#',
-    externalLink: false,
-  },
-  {
-    label: 'About',
-    href: '#',
-    externalLink: false,
-    children: [
-      {
-        label: 'Why Thomas Archer',
-        href: '#',
-        externalLink: false,
-      },
-      {
-        label: 'Find Your Home',
-        href: '#',
-        externalLink: false,
-      },
-      {
-        label: 'Accolades',
-        href: '#',
-        externalLink: false,
-      },
-      {
-        label: 'Testimonials',
-        href: '#',
-        externalLink: false,
-      },
-      {
-        label: 'Where We Build',
-        href: '#',
-        externalLink: false,
-      },
-      {
-        label: 'Style Studio',
-        href: '#',
-        externalLink: false,
-      },
-      {
-        label: 'Interior Styling',
-        href: '#',
-        externalLink: false,
-      },
-    ],
-  },
-]
 
 export default Navbar

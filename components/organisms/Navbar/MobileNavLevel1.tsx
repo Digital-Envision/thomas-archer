@@ -20,7 +20,7 @@ const MobileNavLevel1: React.FC<Props> = ({
   return (
     <Box>
       <Stack direction={'column'} spacing={0} width={'full'}>
-        {NAV_ITEMS.map((link, key) => {
+        {NAV_ITEMS?.map((link, key) => {
           return (
             <>
               <DropdownItem
