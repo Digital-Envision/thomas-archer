@@ -35,6 +35,7 @@ import SectionImageAwards from 'schemas/sections/SectionImageAwards'
 import SectionProjectListing from 'schemas/sections/SectionProjectListing'
 import SectionHeroImageDefault from 'schemas/sections/SectionHeroImageDefault'
 import SectionImageHeadingCTA from 'schemas/sections/SectionImageHeadingCTA'
+import Carousel from 'schemas/sections/Carousel'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -61,6 +62,7 @@ export default defineConfig({
       settingsType,
       pageType,
       fixedComponentType,
+      Carousel,
       SectionHeroImageBig,
       SectionHeroImageDefault,
       SectionImageHeadingCTA,
