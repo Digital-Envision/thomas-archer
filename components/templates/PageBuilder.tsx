@@ -3,6 +3,7 @@ import SectionAwards from 'components/modules/SectionAwards'
 import SectionHeadingParagraphContactForm from 'components/modules/SectionHeadingParagraphContactForm'
 import SectionHeadingParagraphCTA from 'components/modules/SectionHeadingParagraphCTA'
 import SectionHeadingParagraphCTAImage from 'components/modules/SectionHeadingParagraphCTAImage'
+import SectionHeroImageBig from 'components/modules/SectionHeroImageBig'
 import SectionImageTextMosaicType1 from 'components/modules/SectionImageTextMosaicType1'
 import SectionTextFeatured from 'components/modules/SectionTextFeatured'
 import Footer from 'components/organisms/Footer'
@@ -19,6 +20,9 @@ const PageBuilder = (props) => {
     .map((c) => {
       let el = null
       switch (c._type) {
+        case 'SectionHeroImageBig':
+          el = <SectionHeroImageBig {...c} />
+          break;
         case 'SectionHeadingParagraphCTA':
           el = <SectionHeadingParagraphCTA {...c} />
           break
