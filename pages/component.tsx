@@ -37,11 +37,7 @@ const Component = () => {
       flexDir={'column'}
     >
       <Navbar />
-      <Box flex={1}>
-        <SectionHeroImageDefault />
-        <Spacer mb={'500px'} />
-        <Spacer mb={'500px'} />
-      </Box>
+      <Box flex={1}></Box>
       <Footer />
     </Box>
   )

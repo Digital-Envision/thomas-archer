@@ -33,6 +33,7 @@ import SectionImageTextMosaicType1 from 'schemas/sections/SectionImageTextMosaic
 import SectionHeroImageBig from 'schemas/sections/SectionHeroImageBig'
 import SectionImageAwards from 'schemas/sections/SectionImageAwards'
 import SectionProjectListing from 'schemas/sections/SectionProjectListing'
+import SectionHeroImageDefault from 'schemas/sections/SectionHeroImageDefault'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -60,6 +61,7 @@ export default defineConfig({
       pageType,
       fixedComponentType,
       SectionHeroImageBig,
+      SectionHeroImageDefault,
       SectionHeadingParagraphCTAType,
       SectionHeadingParagraphCTAImageType,
       DividerType,

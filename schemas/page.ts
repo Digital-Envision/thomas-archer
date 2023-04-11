@@ -14,6 +14,7 @@ export default {
             title: 'Page sections',
             description: 'Add, edit, and reorder sections',
             of: [
+                { type: 'SectionHeroImageDefault' },
                 { type: 'SectionHeroImageBig' },
                 { type: 'SectionHeadingParagraphCTA' },
                 { type: 'SectionHeadingParagraphCTAImage' },

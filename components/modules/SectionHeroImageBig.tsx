@@ -6,16 +6,23 @@ import React from 'react'
 import { BsChevronDown } from 'react-icons/bs'
 import { animateScroll } from 'react-scroll'
 import { getVideoUrl } from 'lib/utils'
+import { SanityFiles } from 'utils/interfaces'
 
-const SectionHeroImageBig = ({
+type SectionHeroImageBigProps = {
+  quotes: Array<any>
+  bannerImage?: SanityFiles
+  bannerVideo?: SanityFiles
+  marginBottom?: string
+  marginTop?: string
+}
+
+const SectionHeroImageBig: React.FC<SectionHeroImageBigProps> = ({
   quotes,
   bannerImage,
   bannerVideo,
   marginBottom,
   marginTop,
 }) => {
-  const withVideo = false
-
   const handleScrollDown = () => {
     animateScroll.scrollTo((100 * window.innerHeight) / 100, {
       duration: 500,
@@ -26,7 +33,7 @@ const SectionHeroImageBig = ({
   return (
     <Box
       height={'100vh'}
-      bg={withVideo ? 'gray.700' : ''}
+      bg={bannerVideo?.asset?._ref ? 'gray.700' : ''}
       backgroundImage={
         bannerVideo?.asset?._ref ? '' : urlForImage(bannerImage).url()
       }
