@@ -61,6 +61,7 @@ const SectionAwards: React.FC<SectionAwardsProps> = ({
   return (
     // @ts-ignore: 2590
     <Flex
+      mx={'auto'}
       direction={'column'}
       width={'w-full'}
       maxWidth={'1440px'}

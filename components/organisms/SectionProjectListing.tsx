@@ -1,4 +1,5 @@
 import { Box, Flex, Grid, GridItem } from '@chakra-ui/react'
+import Button, { Variants } from 'components/base/Button'
 import { HeightVariants } from 'components/base/Divider'
 import Heading2 from 'components/base/Heading2'
 import ProjectListingCard, {
@@ -22,6 +23,7 @@ const SectionProjectListing: React.FC<SectionProjectListingProps> = ({
 }) => {
   return (
     <Flex
+      mx={'auto'}
       flex={1}
       overflow="hidden"
       justify="center"
@@ -71,6 +73,11 @@ const SectionProjectListing: React.FC<SectionProjectListingProps> = ({
           )
         )}
       </Grid>
+
+      <Box pt="1rem" />
+      <Button type="submit" variant={Variants.blackLine}>
+        Load More Inspiration
+      </Button>
     </Flex>
   )
 }

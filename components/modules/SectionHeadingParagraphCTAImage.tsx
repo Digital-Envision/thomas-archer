@@ -20,6 +20,7 @@ const SectionHeadingParagraphCTAImage: React.FC<
 > = ({ heading, paragraph, imageUrl, image, marginTop, marginBottom }) => {
   return (
     <Flex
+      mx={'auto'}
       direction={{ base: 'column', md: 'row' }}
       width={'w-full'}
       maxWidth={'1440px'}
