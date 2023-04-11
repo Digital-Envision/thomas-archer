@@ -25,6 +25,7 @@ const Section3ColsCards: React.FC<Section3ColsCardsProps> = ({
 }) => {
   return (
     <Flex
+      mx={'auto'}
       flex={1}
       overflow="hidden"
       justify="center"

@@ -65,6 +65,7 @@ const SectionHeadingParagraphContactForm: React.FC<
   return (
     // @ts-ignore: 2590
     <Flex
+      mx={'auto'}
       direction={{ base: 'column', md: 'row' }}
       width={'w-full'}
       maxWidth={'1440px'}

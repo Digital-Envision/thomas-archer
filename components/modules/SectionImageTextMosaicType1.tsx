@@ -44,6 +44,7 @@ const SectionImageTextMosaicType1: React.FC<
 }) => {
   return (
     <Flex
+      mx={'auto'}
       direction={{ base: 'column', md: 'row' }}
       width={'w-full'}
       maxWidth={'1440px'}
