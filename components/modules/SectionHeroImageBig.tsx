@@ -6,8 +6,17 @@ import React from 'react'
 import { BsChevronDown } from 'react-icons/bs'
 import { animateScroll } from 'react-scroll'
 import { getVideoUrl } from 'lib/utils'
+import { SanityFiles } from 'utils/interfaces'
 
-const SectionHeroImageBig = ({
+type SectionHeroImageBigProps = {
+  quotes: Array<any>
+  bannerImage?: SanityFiles
+  bannerVideo?: SanityFiles
+  marginBottom?: string
+  marginTop?: string
+}
+
+const SectionHeroImageBig: React.FC<SectionHeroImageBigProps> = ({
   quotes,
   bannerImage,
   bannerVideo,
