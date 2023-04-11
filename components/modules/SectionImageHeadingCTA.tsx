@@ -11,14 +11,14 @@ type SectionImageHeadingCTAProps = {
   description: string
   isOverlay?: boolean
   image: SanityFiles
-  buttonName: string
-  buttonLink: string
   button: {
     buttonName: string
     buttonLink: string
     isExternal: boolean
   }
-  isExternal: boolean
+  isExternal?: boolean
+  marginTop?: string
+  marginBottom?: string
 }
 
 const SectionImageHeadingCTA: React.FC<SectionImageHeadingCTAProps> = ({
@@ -27,6 +27,8 @@ const SectionImageHeadingCTA: React.FC<SectionImageHeadingCTAProps> = ({
   isOverlay,
   image,
   button,
+  marginTop,
+  marginBottom,
 }) => {
   return (
     <Box
@@ -34,6 +36,8 @@ const SectionImageHeadingCTA: React.FC<SectionImageHeadingCTAProps> = ({
       backgroundImage={urlForImage(image).url()}
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
+      marginTop={marginTop}
+      marginBottom={marginBottom}
     >
       <Box
         bgGradient={isOverlay ? 'linear(to-b, #00000073, #00000000)' : ''}

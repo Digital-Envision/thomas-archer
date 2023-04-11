@@ -1,8 +1,14 @@
 import { Box, Flex } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
+import { urlForImage } from 'lib/sanity.image'
+import { SanityFiles } from 'utils/interfaces'
 
-const Carousel = () => {
+type CarouselProps = {
+  images: Array<SanityFiles>
+}
+
+const Carousel: React.FC<CarouselProps> = ({ images }) => {
   const [slide, setSlide] = useState(0)
 
   useEffect(() => {
@@ -33,8 +39,8 @@ const Carousel = () => {
             >
               <Box key={key} transition={'all .6s'}>
                 <Image
-                  src={image.src}
-                  alt={image.alt}
+                  src={urlForImage(image).url()}
+                  alt={image._key}
                   layout={'fill'}
                   objectFit={'cover'}
                   objectPosition={'center'}
@@ -72,26 +78,5 @@ const Carousel = () => {
     </Box>
   )
 }
-
-const images = [
-  {
-    id: 1,
-    src: 'https://picsum.photos/200/300',
-    alt: 'Image 1',
-    caption: 'Image 1 caption',
-  },
-  {
-    id: 2,
-    src: 'https://picsum.photos/300/400',
-    alt: 'Image 2',
-    caption: 'Image 2 caption',
-  },
-  {
-    id: 3,
-    src: 'https://picsum.photos/400/500',
-    alt: 'Image 3',
-    caption: 'Image 3 caption',
-  },
-]
 
 export default Carousel

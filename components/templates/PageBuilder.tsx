@@ -1,4 +1,5 @@
 import Divider from 'components/base/Divider'
+import Carousel from 'components/modules/Carousel'
 import SectionAwards from 'components/modules/SectionAwards'
 import SectionHeadingParagraphContactForm from 'components/modules/SectionHeadingParagraphContactForm'
 import SectionHeadingParagraphCTA from 'components/modules/SectionHeadingParagraphCTA'
@@ -24,6 +25,9 @@ const PageBuilder = (props) => {
     .map((c) => {
       let el = null
       switch (c._type) {
+        case 'Carousel':
+          el = <Carousel {...c} />
+          break
         case 'SectionHeroImageDefault':
           el = <SectionHeroImageDefault {...c} />
           break
