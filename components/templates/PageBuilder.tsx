@@ -6,6 +6,7 @@ import SectionHeadingParagraphCTAImage from 'components/modules/SectionHeadingPa
 import SectionHeroImageBig from 'components/modules/SectionHeroImageBig'
 import SectionHeroImageDefault from 'components/modules/SectionHeroImageDefault'
 import SectionImageAwards from 'components/modules/SectionImageAwards'
+import SectionImageHeadingCTA from 'components/modules/SectionImageHeadingCTA'
 import SectionImageTextMosaicType1 from 'components/modules/SectionImageTextMosaicType1'
 import SectionTextFeatured from 'components/modules/SectionTextFeatured'
 import Footer from 'components/organisms/Footer'
@@ -13,7 +14,7 @@ import Navbar from 'components/organisms/Navbar'
 import Section3ColsCards from 'components/organisms/Section3ColsCards'
 import SectionBlog from 'components/organisms/SectionBlog'
 import SectionProjectListing from 'components/organisms/SectionProjectListing'
-import React, { useState } from 'react'
+import React from 'react'
 
 const PageBuilder = (props) => {
   // console.log('🔥PageBuilder props', props)
@@ -28,6 +29,9 @@ const PageBuilder = (props) => {
           break
         case 'SectionHeroImageBig':
           el = <SectionHeroImageBig {...c} />
+          break
+        case 'SectionImageHeadingCTA':
+          el = <SectionImageHeadingCTA {...c} />
           break
         case 'SectionHeadingParagraphCTA':
           el = <SectionHeadingParagraphCTA {...c} />
