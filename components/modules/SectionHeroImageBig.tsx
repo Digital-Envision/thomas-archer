@@ -14,8 +14,6 @@ const SectionHeroImageBig = ({
   marginBottom,
   marginTop,
 }) => {
-  const withVideo = false
-
   const handleScrollDown = () => {
     animateScroll.scrollTo((100 * window.innerHeight) / 100, {
       duration: 500,
@@ -26,7 +24,7 @@ const SectionHeroImageBig = ({
   return (
     <Box
       height={'100vh'}
-      bg={withVideo ? 'gray.700' : ''}
+      bg={bannerVideo?.asset?._ref ? 'gray.700' : ''}
       backgroundImage={
         bannerVideo?.asset?._ref ? '' : urlForImage(bannerImage).url()
       }

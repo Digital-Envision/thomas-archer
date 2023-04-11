@@ -5,7 +5,7 @@ import { enumToArrayOfObjects } from 'lib/utils'
 export default defineType({
     name: 'SectionHeroImageBig',
     title: 'SectionHeroImageBig',
-    type: 'document',
+    type: 'object',
     fields: [
         defineField({
             name: 'quotes',
