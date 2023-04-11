@@ -37,7 +37,6 @@ const Component = () => {
     >
       <Navbar />
       <Box flex={1}>
-        <SectionImageHeadingCTA />
       </Box>
       <Footer />
     </Box>
