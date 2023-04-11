@@ -16,6 +16,7 @@ export default {
             of: [
                 { type: 'SectionHeroImageDefault' },
                 { type: 'SectionHeroImageBig' },
+                { type: 'SectionImageHeadingCTA' },
                 { type: 'SectionHeadingParagraphCTA' },
                 { type: 'SectionHeadingParagraphCTAImage' },
                 { type: 'Divider' },

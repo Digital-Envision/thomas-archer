@@ -10,8 +10,8 @@ import { settingsPlugin, settingsStructure } from 'plugins/settings'
 import { defineConfig } from 'sanity'
 import { deskTool } from 'sanity/desk'
 import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
-import { dashboardTool } from "@sanity/dashboard";
-import { netlifyWidget } from "sanity-plugin-dashboard-widget-netlify";
+import { dashboardTool } from '@sanity/dashboard'
+import { netlifyWidget } from 'sanity-plugin-dashboard-widget-netlify'
 import authorType from 'schemas/author'
 import postType from 'schemas/post'
 import settingsType from 'schemas/settings'
@@ -34,6 +34,7 @@ import SectionHeroImageBig from 'schemas/sections/SectionHeroImageBig'
 import SectionImageAwards from 'schemas/sections/SectionImageAwards'
 import SectionProjectListing from 'schemas/sections/SectionProjectListing'
 import SectionHeroImageDefault from 'schemas/sections/SectionHeroImageDefault'
+import SectionImageHeadingCTA from 'schemas/sections/SectionImageHeadingCTA'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -62,6 +63,7 @@ export default defineConfig({
       fixedComponentType,
       SectionHeroImageBig,
       SectionHeroImageDefault,
+      SectionImageHeadingCTA,
       SectionHeadingParagraphCTAType,
       SectionHeadingParagraphCTAImageType,
       DividerType,
@@ -78,7 +80,7 @@ export default defineConfig({
       ArticleBlogCard,
       // Margin,
       // PortfolioCard, // TODO LATER
-      PortfolioListingCard // TODO LATER
+      PortfolioListingCard, // TODO LATER
     ],
   },
   plugins: [
@@ -111,9 +113,9 @@ export default defineConfig({
               buildHookId: process.env.NETLIFY_BUILD_HOOK_ID,
               name: 'thomas-archer',
             },
-          ]
-        })
-      ]
-    })
+          ],
+        }),
+      ],
+    }),
   ],
 })
