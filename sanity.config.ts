@@ -10,6 +10,8 @@ import { settingsPlugin, settingsStructure } from 'plugins/settings'
 import { defineConfig } from 'sanity'
 import { deskTool } from 'sanity/desk'
 import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash'
+import { dashboardTool } from "@sanity/dashboard";
+import { netlifyWidget } from "sanity-plugin-dashboard-widget-netlify";
 import authorType from 'schemas/author'
 import postType from 'schemas/post'
 import settingsType from 'schemas/settings'
@@ -27,6 +29,9 @@ import PortfolioCard from 'schemas/subSections/PortfolioCard'
 import PortfolioListingCard from 'schemas/subSections/PortfolioListingCard'
 import SectionTextFeatured from 'schemas/sections/SectionTextFeatured'
 import SectionImageTextMosaicType1 from 'schemas/sections/SectionImageTextMosaicType1'
+// import Margin from 'schemas/subSections/Margin'
+// import SectionImageAwards from 'schemas/sections/SectionImageAwards'
+// import SectionProjectListing from 'schemas/sections/SectionProjectListing'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -63,9 +68,12 @@ export default defineConfig({
       SectionAwards,
       SectionTextFeatured,
       SectionImageTextMosaicType1,
+      // SectionImageAwards,
+      // SectionProjectListing,
 
       // -- subSection
       ArticleBlogCard,
+      // Margin,
       // PortfolioCard, // TODO LATER
       // PortfolioListingCard // TODO LATER
     ],
@@ -89,5 +97,20 @@ export default defineConfig({
     // Vision lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({ defaultApiVersion: apiVersion }),
+    dashboardTool({
+      widgets: [
+        netlifyWidget({
+          title: 'Netlify deploys',
+          sites: [
+            {
+              title: 'thomas-archer',
+              apiId: process.env.NETLIFY_API_ID,
+              buildHookId: process.env.NETLIFY_BUILD_HOOK_ID,
+              name: 'thomas-archer',
+            },
+          ]
+        })
+      ]
+    })
   ],
 })
