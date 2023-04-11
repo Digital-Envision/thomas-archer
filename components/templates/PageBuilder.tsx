@@ -4,12 +4,14 @@ import SectionHeadingParagraphContactForm from 'components/modules/SectionHeadin
 import SectionHeadingParagraphCTA from 'components/modules/SectionHeadingParagraphCTA'
 import SectionHeadingParagraphCTAImage from 'components/modules/SectionHeadingParagraphCTAImage'
 import SectionHeroImageBig from 'components/modules/SectionHeroImageBig'
+import SectionImageAwards from 'components/modules/SectionImageAwards'
 import SectionImageTextMosaicType1 from 'components/modules/SectionImageTextMosaicType1'
 import SectionTextFeatured from 'components/modules/SectionTextFeatured'
 import Footer from 'components/organisms/Footer'
 import Navbar from 'components/organisms/Navbar'
 import Section3ColsCards from 'components/organisms/Section3ColsCards'
 import SectionBlog from 'components/organisms/SectionBlog'
+import SectionProjectListing from 'components/organisms/SectionProjectListing'
 import React, { useState } from 'react'
 
 const PageBuilder = (props) => {
@@ -22,7 +24,7 @@ const PageBuilder = (props) => {
       switch (c._type) {
         case 'SectionHeroImageBig':
           el = <SectionHeroImageBig {...c} />
-          break;
+          break
         case 'SectionHeadingParagraphCTA':
           el = <SectionHeadingParagraphCTA {...c} />
           break
@@ -50,9 +52,15 @@ const PageBuilder = (props) => {
         case 'SectionAwards':
           el = <SectionAwards {...c} />
           break
+        case 'SectionImageAwards':
+          el = <SectionImageAwards {...c} />
+          break
         // case 'SectionBlog':
         //   el = <SectionBlog {...c} />
         //   break
+        case 'SectionProjectListing':
+          el = <SectionProjectListing {...c} />
+          break
         case 'SectionHeadingParagraphContactForm':
           el = <SectionHeadingParagraphContactForm {...c} />
           break

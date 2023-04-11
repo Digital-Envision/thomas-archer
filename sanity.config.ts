@@ -30,9 +30,9 @@ import PortfolioListingCard from 'schemas/subSections/PortfolioListingCard'
 import SectionTextFeatured from 'schemas/sections/SectionTextFeatured'
 import SectionImageTextMosaicType1 from 'schemas/sections/SectionImageTextMosaicType1'
 // import Margin from 'schemas/subSections/Margin'
-// import SectionImageAwards from 'schemas/sections/SectionImageAwards'
-// import SectionProjectListing from 'schemas/sections/SectionProjectListing'
 import SectionHeroImageBig from 'schemas/sections/SectionHeroImageBig'
+import SectionImageAwards from 'schemas/sections/SectionImageAwards'
+import SectionProjectListing from 'schemas/sections/SectionProjectListing'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -69,14 +69,14 @@ export default defineConfig({
       SectionAwards,
       SectionTextFeatured,
       SectionImageTextMosaicType1,
-      // SectionImageAwards,
-      // SectionProjectListing,
+      SectionImageAwards,
+      SectionProjectListing,
 
       // -- subSection
       ArticleBlogCard,
       // Margin,
       // PortfolioCard, // TODO LATER
-      // PortfolioListingCard // TODO LATER
+      PortfolioListingCard // TODO LATER
     ],
   },
   plugins: [

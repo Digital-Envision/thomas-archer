@@ -76,8 +76,8 @@ const SectionHeadingParagraphContactForm: React.FC<
         <Heading1>{heading}</Heading1>
         <Box pt={HeightVariants.less} />
         <Text>{paragraph}</Text>
-        <Divider
-          variant={{
+        <Box
+          pt={{
             base: HeightVariants.less,
             md: HeightVariants.none,
           }}
