@@ -32,15 +32,15 @@ import SectionImageTextMosaicType1 from 'schemas/sections/SectionImageTextMosaic
 // import Margin from 'schemas/subSections/Margin'
 // import SectionImageAwards from 'schemas/sections/SectionImageAwards'
 // import SectionProjectListing from 'schemas/sections/SectionProjectListing'
+import SectionHeroImageBig from 'schemas/sections/SectionHeroImageBig'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
 
-
 /**
  * 1. create schema
  * 2. import schema to this types below
- * 3. create query function, and adjust query  
+ * 3. create query function, and adjust query
  * 4. load dataset on getStaticProps from designated page
  */
 
@@ -59,6 +59,7 @@ export default defineConfig({
       settingsType,
       pageType,
       fixedComponentType,
+      SectionHeroImageBig,
       SectionHeadingParagraphCTAType,
       SectionHeadingParagraphCTAImageType,
       DividerType,
