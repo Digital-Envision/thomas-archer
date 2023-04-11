@@ -10,13 +10,13 @@ export interface Props {
 const DesktopNav: React.FC<Props> = ({ NAV_ITEMS }) => {
   return (
     <SimpleGrid
-      columns={NAV_ITEMS.length}
+      columns={NAV_ITEMS?.length}
       display={{
         base: 'none',
         md: 'grid',
       }}
     >
-      {NAV_ITEMS.map((nav, key) => {
+      {NAV_ITEMS?.map((nav, key) => {
         return (
           <Box key={key}>
             <Link href={nav.href} isExternal={nav.externalLink}>

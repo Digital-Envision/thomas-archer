@@ -8,6 +8,7 @@ import {
   type Settings,
   settingsQuery,
   pageQuery,
+  globalQuery,
 } from 'lib/sanity.queries'
 import { createClient } from 'next-sanity'
 
@@ -35,6 +36,13 @@ export async function getAllPosts(): Promise<Post[]> {
 export async function getAllPages(page): Promise<Post[]> {
   if (client) {
     return (await client.fetch(pageQuery(page))) || []
+  }
+  return []
+}
+
+export async function getAllGlobals(): Promise<Post[]> {
+  if (client) {
+    return (await client.fetch(globalQuery())) || []
   }
   return []
 }

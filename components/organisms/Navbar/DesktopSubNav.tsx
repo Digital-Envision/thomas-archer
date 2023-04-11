@@ -48,7 +48,7 @@ const DesktopSubNav: React.FC<Props> = ({ links, title }) => {
         </GridItem>
         <GridItem colSpan={7}>
           <SimpleGrid columns={2} spacingX={10} spacingY={1}>
-            {links.map((link, key) => {
+            {links?.map((link, key) => {
               return (
                 <DropdownItem
                   key={key}

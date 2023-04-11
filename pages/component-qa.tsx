@@ -40,7 +40,7 @@ import { HeightVariants } from 'components/base/Divider'
 const Component = () => {
   return (
     <Box>
-      <Navbar />
+      {/*<Navbar />*/}
       <Box
         height={'100vh'}
         bg={'blue.200'}
@@ -293,7 +293,7 @@ const Component = () => {
           </Box>
         </Box>
       </Flex>
-      <Footer />
+      {/*<Footer />*/}
     </Box>
   )
 }

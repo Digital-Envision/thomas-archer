@@ -16,6 +16,7 @@ import authorType from 'schemas/author'
 import postType from 'schemas/post'
 import settingsType from 'schemas/settings'
 import pageType from 'schemas/page'
+import globalType from 'schemas/global'
 import fixedComponentType from 'schemas/fixedComponent'
 import SectionHeadingParagraphCTAType from 'schemas/sections/SectionHeadingParagraphCTA'
 import SectionHeadingParagraphCTAImageType from 'schemas/sections/SectionHeadingParagraphCTAImage'
@@ -36,6 +37,7 @@ import SectionProjectListing from 'schemas/sections/SectionProjectListing'
 import SectionHeroImageDefault from 'schemas/sections/SectionHeroImageDefault'
 import SectionImageHeadingCTA from 'schemas/sections/SectionImageHeadingCTA'
 import Carousel from 'schemas/sections/Carousel'
+import Links from 'schemas/global/Links'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -61,6 +63,8 @@ export default defineConfig({
       // -- section
       settingsType,
       pageType,
+      globalType,
+      Links,
       fixedComponentType,
       Carousel,
       SectionHeroImageBig,

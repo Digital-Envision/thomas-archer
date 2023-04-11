@@ -18,7 +18,7 @@ const MobileNav: React.FC<Props> = ({ NAV_ITEMS }) => {
         md: 'none',
       }}
     >
-      {NAV_ITEMS.map((link, key) => {
+      {NAV_ITEMS?.map((link, key) => {
         return (
           <Box mb={8}>
             <Flex alignItems={'center'} onClick={() => setDropdown(key)}>
@@ -48,7 +48,7 @@ const MobileNav: React.FC<Props> = ({ NAV_ITEMS }) => {
             </Flex>
             {link.children && (
               <Collapse in={dropdown === key}>
-                {link.children.map((childLink, childKey) => {
+                {link?.children?.map((childLink, childKey) => {
                   return (
                     <Link
                       href={childLink.href}

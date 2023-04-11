@@ -1,6 +1,11 @@
 import { PreviewSuspense } from '@sanity/preview-kit'
 import IndexPage from 'components/IndexPage'
-import { getAllPages, getAllPosts, getSettings } from 'lib/sanity.client'
+import {
+  getAllGlobals,
+  getAllPages,
+  getAllPosts,
+  getSettings,
+} from 'lib/sanity.client'
 import { Post, Settings } from 'lib/sanity.queries'
 import { GetStaticProps } from 'next'
 import { lazy } from 'react'
@@ -10,6 +15,7 @@ const PreviewIndexPage = lazy(() => import('components/PreviewIndexPage'))
 interface PageProps {
   posts: Post[]
   pages: any[]
+  globals: any[]
   settings: Settings
   preview: boolean
   token: string | null
@@ -25,7 +31,7 @@ interface PreviewData {
 
 export default function HomePage(props: PageProps) {
   // console.log('✅pages/index', props)
-  const { posts, settings, preview, token, pages } = props
+  const { posts, settings, preview, token, pages, globals } = props
 
   if (preview) {
     return (
@@ -37,6 +43,7 @@ export default function HomePage(props: PageProps) {
             posts={posts}
             settings={settings}
             pages={pages}
+            globals={globals}
           />
         }
       >
@@ -45,7 +52,14 @@ export default function HomePage(props: PageProps) {
     )
   }
 
-  return <IndexPage posts={posts} settings={settings} pages={pages} />
+  return (
+    <IndexPage
+      posts={posts}
+      settings={settings}
+      pages={pages}
+      globals={globals}
+    />
+  )
 }
 
 export const getStaticProps: GetStaticProps<
@@ -55,10 +69,11 @@ export const getStaticProps: GetStaticProps<
 > = async (ctx) => {
   const { preview = false, previewData = {} } = ctx
 
-  const [settings, posts = [], pages = []] = await Promise.all([
+  const [settings, posts = [], pages = [], globals = []] = await Promise.all([
     getSettings(),
     getAllPosts(), // can remove
     getAllPages('Home'),
+    getAllGlobals(),
   ])
 
   return {
@@ -66,6 +81,7 @@ export const getStaticProps: GetStaticProps<
       posts,
       settings,
       pages,
+      globals,
       preview,
       token: previewData.token ?? null,
     },

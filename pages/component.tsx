@@ -29,16 +29,12 @@ import Footer from '../components/organisms/Footer'
 
 const Component = () => {
   return (
-    <Box
-      bg={'blue.700'}
-      minH="200vh"
-      display={'flex'}
-      flexDir={'column'}
-    >
-      <Navbar />
-      <Box flex={1}>
-      </Box>
-      <Footer />
+    <Box bg={'blue.700'} minH="200vh" display={'flex'} flexDir={'column'}>
+      {/*
+          <Navbar />*/}
+      <Box flex={1}></Box>
+      {/*
+          <Footer />*/}
     </Box>
   )
 }

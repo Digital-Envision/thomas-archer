@@ -24,6 +24,10 @@ export const pageQuery = (page) => {
   return groq`*[_type == "page"]`
 }
 
+export const globalQuery = () => {
+  return groq`*[_type == "global"]`
+}
+
 export const postAndMoreStoriesQuery = groq`
 {
   "post": *[_type == "post" && slug.current == $slug] | order(_updatedAt desc) [0] {

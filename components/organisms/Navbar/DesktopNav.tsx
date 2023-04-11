@@ -48,7 +48,7 @@ const DesktopNav: React.FC<Props> = ({
           pr={'3.5em'}
           pt={'3.8em'}
         >
-          {NAV_ITEMS.map((link, key) => {
+          {NAV_ITEMS?.map((link, key) => {
             return (
               <Box
                 key={key}
