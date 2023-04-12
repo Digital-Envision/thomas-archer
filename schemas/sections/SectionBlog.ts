@@ -5,40 +5,63 @@ export default {
     name: 'SectionBlog',
     title: 'SectionBlog',
     fields: [
+        // {
+        //     name: 'SectionHeadingParagraphCTA',
+        //     title: 'SectionHeadingParagraphCTA',
+        //     type: 'SectionHeadingParagraphCTA',
+        // },
         {
-            name: 'SectionHeadingParagraphCTA',
-            title: 'SectionHeadingParagraphCTA',
-            type: 'SectionHeadingParagraphCTA',
+            name: 'heading',
+            type: 'text',
         },
         {
-            name: 'Section3ColsCards',
-            title: 'Section3ColsCards',
-            type: 'Section3ColsCards',
+            name: 'paragraph',
+            type: 'text',
         },
         {
-            title: 'Margin Top',
-            name: 'marginTop',
-            type: 'string',
-            options: {
-                list: [
-                    ...enumToArrayOfObjects(HeightVariants)
-                ],
-            },
+            name: 'ArticleBlogCard1',
+            title: 'ArticleBlogCard - 1',
+            type: 'ArticleBlogCard',
+        },
+        {
+            name: 'ArticleBlogCard2',
+            title: 'ArticleBlogCard - 2',
+            type: 'ArticleBlogCard',
+        },
+        {
+            name: 'ArticleBlogCard3',
+            title: 'ArticleBlogCard - 3',
+            type: 'ArticleBlogCard',
+        },
+        {
+            name: 'Margin',
+            title: 'Margin',
+            type: 'Margin',
+        }
+        // {
+        //     title: 'Margin Top',
+        //     name: 'marginTop',
+        //     type: 'string',
+        //     options: {
+        //         list: [
+        //             ...enumToArrayOfObjects(HeightVariants)
+        //         ],
+        //     },
 
-            layout: 'dropdown'
-        },
-        {
-            title: 'Margin Bottom',
-            name: 'marginBottom',
-            type: 'string',
-            options: {
-                list: [
-                    ...enumToArrayOfObjects(HeightVariants)
-                ],
-            },
+        //     layout: 'dropdown'
+        // },
+        // {
+        //     title: 'Margin Bottom',
+        //     name: 'marginBottom',
+        //     type: 'string',
+        //     options: {
+        //         list: [
+        //             ...enumToArrayOfObjects(HeightVariants)
+        //         ],
+        //     },
 
-            layout: 'dropdown'
-        },
+        //     layout: 'dropdown'
+        // },
     ],
     preview: {
         select: {
