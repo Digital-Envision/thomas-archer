@@ -35,7 +35,11 @@ const Section3ColsCards: React.FC<Section3ColsCardsProps> = ({
       marginTop={marginTop}
       marginBottom={marginBottom}
     >
-      <Stack direction={{ base: 'column', md: 'row' }} spacing={'1rem'}>
+      <Stack
+        direction={{ base: 'column', md: 'row' }}
+        spacing={'1rem'}
+        overflow="hidden"
+      >
         <ArticleBlogCard {...ArticleBlogCard1} />
         <ArticleBlogCard {...ArticleBlogCard2} />
         <ArticleBlogCard {...ArticleBlogCard3} />
