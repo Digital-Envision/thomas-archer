@@ -10,7 +10,7 @@ export type ArticleBlogCardProps = {
   imageUrl?: string // load image from url; test purpose
   createdAt?: string
   heading: string
-  description: string
+  paragraph: string
   width?: string
   height?: string
   buttonText: string
@@ -23,7 +23,7 @@ export type ArticleBlogCardProps = {
     imageUrl="https://via.placeholder.com/500x500"
     createdAt={'01/01/2023'}
     heading="Article Card"
-    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse fringilla mauris eget fringilla imperdiet. Sed dictum ipsum velit, et vestibulum leo consectetur vel."
+    paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse fringilla mauris eget fringilla imperdiet. Sed dictum ipsum velit, et vestibulum leo consectetur vel."
     buttonText="Find Out More"
     buttonOnClick={() => alert('Button clicked!')}
   />
@@ -34,13 +34,13 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
   image,
   createdAt,
   heading,
-  description,
+  paragraph,
   width = '470px',
   height = '700px',
   buttonOnClick,
 }) => {
   return (
-    <Flex direction={'column'} overflow="hidden" width={width} height={height}>
+    <Flex direction={'column'} width={width} maxHeight={height}>
       <Box display="flex" justifyContent="center" alignItems="center">
         <Image
           src={imageUrl || urlForImage(image).url()}
@@ -62,11 +62,11 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
           <Heading3 mb="4">{heading}</Heading3>
 
           <Text noOfLines={3} fontSize={'14px'} mb="4">
-            {description}
+            {paragraph}
           </Text>
         </Box>
 
-        <Box>
+        <Box mt="auto">
           <Button variant={Variants.blackLine} onClick={buttonOnClick}>
             {'Why Thomas Archer'}
           </Button>
