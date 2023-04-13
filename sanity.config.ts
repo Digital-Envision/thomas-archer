@@ -38,6 +38,7 @@ import SectionHeroImageDefault from 'schemas/sections/SectionHeroImageDefault'
 import SectionImageHeadingCTA from 'schemas/sections/SectionImageHeadingCTA'
 import Carousel from 'schemas/sections/Carousel'
 import Links from 'schemas/global/Links'
+import SectionGridGallery from 'schemas/sections/SectionGridGallery'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -81,6 +82,8 @@ export default defineConfig({
       SectionImageTextMosaicType1,
       SectionImageAwards,
       SectionProjectListing,
+
+      SectionGridGallery,
 
       // -- subSection
       ArticleBlogCard,

@@ -1,3 +1,4 @@
+import { Flex } from '@chakra-ui/react'
 import Divider from 'components/base/Divider'
 import Carousel from 'components/modules/Carousel'
 import SectionAwards from 'components/modules/SectionAwards'
@@ -14,6 +15,7 @@ import Footer from 'components/organisms/Footer'
 import Navbar from 'components/organisms/Navbar'
 import Section3ColsCards from 'components/organisms/Section3ColsCards'
 import SectionBlog from 'components/organisms/SectionBlog'
+import SectionGridGallery from 'components/organisms/SectionGridGallery'
 import SectionProjectListing from 'components/organisms/SectionProjectListing'
 import React from 'react'
 
@@ -66,6 +68,9 @@ const PageBuilder = (props) => {
           break
         case 'SectionImageAwards':
           el = <SectionImageAwards {...c} />
+          break
+        case 'SectionGridGallery':
+          el = <SectionGridGallery {...c} />
           break
         // case 'SectionBlog':
         //   el = <SectionBlog {...c} />

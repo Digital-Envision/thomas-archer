@@ -29,6 +29,7 @@ export default {
                 { type: 'SectionTextFeatured' },
                 { type: 'SectionImageTextMosaicType1' },
                 { type: 'SectionImageAwards' },
+                { type: 'SectionGridGallery' },
                 // { type: 'fixedComponent' },
             ],
         },
