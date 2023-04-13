@@ -7,9 +7,11 @@ import {
   getSettings,
 } from 'lib/sanity.client'
 import { Post, Settings } from 'lib/sanity.queries'
-import _ from 'lodash'
 import { GetStaticProps } from 'next'
 import { lazy } from 'react'
+import { getAllPagesSlugs } from 'lib/sanity.client'
+import { useRouter } from 'next/router'
+import _ from 'lodash'
 
 const PreviewIndexPage = lazy(() => import('components/PreviewIndexPage'))
 
@@ -30,9 +32,19 @@ interface PreviewData {
   token?: string
 }
 
-export default function HomePage(props: PageProps) {
-  // console.log('✅pages/index', props)
-  const { posts, settings, preview, token, pages, globals } = props
+export default function DynamicPage({
+  posts,
+  settings,
+  preview,
+  token,
+  pages,
+  globals,
+}) {
+  const router = useRouter()
+
+  if (router.isFallback) {
+    return <div>Loading...</div>
+  }
 
   if (preview) {
     return (
@@ -63,22 +75,32 @@ export default function HomePage(props: PageProps) {
   )
 }
 
+export async function getStaticPaths() {
+  const slugsPages = (await getAllPagesSlugs()) || []
+  const paths = slugsPages.map((slug) => ({ params: { slug } }))
+
+  return {
+    paths,
+    fallback: true,
+  }
+}
+
 export const getStaticProps: GetStaticProps<
   PageProps,
   Query,
   PreviewData
 > = async (ctx) => {
-  const { preview = false, previewData = {} } = ctx
-  let pages = []
-  const [settings, posts = [], globals = []] = await Promise.all([
+  const { preview = false, previewData = {}, params } = ctx
+
+  const [settings, posts = [], pages = [], globals = []] = await Promise.all([
     getSettings(),
     getAllPosts(), // can remove
+    getAllPages(params?.slug),
     getAllGlobals(),
   ])
 
-  // get index page reference from settings
-  if (!_.isEmpty(settings)) {
-    pages = [...(await getAllPages({ _id: settings?.indexPage?._ref }))]
+  if (_.isEmpty(pages)) {
+    return { notFound: true }
   }
 
   return {

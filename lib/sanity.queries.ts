@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import { groq } from 'next-sanity'
 
 const postFields = groq`
@@ -17,9 +18,13 @@ export const indexQuery = groq`
   ${postFields}
 }`
 
-export const pageQuery = (page) => {
-  if (page) {
-    return groq`*[_type == "page" && title=="${page}"]`
+export const pageQuery = (slug: 'string' | { _id: string }) => {
+  if (typeof slug === 'object' && slug._id) {
+    return groq`*[_type == "page" && _id=="${slug._id}"]`
+  }
+
+  if (slug) {
+    return groq`*[_type == "page" && slug.current=="${slug}"]`
   }
   return groq`*[_type == "page"]`
 }
@@ -43,6 +48,10 @@ export const postAndMoreStoriesQuery = groq`
 export const postSlugsQuery = groq`
 *[_type == "post" && defined(slug.current)][].slug.current
 `
+export const pageSlugsQuery = groq`*[_type == 'page' && slug.current != null ] { slug }`
+// export const pageSlugsQuery = groq`*[_type == "page"] {slug}`
+// export const pageSlugsQuery = groq`*[_type == "page"]`
+// export const pageSlugsQuery = groq`*[_type == "page" && defined(slug.current)][].slug.current`
 
 export const postBySlugQuery = groq`
 *[_type == "post" && slug.current == $slug][0] {
@@ -76,4 +85,18 @@ export interface Settings {
   ogImage?: {
     title?: string
   }
+  indexPage?: { _ref: string, _type: string }
+}
+export interface Page {
+  _createdAt: string;
+  _id: string;
+  _rev: string;
+  _type: 'page';
+  _updatedAt: string;
+  content: any[];
+  slug: {
+    _type: 'slug';
+    current: string;
+  };
+  title: string;
 }

@@ -73,5 +73,12 @@ export default defineType({
         }),
       ],
     }),
+    defineField({
+      name: 'indexPage',
+      title: 'Index Page',
+      description: 'Select the page to be used as the index page',
+      type: 'reference',
+      to: [{ type: 'page' }],
+    }),
   ],
 })

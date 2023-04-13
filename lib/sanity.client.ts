@@ -9,7 +9,9 @@ import {
   settingsQuery,
   pageQuery,
   globalQuery,
+  pageSlugsQuery,
 } from 'lib/sanity.queries'
+import _ from 'lodash'
 import { createClient } from 'next-sanity'
 
 /**
@@ -51,6 +53,13 @@ export async function getAllPostsSlugs(): Promise<Pick<Post, 'slug'>[]> {
   if (client) {
     const slugs = (await client.fetch<string[]>(postSlugsQuery)) || []
     return slugs.map((slug) => ({ slug }))
+  }
+  return []
+}
+export async function getAllPagesSlugs(): Promise<Pick<Post, 'slug'>[]> {
+  if (client) {
+    const slugs = (await client.fetch<string[]>(pageSlugsQuery)) || []
+    return _.map(slugs, 'slug.current')
   }
   return []
 }

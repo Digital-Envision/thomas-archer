@@ -9,6 +9,17 @@ export default {
             title: 'Title',
         },
         {
+            name: 'slug',
+            description: 'page can be access: https://thomas-archer.netlify.app/[slug]',
+            type: 'slug',
+            title: 'Slug',
+            options: {
+                source: 'title',
+                maxLength: 96,
+                isUnique: (value, context) => context.defaultIsUnique(value, context),
+            },
+        },
+        {
             name: 'content',
             type: 'array',
             title: 'Page sections',
