@@ -1,12 +1,4 @@
-import {
-  Box,
-  Divider,
-  Flex,
-  Grid,
-  GridItem,
-  Link,
-  Stack,
-} from '@chakra-ui/react'
+import { Box, Divider, Flex, Grid, GridItem, Stack } from '@chakra-ui/react'
 import Button, { Variants as ButtonVariants } from 'components/base/Button'
 import Text from 'components/base/Text'
 import ButtonIcon, {
@@ -17,6 +9,7 @@ import Telephone from 'components/icon/Telephone'
 import React from 'react'
 import DesktopSubNav from './DesktopSubNav'
 import { NavLinksInterfaces } from '.'
+import Link from 'next/link'
 
 export interface Props {
   openDrawer?: () => void
@@ -59,17 +52,21 @@ const DesktopNav: React.FC<Props> = ({
                 }}
               >
                 <Link
-                  fontSize={'14px'}
-                  fontWeight={400}
-                  lineHeight={'16.8px'}
-                  height={'full'}
-                  _hover={{
-                    textDecor: 'none',
-                  }}
-                  href={link.href ? link.href : '#'}
-                  isExternal={link.externalLink}
+                  href={
+                    link.useInternal
+                      ? `/${link.internalHref}`
+                      : link.externalHref
+                  }
+                  target={link.isExternal ? '_blank' : ''}
                 >
                   <Text
+                    fontSize={'14px'}
+                    fontWeight={400}
+                    lineHeight={'16.8px'}
+                    height={'full'}
+                    _hover={{
+                      textDecor: 'none',
+                    }}
                     color={
                       parentHover
                         ? '#000000'
@@ -110,7 +107,9 @@ const DesktopNav: React.FC<Props> = ({
           </ButtonIcon>
           <Divider
             orientation="vertical"
-            borderColor={'#000000'}
+            borderColor={
+              parentHover ? '#000000' : onLightNavbar ? '#000000' : 'white'
+            }
             height={'28px'}
             mt={'8px'}
           />

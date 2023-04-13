@@ -30,7 +30,13 @@ export const pageQuery = (slug: 'string' | { _id: string }) => {
 }
 
 export const globalQuery = () => {
-  return groq`*[_type == "global"]`
+  return groq`*[_type == "global"][0]{
+    ...,
+    Links[]{
+      ...,
+      "internalHref": internalHref->slug.current
+    }
+  }`
 }
 
 export const postAndMoreStoriesQuery = groq`
@@ -85,18 +91,18 @@ export interface Settings {
   ogImage?: {
     title?: string
   }
-  indexPage?: { _ref: string, _type: string }
+  indexPage?: { _ref: string; _type: string }
 }
 export interface Page {
-  _createdAt: string;
-  _id: string;
-  _rev: string;
-  _type: 'page';
-  _updatedAt: string;
-  content: any[];
+  _createdAt: string
+  _id: string
+  _rev: string
+  _type: 'page'
+  _updatedAt: string
+  content: any[]
   slug: {
-    _type: 'slug';
-    current: string;
-  };
-  title: string;
+    _type: 'slug'
+    current: string
+  }
+  title: string
 }

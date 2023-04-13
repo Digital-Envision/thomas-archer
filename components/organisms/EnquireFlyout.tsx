@@ -7,7 +7,6 @@ import {
   Flex,
   FormControl,
   FormErrorMessage,
-  Link,
   Textarea,
   VStack,
 } from '@chakra-ui/react'
@@ -19,6 +18,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { HeightVariants } from 'components/base/Divider'
 import ButtonIcon from 'components/base/ButtonIcon'
 import Close from 'components/icon/Close'
+import Link from 'next/link'
 
 type FormInputs = {
   name: string
@@ -27,7 +27,15 @@ type FormInputs = {
   message?: string
 }
 
-const EnquireFlyout = ({ isOpen, onClose }) => {
+const EnquireFlyout = ({
+  isOpen,
+  onClose,
+  title,
+  description,
+  button,
+  privacyAndPolicy,
+  contact,
+}) => {
   const {
     register,
     formState: { errors },
@@ -46,26 +54,35 @@ const EnquireFlyout = ({ isOpen, onClose }) => {
 
         <Box px={'36px'}>
           <Box mb={'5vh'}>
-            <Heading1 mb={'32px'}>We’re here to help.</Heading1>
-            <Text mb={'24px'}>
-              For more information or to speak with one of our Consultants
-              contact us today and we will respond to your query.
-            </Text>
-            <Button variant={ButtonVariants.black}>
-              Book an Exploration Session
-            </Button>
+            <Heading1 mb={'32px'}>{title}</Heading1>
+            <Text mb={'24px'}>{description}</Text>
+            <Link
+              href={
+                button?.useInternal
+                  ? `/${button?.internalHref}`
+                  : button?.externalHref
+              }
+              target={button?.isExternal ? '_blank' : ''}
+            >
+              <Button variant={ButtonVariants.black}>{button?.name}</Button>
+            </Link>
             <Box mt={'24px'}>
               <Text fontSize={'14px'} fontWeight={700} mb={1}>
                 Thomas Archer
               </Text>
-              <Text mb={1}>11 Corporate Drive, Heatherton VIC 3202</Text>
-              <Link href="tel:0399995967">
+              <Text mb={1}>
+                {contact?.address?.streetName} {contact?.address?.suburb}{' '}
+                {contact?.address?.postalCode}
+              </Text>
+              <Link
+                href={`tel:${contact?.phone?.code}${contact?.phone?.number}`}
+              >
                 <Text textDecor={'underline'} mb={1}>
-                  (03) 9999 5967
+                  ({contact?.phone?.code}) {contact?.phone?.number}
                 </Text>
               </Link>
-              <Link href="mailto:info@thomasarcher.com.au">
-                <Text textDecor={'underline'}>info@thomasarcher.com.au</Text>
+              <Link href={`mailto:${contact?.email}`}>
+                <Text textDecor={'underline'}>{contact?.email}</Text>
               </Link>
             </Box>
           </Box>
@@ -188,7 +205,17 @@ const EnquireFlyout = ({ isOpen, onClose }) => {
               <Text>
                 By submitting this form you are consenting to receive marketing
                 communications from Thomas Archer in future, on the
-                understanding that you have read and agree to our Privacy and
+                understanding that you have read and agree to our{' '}
+                <Link
+                  href={
+                    privacyAndPolicy?.useInternal
+                      ? `/${privacyAndPolicy?.internalHref}`
+                      : privacyAndPolicy?.externalHref
+                  }
+                  target={privacyAndPolicy?.isExternal ? '_blank' : ''}
+                >
+                  Privacy and
+                </Link>
                 Data Collection Statement and that you can opt-out at any time.
               </Text>
             </form>

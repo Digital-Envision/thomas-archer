@@ -6,21 +6,22 @@ import DesktopNav from './DesktopNav'
 import MobileNav from './MobileNav'
 import MobileCollapse from './MobileCollapse'
 import EnquireFlyout from '../EnquireFlyout'
+import Link from 'next/link'
 
 export interface LinksInterface {
   label: string
-  href: string
-  externalLink: boolean
+  useInternal: boolean
+  internalHref: string
+  externalHref: string
+  isExternal: boolean
 }
 
 export interface NavLinksInterfaces extends LinksInterface {
   children?: Array<LinksInterface>
 }
 
-const Navbar = ({ links }) => {
-  const Links = _.isArray(links)
-    ? links.filter((c) => c.title === 'Navigation Links')[0]?.content
-    : []
+const Navbar = ({ links, enquire, contact, socialMedia }) => {
+  const Links = links || []
 
   const [onLightNavbar, setOnLightNavbar] = useState(false)
 
@@ -115,7 +116,15 @@ const Navbar = ({ links }) => {
 
   return (
     <>
-      <EnquireFlyout isOpen={openDrawer} onClose={() => setOpenDrawer(false)} />
+      <EnquireFlyout
+        isOpen={openDrawer}
+        onClose={() => setOpenDrawer(false)}
+        title={enquire?.title}
+        description={enquire?.description}
+        button={enquire?.button}
+        privacyAndPolicy={enquire?.privacyAndPolicy}
+        contact={contact}
+      />
       <Box width={'full'} position={'fixed'} height={'auto'} zIndex={99}>
         <Flex
           height={{
@@ -163,7 +172,9 @@ const Navbar = ({ links }) => {
               xl: '3.4em',
             }}
           >
-            <Logo variant={LogoVariantBreakpoint.variant} />
+            <Link href={'/'}>
+              <Logo variant={LogoVariantBreakpoint.variant} />
+            </Link>
           </Box>
           <Box ml={'auto'}>
             <DesktopNav

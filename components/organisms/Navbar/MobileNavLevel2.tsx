@@ -20,8 +20,10 @@ const MobileNavLevel2: React.FC<Props> = ({ NAV_ITEMS, title }) => {
             <>
               <DropdownItem
                 key={key}
-                href={link.href}
-                isExternal={link.externalLink}
+                href={
+                  link.useInternal ? `/${link.internalHref}` : link.externalHref
+                }
+                isExternal={link.isExternal}
                 width={'auto'}
                 paddingY={3}
                 paddingX={0}

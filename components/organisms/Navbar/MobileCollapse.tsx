@@ -1,5 +1,6 @@
-import { Box, Divider, Flex, Grid, GridItem, Link } from '@chakra-ui/react'
+import { Box, Divider, Flex, Grid, GridItem } from '@chakra-ui/react'
 import Text from 'components/base/Text'
+import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { LinksInterface, NavLinksInterfaces } from '.'
 import MobileNavLevel1 from './MobileNavLevel1'
@@ -91,7 +92,7 @@ const MobileCollapse: React.FC<Props> = ({
             <Divider orientation="horizontal" borderColor={'black'} />
           </Box>
           <Flex>
-            <Link>
+            <Link href={'#'}>
               <Text>Instagram</Text>
             </Link>
             <Divider
@@ -100,7 +101,7 @@ const MobileCollapse: React.FC<Props> = ({
               borderColor={'#000000'}
               height={'14px'}
             />
-            <Link>
+            <Link href={'#'}>
               <Text>Facebook</Text>
             </Link>
           </Flex>
