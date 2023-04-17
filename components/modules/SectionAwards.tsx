@@ -1,12 +1,13 @@
 import { Box, Flex, Image, VStack } from '@chakra-ui/react'
 import Text from '../base/Text'
-import Heading1 from 'components/base/Heading1'
+import Heading1, { HeadingTagSemantic } from 'components/base/Heading1'
 import Button, { Variants } from 'components/base/Button'
-import Divider, { HeightVariants } from 'components/base/Divider'
+import { HeightVariants } from 'components/base/Divider'
 import { urlForImage } from 'lib/sanity.image'
 
 type SectionAwardsProps = {
   heading: string
+  headingTagLevel: HeadingTagSemantic
   paragraph: string
   onPressMore: () => void
   image?: any // sanity io image
@@ -15,6 +16,74 @@ type SectionAwardsProps = {
   marginTop: HeightVariants
   marginBottom: HeightVariants
 }
+
+const SectionAwards: React.FC<SectionAwardsProps> = ({
+  heading,
+  headingTagLevel,
+  paragraph,
+  onPressMore,
+  imageUrl,
+  image,
+  awards,
+  marginTop,
+  marginBottom,
+}) => {
+  return (
+    <Flex
+      mx={'auto'}
+      direction={'column'}
+      width={'w-full'}
+      maxWidth={'1800px'}
+      px={{ base: '1rem', md: '4rem' }}
+      marginTop={marginTop}
+      marginBottom={marginBottom}
+    >
+      <Heading1 as={headingTagLevel}>{heading}</Heading1>
+      <Flex direction={{ base: 'column', md: 'row' }}>
+        <Flex flex={1} direction={'column'} width={'100%'}>
+          <Box pt={HeightVariants.less} />
+          <Text>{paragraph}</Text>
+          <Box pt={HeightVariants.less} />
+          <Box>
+            <Button variant={Variants.blackLine} onClick={onPressMore}>
+              {'Find Out More'}
+            </Button>
+          </Box>
+          <Box
+            pt={{
+              base: HeightVariants.less,
+              md: HeightVariants.none,
+            }}
+          />
+        </Flex>
+        <Box p={{ base: '1rem', md: '2rem' }} />
+        <Flex flex={1} width={'w-full'}>
+          <Flex direction={'row'}>
+            <Image
+              alt={heading}
+              maxW={'90px'}
+              maxH={'95px'}
+              src={imageUrl || urlForImage(image).url()}
+            />
+            <Box pr={3} />
+            <VStack spacing={8} align="stretch">
+              {awards?.map((o) => {
+                return (
+                  <Box>
+                    <Text fontWeight="bold">{o?.name}</Text>
+                    <Text>{o?.description}</Text>
+                  </Box>
+                )
+              })}
+            </VStack>
+          </Flex>
+        </Flex>
+      </Flex>
+    </Flex>
+  )
+}
+
+export default SectionAwards
 
 /**
  * usage:
@@ -47,71 +116,3 @@ type SectionAwardsProps = {
       ]}
     />
  */
-
-const SectionAwards: React.FC<SectionAwardsProps> = ({
-  heading,
-  paragraph,
-  onPressMore,
-  imageUrl,
-  image,
-  awards,
-  marginTop,
-  marginBottom,
-}) => {
-  return (
-    // @ts-ignore: 2590
-    <Flex
-      mx={'auto'}
-      direction={'column'}
-      width={'w-full'}
-      maxWidth={'1440px'}
-      px={'1rem'}
-      marginTop={marginTop}
-      marginBottom={marginBottom}
-    >
-      <Heading1>{heading}</Heading1>
-      <Flex direction={{ base: 'column', md: 'row' }}>
-        <Flex flex={1} direction={'column'} width={'100%'} pr={8}>
-          <Box pt={HeightVariants.less} />
-          <Text>{paragraph}</Text>
-          <Box pt={HeightVariants.less} />
-          <Box>
-            <Button variant={Variants.blackLine} onClick={onPressMore}>
-              {'Find Out More'}
-            </Button>
-          </Box>
-          <Box
-            pt={{
-              base: HeightVariants.less,
-              md: HeightVariants.none,
-            }}
-          />
-        </Flex>
-
-        <Flex flex={1} width={'w-full'}>
-          <Flex direction={'row'}>
-            <Image
-              alt={heading}
-              maxW={'90px'}
-              maxH={'95px'}
-              src={imageUrl || urlForImage(image).url()}
-            />
-            <Box pr={3} />
-            <VStack spacing={8} align="stretch">
-              {awards?.map((o) => {
-                return (
-                  <Box>
-                    <Text fontWeight="bold">{o?.name}</Text>
-                    <Text>{o?.description}</Text>
-                  </Box>
-                )
-              })}
-            </VStack>
-          </Flex>
-        </Flex>
-      </Flex>
-    </Flex>
-  )
-}
-
-export default SectionAwards

@@ -53,8 +53,8 @@ const SectionImageAwards: React.FC<SectionImageAwardsProps> = ({
       mx={'auto'}
       direction={'column'}
       width={'w-full'}
-      maxWidth={'1440px'}
-      px={'1rem'}
+      maxWidth={'1800px'}
+      px={{ base: '1rem', md: '4rem' }}
       marginTop={marginTop}
       marginBottom={marginBottom}
     >

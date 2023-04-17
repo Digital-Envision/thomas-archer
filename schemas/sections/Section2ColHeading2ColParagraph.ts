@@ -3,13 +3,44 @@ import { enumToArrayOfObjects } from "lib/utils"
 
 export default {
     type: 'object',
-    name: 'SectionHeadingParagraphContactForm',
-    title: 'SectionHeadingParagraphContactForm',
+    name: 'Section2ColHeading2ColParagraph',
+    title: 'Section2ColHeading2ColParagraph',
     fields: [
         {
-            name: 'heading',
-            title: 'Heading',
-            type: 'string',
+            name: 'leftHeading',
+            type: 'text',
+        },
+        {
+            name: 'rightHeading1',
+            type: 'text',
+        },
+        {
+            name: 'rightParagraph1',
+            type: 'text',
+        },
+        {
+            name: 'rightHeading2',
+            type: 'text',
+        },
+        {
+            name: 'rightParagraph2',
+            type: 'text',
+        },
+        {
+            name: 'rightHeading3',
+            type: 'text',
+        },
+        {
+            name: 'rightParagraph3',
+            type: 'text',
+        },
+        {
+            name: 'rightHeading4',
+            type: 'text',
+        },
+        {
+            name: 'rightParagraph4',
+            type: 'text',
         },
         {
             name: 'headingTagLevel',
@@ -22,14 +53,14 @@ export default {
             },
         },
         {
-            name: 'paragraph',
-            title: 'Paragraph',
-            type: 'text',
-        },
-        {
-            name: 'tnc',
-            title: 'Terms and Conditions',
-            type: 'text',
+            name: 'image',
+            title: 'Image',
+            description:
+                'This image will be displayed on the right section.',
+            type: 'image',
+            options: {
+                hotspot: false,
+            },
         },
         {
             title: 'Margin Top',
@@ -58,13 +89,13 @@ export default {
     ],
     preview: {
         select: {
-            title: 'placeholder',
+            title: 'leftHeading',
             subtitle: 'label',
             disabled: 'disabled'
         },
         prepare({ title, disabled }) {
             return {
-                title: `SectionHeadingParagraphContactForm`
+                title: `Section2ColHeading2ColParagraph`
             }
         }
     }

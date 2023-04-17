@@ -14,7 +14,7 @@ import SectionImageAwards from 'components/modules/SectionImageAwards'
 import SectionImageTextMosaicType1 from 'components/modules/SectionImageTextMosaicType1'
 import Navbar from 'components/organisms/Navbar'
 import Footer from 'components/organisms/Footer'
-import Heading1 from 'components/base/Heading1'
+import Heading1, { HeadingTagSemantic } from 'components/base/Heading1'
 import { HeightVariants } from 'components/base/Divider'
 
 /**
@@ -63,12 +63,13 @@ const Component = () => {
           </Link>
           <Box borderWidth={1}>
             <ArticleBlogCard
+              headingTagLevel={HeadingTagSemantic.H1}
               imageUrl="https://via.placeholder.com/500x500"
               heading="Article Card"
               createdAt={'01/01/2023'}
               paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse fringilla mauris eget fringilla imperdiet. Sed dictum ipsum velit, et vestibulum leo consectetur vel. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse fringilla mauris eget fringilla imperdiet. Sed dictum ipsum velit, et vestibulum leo consectetur vel. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse fringilla mauris eget fringilla imperdiet. Sed dictum ipsum velit, et vestibulum leo consectetur vel."
               buttonText="Find Out More"
-              buttonOnClick={() => alert('Button clicked!')}
+              buttonLink="home"
             />
           </Box>
         </Box>
@@ -133,6 +134,9 @@ const Component = () => {
           ullamcorper, nulla dui ullamcorper quam."
               marginTop={HeightVariants.none}
               marginBottom={HeightVariants.none}
+              headingTagLevel={HeadingTagSemantic.H1}
+              buttonText="Find Out More"
+              buttonLink="home"
             />
           </Box>
         </Box>
@@ -172,9 +176,12 @@ const Component = () => {
           dui ullamcorper quam, et dictum arcu ipsum vel risus. Curabitur quis
           orci viverra, efficitur nunc in. Sed feugiat, lectus et viverra
           ullamcorper, nulla dui ullamcorper quam."
-              imageUrl="https://via.placeholder.com/727x455/"
+              image="https://via.placeholder.com/727x455/"
               marginTop={HeightVariants.none}
               marginBottom={HeightVariants.none}
+              headingTagLevel={HeadingTagSemantic.H1}
+              buttonText="Find Out More"
+              buttonLink="home"
             />
           </Box>
         </Box>
@@ -209,6 +216,7 @@ const Component = () => {
               paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed feugiat, lectus et viverra ullamcorper, nulla dui ullamcorper quam.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed feugiat, lectus et viverra ullamcorper, nulla dui ullamcorper quam."
               onPressMore={() => alert('find out more')}
               imageUrl="/images/logo/HIA-logo.png"
+              headingTagLevel={HeadingTagSemantic.H1}
               awards={[
                 {
                   name: 'Finalist 2021',
@@ -289,6 +297,7 @@ const Component = () => {
               leftImageUrl="https://via.placeholder.com/500x500/"
               marginTop={HeightVariants.none}
               marginBottom={HeightVariants.none}
+              headingTagLevel={HeadingTagSemantic.H1}
             />
           </Box>
         </Box>

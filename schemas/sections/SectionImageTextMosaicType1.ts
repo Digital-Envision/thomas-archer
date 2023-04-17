@@ -11,6 +11,16 @@ export default {
             type: 'text',
         },
         {
+            name: 'headingTagLevel',
+            title: 'Heading Tag Level',
+            type: 'string',
+            options: {
+                list: [
+                    'H1', 'H2', 'H3'
+                ],
+            },
+        },
+        {
             name: 'paragraph',
             type: 'text',
         },

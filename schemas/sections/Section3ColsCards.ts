@@ -22,6 +22,16 @@ export default {
             type: 'ArticleBlogCard',
         },
         {
+            name: 'headingTagLevel',
+            title: 'Heading Tag Level',
+            type: 'string',
+            options: {
+                list: [
+                    'H1', 'H2', 'H3'
+                ],
+            },
+        },
+        {
             title: 'Margin Top',
             name: 'marginTop',
             type: 'string',

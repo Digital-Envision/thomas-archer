@@ -1,20 +1,23 @@
-import { Box, Image, Flex } from '@chakra-ui/react'
+import { Box, Image, Flex, Link } from '@chakra-ui/react'
 import Heading3 from '../base/Heading3'
 import Text from '../base/Text'
 import { isEmpty } from 'lodash'
 import Button, { Variants } from 'components/base/Button'
 import { urlForImage } from 'lib/sanity.image'
+import router from 'next/router'
+import { HeadingTagSemantic } from 'components/base/Heading1'
 
 export type ArticleBlogCardProps = {
   image?: any // sanity io image
   imageUrl?: string // load image from url; test purpose
   createdAt?: string
   heading: string
+  headingTagLevel: HeadingTagSemantic
   paragraph: string
   width?: string
   height?: string
   buttonText: string
-  buttonOnClick: () => void
+  buttonLink: string
 }
 
 /**
@@ -29,23 +32,32 @@ export type ArticleBlogCardProps = {
   />
  */
 
+// TODO image should be have the same size and aspect ratio
+// TODO offset when there's createdAt
+
 const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
   imageUrl,
   image,
   createdAt,
   heading,
+  headingTagLevel,
   paragraph,
-  width = '470px',
+  width = '100%',
   height = '700px',
-  buttonOnClick,
+  buttonText,
+  buttonLink,
 }) => {
   return (
-    <Flex direction={'column'} width={width} maxHeight={height}>
+    <Flex
+      direction={'column'}
+      width={width}
+      maxWidth="550px"
+      maxHeight={height}
+    >
       <Box display="flex" justifyContent="center" alignItems="center">
         <Image
           src={imageUrl || urlForImage(image).url()}
           alt={heading}
-          maxW="470px"
           maxH="500px"
           w="full"
           h="auto"
@@ -59,7 +71,9 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
               {createdAt}
             </Text>
           )}
-          <Heading3 mb="4">{heading}</Heading3>
+          <Heading3 as={headingTagLevel} mb="4">
+            {heading}
+          </Heading3>
 
           <Text noOfLines={3} fontSize={'14px'} mb="4">
             {paragraph}
@@ -67,9 +81,9 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
         </Box>
 
         <Box mt="auto">
-          <Button variant={Variants.blackLine} onClick={buttonOnClick}>
-            {'Why Thomas Archer'}
-          </Button>
+          <Link href={buttonLink} isExternal>
+            <Button variant={Variants.blackLine}>{buttonText}</Button>
+          </Link>
         </Box>
       </Flex>
     </Flex>

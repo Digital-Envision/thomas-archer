@@ -51,7 +51,7 @@ const SectionTextFeatured: React.FC<SectionTextFeaturedProps> = ({
     >
       <Flex>
         <Flex flex={2} px={2}>
-          <Heading1>{leftHeading}</Heading1>
+          <Heading1 as="blockquote">{leftHeading}</Heading1>
         </Flex>
         <Flex display={{ base: 'none', md: 'block' }} flex={1} px={2} />
       </Flex>
@@ -63,7 +63,7 @@ const SectionTextFeatured: React.FC<SectionTextFeaturedProps> = ({
             <Dash width={{ base: '50px', md: '100px' }} height="1px" />
           </Box>
           <Flex direction={'column'}>
-            <Heading1>{rightHeading}</Heading1>
+            <Heading1 as="blockquote">{rightHeading}</Heading1>
             <Box pt={5}>
               <Text fontSize={'sm'}>{postedBy}</Text>
             </Box>

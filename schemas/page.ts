@@ -33,7 +33,7 @@ export default {
                 { type: 'SectionHeadingParagraphCTAImage' },
                 { type: 'Divider' },
                 { type: 'Section3ColsCards' },
-                // { type: 'SectionBlog' }, //TODO LATER SPRINT 3
+                { type: 'Section2ColCards' },
                 { type: 'SectionProjectListing' },
                 { type: 'SectionHeadingParagraphContactForm' },
                 { type: 'SectionAwards' },
@@ -41,6 +41,9 @@ export default {
                 { type: 'SectionImageTextMosaicType1' },
                 { type: 'SectionImageAwards' },
                 { type: 'SectionGridGallery' },
+                { type: 'Section2ColHeading2ColParagraph' },
+                { type: 'Section2ColImageTextMosaicType2' },
+                // { type: 'SectionBlog' }, //TODO LATER SPRINT 3
                 // { type: 'fixedComponent' },
             ],
         },
