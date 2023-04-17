@@ -84,9 +84,9 @@ const PageBuilder = (props) => {
         case 'SectionGridGallery':
           el = <SectionGridGallery {...c} />
           break
-        // case 'SectionBlog':
-        //   el = <SectionBlog {...c} />
-        //   break
+        case 'SectionBlog':
+          el = <SectionBlog {...c} />
+          break
         case 'SectionProjectListing':
           el = <SectionProjectListing {...c} />
           break
