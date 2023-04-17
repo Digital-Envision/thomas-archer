@@ -54,7 +54,7 @@ const SectionBlog: React.FC<SectionBlogProps> = (
       px={'1rem'}
       direction={'column'}
     >
-      <SectionHeadingParagraphCTA
+      {/* <SectionHeadingParagraphCTA
         isOffset={false}
         heading="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed feugiat,
           lectus et viverra ullamcorper, nulla dui ullamcorper quam, et dictum
@@ -98,7 +98,7 @@ const SectionBlog: React.FC<SectionBlogProps> = (
           buttonText="Find Out More"
           buttonOnClick={() => alert('Button clicked!')}
         />
-      </Stack>
+      </Stack> */}
     </Flex>
   )
 }

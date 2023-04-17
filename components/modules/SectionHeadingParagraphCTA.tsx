@@ -1,40 +1,46 @@
-import { Box, Flex } from '@chakra-ui/react'
+import { Box, Flex, Link } from '@chakra-ui/react'
 import Text from '../base/Text'
-import Heading1 from 'components/base/Heading1'
+import Heading1, { HeadingTagSemantic } from 'components/base/Heading1'
 import Button, { Variants } from 'components/base/Button'
 import Dash from 'components/base/Dash'
 import { HeightVariants } from 'components/base/Divider'
 
 type SectionHeadingParagraphCTAProps = {
   heading: string
+  headingTagLevel: HeadingTagSemantic
   paragraph: string
   isOffset: boolean
   showButton?: boolean
   marginTop: HeightVariants
   marginBottom: HeightVariants
+  buttonText: string
+  buttonLink: string
 }
 
 const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
   heading,
+  headingTagLevel,
   paragraph,
   isOffset,
   showButton = true,
   marginTop,
   marginBottom,
+  buttonText,
+  buttonLink,
 }) => {
   return (
     <Flex
       mx={'auto'}
       width={'w-full'}
-      maxWidth={'1440px'}
+      maxWidth={'1800px'}
       direction={{ base: 'column', md: isOffset ? 'column' : 'row' }}
-      px={'1rem'}
+      px={{ base: '1rem', md: '4rem' }}
       marginTop={marginTop}
       marginBottom={marginBottom}
     >
       <Flex direction={'row'} flex={1}>
         <Flex flex={1}>
-          <Heading1>{heading}</Heading1>
+          <Heading1 as={headingTagLevel}>{heading}</Heading1>
         </Flex>
         {isOffset && (
           <Flex
@@ -43,6 +49,8 @@ const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
           />
         )}
       </Flex>
+
+      <Box p="1rem" />
 
       <Flex direction={'row'} flex={1}>
         {isOffset && (
@@ -59,9 +67,9 @@ const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
             <Text>{paragraph}</Text>
             <Box pt={5}>
               {showButton && (
-                <Button variant={Variants.blackLine}>
-                  {'Why Thomas Archer'}
-                </Button>
+                <Link href={buttonLink} isExternal>
+                  <Button variant={Variants.blackLine}>{buttonText}</Button>
+                </Link>
               )}
             </Box>
           </Flex>

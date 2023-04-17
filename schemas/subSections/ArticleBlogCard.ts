@@ -23,6 +23,14 @@ export default {
                 hotspot: false,
             },
         },
+        {
+            name: 'buttonText',
+            type: 'string',
+        },
+        {
+            name: 'buttonLink',
+            type: 'string',
+        },
     ],
     preview: {
         select: {

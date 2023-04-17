@@ -12,6 +12,16 @@ export default {
             type: 'text',
         },
         {
+            name: 'headingTagLevel',
+            title: 'Heading Tag Level',
+            type: 'string',
+            options: {
+                list: [
+                    'H1', 'H2', 'H3'
+                ],
+            },
+        },
+        {
             name: 'paragraph',
             type: 'text',
         },
@@ -24,6 +34,14 @@ export default {
             options: {
                 hotspot: false,
             },
+        },
+        {
+            name: 'buttonText',
+            type: 'string',
+        },
+        {
+            name: 'buttonLink',
+            type: 'string',
         },
         {
             title: 'Margin Top',

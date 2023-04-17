@@ -22,6 +22,7 @@ import SectionHeadingParagraphCTAType from 'schemas/sections/SectionHeadingParag
 import SectionHeadingParagraphCTAImageType from 'schemas/sections/SectionHeadingParagraphCTAImage'
 import DividerType from 'schemas/sections/Divider'
 import Section3ColsCards from 'schemas/sections/Section3ColsCards'
+import Section2ColCards from 'schemas/sections/Section2ColCards'
 import SectionBlog from 'schemas/sections/SectionBlog'
 import SectionHeadingParagraphContactForm from 'schemas/sections/SectionHeadingParagraphContactForm'
 import SectionAwards from 'schemas/sections/SectionAwards'
@@ -38,7 +39,10 @@ import SectionHeroImageDefault from 'schemas/sections/SectionHeroImageDefault'
 import SectionImageHeadingCTA from 'schemas/sections/SectionImageHeadingCTA'
 import Carousel from 'schemas/sections/Carousel'
 import Links from 'schemas/global/Links'
+// import Dataset from 'schemas/dataset'
 import SectionGridGallery from 'schemas/sections/SectionGridGallery'
+import Section2ColImageTextMosaicType2 from 'schemas/sections/Section2ColImageTextMosaicType2'
+import Section2ColHeading2ColParagraph from 'schemas/sections/Section2ColHeading2ColParagraph'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -90,6 +94,12 @@ export default defineConfig({
       // Margin,
       // PortfolioCard, // TODO LATER
       PortfolioListingCard, // TODO LATER
+
+      // Dataset,
+
+      Section2ColCards,
+      Section2ColImageTextMosaicType2,
+      Section2ColHeading2ColParagraph
     ],
   },
   plugins: [

@@ -1,6 +1,8 @@
 import { Flex } from '@chakra-ui/react'
 import Divider from 'components/base/Divider'
 import Carousel from 'components/modules/Carousel'
+import Section2ColHeading2ColParagraph from 'components/modules/Section2ColHeading2ColParagraph'
+import Section2ColImageTextMosaicType2 from 'components/modules/Section2ColImageTextMosaicType2'
 import SectionAwards from 'components/modules/SectionAwards'
 import SectionHeadingParagraphContactForm from 'components/modules/SectionHeadingParagraphContactForm'
 import SectionHeadingParagraphCTA from 'components/modules/SectionHeadingParagraphCTA'
@@ -13,6 +15,7 @@ import SectionImageTextMosaicType1 from 'components/modules/SectionImageTextMosa
 import SectionTextFeatured from 'components/modules/SectionTextFeatured'
 import Footer from 'components/organisms/Footer'
 import Navbar from 'components/organisms/Navbar'
+import Section2ColCards from 'components/organisms/Section2ColCards'
 import Section3ColsCards from 'components/organisms/Section3ColsCards'
 import SectionBlog from 'components/organisms/SectionBlog'
 import SectionGridGallery from 'components/organisms/SectionGridGallery'
@@ -56,6 +59,15 @@ const PageBuilder = (props) => {
           break
         case 'Section3ColsCards':
           el = <Section3ColsCards {...c} />
+          break
+        case 'Section2ColCards':
+          el = <Section2ColCards {...c} />
+          break
+        case 'Section2ColHeading2ColParagraph':
+          el = <Section2ColHeading2ColParagraph {...c} />
+          break
+        case 'Section2ColImageTextMosaicType2':
+          el = <Section2ColImageTextMosaicType2 {...c} />
           break
         case 'Navbar':
           el = <Navbar {...c} />

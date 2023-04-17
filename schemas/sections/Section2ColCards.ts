@@ -3,20 +3,28 @@ import { enumToArrayOfObjects } from "lib/utils"
 
 export default {
     type: 'object',
-    name: 'Divider',
-    title: 'Divider',
+    name: 'Section2ColCards',
+    title: 'Section2ColCards',
     fields: [
         {
-            title: 'Variant',
-            name: 'variant',
+            name: 'ArticleBlogCard1',
+            title: 'ArticleBlogCard - 1',
+            type: 'ArticleBlogCard',
+        },
+        {
+            name: 'ArticleBlogCard2',
+            title: 'ArticleBlogCard - 2',
+            type: 'ArticleBlogCard',
+        },
+        {
+            name: 'headingTagLevel',
+            title: 'Heading Tag Level',
             type: 'string',
             options: {
                 list: [
-                    ...enumToArrayOfObjects(HeightVariants)
+                    'H1', 'H2', 'H3'
                 ],
             },
-
-            layout: 'dropdown'
         },
         {
             title: 'Margin Top',
@@ -45,15 +53,13 @@ export default {
     ],
     preview: {
         select: {
-            title: 'variant',
-            subtitle: 'label', // unused
-            disabled: 'disabled',
-            selected: 'variant'
+            title: 'placeholder',
+            subtitle: 'label',
+            disabled: 'disabled'
         },
-        prepare({ title, subtitle, disabled, selected }) {
-            const variantLabel = selected && enumToArrayOfObjects(HeightVariants).flatMap(option => option.value === selected ? [option.title] : [])
+        prepare({ title, disabled }) {
             return {
-                title: selected ? `Divider: ${variantLabel}` : 'No variant selected',
+                title: `Section2ColCards`
             }
         }
     }

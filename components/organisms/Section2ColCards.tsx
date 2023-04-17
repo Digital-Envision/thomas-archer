@@ -5,7 +5,7 @@ import ArticleBlogCard, {
 import { HeightVariants } from 'components/base/Divider'
 import { HeadingTagSemantic } from 'components/base/Heading1'
 
-type Section3ColsCardsProps = {
+type Section2ColCardsProps = {
   ArticleBlogCard1: ArticleBlogCardProps
   ArticleBlogCard2: ArticleBlogCardProps
   ArticleBlogCard3: ArticleBlogCardProps
@@ -14,10 +14,9 @@ type Section3ColsCardsProps = {
   headingTagLevel: HeadingTagSemantic
 }
 
-const Section3ColsCards: React.FC<Section3ColsCardsProps> = ({
+const Section2ColCards: React.FC<Section2ColCardsProps> = ({
   ArticleBlogCard1,
   ArticleBlogCard2,
-  ArticleBlogCard3,
   marginTop,
   marginBottom,
   headingTagLevel,
@@ -46,13 +45,9 @@ const Section3ColsCards: React.FC<Section3ColsCardsProps> = ({
           {...ArticleBlogCard2}
           headingTagLevel={headingTagLevel}
         />
-        <ArticleBlogCard
-          {...ArticleBlogCard3}
-          headingTagLevel={headingTagLevel}
-        />
       </Stack>
     </Flex>
   )
 }
 
-export default Section3ColsCards
+export default Section2ColCards
