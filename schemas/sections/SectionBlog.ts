@@ -6,15 +6,28 @@ export default {
     title: 'SectionBlog',
     fields: [
         {
-            name: 'SectionHeadingParagraphCTA',
-            title: 'SectionHeadingParagraphCTA',
-            type: 'SectionHeadingParagraphCTA',
+            name: 'heading',
+            type: 'text',
         },
         {
-            name: 'Section3ColsCards',
-            title: 'Section3ColsCards',
-            type: 'Section3ColsCards',
+            name: 'headingTagLevel',
+            title: 'Heading Tag Level',
+            type: 'string',
+            options: {
+                list: [
+                    'H1', 'H2', 'H3'
+                ],
+            },
         },
+        {
+            name: 'paragraph',
+            type: 'text',
+        },
+        // {
+        //     name: 'Section3ColsCards',
+        //     title: 'Section3ColsCards',
+        //     type: 'Section3ColsCards',
+        // },
         {
             title: 'Margin Top',
             name: 'marginTop',

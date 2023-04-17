@@ -79,15 +79,14 @@ export default defineConfig({
       SectionHeadingParagraphCTAImageType,
       DividerType,
       Section3ColsCards,
-      // SectionBlog, // TODO LATER
+      SectionBlog, // TODO DATASET LATER
       SectionHeadingParagraphContactForm,
       SectionAwards,
       SectionTextFeatured,
       SectionImageTextMosaicType1,
       SectionImageAwards,
-      SectionProjectListing,
-
-      SectionGridGallery,
+      SectionProjectListing, // TODO DATASET LATER
+      SectionGridGallery, // TODO DATASET LATER
 
       // -- subSection
       ArticleBlogCard,

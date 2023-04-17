@@ -43,7 +43,7 @@ export default {
                 { type: 'SectionGridGallery' },
                 { type: 'Section2ColHeading2ColParagraph' },
                 { type: 'Section2ColImageTextMosaicType2' },
-                // { type: 'SectionBlog' }, //TODO LATER SPRINT 3
+                { type: 'SectionBlog' },
                 // { type: 'fixedComponent' },
             ],
         },

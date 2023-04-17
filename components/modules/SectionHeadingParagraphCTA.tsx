@@ -11,10 +11,10 @@ type SectionHeadingParagraphCTAProps = {
   paragraph: string
   isOffset: boolean
   showButton?: boolean
-  marginTop: HeightVariants
-  marginBottom: HeightVariants
-  buttonText: string
-  buttonLink: string
+  marginTop?: HeightVariants
+  marginBottom?: HeightVariants
+  buttonText?: string
+  buttonLink?: string
 }
 
 const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
