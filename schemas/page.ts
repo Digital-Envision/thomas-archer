@@ -44,6 +44,7 @@ export default {
                 { type: 'Section2ColHeading2ColParagraph' },
                 { type: 'Section2ColImageTextMosaicType2' },
                 { type: 'SectionBlog' },
+                { type: 'SectionInclusions' },
                 // { type: 'fixedComponent' },
             ],
         },

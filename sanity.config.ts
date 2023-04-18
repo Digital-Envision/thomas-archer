@@ -44,6 +44,7 @@ import SectionGridGallery from 'schemas/sections/SectionGridGallery'
 import Section2ColImageTextMosaicType2 from 'schemas/sections/Section2ColImageTextMosaicType2'
 import Section2ColHeading2ColParagraph from 'schemas/sections/Section2ColHeading2ColParagraph'
 import Enquire from 'schemas/global/Enquire'
+import SectionInclusions from 'schemas/sections/SectionInclusions'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -88,6 +89,7 @@ export default defineConfig({
       SectionImageAwards,
       SectionProjectListing, // TODO DATASET LATER
       SectionGridGallery, // TODO DATASET LATER
+      SectionInclusions, // TODO DATASET LATER
 
       // -- subSection
       ArticleBlogCard,

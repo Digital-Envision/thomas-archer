@@ -19,6 +19,7 @@ import Section2ColCards from 'components/organisms/Section2ColCards'
 import Section3ColsCards from 'components/organisms/Section3ColsCards'
 import SectionBlog from 'components/organisms/SectionBlog'
 import SectionGridGallery from 'components/organisms/SectionGridGallery'
+import SectionInclusions from 'components/organisms/SectionInclusions'
 import SectionProjectListing from 'components/organisms/SectionProjectListing'
 import React from 'react'
 
@@ -89,6 +90,9 @@ const PageBuilder = (props) => {
           break
         case 'SectionProjectListing':
           el = <SectionProjectListing {...c} />
+          break
+        case 'SectionInclusions':
+          el = <SectionInclusions {...c} />
           break
         case 'SectionHeadingParagraphContactForm':
           el = <SectionHeadingParagraphContactForm {...c} />
