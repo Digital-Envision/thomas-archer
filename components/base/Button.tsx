@@ -66,8 +66,9 @@ const Button: React.FC<Props> = ({ children, variant, ...props }) => {
       fontSize={'14px'}
       lineHeight={'17px'}
       px={'24px'}
+      pt={2}
+      textAlign={'center'}
       borderRadius={'25px'}
-      fontFamily={'Helvetica Neue LT Pro'}
       {...props}
     >
       {children}

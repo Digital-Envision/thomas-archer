@@ -43,6 +43,7 @@ import Links from 'schemas/global/Links'
 import SectionGridGallery from 'schemas/sections/SectionGridGallery'
 import Section2ColImageTextMosaicType2 from 'schemas/sections/Section2ColImageTextMosaicType2'
 import Section2ColHeading2ColParagraph from 'schemas/sections/Section2ColHeading2ColParagraph'
+import Enquire from 'schemas/global/Enquire'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -69,7 +70,7 @@ export default defineConfig({
       settingsType,
       pageType,
       globalType,
-      Links,
+      Enquire,
       fixedComponentType,
       Carousel,
       SectionHeroImageBig,
@@ -103,12 +104,13 @@ export default defineConfig({
   },
   plugins: [
     deskTool({
-      structure: settingsStructure(settingsType),
+      structure: settingsStructure([settingsType], [globalType]),
       // `defaultDocumentNode` is responsible for adding a “Preview” tab to the document pane
       defaultDocumentNode: previewDocumentNode({ apiVersion, previewSecretId }),
     }),
     // Configures the global "new document" button, and document actions, to suit the Settings document singleton
     settingsPlugin({ type: settingsType.name }),
+    settingsPlugin({ type: globalType.name }),
     // Add the "Open preview" action
     productionUrl({
       apiVersion,

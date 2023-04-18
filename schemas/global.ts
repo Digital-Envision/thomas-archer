@@ -1,19 +1,25 @@
-export default {
+import { defineType } from 'sanity'
+import Contact, { contactFieldset } from './global/Contact'
+import Enquire, { enquireFieldset } from './global/Enquire'
+import Links, { linkFieldset } from './global/Links'
+import SocialMedia, { socialMediaFieldset } from './global/SocialMedia'
+
+export default defineType({
   type: 'document',
   name: 'global',
   title: 'Global',
-  fields: [
-    {
-      name: 'title',
-      type: 'string',
-      title: 'Title',
-    },
-    {
-      name: 'content',
-      type: 'array',
-      title: 'Global sections',
-      description: 'Add, edit, and reorder sections',
-      of: [{ type: 'Link' }],
-    },
+  fields: [Links, Enquire, Contact, SocialMedia],
+  fieldsets: [
+    linkFieldset,
+    enquireFieldset,
+    contactFieldset,
+    socialMediaFieldset,
   ],
-}
+  preview: {
+    prepare() {
+      return {
+        title: 'Global Value',
+      }
+    },
+  },
+})

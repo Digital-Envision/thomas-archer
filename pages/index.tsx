@@ -9,7 +9,7 @@ import {
 import { Post, Settings } from 'lib/sanity.queries'
 import _ from 'lodash'
 import { GetStaticProps } from 'next'
-import { lazy } from 'react'
+import { lazy, useEffect } from 'react'
 
 const PreviewIndexPage = lazy(() => import('components/PreviewIndexPage'))
 
@@ -33,6 +33,10 @@ interface PreviewData {
 export default function HomePage(props: PageProps) {
   // console.log('✅pages/index', props)
   const { posts, settings, preview, token, pages, globals } = props
+
+  useEffect(() => {
+    console.log({ props })
+  }, [props])
 
   if (preview) {
     return (

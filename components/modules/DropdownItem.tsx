@@ -1,16 +1,11 @@
 import React from 'react'
-import {
-  Link,
-  LinkProps as ChakraLinkProps,
-  Icon,
-  Flex,
-  TextProps,
-} from '@chakra-ui/react'
+import { FlexProps, Icon, Flex, TextProps, Box } from '@chakra-ui/react'
 import { ReactNode } from 'react'
 import { HiArrowSmallRight } from 'react-icons/hi2'
 import Text from 'components/base/Text'
+import Link from 'next/link'
 
-interface LinkProps extends ChakraLinkProps {
+interface LinkProps extends FlexProps {
   children: ReactNode
   href: string
   isExternal?: boolean
@@ -41,25 +36,25 @@ const DropdownItem = ({
   ...props
 }: LinkProps) => {
   return (
-    <Link
-      href={href}
-      isExternal={isExternal}
-      paddingY={2}
-      borderBottom="1px"
-      borderColor="#898989"
-      _hover={{
-        textDecoration: 'none',
-        bg: '#FFFFFF',
-        border: 0,
-      }}
-      {...props}
-    >
-      <Flex align="center" justifyContent="space-between" width={width}>
-        <Text {...dropdownTextStyle} {...textProps}>
-          {children}
-        </Text>
-        <Icon as={HiArrowSmallRight} color={'#898989'} fontSize={'18px'} />
-      </Flex>
+    <Link href={href} target={isExternal ? '_blank' : ''}>
+      <Box
+        paddingY={2}
+        borderBottom="1px"
+        borderColor="#898989"
+        _hover={{
+          textDecoration: 'none',
+          bg: '#FFFFFF',
+          border: 0,
+        }}
+        {...props}
+      >
+        <Flex align="center" justifyContent="space-between" width={width}>
+          <Text {...dropdownTextStyle} {...textProps}>
+            {children}
+          </Text>
+          <Icon as={HiArrowSmallRight} color={'#898989'} fontSize={'18px'} />
+        </Flex>
+      </Box>
     </Link>
   )
 }

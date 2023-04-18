@@ -4,7 +4,6 @@ import {
   Flex,
   Grid,
   GridItem,
-  Link,
   SimpleGrid,
 } from '@chakra-ui/react'
 import Button, { Variants as ButtonVariants } from 'components/base/Button'
@@ -13,6 +12,7 @@ import Heading1 from 'components/base/Heading1'
 import React from 'react'
 import DropdownItem from 'components/modules/DropdownItem'
 import { LinksInterface } from '.'
+import Link from 'next/link'
 
 export interface Props {
   links: Array<LinksInterface>
@@ -52,8 +52,12 @@ const DesktopSubNav: React.FC<Props> = ({ links, title }) => {
               return (
                 <DropdownItem
                   key={key}
-                  href={link.href}
-                  isExternal={link.externalLink}
+                  href={
+                    link.useInternal
+                      ? `/${link.internalHref}`
+                      : link.externalHref
+                  }
+                  isExternal={link.isExternal}
                   width={'auto'}
                   paddingX={0}
                   _hover={{}}
@@ -75,16 +79,16 @@ const DesktopSubNav: React.FC<Props> = ({ links, title }) => {
           <SimpleGrid columns={2} spacingX={10}>
             <Flex alignItems={'center'}>
               <Box>
-                <Link textDecor={'underline'}>
-                  <Text>Connect with us</Text>
+                <Link href={'#'}>
+                  <Text textDecor={'underline'}>Connect with us</Text>
                 </Link>
               </Box>
               <Box width={'71px'} borderColor={'black'} mx={2}>
                 <Divider />
               </Box>
               <Flex>
-                <Link textDecor={'underline'}>
-                  <Text>Instagram</Text>
+                <Link href={'#'}>
+                  <Text textDecor={'underline'}>Instagram</Text>
                 </Link>
                 <Divider
                   mx={1}
@@ -93,8 +97,8 @@ const DesktopSubNav: React.FC<Props> = ({ links, title }) => {
                   height={'14px'}
                   //mt={1}
                 />
-                <Link textDecor={'underline'}>
-                  <Text>Facebook</Text>
+                <Link href={'#'} rel="noopener noreferrer">
+                  <Text textDecor={'underline'}>Facebook</Text>
                 </Link>
               </Flex>
             </Flex>

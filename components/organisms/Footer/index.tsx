@@ -11,17 +11,25 @@ import React, { useState } from 'react'
 import DesktopNav from './DesktopNav'
 import MobileNav from './MobileNav'
 import EnquireFlyout from '../EnquireFlyout'
+import { urlForImage } from 'lib/sanity.image'
+import { ReactSVG } from 'react-svg'
 
-const Footer = ({ links }) => {
-  const Links = _.isArray(links)
-    ? links.filter((c) => c.title === 'Navigation Links')[0]?.content
-    : []
+const Footer = ({ links, enquire, contact, socialMedia }) => {
+  const Links = links || []
 
   const [openDrawer, setOpenDrawer] = useState(false)
 
   return (
     <>
-      <EnquireFlyout isOpen={openDrawer} onClose={() => setOpenDrawer(false)} />
+      <EnquireFlyout
+        isOpen={openDrawer}
+        onClose={() => setOpenDrawer(false)}
+        title={enquire?.title}
+        description={enquire?.description}
+        button={enquire?.button}
+        privacyAndPolicy={enquire?.privacyAndPolicy}
+        contact={contact}
+      />
       <Box
         as={'footer'}
         bg={'#FFFFFF'}
@@ -56,24 +64,28 @@ const Footer = ({ links }) => {
                 </Box>
               </GridItem>
               <GridItem>
-                <Text fontSize={'12px'}>11 Corporate Dr,</Text>
-                <Text fontSize={'12px'}>Heatherton VIC 3202</Text>
+                <Text fontSize={'12px'}>{contact?.address?.streetName}</Text>
+                <Text fontSize={'12px'}>
+                  {contact?.address?.suburb} {contact?.address?.postalCode}
+                </Text>
               </GridItem>
               <GridItem>
-                <Link href={'tel:0399995967'}>
+                <Link
+                  href={`tel:${contact?.phone?.code}${contact?.phone?.number}`}
+                >
                   <Text>
                     <Text as={'span'} fontSize={'12px'} fontWeight={700} mr={2}>
                       p.
                     </Text>
-                    03 9999 5967
+                    {contact?.phone?.code} {contact?.phone?.number}
                   </Text>
                 </Link>
-                <Link href={'mailto:info@thomasarcher.com.au'}>
+                <Link href={`mailto:${contact?.email}`}>
                   <Text>
                     <Text as={'span'} fontSize={'12px'} fontWeight={700} mr={2}>
                       e.
                     </Text>
-                    info@thomasarcher.com.au
+                    {contact?.email}
                   </Text>
                 </Link>
               </GridItem>
@@ -90,12 +102,30 @@ const Footer = ({ links }) => {
               >
                 Enquire
               </Button>
-              <ButtonIcon aria-label="instagram">
-                <Instagram />
-              </ButtonIcon>
-              <ButtonIcon aria-label="facebook">
-                <Facebook />
-              </ButtonIcon>
+              {socialMedia?.map((sc, key) => {
+                return (
+                  <Link
+                    href={
+                      sc?.useInternal
+                        ? `/${sc?.internalHref}`
+                        : sc?.externalHref
+                    }
+                    target={sc?.isExternal ? '_blank' : ''}
+                  >
+                    <ButtonIcon aria-label={sc?.label} key={key}>
+                      <ReactSVG
+                        src={urlForImage(sc?.icon).url()}
+                        beforeInjection={(svg) => {
+                          svg.setAttribute(
+                            'style',
+                            'width: 18px; height: 18px;'
+                          )
+                        }}
+                      />
+                    </ButtonIcon>
+                  </Link>
+                )
+              })}
             </Flex>
           </GridItem>
           <GridItem

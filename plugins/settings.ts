@@ -2,6 +2,7 @@
  * This plugin contains all the logic for setting up the `Settings` singleton
  */
 
+import _ from 'lodash'
 import { definePlugin, type DocumentDefinition } from 'sanity'
 import { type StructureResolver } from 'sanity/desk'
 
@@ -33,28 +34,46 @@ export const settingsPlugin = definePlugin<{ type: string }>(({ type }) => {
 // The StructureResolver is how we're changing the DeskTool structure to linking to a single "Settings" document, instead of rendering "settings" in a list
 // like how "Post" and "Author" is handled.
 export const settingsStructure = (
-  typeDef: DocumentDefinition
+  topList?: Array<DocumentDefinition>,
+  bottomList?: Array<DocumentDefinition>
 ): StructureResolver => {
   return (S) => {
-    // The `Settings` root list item
-    const settingsListItem = // A singleton not using `documentListItem`, eg no built-in preview
-      S.listItem()
-        .title(typeDef.title)
-        .icon(typeDef.icon)
+    // // The `Settings` root list item
+    const topListItem = topList.map((type) => {
+      return S.listItem()
+        .title(type.title)
+        .icon(type.icon)
         .child(
-          S.editor()
-            .id(typeDef.name)
-            .schemaType(typeDef.name)
-            .documentId(typeDef.name)
+          S.editor().id(type.name).schemaType(type.name).documentId(type.name)
         )
+    })
 
-    // The default root list items (except custom ones)
-    const defaultListItems = S.documentTypeListItems().filter(
-      (listItem) => listItem.getId() !== typeDef.name
+    const onlyBottomList = S.documentTypeListItems().filter(
+      (listItem) => !topList.some((type) => type.name === listItem.getId())
     )
+
+    const bottomListItem = onlyBottomList.map((list) => {
+      const single = _.find(bottomList, (id) => {
+        return id.name === list.getId()
+      })
+
+      if (!_.isEmpty(single)) {
+        return S.listItem()
+          .title(single.title)
+          .icon(single.icon)
+          .child(
+            S.editor()
+              .id(single.name)
+              .schemaType(single.name)
+              .documentId(single.name)
+          )
+      }
+
+      return list
+    })
 
     return S.list()
       .title('Content')
-      .items([settingsListItem, S.divider(), ...defaultListItems])
+      .items([...topListItem, S.divider(), ...bottomListItem])
   }
 }
