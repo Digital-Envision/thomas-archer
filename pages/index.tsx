@@ -34,10 +34,6 @@ export default function HomePage(props: PageProps) {
   // console.log('✅pages/index', props)
   const { posts, settings, preview, token, pages, globals } = props
 
-  useEffect(() => {
-    console.log({ props })
-  }, [props])
-
   if (preview) {
     return (
       <PreviewSuspense

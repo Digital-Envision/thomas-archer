@@ -13,13 +13,41 @@ import React from 'react'
 import DropdownItem from 'components/modules/DropdownItem'
 import { LinksInterface } from '.'
 import Link from 'next/link'
+import { SanityFiles } from 'utils/interfaces'
 
 export interface Props {
   links: Array<LinksInterface>
   title: string
+  button: any
+  contact: {
+    phone: {
+      code: string
+      number: string
+    }
+    email: string
+    address: {
+      streetName: string
+      suburb: string
+      postalCode: string
+    }
+  }
+  socialMedia: Array<{
+    label: string
+    icon: SanityFiles
+    useInternal: boolean
+    internalHref: string
+    externalHref: string
+    isExternal: boolean
+  }>
 }
 
-const DesktopSubNav: React.FC<Props> = ({ links, title }) => {
+const DesktopSubNav: React.FC<Props> = ({
+  links,
+  title,
+  button,
+  contact,
+  socialMedia,
+}) => {
   return (
     <Box
       bg={'rgba(255,255,255,0.9)'}
@@ -50,20 +78,22 @@ const DesktopSubNav: React.FC<Props> = ({ links, title }) => {
           <SimpleGrid columns={2} spacingX={10} spacingY={1}>
             {links?.map((link, key) => {
               return (
-                <DropdownItem
-                  key={key}
-                  href={
-                    link.useInternal
-                      ? `/${link.internalHref}`
-                      : link.externalHref
-                  }
-                  isExternal={link.isExternal}
-                  width={'auto'}
-                  paddingX={0}
-                  _hover={{}}
-                >
-                  {link.label}
-                </DropdownItem>
+                !link.mobileOnly && (
+                  <DropdownItem
+                    key={key}
+                    href={
+                      link.useInternal
+                        ? `/${link.internalHref}`
+                        : link.externalHref
+                    }
+                    isExternal={link.isExternal}
+                    width={'auto'}
+                    paddingX={0}
+                    _hover={{}}
+                  >
+                    {link.label}
+                  </DropdownItem>
+                )
               )
             })}
           </SimpleGrid>
@@ -71,9 +101,22 @@ const DesktopSubNav: React.FC<Props> = ({ links, title }) => {
       </Grid>
       <Grid templateColumns={'repeat(11, 1fr)'}>
         <GridItem colSpan={4}>
-          <Button variant={ButtonVariants.black}>
-            Book on Exploration Session
-          </Button>
+          {button && button?.label && (
+            <Link
+              href={
+                button.useInternal
+                  ? button.internalHref
+                    ? `/${button?.internalHref}`
+                    : '#'
+                  : button.externalHref
+                  ? button.externalHref
+                  : '#'
+              }
+              target={button?.isExternal ? '_blank' : ''}
+            >
+              <Button variant={ButtonVariants.black}>{button?.label}</Button>
+            </Link>
+          )}
         </GridItem>
         <GridItem colSpan={7}>
           <SimpleGrid columns={2} spacingX={10}>
@@ -87,23 +130,34 @@ const DesktopSubNav: React.FC<Props> = ({ links, title }) => {
                 <Divider />
               </Box>
               <Flex>
-                <Link href={'#'}>
-                  <Text textDecor={'underline'}>Instagram</Text>
-                </Link>
-                <Divider
-                  mx={1}
-                  orientation="vertical"
-                  borderColor={'#000000'}
-                  height={'14px'}
-                  //mt={1}
-                />
-                <Link href={'#'} rel="noopener noreferrer">
-                  <Text textDecor={'underline'}>Facebook</Text>
-                </Link>
+                {socialMedia?.map((sc, key) => {
+                  return (
+                    <>
+                      {key !== 0 && (
+                        <Divider
+                          mx={1}
+                          orientation="vertical"
+                          borderColor={'#000000'}
+                          height={'14px'}
+                        />
+                      )}
+                      <Link
+                        href={
+                          sc.useInternal
+                            ? `/${sc.internalHref}`
+                            : sc.externalHref
+                        }
+                        rel="noopener noreferrer"
+                      >
+                        <Text textDecor={'underline'}>{sc.label}</Text>
+                      </Link>
+                    </>
+                  )
+                })}
               </Flex>
             </Flex>
-            <Link href={'mailto:info@thomasarcher.com.au'}>
-              <Text>info@thomasarcher.com.au</Text>
+            <Link href={`mailto:${contact.email}`}>
+              <Text>{contact.email}</Text>
             </Link>
           </SimpleGrid>
         </GridItem>

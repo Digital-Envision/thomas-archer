@@ -27,6 +27,7 @@ export default {
             of: [
                 { type: 'SectionHeroImageDefault' },
                 { type: 'SectionHeroImageBig' },
+                { type: 'SectionHeroVideoBig' },
                 { type: 'Carousel' },
                 { type: 'SectionImageHeadingCTA' },
                 { type: 'SectionHeadingParagraphCTA' },

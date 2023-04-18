@@ -1,8 +1,8 @@
 import { defineField } from 'sanity'
 
-export const socialMediaFieldset = {
-  name: 'SocialMedia',
-  title: 'Social Media',
+export const specialButtonFieldset = {
+  name: 'SpecialButtons',
+  title: 'Special Buttons Collapsable',
   options: {
     collapsible: true,
     collapsed: true,
@@ -10,30 +10,36 @@ export const socialMediaFieldset = {
 }
 
 export default defineField({
-  name: 'SocialMedia',
-  title: 'Social Media Links',
-  type: 'array',
-  fieldset: 'SocialMedia',
-  of: [
+  name: 'SpecialButtons',
+  title: 'Special Buttons',
+  type: 'object',
+  description: 'You can put client login and telephone icon for navbar header',
+  fieldset: 'SpecialButtons',
+  fields: [
     {
-      name: 'SocialMediaLink',
-      title: 'Social Media Link',
+      name: 'specialButtonOne',
+      title: 'Special Button One',
       type: 'object',
+      description: 'Phone navbar button',
+      fields: [
+        {
+          name: 'showButton',
+          title: 'Show button',
+          type: 'boolean',
+          initialValue: true,
+        },
+      ],
+    },
+    {
+      name: 'specialButtonTwo',
+      title: 'Special Button Two',
+      type: 'object',
+      description: 'User client login navbar button',
       fields: [
         {
           name: 'label',
           title: 'Name',
           type: 'string',
-          validation: (rule) => rule.required(),
-        },
-        {
-          name: 'icon',
-          title: 'Icon',
-          type: 'image',
-          options: {
-            hotspot: true,
-            accept: '.svg',
-          },
         },
         {
           name: 'useInternal',
@@ -58,6 +64,12 @@ export default defineField({
           title: 'New Tab Link',
           type: 'boolean',
           initialValue: false,
+        },
+        {
+          name: 'showButton',
+          title: 'Show button',
+          type: 'boolean',
+          initialValue: true,
         },
       ],
     },

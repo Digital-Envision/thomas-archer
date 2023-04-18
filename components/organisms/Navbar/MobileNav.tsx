@@ -5,19 +5,35 @@ import ButtonIcon, {
 import Telephone from 'components/icon/Telephone'
 import React from 'react'
 import Menu from 'components/icon/Menu'
+import Close from 'components/icon/Close'
 
 export interface Props {
   onLightNavbar: boolean
   onOpenDropdown: boolean
   handleOpenDropdown: () => void
-  TELEPHONE: string
+  specialButtonOne: {
+    showButton: boolean
+  }
+  contact: {
+    phone: {
+      code: string
+      number: string
+    }
+    email: string
+    address: {
+      streetName: string
+      suburb: string
+      postalCode: string
+    }
+  }
 }
 
 const MobileNav: React.FC<Props> = ({
   onLightNavbar,
   onOpenDropdown,
   handleOpenDropdown,
-  TELEPHONE,
+  specialButtonOne,
+  contact,
 }) => {
   return (
     <>
@@ -28,23 +44,25 @@ const MobileNav: React.FC<Props> = ({
           xl: 'none',
         }}
       >
-        <ButtonIcon
-          aria-label="button-telephone"
-          variant={ButtonIconVariants.default}
-          as={'a'}
-          href={`tel:${TELEPHONE}`}
-        >
-          <Telephone
-            pathFill={
-              onOpenDropdown ? 'black' : onLightNavbar ? 'black' : 'white'
-            }
-            rectFill={
-              onOpenDropdown ? 'white' : onLightNavbar ? 'white' : 'black'
-            }
-            width={'25.6px'}
-            height={'25.58px'}
-          />
-        </ButtonIcon>
+        {specialButtonOne && specialButtonOne.showButton && (
+          <ButtonIcon
+            aria-label="button-telephone"
+            variant={ButtonIconVariants.default}
+            as={'a'}
+            href={`tel:${contact.phone.code}${contact.phone.number}`}
+          >
+            <Telephone
+              pathFill={
+                onOpenDropdown ? 'black' : onLightNavbar ? 'black' : 'white'
+              }
+              rectFill={
+                onOpenDropdown ? 'white' : onLightNavbar ? 'white' : 'black'
+              }
+              width={'25.6px'}
+              height={'25.58px'}
+            />
+          </ButtonIcon>
+        )}
         <ButtonIcon
           aria-label="button-menu"
           variant={ButtonIconVariants.default}
@@ -53,11 +71,11 @@ const MobileNav: React.FC<Props> = ({
           height={'21px'}
           onClick={handleOpenDropdown}
         >
-          <Menu
-            pathFill={
-              onOpenDropdown ? 'black' : onLightNavbar ? 'black' : 'white'
-            }
-          />
+          {onOpenDropdown ? (
+            <Close />
+          ) : (
+            <Menu pathFill={onLightNavbar ? 'black' : 'white'} />
+          )}
         </ButtonIcon>
       </Flex>
     </>

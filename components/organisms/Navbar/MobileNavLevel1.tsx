@@ -10,13 +10,26 @@ import Link from 'next/link'
 export interface Props {
   openDrawer?: () => void
   NAV_ITEMS: Array<NavLinksInterfaces>
-  setSubLinks: (links: Array<LinksInterface>, title: string) => void
+  setSubLinks: (
+    links: Array<LinksInterface>,
+    title: string,
+    button: Omit<LinksInterface, 'mobileOnly'>
+  ) => void
+  specialButtonTwo: {
+    label: string
+    useInternal: boolean
+    externalHref: string
+    internalHref: string
+    isExternal: boolean
+    showButton: boolean
+  }
 }
 
 const MobileNavLevel1: React.FC<Props> = ({
   openDrawer,
   NAV_ITEMS,
   setSubLinks,
+  specialButtonTwo,
 }) => {
   return (
     <Box>
@@ -34,7 +47,9 @@ const MobileNavLevel1: React.FC<Props> = ({
               }
               isExternal={link.children ? false : link.isExternal}
               onClick={() =>
-                link.children ? setSubLinks(link.children, link.label) : {}
+                link.children
+                  ? setSubLinks(link.children, link.label, link.button)
+                  : {}
               }
               width={'auto'}
               paddingX={0}
@@ -49,28 +64,44 @@ const MobileNavLevel1: React.FC<Props> = ({
             </DropdownItem>
           )
         })}
-        <Link href={'#'}>
-          <Flex
-            alignItems={'center'}
-            py={5}
-            _hover={{
-              textDecor: 'none',
-            }}
+        {specialButtonTwo && specialButtonTwo.showButton && (
+          <Link
+            href={
+              specialButtonTwo.useInternal
+                ? `/${specialButtonTwo.internalHref}`
+                : specialButtonTwo.externalHref
+            }
           >
-            <Person pathFill={'black'} width={'17px'} height={'20px'} mr={2} />
-            <Text
-              fontWeight={300}
-              color={'black'}
-              fontSize={'1.3em'}
-              lineHeight={'1.57em'}
+            <Flex
+              alignItems={'center'}
+              py={5}
+              _hover={{
+                textDecor: 'none',
+              }}
             >
-              Client Login
-            </Text>
-          </Flex>
-        </Link>
+              <Person
+                pathFill={'black'}
+                width={'17px'}
+                height={'20px'}
+                mr={2}
+              />
+              {specialButtonTwo.label && (
+                <Text
+                  fontWeight={300}
+                  color={'black'}
+                  fontSize={'1.3em'}
+                  lineHeight={'1.57em'}
+                >
+                  Client Login
+                </Text>
+              )}
+            </Flex>
+          </Link>
+        )}
         <Box>
           <Button
             mt={'28px'}
+            mb={'28px'}
             variant={ButtonVariants.black}
             onClick={openDrawer}
           >

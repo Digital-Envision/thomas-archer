@@ -58,7 +58,7 @@ const SectionProjectListing: React.FC<SectionProjectListingProps> = ({
           lg: '3vh',
         }}
       >
-        {projects.map(
+        {projects?.map(
           ({ image, subHeading, heading, description, link }, index) => (
             <GridItem key={index} colSpan={1}>
               <ProjectListingCard

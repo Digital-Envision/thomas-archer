@@ -53,6 +53,43 @@ export default defineField({
           initialValue: false,
         },
         {
+          name: 'button',
+          title: 'Button',
+          type: 'object',
+          fields: [
+            {
+              name: 'label',
+              title: 'Name',
+              type: 'string',
+              validation: (rule) => rule.required(),
+            },
+            {
+              name: 'useInternal',
+              title: 'Use Internal Link Pages',
+              type: 'boolean',
+            },
+            {
+              name: 'externalHref',
+              title: 'External Link',
+              type: 'url',
+              hidden: ({ parent }) => parent?.useInternal,
+            },
+            {
+              name: 'internalHref',
+              title: 'Internal Link',
+              type: 'reference',
+              to: [{ type: 'page' }],
+              hidden: ({ parent }) => !parent?.useInternal,
+            },
+            {
+              name: 'isExternal',
+              title: 'New Tab Link',
+              type: 'boolean',
+              initialValue: false,
+            },
+          ],
+        },
+        {
           name: 'children',
           title: 'Sub Links',
           type: 'array',
@@ -87,6 +124,12 @@ export default defineField({
                 {
                   name: 'isExternal',
                   title: 'New Tab Link',
+                  type: 'boolean',
+                  initialValue: false,
+                },
+                {
+                  name: 'mobileOnly',
+                  title: 'Mobile Only',
                   type: 'boolean',
                   initialValue: false,
                 },

@@ -9,6 +9,7 @@ import SectionHeadingParagraphCTA from 'components/modules/SectionHeadingParagra
 import SectionHeadingParagraphCTAImage from 'components/modules/SectionHeadingParagraphCTAImage'
 import SectionHeroImageBig from 'components/modules/SectionHeroImageBig'
 import SectionHeroImageDefault from 'components/modules/SectionHeroImageDefault'
+import SectionHeroVideoBig from 'components/modules/SectionHeroVideoBig'
 import SectionImageAwards from 'components/modules/SectionImageAwards'
 import SectionImageHeadingCTA from 'components/modules/SectionImageHeadingCTA'
 import SectionImageTextMosaicType1 from 'components/modules/SectionImageTextMosaicType1'
@@ -39,6 +40,9 @@ const PageBuilder = (props) => {
           break
         case 'SectionHeroImageBig':
           el = <SectionHeroImageBig {...c} />
+          break
+        case 'SectionHeroVideoBig':
+          el = <SectionHeroVideoBig {...c} />
           break
         case 'SectionImageHeadingCTA':
           el = <SectionImageHeadingCTA {...c} />

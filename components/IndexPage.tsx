@@ -4,7 +4,6 @@ import PageBuilder from 'components/templates/PageBuilder'
 import Navbar from './organisms/Navbar'
 import Footer from './organisms/Footer'
 import { Box } from '@chakra-ui/react'
-import { useEffect } from 'react'
 
 export interface IndexPageProps {
   preview?: boolean
@@ -26,6 +25,7 @@ export default function IndexPage(props: IndexPageProps) {
         enquire={globals.Enquire}
         contact={globals.Contact}
         socialMedia={globals.SocialMedia}
+        specialButtons={globals.SpecialButtons}
       />
       <Box flex={1}>
         <PageBuilder {...pages} />

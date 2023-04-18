@@ -1,5 +1,6 @@
 import { defineField, defineType } from 'sanity'
 import { HeightVariants } from 'components/base/Divider'
+import { HeightVariants as BannerHeight } from 'components/modules/SectionImageHeadingCTA'
 import { enumToArrayOfObjects } from 'lib/utils'
 export default defineType({
     name: 'SectionImageHeadingCTA',
@@ -24,20 +25,32 @@ export default defineType({
             validation: (rule) => rule.required(),
             fields: [
                 {
-                    name: 'buttonName',
+                    name: 'label',
                     title: 'Name',
                     type: 'string',
                     validation: (rule) => rule.required(),
                 },
                 {
-                    name: 'buttonLink',
-                    title: 'Link',
+                    name: 'useInternal',
+                    title: 'Use Internal Link Pages',
+                    type: 'boolean',
+                },
+                {
+                    name: 'externalHref',
+                    title: 'External Link',
                     type: 'url',
-                    validation: (rule) => rule.required(),
+                    hidden: ({ parent }) => parent?.useInternal,
+                },
+                {
+                    name: 'internalHref',
+                    title: 'Internal Link',
+                    type: 'reference',
+                    to: [{ type: 'page' }],
+                    hidden: ({ parent }) => !parent?.useInternal,
                 },
                 {
                     name: 'isExternal',
-                    title: 'New tab link',
+                    title: 'New Tab Link',
                     type: 'boolean',
                     initialValue: false,
                 },
@@ -76,6 +89,15 @@ export default defineType({
                 list: [...enumToArrayOfObjects(HeightVariants)],
             },
             initialValue: HeightVariants.none,
+        }),
+        defineField({
+            name: 'height',
+            title: 'Heights',
+            type: 'string',
+            options: {
+                list: [...enumToArrayOfObjects(BannerHeight)],
+            },
+            initialValue: BannerHeight.large,
         }),
     ],
     preview: {
