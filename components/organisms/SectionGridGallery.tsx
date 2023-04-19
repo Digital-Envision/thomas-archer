@@ -161,7 +161,7 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
         sx={{ columnCount: [1, 1, 2, 3, 3], columnGap: '8px' }}
         overflow="hidden"
       >
-        {localImages.map((image) => (
+        {localImages?.map((image) => (
           <Box onClick={() => handleListItemClick(image)}>
             <Img
               key={image?.imageUrl}

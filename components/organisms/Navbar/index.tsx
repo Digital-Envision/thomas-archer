@@ -14,13 +14,21 @@ export interface LinksInterface {
   internalHref: string
   externalHref: string
   isExternal: boolean
+  mobileOnly: boolean
 }
 
 export interface NavLinksInterfaces extends LinksInterface {
   children?: Array<LinksInterface>
+  button?: {
+    label: string
+    useInternal: boolean
+    internalHref: string
+    externalHref: string
+    isExternal: boolean
+  }
 }
 
-const Navbar = ({ links, enquire, contact, socialMedia }) => {
+const Navbar = ({ links, enquire, contact, socialMedia, specialButtons }) => {
   const Links = links || []
 
   const [onLightNavbar, setOnLightNavbar] = useState(false)
@@ -182,13 +190,17 @@ const Navbar = ({ links, enquire, contact, socialMedia }) => {
               onLightNavbar={onLightNavbar}
               parentHover={onHover}
               NAV_ITEMS={Links}
-              TELEPHONE={TELEPHONE}
+              specialButtonOne={specialButtons?.specialButtonOne}
+              specialButtonTwo={specialButtons?.specialButtonTwo}
+              contact={contact}
+              socialMedia={socialMedia}
             />
             <MobileNav
               onLightNavbar={onLightNavbar}
               onOpenDropdown={onOpenDropdown}
               handleOpenDropdown={handleOpenDropdown}
-              TELEPHONE={TELEPHONE}
+              specialButtonOne={specialButtons?.specialButtonOne}
+              contact={contact}
             />
           </Box>
         </Flex>
@@ -200,6 +212,9 @@ const Navbar = ({ links, enquire, contact, socialMedia }) => {
               NAV_ITEMS={Links}
               onOpenLevel2={onOpenLevel2}
               setOnOpenLevel2={setOnOpenLevel2}
+              specialButtonTwo={specialButtons?.specialButtonTwo}
+              contact={contact}
+              socialMedia={socialMedia}
             />
           </Collapse>
         </Box>
@@ -207,7 +222,5 @@ const Navbar = ({ links, enquire, contact, socialMedia }) => {
     </>
   )
 }
-
-const TELEPHONE = '+611234567890'
 
 export default Navbar

@@ -45,6 +45,7 @@ import Section2ColImageTextMosaicType2 from 'schemas/sections/Section2ColImageTe
 import Section2ColHeading2ColParagraph from 'schemas/sections/Section2ColHeading2ColParagraph'
 import Enquire from 'schemas/global/Enquire'
 import SectionInclusions from 'schemas/sections/SectionInclusions'
+import SectionHeroVideoBig from 'schemas/sections/SectionHeroVideoBig'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -76,6 +77,7 @@ export default defineConfig({
       Carousel,
       SectionHeroImageBig,
       SectionHeroImageDefault,
+      SectionHeroVideoBig,
       SectionImageHeadingCTA,
       SectionHeadingParagraphCTAType,
       SectionHeadingParagraphCTAImageType,
@@ -101,7 +103,7 @@ export default defineConfig({
 
       Section2ColCards,
       Section2ColImageTextMosaicType2,
-      Section2ColHeading2ColParagraph
+      Section2ColHeading2ColParagraph,
     ],
   },
   plugins: [

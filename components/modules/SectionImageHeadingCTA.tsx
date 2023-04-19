@@ -6,33 +6,47 @@ import { SanityFiles } from 'utils/interfaces'
 import Button, { Variants as ButtonVariants } from 'components/base/Button'
 import Link from 'next/link'
 
+export enum HeightVariants {
+  small = '50vh',
+  medium = '70vh',
+  large = '100vh',
+}
+
 type SectionImageHeadingCTAProps = {
   title: string
   description: string
   isOverlay?: boolean
   image: SanityFiles
   button: {
-    buttonName: string
-    buttonLink: string
+    label: string
+    useInternal: boolean
+    internalHref: string
+    externalHref: string
     isExternal: boolean
   }
   isExternal?: boolean
   marginTop?: string
   marginBottom?: string
+  height?: HeightVariants
 }
 
-const SectionImageHeadingCTA: React.FC<SectionImageHeadingCTAProps> = ({
-  title,
-  description,
-  isOverlay,
-  image,
-  button,
-  marginTop,
-  marginBottom,
-}) => {
+const SectionImageHeadingCTA: React.FC<SectionImageHeadingCTAProps> = (
+  props
+) => {
+  const {
+    title,
+    description,
+    isOverlay,
+    image,
+    button,
+    marginTop,
+    marginBottom,
+    height: heightVariant,
+  } = props
+
   return (
     <Box
-      height={'100vh'}
+      height={heightVariant}
       backgroundImage={urlForImage(image).url()}
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
@@ -42,7 +56,7 @@ const SectionImageHeadingCTA: React.FC<SectionImageHeadingCTAProps> = ({
       <Box
         bgGradient={isOverlay ? 'linear(to-b, #00000073, #00000000)' : ''}
         width={'full'}
-        height={'100vh'}
+        height={heightVariant}
         position={'absolute'}
         display={'flex'}
         textAlign={'center'}
@@ -62,11 +76,15 @@ const SectionImageHeadingCTA: React.FC<SectionImageHeadingCTAProps> = ({
           </Text>
           <Text color={'#FFFFFF'}>{description}</Text>
           <Link
-            href={button ? button.buttonLink : '#'}
+            href={
+              button.useInternal
+                ? `/${button.internalHref}`
+                : button.externalHref
+            }
             target={button?.isExternal ? '_blank' : ''}
           >
             <Button variant={ButtonVariants.whiteLine} mt={'42px'}>
-              {button?.buttonName}
+              {button?.label}
             </Button>
           </Link>
         </Box>

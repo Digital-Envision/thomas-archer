@@ -10,13 +10,44 @@ import React from 'react'
 import DesktopSubNav from './DesktopSubNav'
 import { NavLinksInterfaces } from '.'
 import Link from 'next/link'
+import { SanityFiles } from 'utils/interfaces'
 
 export interface Props {
   openDrawer?: () => void
   onLightNavbar?: boolean
   parentHover?: boolean
   NAV_ITEMS: Array<NavLinksInterfaces>
-  TELEPHONE: string
+  specialButtonOne: {
+    showButton: boolean
+  }
+  specialButtonTwo: {
+    label: string
+    useInternal: boolean
+    externalHref: string
+    internalHref: string
+    isExternal: boolean
+    showButton: boolean
+  }
+  contact: {
+    phone: {
+      code: string
+      number: string
+    }
+    email: string
+    address: {
+      streetName: string
+      suburb: string
+      postalCode: string
+    }
+  }
+  socialMedia: Array<{
+    label: string
+    icon: SanityFiles
+    useInternal: boolean
+    internalHref: string
+    externalHref: string
+    isExternal: boolean
+  }>
 }
 
 const DesktopNav: React.FC<Props> = ({
@@ -24,7 +55,10 @@ const DesktopNav: React.FC<Props> = ({
   onLightNavbar,
   parentHover,
   NAV_ITEMS,
-  TELEPHONE,
+  specialButtonOne,
+  specialButtonTwo,
+  contact,
+  socialMedia,
 }) => {
   return (
     <Grid
@@ -79,7 +113,13 @@ const DesktopNav: React.FC<Props> = ({
                   </Text>
                 </Link>
                 {link.children && (
-                  <DesktopSubNav links={link.children} title={link.label} />
+                  <DesktopSubNav
+                    links={link.children}
+                    title={link.label}
+                    button={link.button}
+                    contact={contact}
+                    socialMedia={socialMedia}
+                  />
                 )}
               </Box>
             )
@@ -87,54 +127,76 @@ const DesktopNav: React.FC<Props> = ({
         </Stack>
       </GridItem>
       <GridItem colSpan={2} pt={'3.4em'}>
-        <Flex gap={3} height={'full'}>
-          <ButtonIcon
-            aria-label="button-telephone"
-            variant={ButtonIconVariants.default}
-            as={'a'}
-            href={`tel:${TELEPHONE}`}
-          >
-            <Telephone
-              pathFill={
-                parentHover ? 'black' : onLightNavbar ? 'black' : 'white'
-              }
-              rectFill={
-                parentHover ? 'white' : onLightNavbar ? 'white' : 'black'
-              }
-              width={'21.6px'}
-              height={'20.78px'}
-            />
-          </ButtonIcon>
-          <Divider
-            orientation="vertical"
-            borderColor={
-              parentHover ? '#000000' : onLightNavbar ? '#000000' : 'white'
-            }
-            height={'28px'}
-            mt={'8px'}
-          />
-          <ButtonIcon aria-label="button-client-login">
-            <Flex alignItems={'center'}>
-              <Person
+        <Flex
+          gap={specialButtonOne && specialButtonTwo ? 3 : 1}
+          height={'full'}
+        >
+          {specialButtonOne && specialButtonOne.showButton && (
+            <ButtonIcon
+              aria-label="button-telephone"
+              variant={ButtonIconVariants.default}
+              as={'a'}
+              href={`tel:${contact.phone.code}${contact.phone.number}`}
+            >
+              <Telephone
                 pathFill={
                   parentHover ? 'black' : onLightNavbar ? 'black' : 'white'
                 }
+                rectFill={
+                  parentHover ? 'white' : onLightNavbar ? 'white' : 'black'
+                }
                 width={'21.6px'}
                 height={'20.78px'}
-                mr={2}
-                ml={1}
               />
-              <Text
-                fontWeight={400}
-                fontSize={'14px'}
-                color={
-                  parentHover ? 'black' : onLightNavbar ? 'black' : 'white'
+            </ButtonIcon>
+          )}
+          {specialButtonOne &&
+            specialButtonTwo &&
+            specialButtonOne.showButton &&
+            specialButtonTwo.showButton && (
+              <Divider
+                orientation="vertical"
+                borderColor={
+                  parentHover ? '#000000' : onLightNavbar ? '#000000' : 'white'
                 }
-              >
-                Client Login
-              </Text>
-            </Flex>
-          </ButtonIcon>
+                height={'28px'}
+                mt={'8px'}
+              />
+            )}
+          {specialButtonTwo && specialButtonTwo.showButton && (
+            <ButtonIcon
+              aria-label="button-client-login"
+              as={'a'}
+              href={
+                specialButtonTwo.useInternal
+                  ? `/${specialButtonTwo.internalHref}`
+                  : specialButtonTwo.externalHref
+              }
+            >
+              <Flex alignItems={'center'}>
+                <Person
+                  pathFill={
+                    parentHover ? 'black' : onLightNavbar ? 'black' : 'white'
+                  }
+                  width={'21.6px'}
+                  height={'20.78px'}
+                  mr={2}
+                  ml={1}
+                />
+                {specialButtonTwo.label && (
+                  <Text
+                    fontWeight={400}
+                    fontSize={'14px'}
+                    color={
+                      parentHover ? 'black' : onLightNavbar ? 'black' : 'white'
+                    }
+                  >
+                    {specialButtonTwo.label}
+                  </Text>
+                )}
+              </Flex>
+            </ButtonIcon>
+          )}
         </Flex>
       </GridItem>
       <GridItem pt={'3.3em'}>

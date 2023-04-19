@@ -34,8 +34,21 @@ export const globalQuery = () => {
     ...,
     Links[]{
       ...,
-      "internalHref": internalHref->slug.current
-    }
+      "internalHref": internalHref->slug.current,
+      "button": {
+        ...button,
+        ...{
+          "internalHref": button.internalHref->slug.current,
+        },
+      },
+    },
+    SpecialButtons{
+      ...,
+      "specialButtonTwo": {
+        ...specialButtonTwo,
+        "internalHref": specialButtonTwo.internalHref->slug.current,
+      },
+    },
   }`
 }
 
