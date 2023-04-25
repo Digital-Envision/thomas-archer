@@ -5,6 +5,8 @@ import Heading2 from 'components/base/Heading2'
 import ProjectListingCard, {
   ProjectListingCardProps,
 } from 'components/modules/ProjectListingCard'
+import _ from 'lodash'
+import { useRouter } from 'next/router'
 
 type SectionProjectListingProps = {
   heading: string
@@ -15,12 +17,9 @@ type SectionProjectListingProps = {
   marginBottom: HeightVariants
 }
 
-const SectionProjectListing: React.FC<SectionProjectListingProps> = ({
-  heading,
-  projects,
-  marginTop,
-  marginBottom,
-}) => {
+const SectionProjectListing: React.FC<SectionProjectListingProps> = (props) => {
+  const { asPath } = useRouter()
+  const { heading, projects, marginTop, marginBottom } = props
   return (
     <Flex
       mx={'auto'}
@@ -58,15 +57,15 @@ const SectionProjectListing: React.FC<SectionProjectListingProps> = ({
           lg: '3vh',
         }}
       >
-        {projects?.map(
-          ({ image, subHeading, heading, description, link }, index) => (
+        {_.toArray(projects)?.map(
+          ({ image, subHeading, heading, description, slug }, index) => (
             <GridItem key={index} colSpan={1}>
               <ProjectListingCard
                 image={image}
                 heading={heading}
                 subHeading={subHeading}
                 description={description}
-                link={link}
+                link={`${asPath}/project/${slug?.current}`}
               />
               <Box mb={'2rem'} />
             </GridItem>

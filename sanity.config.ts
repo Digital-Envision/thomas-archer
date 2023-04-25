@@ -46,6 +46,9 @@ import Section2ColHeading2ColParagraph from 'schemas/sections/Section2ColHeading
 import Enquire from 'schemas/global/Enquire'
 import SectionInclusions from 'schemas/sections/SectionInclusions'
 import SectionHeroVideoBig from 'schemas/sections/SectionHeroVideoBig'
+import Projects from 'schemas/projects'
+import customPageSection from 'schemas/customPageSection'
+import SectionBreadcrumbs from 'schemas/sections/SectionBreadcrumbs'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -89,21 +92,26 @@ export default defineConfig({
       SectionTextFeatured,
       SectionImageTextMosaicType1,
       SectionImageAwards,
-      SectionProjectListing, // TODO DATASET LATER
+      SectionProjectListing,
       SectionGridGallery, // TODO DATASET LATER
       SectionInclusions, // TODO DATASET LATER
+      SectionBreadcrumbs,
 
       // -- subSection
       ArticleBlogCard,
       // Margin,
       // PortfolioCard, // TODO LATER
-      PortfolioListingCard, // TODO LATER
+      PortfolioListingCard,
 
-      // Dataset,
+      // -- Dataset,
+      Projects,
 
       Section2ColCards,
       Section2ColImageTextMosaicType2,
       Section2ColHeading2ColParagraph,
+
+      //template
+      customPageSection,
     ],
   },
   plugins: [

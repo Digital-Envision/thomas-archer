@@ -1,0 +1,30 @@
+export default {
+    name: 'customPageSection',
+    type: 'array',
+    title: 'Page sections',
+    description: 'Add, edit, and reorder sections',
+    of: [
+        { type: 'SectionHeroImageDefault' },
+        { type: 'SectionHeroImageBig' },
+        { type: 'SectionHeroVideoBig' },
+        { type: 'Carousel' },
+        { type: 'SectionImageHeadingCTA' },
+        { type: 'SectionHeadingParagraphCTA' },
+        { type: 'SectionHeadingParagraphCTAImage' },
+        { type: 'Divider' },
+        { type: 'Section3ColsCards' },
+        { type: 'Section2ColCards' },
+        { type: 'SectionProjectListing' },
+        { type: 'SectionHeadingParagraphContactForm' },
+        { type: 'SectionAwards' },
+        { type: 'SectionTextFeatured' },
+        { type: 'SectionImageTextMosaicType1' },
+        { type: 'SectionImageAwards' },
+        { type: 'SectionGridGallery' },
+        { type: 'Section2ColHeading2ColParagraph' },
+        { type: 'Section2ColImageTextMosaicType2' },
+        { type: 'SectionBlog' },
+        { type: 'SectionInclusions' },
+        { type: 'SectionBreadcrumbs' }
+    ]
+}
