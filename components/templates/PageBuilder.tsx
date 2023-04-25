@@ -4,6 +4,7 @@ import Carousel from 'components/modules/Carousel'
 import Section2ColHeading2ColParagraph from 'components/modules/Section2ColHeading2ColParagraph'
 import Section2ColImageTextMosaicType2 from 'components/modules/Section2ColImageTextMosaicType2'
 import SectionAwards from 'components/modules/SectionAwards'
+import SectionBreadcrumbs from 'components/modules/SectionBreadcrumbs'
 import SectionHeadingParagraphContactForm from 'components/modules/SectionHeadingParagraphContactForm'
 import SectionHeadingParagraphCTA from 'components/modules/SectionHeadingParagraphCTA'
 import SectionHeadingParagraphCTAImage from 'components/modules/SectionHeadingParagraphCTAImage'
@@ -24,10 +25,8 @@ import SectionInclusions from 'components/organisms/SectionInclusions'
 import SectionProjectListing from 'components/organisms/SectionProjectListing'
 import React from 'react'
 
-const PageBuilder = (props) => {
-  // console.log('🔥PageBuilder props', props)
-
-  const content = (props?.[0]?.content || [])
+const PageBuilder = ({ pages, ...rest }) => {
+  const content = (pages?.[0]?.content || [])
     .filter((c) => !c.disabled)
     .map((c) => {
       let el = null
@@ -37,6 +36,9 @@ const PageBuilder = (props) => {
           break
         case 'SectionHeroImageDefault':
           el = <SectionHeroImageDefault {...c} />
+          break
+        case 'SectionBreadcrumbs':
+          el = <SectionBreadcrumbs {...c} />
           break
         case 'SectionHeroImageBig':
           el = <SectionHeroImageBig {...c} />
@@ -93,7 +95,7 @@ const PageBuilder = (props) => {
           el = <SectionBlog {...c} />
           break
         case 'SectionProjectListing':
-          el = <SectionProjectListing {...c} />
+          el = <SectionProjectListing {...c} {...rest} />
           break
         case 'SectionInclusions':
           el = <SectionInclusions {...c} />

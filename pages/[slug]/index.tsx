@@ -3,7 +3,7 @@ import IndexPage from 'components/IndexPage'
 import {
   getAllGlobals,
   getAllPages,
-  getAllPosts,
+  getAllProjects,
   getSettings,
 } from 'lib/sanity.client'
 import { Post, Settings } from 'lib/sanity.queries'
@@ -12,25 +12,9 @@ import { lazy } from 'react'
 import { getAllPagesSlugs } from 'lib/sanity.client'
 import { useRouter } from 'next/router'
 import _ from 'lodash'
+import { PageProps, PreviewData, Query } from 'pages'
 
 const PreviewIndexPage = lazy(() => import('components/PreviewIndexPage'))
-
-interface PageProps {
-  posts: Post[]
-  pages: any[]
-  globals: any[]
-  settings: Settings
-  preview: boolean
-  token: string | null
-}
-
-interface Query {
-  [key: string]: string
-}
-
-interface PreviewData {
-  token?: string
-}
 
 export default function DynamicPage({
   posts,
@@ -39,6 +23,7 @@ export default function DynamicPage({
   token,
   pages,
   globals,
+  projects,
 }) {
   const router = useRouter()
 
@@ -46,24 +31,25 @@ export default function DynamicPage({
     return <div>Loading...</div>
   }
 
-  if (preview) {
-    return (
-      <PreviewSuspense
-        fallback={
-          <IndexPage
-            loading
-            preview
-            posts={posts}
-            settings={settings}
-            pages={pages}
-            globals={globals}
-          />
-        }
-      >
-        <PreviewIndexPage token={token} />
-      </PreviewSuspense>
-    )
-  }
+  // if (preview) {
+  //   return (
+  //     <PreviewSuspense
+  //       fallback={
+  //         <IndexPage
+  //           loading
+  //           preview
+  //           posts={posts}
+  //           settings={settings}
+  //           pages={pages}
+  //           globals={globals}
+  //           projects={projects}
+  //         />
+  //       }
+  //     >
+  //       <PreviewIndexPage token={token} />
+  //     </PreviewSuspense>
+  //   )
+  // }
 
   return (
     <IndexPage
@@ -71,6 +57,7 @@ export default function DynamicPage({
       settings={settings}
       pages={pages}
       globals={globals}
+      projects={projects}
     />
   )
 }
@@ -94,7 +81,7 @@ export const getStaticProps: GetStaticProps<
 
   const [settings, posts = [], pages = [], globals = []] = await Promise.all([
     getSettings(),
-    getAllPosts(), // can remove
+    [],
     getAllPages(params?.slug),
     getAllGlobals(),
   ])
@@ -103,9 +90,12 @@ export const getStaticProps: GetStaticProps<
     return { notFound: true }
   }
 
+  const projects = await getAllProjects()
+
   return {
     props: {
       posts,
+      projects,
       settings,
       pages,
       globals,

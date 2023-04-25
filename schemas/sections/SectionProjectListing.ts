@@ -10,18 +10,19 @@ export default {
             title: 'Heading',
             type: 'string',
         },
-        {
-            name: 'projects',
-            title: 'Projects',
-            type: 'array',
-            of: [
-                {
-                    name: 'project',
-                    title: 'Project',
-                    type: 'PortfolioListingCard',
-                },
-            ]
-        },
+        // data pulled from projects documents instead
+        // {
+        //     name: 'projects',
+        //     title: 'Projects',
+        //     type: 'array',
+        //     of: [
+        //         {
+        //             name: 'project',
+        //             title: 'Project',
+        //             type: 'PortfolioListingCard',
+        //         },
+        //     ]
+        // },
         {
             title: 'Margin Top',
             name: 'marginTop',

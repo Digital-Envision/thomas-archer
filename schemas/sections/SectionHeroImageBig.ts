@@ -22,7 +22,7 @@ export default defineType({
                 hotspot: true,
             },
             readOnly: ({ parent }) => {
-                return !_.isEmpty(parent.bannerVideo)
+                return !_.isEmpty(parent?.bannerVideo)
             },
             description:
                 'You only can choose one, using Video or Image as a banner image',
@@ -35,7 +35,7 @@ export default defineType({
                 accept: 'video/*',
             },
             readOnly: ({ parent }) => {
-                return !_.isEmpty(parent.bannerImage)
+                return !_.isEmpty(parent?.bannerImage)
             },
             description:
                 'You only can choose one, using Video or Image as a banner image',

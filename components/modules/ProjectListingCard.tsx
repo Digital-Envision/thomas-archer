@@ -14,6 +14,7 @@ export type ProjectListingCardProps = {
   width?: string
   height?: string
   isExternal?: boolean
+  slug?: { current: string }
 }
 
 /**
