@@ -38,25 +38,27 @@ const DesktopNav: React.FC<Props> = ({ NAV_ITEMS }) => {
               <Flex flexDir={'column'} rowGap={3}>
                 {nav.children.map((childLink, childKey) => {
                   return (
-                    <Link
-                      href={
-                        childLink.useInternal
-                          ? `/${childLink.internalHref}`
-                          : childLink.externalHref
-                      }
-                      target={childLink.isExternal ? '_blank' : ''}
-                    >
-                      <Text
+                    !childLink.mobileOnly && (
+                      <Link
+                        href={
+                          childLink.useInternal
+                            ? `/${childLink.internalHref}`
+                            : childLink.externalHref
+                        }
+                        target={childLink.isExternal ? '_blank' : ''}
                         key={childKey}
-                        fontSize={'12px'}
-                        lineHeight={'14px'}
-                        _hover={{
-                          textDecoration: 'underline',
-                        }}
                       >
-                        {childLink.label}
-                      </Text>
-                    </Link>
+                        <Text
+                          fontSize={'12px'}
+                          lineHeight={'14px'}
+                          _hover={{
+                            textDecoration: 'underline',
+                          }}
+                        >
+                          {childLink.label}
+                        </Text>
+                      </Link>
+                    )
                   )
                 })}
               </Flex>

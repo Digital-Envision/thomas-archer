@@ -8,7 +8,7 @@ import Person from 'components/icon/Person'
 import Telephone from 'components/icon/Telephone'
 import React from 'react'
 import DesktopSubNav from './DesktopSubNav'
-import { NavLinksInterfaces } from '.'
+import { NavLinksInterfaces, LinksInterface } from '.'
 import Link from 'next/link'
 import { SanityFiles } from 'utils/interfaces'
 
@@ -40,14 +40,17 @@ export interface Props {
       postalCode: string
     }
   }
-  socialMedia: Array<{
-    label: string
-    icon: SanityFiles
-    useInternal: boolean
-    internalHref: string
-    externalHref: string
-    isExternal: boolean
-  }>
+  socialMedia: {
+    connectWithUs: LinksInterface
+    socialMedia: Array<{
+      label: string
+      icon: SanityFiles
+      useInternal: boolean
+      internalHref: string
+      externalHref: string
+      isExternal: boolean
+    }>
+  }
 }
 
 const DesktopNav: React.FC<Props> = ({
