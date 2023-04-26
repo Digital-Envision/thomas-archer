@@ -15,15 +15,18 @@ export default defineType({
             validation: (rule) => rule.required(),
         }),
         defineField({
+            name: 'isVideo',
+            title: 'Use Video',
+            type: 'boolean',
+        }),
+        defineField({
             name: 'bannerImage',
             title: 'Banner Image',
             type: 'image',
             options: {
                 hotspot: true,
             },
-            readOnly: ({ parent }) => {
-                return !_.isEmpty(parent?.bannerVideo)
-            },
+            hidden: ({ parent }) => parent.isVideo,
             description:
                 'You only can choose one, using Video or Image as a banner image',
         }),
@@ -34,9 +37,7 @@ export default defineType({
             options: {
                 accept: 'video/*',
             },
-            readOnly: ({ parent }) => {
-                return !_.isEmpty(parent?.bannerImage)
-            },
+            hidden: ({ parent }) => !parent.isVideo,
             description:
                 'You only can choose one, using Video or Image as a banner image',
         }),

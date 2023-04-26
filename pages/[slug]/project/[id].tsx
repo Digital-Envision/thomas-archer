@@ -84,6 +84,7 @@ export default function DynamicPage({
         enquire={globals.Enquire}
         contact={globals.Contact}
         socialMedia={globals.SocialMedia}
+        footer={globals.Footer}
       />
     </>
   )

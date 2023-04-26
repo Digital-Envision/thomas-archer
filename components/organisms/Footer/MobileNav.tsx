@@ -12,6 +12,11 @@ export interface Props {
 const MobileNav: React.FC<Props> = ({ NAV_ITEMS }) => {
   const [dropdown, setDropdown] = useState(-1)
 
+  const onDropdown = (key: number) => {
+    if (dropdown === key) setDropdown(-1)
+    else setDropdown(key)
+  }
+
   return (
     <Box
       display={{
@@ -22,7 +27,7 @@ const MobileNav: React.FC<Props> = ({ NAV_ITEMS }) => {
       {NAV_ITEMS?.map((link, key) => {
         return (
           <Box mb={8}>
-            <Flex alignItems={'center'} onClick={() => setDropdown(key)}>
+            <Flex alignItems={'center'} onClick={() => onDropdown(key)}>
               {link.children ? (
                 <>
                   <Text
@@ -36,7 +41,15 @@ const MobileNav: React.FC<Props> = ({ NAV_ITEMS }) => {
                     {link.label}
                   </Text>
                   {link.children && (
-                    <Dropdown width={6} height={6} pt={'9px'} />
+                    <Dropdown
+                      width={6}
+                      height={6}
+                      pt={'9px'}
+                      transform={
+                        dropdown === key ? 'rotate(-180deg)' : 'rotate(0)'
+                      }
+                      transition={'all .2s'}
+                    />
                   )}
                 </>
               ) : (
