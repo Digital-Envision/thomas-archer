@@ -26,12 +26,11 @@ const MobileNav: React.FC<Props> = ({ NAV_ITEMS }) => {
     >
       {NAV_ITEMS?.map((link, key) => {
         return (
-          <Box mb={8}>
+          <Box mb={8} key={key}>
             <Flex alignItems={'center'} onClick={() => onDropdown(key)}>
               {link.children ? (
                 <>
                   <Text
-                    key={key}
                     fontWeight={700}
                     _hover={{
                       textDecor: 'underline',
@@ -61,9 +60,7 @@ const MobileNav: React.FC<Props> = ({ NAV_ITEMS }) => {
                   }
                   target={link.isExternal ? '_blank' : ''}
                 >
-                  <Text key={key} fontWeight={700}>
-                    {link.label}
-                  </Text>
+                  <Text fontWeight={700}>{link.label}</Text>
                 </Link>
               )}
             </Flex>
@@ -78,8 +75,9 @@ const MobileNav: React.FC<Props> = ({ NAV_ITEMS }) => {
                           : childLink.externalHref
                       }
                       target={childLink.isExternal ? '_blank' : ''}
+                      key={childKey}
                     >
-                      <Text key={childKey} fontSize={'12px'} mt={'20px'} ml={5}>
+                      <Text fontSize={'12px'} mt={'20px'} ml={5}>
                         {childLink.label}
                       </Text>
                     </Link>
