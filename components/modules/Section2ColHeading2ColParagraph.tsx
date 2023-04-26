@@ -106,14 +106,16 @@ const Section2ColHeading2ColParagraph: React.FC<
           </Box>
         </SimpleGrid>
 
-        <Box display="flex" justifyContent="center" alignItems="center">
-          <Image
-            width={'100%'}
-            maxH="500px"
-            objectFit={'cover'}
-            src={typeof image === 'string' ? image : urlForImage(image).url()}
-          />
-        </Box>
+        {image && (
+          <Box display="flex" justifyContent="center" alignItems="center">
+            <Image
+              width={'100%'}
+              maxH="500px"
+              objectFit={'cover'}
+              src={typeof image === 'string' ? image : urlForImage(image).url()}
+            />
+          </Box>
+        )}
       </Flex>
     </Flex>
   )
