@@ -8,6 +8,7 @@ export default {
         { type: 'SectionHeroImageBig' },
         { type: 'SectionHeroVideoBig' },
         { type: 'Carousel' },
+        { type: 'SectionProjectScroll' },
         { type: 'SectionImageHeadingCTA' },
         { type: 'SectionHeadingParagraphCTA' },
         { type: 'SectionHeadingParagraphCTAImage' },
@@ -25,6 +26,6 @@ export default {
         { type: 'Section2ColImageTextMosaicType2' },
         { type: 'SectionBlog' },
         { type: 'SectionInclusions' },
-        { type: 'SectionBreadcrumbs' }
-    ]
+        { type: 'SectionBreadcrumbs' },
+    ],
 }

@@ -10,6 +10,7 @@ export interface Props extends IconButtonProps {
   children: React.ReactNode
   variant?: Variants
   href?: string
+  ref?: React.RefObject<HTMLButtonElement>
 }
 
 const variants = {
@@ -22,8 +23,12 @@ const variants = {
   },
   state2: {
     bg: '#FFFFFF',
-    color: '#000000',
-    _hover: {},
+    color: '#898989',
+    border: '1px solid #898989',
+    _hover: {
+      color: '#FFFFFF',
+      bg: '#898989',
+    },
     _focus: {},
     _active: {},
   },

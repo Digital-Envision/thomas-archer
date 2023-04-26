@@ -32,14 +32,17 @@ export interface Props {
       postalCode: string
     }
   }
-  socialMedia: Array<{
-    label: string
-    icon: SanityFiles
-    useInternal: boolean
-    internalHref: string
-    externalHref: string
-    isExternal: boolean
-  }>
+  socialMedia: {
+    connectWithUs: LinksInterface
+    socialMedia: Array<{
+      label: string
+      icon: SanityFiles
+      useInternal: boolean
+      internalHref: string
+      externalHref: string
+      isExternal: boolean
+    }>
+  }
 }
 
 const MobileCollapse: React.FC<Props> = ({
@@ -129,14 +132,31 @@ const MobileCollapse: React.FC<Props> = ({
 
       <Box mt={'auto'}>
         <Flex alignItems={'center'}>
-          <Box>
-            <Text width={'100px'}>Connect with us</Text>
-          </Box>
-          <Box borderColor={'black'} width={'full'} mx={2}>
-            <Divider orientation="horizontal" borderColor={'black'} />
-          </Box>
+          {socialMedia?.connectWithUs && (
+            <Box>
+              <Link
+                href={
+                  socialMedia?.connectWithUs?.useInternal
+                    ? socialMedia?.connectWithUs?.internalHref
+                      ? `/${socialMedia?.connectWithUs?.internalHref}`
+                      : '#'
+                    : socialMedia?.connectWithUs?.externalHref
+                    ? socialMedia?.connectWithUs?.externalHref
+                    : '#'
+                }
+                target={socialMedia?.connectWithUs?.isExternal ? '_blank' : ''}
+              >
+                <Text width={'100px'}>Connect with us</Text>
+              </Link>
+            </Box>
+          )}
+          {socialMedia?.socialMedia?.length > 0 && (
+            <Box borderColor={'black'} width={'full'} mx={2}>
+              <Divider orientation="horizontal" borderColor={'black'} />
+            </Box>
+          )}
           <Flex>
-            {socialMedia?.map((sc, key) => {
+            {socialMedia?.socialMedia?.map((sc, key) => {
               return (
                 <>
                   {key !== 0 && (

@@ -102,7 +102,7 @@ const Footer = ({ links, enquire, contact, socialMedia, footer }) => {
               >
                 Enquire
               </Button>
-              {socialMedia?.map((sc, key) => {
+              {socialMedia?.socialMedia?.map((sc, key) => {
                 return (
                   <Link
                     href={

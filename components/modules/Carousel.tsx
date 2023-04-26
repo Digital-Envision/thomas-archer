@@ -25,6 +25,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
               right={`${slide}00vw`}
               transition={'all .6s'}
               key={key}
+              height="780px"
             >
               <Box width={'100vw'}>
                 <Image
@@ -34,6 +35,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
                   height={0}
                   sizes="100vw"
                   style={{ width: '100%' }}
+                  layout={'fill'}
                   objectPosition={'center'}
                 />
               </Box>

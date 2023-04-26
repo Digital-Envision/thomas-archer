@@ -31,14 +31,17 @@ export interface Props {
       postalCode: string
     }
   }
-  socialMedia: Array<{
-    label: string
-    icon: SanityFiles
-    useInternal: boolean
-    internalHref: string
-    externalHref: string
-    isExternal: boolean
-  }>
+  socialMedia: {
+    connectWithUs: LinksInterface
+    socialMedia: Array<{
+      label: string
+      icon: SanityFiles
+      useInternal: boolean
+      internalHref: string
+      externalHref: string
+      isExternal: boolean
+    }>
+  }
 }
 
 const DesktopSubNav: React.FC<Props> = ({
@@ -121,16 +124,33 @@ const DesktopSubNav: React.FC<Props> = ({
         <GridItem colSpan={7}>
           <SimpleGrid columns={2} spacingX={10}>
             <Flex alignItems={'center'}>
-              <Box>
-                <Link href={'#'}>
-                  <Text textDecor={'underline'}>Connect with us</Text>
-                </Link>
-              </Box>
-              <Box width={'71px'} borderColor={'black'} mx={2}>
-                <Divider />
-              </Box>
+              {socialMedia?.connectWithUs && (
+                <Box>
+                  <Link
+                    href={
+                      socialMedia?.connectWithUs?.useInternal
+                        ? socialMedia?.connectWithUs?.internalHref
+                          ? `/${socialMedia?.connectWithUs?.internalHref}`
+                          : '#'
+                        : socialMedia?.connectWithUs?.externalHref
+                        ? socialMedia?.connectWithUs?.externalHref
+                        : '#'
+                    }
+                    target={
+                      socialMedia?.connectWithUs?.isExternal ? '_blank' : ''
+                    }
+                  >
+                    <Text textDecor={'underline'}>Connect with us</Text>
+                  </Link>
+                </Box>
+              )}
+              {socialMedia?.socialMedia?.length > 0 && (
+                <Box width={'71px'} borderColor={'black'} mx={2}>
+                  <Divider />
+                </Box>
+              )}
               <Flex>
-                {socialMedia?.map((sc, key) => {
+                {socialMedia?.socialMedia?.map((sc, key) => {
                   return (
                     <>
                       {key !== 0 && (

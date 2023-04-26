@@ -1,9 +1,11 @@
-import { Box, Flex, Link } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 import Text from '../base/Text'
 import Heading1, { HeadingTagSemantic } from 'components/base/Heading1'
 import Button, { Variants } from 'components/base/Button'
 import Dash from 'components/base/Dash'
 import { HeightVariants } from 'components/base/Divider'
+import Link from 'next/link'
+import { LinksInterface } from 'components/organisms/Navbar'
 
 type SectionHeadingParagraphCTAProps = {
   heading: string
@@ -13,8 +15,7 @@ type SectionHeadingParagraphCTAProps = {
   showButton?: boolean
   marginTop?: HeightVariants
   marginBottom?: HeightVariants
-  buttonText?: string
-  buttonLink?: string
+  button?: LinksInterface
 }
 
 const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
@@ -25,8 +26,7 @@ const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
   showButton = true,
   marginTop,
   marginBottom,
-  buttonText,
-  buttonLink,
+  button,
 }) => {
   return (
     <Flex
@@ -67,8 +67,19 @@ const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
             <Text>{paragraph}</Text>
             <Box pt={5}>
               {showButton && (
-                <Link href={buttonLink} isExternal>
-                  <Button variant={Variants.blackLine}>{buttonText}</Button>
+                <Link
+                  href={
+                    button?.useInternal
+                      ? button?.internalHref
+                        ? `/${button?.internalHref}`
+                        : '#'
+                      : button?.externalHref
+                      ? button?.externalHref
+                      : '#'
+                  }
+                  target={button?.isExternal ? '_blank' : ''}
+                >
+                  <Button variant={Variants.blackLine}>{button?.label}</Button>
                 </Link>
               )}
             </Box>

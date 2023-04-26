@@ -27,13 +27,46 @@ export const projectQuery = (project: string) => {
 
 export const pageQuery = (slug: 'string' | { _id: string }) => {
   if (typeof slug === 'object' && slug._id) {
-    return groq`*[_type == "page" && _id=="${slug._id}"]`
+    return groq`*[_type == "page" && _id=="${slug._id}"][]{
+      ...,
+      content[]{
+        ...,
+        "button": {
+          ...button,
+          ...{
+            "internalHref": button.internalHref->slug.current,
+          },
+        },
+      }
+    }`
   }
 
   if (slug) {
-    return groq`*[_type == "page" && slug.current=="${slug}"]`
+    return groq`*[_type == "page" && slug.current=="${slug}"][]{
+      ...,
+      content[]{
+        ...,
+        "button": {
+          ...button,
+          ...{
+            "internalHref": button.internalHref->slug.current,
+          },
+        },
+      }
+    }`
   }
-  return groq`*[_type == "page"]`
+  return groq`*[_type == "page"][]{
+      ...,
+      content[]{
+        ...,
+        "button": {
+          ...button,
+          ...{
+            "internalHref": button.internalHref->slug.current,
+          },
+        },
+      }
+    }`
 }
 
 export const globalQuery = () => {
@@ -48,6 +81,10 @@ export const globalQuery = () => {
           "internalHref": button.internalHref->slug.current,
         },
       },
+      children[] {
+        ...,
+        "internalHref": internalHref->slug.current
+      }
     },
     SpecialButtons{
       ...,
@@ -56,6 +93,17 @@ export const globalQuery = () => {
         "internalHref": specialButtonTwo.internalHref->slug.current,
       },
     },
+    SocialMedia{
+      ...,
+      "connectWithUs": {
+        ...connectWithUs,
+        "internalHref": connectWithUs.internalHref->slug.current,
+      },
+      socialMedia[] {
+        ...,
+        "internalHref": internalHref->slug.current,
+      }
+    }
   }`
 }
 
@@ -128,23 +176,23 @@ export interface Page {
 }
 
 export interface Project {
-  _createdAt: string;
-  _id: string;
-  _rev: string;
-  _type: "projects";
-  _updatedAt: string;
-  caption: string;
-  heading: string;
+  _createdAt: string
+  _id: string
+  _rev: string
+  _type: 'projects'
+  _updatedAt: string
+  caption: string
+  heading: string
   image: {
-    _type: "image";
+    _type: 'image'
     asset: {
-      _ref: string;
-      _type: "reference";
-    };
-  };
+      _ref: string
+      _type: 'reference'
+    }
+  }
   slug: {
-    _type: "slug";
-    current: string;
-  };
-  subHeading: string;
+    _type: 'slug'
+    current: string
+  }
+  subHeading: string
 }
