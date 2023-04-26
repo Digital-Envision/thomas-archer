@@ -36,6 +36,7 @@ export default function IndexPage(props: IndexPageProps) {
         enquire={globals.Enquire}
         contact={globals.Contact}
         socialMedia={globals.SocialMedia}
+        footer={globals.Footer}
       />
     </>
   )

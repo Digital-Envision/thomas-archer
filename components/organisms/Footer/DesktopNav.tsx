@@ -16,6 +16,7 @@ const DesktopNav: React.FC<Props> = ({ NAV_ITEMS }) => {
         base: 'none',
         md: 'grid',
       }}
+      gap={'10px'}
     >
       {NAV_ITEMS?.map((nav, key) => {
         return (

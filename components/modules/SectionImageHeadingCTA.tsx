@@ -5,12 +5,7 @@ import { urlForImage } from 'lib/sanity.image'
 import { SanityFiles } from 'utils/interfaces'
 import Button, { Variants as ButtonVariants } from 'components/base/Button'
 import Link from 'next/link'
-
-export enum HeightVariants {
-  small = '50vh',
-  medium = '70vh',
-  large = '100vh',
-}
+import { HeadingTagSemantic } from 'components/base/Heading1'
 
 type SectionImageHeadingCTAProps = {
   title: string
@@ -27,7 +22,7 @@ type SectionImageHeadingCTAProps = {
   isExternal?: boolean
   marginTop?: string
   marginBottom?: string
-  height?: HeightVariants
+  headingTagLevel: HeadingTagSemantic
 }
 
 const SectionImageHeadingCTA: React.FC<SectionImageHeadingCTAProps> = (
@@ -41,22 +36,23 @@ const SectionImageHeadingCTA: React.FC<SectionImageHeadingCTAProps> = (
     button,
     marginTop,
     marginBottom,
-    height: heightVariant,
+    headingTagLevel,
   } = props
 
   return (
     <Box
-      height={heightVariant}
+      height={'850px'}
       backgroundImage={urlForImage(image).url()}
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
+      backgroundPosition={'center'}
       marginTop={marginTop}
       marginBottom={marginBottom}
     >
       <Box
         bgGradient={isOverlay ? 'linear(to-b, #00000073, #00000000)' : ''}
         width={'full'}
-        height={heightVariant}
+        height={'850px'}
         position={'absolute'}
         display={'flex'}
         textAlign={'center'}
@@ -71,6 +67,7 @@ const SectionImageHeadingCTA: React.FC<SectionImageHeadingCTAProps> = (
             fontSize={'28px'}
             color={'#FFFFFF'}
             mb={'32px'}
+            as={headingTagLevel}
           >
             {title}
           </Text>
@@ -84,7 +81,7 @@ const SectionImageHeadingCTA: React.FC<SectionImageHeadingCTAProps> = (
             target={button?.isExternal ? '_blank' : ''}
           >
             <Button variant={ButtonVariants.whiteLine} mt={'42px'}>
-              {button?.label}
+              Book an Appointment
             </Button>
           </Link>
         </Box>

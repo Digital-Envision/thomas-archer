@@ -1,5 +1,5 @@
 import { Box, Flex } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import { urlForImage } from 'lib/sanity.image'
 import { SanityFiles } from 'utils/interfaces'
@@ -11,38 +11,29 @@ type CarouselProps = {
 const Carousel: React.FC<CarouselProps> = ({ images }) => {
   const [slide, setSlide] = useState(0)
 
-  useEffect(() => {
-    // Disable horizontal scrolling
-    document.body.style.overflowX = 'hidden'
-
-    // Re-enable horizontal scrolling when component unmounts
-    return () => {
-      document.body.style.overflowX = 'auto'
-    }
-  }, [])
-
   const handleCarousel = (key: number) => {
     setSlide(key)
   }
 
   return (
     <Box>
-      <Flex flexDir={'row'} width={`${images.length}00vw`}>
+      <Flex width={'100%'} overflow={'hidden'}>
         {images.map((image, key) => {
           return (
             <Box
               position={'relative'}
-              height={'780px'}
-              width={'100vw'}
               right={`${slide}00vw`}
               transition={'all .6s'}
+              key={key}
             >
-              <Box key={key} transition={'all .6s'}>
+              <Box width={'100vw'}>
                 <Image
-                  src={urlForImage(image).url()}
+                  src={urlForImage(image)?.url()}
                   alt={image._key}
-                  layout={'fill'}
-                  objectFit={'cover'}
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  style={{ width: '100%' }}
                   objectPosition={'center'}
                 />
               </Box>

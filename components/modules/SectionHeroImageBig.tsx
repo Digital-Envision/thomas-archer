@@ -10,6 +10,7 @@ import { SanityFiles } from 'utils/interfaces'
 
 type SectionHeroImageBigProps = {
   quotes: Array<any>
+  isVideo: boolean
   bannerImage?: SanityFiles
   bannerVideo?: SanityFiles
   marginBottom?: string
@@ -18,6 +19,7 @@ type SectionHeroImageBigProps = {
 
 const SectionHeroImageBig: React.FC<SectionHeroImageBigProps> = ({
   quotes,
+  isVideo,
   bannerImage,
   bannerVideo,
   marginBottom,
@@ -34,36 +36,37 @@ const SectionHeroImageBig: React.FC<SectionHeroImageBigProps> = ({
     <Box
       height={'100vh'}
       bg={bannerVideo?.asset?._ref ? 'gray.700' : ''}
-      backgroundImage={
-        bannerVideo?.asset?._ref ? '' : urlForImage(bannerImage).url()
-      }
+      backgroundImage={isVideo ? '' : urlForImage(bannerImage).url()}
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
+      backgroundPosition={'center'}
       display={'flex'}
       flexDir={'column'}
       textAlign={'center'}
       marginBottom={marginBottom}
       marginTop={marginTop}
     >
-      {bannerVideo && (
-        <Box position={'absolute'} top={0} left={0} zIndex={0}>
-          <AspectRatio height={'100vh'} width={'100vw'}>
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              onContextMenu={(e) => e.preventDefault()}
-            >
-              <source
-                src={`${getVideoUrl(
-                  urlForImage(bannerVideo)
-                )}?background=1&autoplay=1&muted=1&loop=1`}
-                type="video/mp4"
-              />
-              Your browser does not support the video tag.
-            </video>
-          </AspectRatio>
+      {isVideo && (
+        <Box position={'relative'}>
+          <Box position={'absolute'} top={0} left={0} zIndex={0}>
+            <AspectRatio height={'100vh'} width={'100vw'}>
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                onContextMenu={(e) => e.preventDefault()}
+              >
+                <source
+                  src={`${getVideoUrl(
+                    urlForImage(bannerVideo)
+                  )}?background=1&autoplay=1&muted=1&loop=1`}
+                  type="video/mp4"
+                />
+                Your browser does not support the video tag.
+              </video>
+            </AspectRatio>
+          </Box>
         </Box>
       )}
       <Box
@@ -75,6 +78,7 @@ const SectionHeroImageBig: React.FC<SectionHeroImageBigProps> = ({
           lg: '64px',
         }}
         color={'#FFFFFF'}
+        px={'16px'}
       >
         <PortableText value={quotes} />
       </Box>
@@ -83,7 +87,9 @@ const SectionHeroImageBig: React.FC<SectionHeroImageBigProps> = ({
           aria-label="go-to-down"
           variant={Variants.whiteLine}
           px={0}
+          pt={1}
           onClick={handleScrollDown}
+          fontSize={'25px'}
         >
           <BsChevronDown />
         </Button>

@@ -1,6 +1,5 @@
 import { defineField, defineType } from 'sanity'
 import { HeightVariants } from 'components/base/Divider'
-import { HeightVariants as BannerHeight } from 'components/modules/SectionImageHeadingCTA'
 import { enumToArrayOfObjects } from 'lib/utils'
 export default defineType({
     name: 'SectionImageHeadingCTA',
@@ -18,6 +17,14 @@ export default defineType({
             title: 'Description',
             type: 'string',
             validation: (rule) => rule.required(),
+        }),
+        defineField({
+            name: 'headingTagLevel',
+            title: 'Heading Tag Level',
+            type: 'string',
+            options: {
+                list: ['H1', 'H2', 'H3'],
+            },
         }),
         defineField({
             type: 'object',
@@ -89,15 +96,6 @@ export default defineType({
                 list: [...enumToArrayOfObjects(HeightVariants)],
             },
             initialValue: HeightVariants.none,
-        }),
-        defineField({
-            name: 'height',
-            title: 'Heights',
-            type: 'string',
-            options: {
-                list: [...enumToArrayOfObjects(BannerHeight)],
-            },
-            initialValue: BannerHeight.large,
         }),
     ],
     preview: {

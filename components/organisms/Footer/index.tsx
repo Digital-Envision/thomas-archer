@@ -11,8 +11,9 @@ import MobileNav from './MobileNav'
 import EnquireFlyout from '../EnquireFlyout'
 import { urlForImage } from 'lib/sanity.image'
 import { ReactSVG } from 'react-svg'
+import { NavLinksInterfaces } from '../Navbar'
 
-const Footer = ({ links, enquire, contact, socialMedia }) => {
+const Footer = ({ links, enquire, contact, socialMedia, footer }) => {
   const Links = links || []
 
   const [openDrawer, setOpenDrawer] = useState(false)
@@ -97,6 +98,7 @@ const Footer = ({ links, enquire, contact, socialMedia }) => {
               <Button
                 variant={ButtonVariants.blackLine}
                 onClick={() => setOpenDrawer(true)}
+                mr={'12px'}
               >
                 Enquire
               </Button>
@@ -109,8 +111,9 @@ const Footer = ({ links, enquire, contact, socialMedia }) => {
                         : sc?.externalHref
                     }
                     target={sc?.isExternal ? '_blank' : ''}
+                    key={key}
                   >
-                    <ButtonIcon aria-label={sc?.label} key={key}>
+                    <ButtonIcon aria-label={sc?.label}>
                       <ReactSVG
                         src={urlForImage(sc?.icon).url()}
                         beforeInjection={(svg) => {
@@ -145,16 +148,41 @@ const Footer = ({ links, enquire, contact, socialMedia }) => {
             base: '39px',
             md: '26px',
           }}
+          display={'flex'}
         >
-          <Text
-            color={'#898989'}
-            fontWeight={300}
-            fontSize={'10px'}
-            lineHeight={'20px'}
-          >
-            ©2022 Thomas Archer | <Link href={'#'}>Privacy Policy</Link> |{' '}
-            <Link href={'#'}>Site Directory</Link>
-          </Text>
+          {footer?.copyright && (
+            <Text
+              color={'#898989'}
+              fontWeight={300}
+              fontSize={'10px'}
+              lineHeight={'20px'}
+            >
+              {footer.copyright}
+            </Text>
+          )}
+          {footer?.links?.map((link: NavLinksInterfaces, key: number) => {
+            return (
+              <Text
+                color={'#898989'}
+                fontWeight={300}
+                fontSize={'10px'}
+                lineHeight={'20px'}
+                key={key}
+                ml={1}
+              >
+                |{' '}
+                <Link
+                  href={
+                    link.useInternal
+                      ? `/${link.internalHref}`
+                      : link.externalHref
+                  }
+                >
+                  {link.label}
+                </Link>
+              </Text>
+            )
+          })}
         </Box>
       </Box>
     </>
