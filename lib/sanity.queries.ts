@@ -27,13 +27,46 @@ export const projectQuery = (project: string) => {
 
 export const pageQuery = (slug: 'string' | { _id: string }) => {
   if (typeof slug === 'object' && slug._id) {
-    return groq`*[_type == "page" && _id=="${slug._id}"]`
+    return groq`*[_type == "page" && _id=="${slug._id}"][]{
+      ...,
+      content[]{
+        ...,
+        "button": {
+          ...button,
+          ...{
+            "internalHref": button.internalHref->slug.current,
+          },
+        },
+      }
+    }`
   }
 
   if (slug) {
-    return groq`*[_type == "page" && slug.current=="${slug}"]`
+    return groq`*[_type == "page" && slug.current=="${slug}"][]{
+      ...,
+      content[]{
+        ...,
+        "button": {
+          ...button,
+          ...{
+            "internalHref": button.internalHref->slug.current,
+          },
+        },
+      }
+    }`
   }
-  return groq`*[_type == "page"]`
+  return groq`*[_type == "page"][]{
+      ...,
+      content[]{
+        ...,
+        "button": {
+          ...button,
+          ...{
+            "internalHref": button.internalHref->slug.current,
+          },
+        },
+      }
+    }`
 }
 
 export const globalQuery = () => {

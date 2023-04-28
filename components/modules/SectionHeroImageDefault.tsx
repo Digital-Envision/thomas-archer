@@ -26,14 +26,16 @@ const SectionHeroImageDefault: React.FC<SectionHeroImageDefaultProps> = ({
       marginBottom={marginBottom}
     >
       <Box zIndex={-1}>
-        <Image
-          priority
-          src={urlForImage(image).url()}
-          layout={'fill'}
-          objectFit={'cover'}
-          objectPosition={'center'}
-          alt={'banner'}
-        />
+        {image && (
+          <Image
+            priority
+            src={urlForImage(image).url()}
+            layout={'fill'}
+            objectFit={'cover'}
+            objectPosition={'center'}
+            alt={'banner'}
+          />
+        )}
       </Box>
       {isOverlay && (
         <Box

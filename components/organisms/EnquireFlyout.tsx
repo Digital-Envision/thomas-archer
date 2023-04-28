@@ -59,8 +59,12 @@ const EnquireFlyout = ({
             <Link
               href={
                 button?.useInternal
-                  ? `/${button?.internalHref}`
+                  ? button?.internalHref
+                    ? `/${button?.internalHref}`
+                    : '#'
                   : button?.externalHref
+                  ? button?.externalHref
+                  : '#'
               }
               target={button?.isExternal ? '_blank' : ''}
             >
@@ -209,8 +213,12 @@ const EnquireFlyout = ({
                 <Link
                   href={
                     privacyAndPolicy?.useInternal
-                      ? `/${privacyAndPolicy?.internalHref}`
+                      ? privacyAndPolicy?.useInternal
+                        ? `/${privacyAndPolicy?.internalHref}`
+                        : '#'
                       : privacyAndPolicy?.externalHref
+                      ? privacyAndPolicy?.externalHref
+                      : '#'
                   }
                   target={privacyAndPolicy?.isExternal ? '_blank' : ''}
                 >

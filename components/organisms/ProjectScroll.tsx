@@ -1,21 +1,111 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import SectionHeadingParagraphCTA from 'components/modules/SectionHeadingParagraphCTA'
-import { HeadingTagSemantic } from 'components/base/Heading1'
+import { Box } from '@chakra-ui/react'
+import Text from 'components/base/Text'
+import Image from 'next/image'
+import ScrollBox from 'components/modules/ScrollBox'
+import { urlForImage } from 'lib/sanity.image'
+import Link from 'next/link'
 
-const ProjectScroll = () => {
+const ProjectScroll = ({
+  projects,
+  heading,
+  headingTagLevel,
+  marginBottom,
+  marginTop,
+  paragraph,
+  button,
+}) => {
+  useEffect(() => {
+    console.log({ projects })
+  }, [])
   return (
-    <>
+    <Box mt={marginTop} mb={marginBottom}>
       <SectionHeadingParagraphCTA
         isOffset={false}
-        heading={'Explore our portofolios'}
-        headingTagLevel={HeadingTagSemantic.H1}
-        paragraph={
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed feugiat, lectus et viverra ullamcorper, nulla dui ullamcorper quam, et dictum arcu ipsum vel risus. Curabitur quis orci viverra, efficitur nunc in. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-        }
-        buttonText="Why Thomas Archer"
-        buttonLink="#"
+        heading={heading}
+        headingTagLevel={headingTagLevel}
+        paragraph={paragraph}
+        button={button}
       />
-    </>
+      <ScrollBox mt={'66px'}>
+        {/* spacing */}
+        <Box>
+          <Box
+            transition={'all .6s'}
+            height={{ base: '373px', md: '500px' }}
+            _hover={{
+              userSelect: 'none',
+            }}
+          >
+            <Box
+              width={{
+                base: '18px',
+                md: '64px',
+              }}
+              height={'100%'}
+              bg={'transparent'}
+            ></Box>
+          </Box>
+        </Box>
+        {projects?.map((project, key) => {
+          return (
+            <Box>
+              <Box
+                key={key}
+                height={{ base: '373px', md: '500px' }}
+                _hover={{
+                  userSelect: 'none',
+                }}
+              >
+                <Box
+                  width={{ base: '277px', md: '362px' }}
+                  height={'100%'}
+                  position={'relative'}
+                >
+                  {project?.image && (
+                    <Image
+                      src={urlForImage(project?.image)?.url()}
+                      alt={project?.heading}
+                      fill
+                      objectFit="cover"
+                    />
+                  )}
+                </Box>
+              </Box>
+              <Link
+                href={
+                  project?.slug?.current ? `/${project?.slug?.current}` : '#'
+                }
+              >
+                <Text mt={4} textDecor={'underline'}>
+                  {project?.heading}
+                </Text>
+              </Link>
+            </Box>
+          )
+        })}
+        {/* spacing */}
+        <Box>
+          <Box
+            transition={'all .6s'}
+            height={{ base: '373px', md: '500px' }}
+            _hover={{
+              userSelect: 'none',
+            }}
+          >
+            <Box
+              width={{
+                base: '18px',
+                md: '64px',
+              }}
+              height={'100%'}
+              bg={'transparent'}
+            ></Box>
+          </Box>
+        </Box>
+      </ScrollBox>
+    </Box>
   )
 }
 

@@ -26,7 +26,7 @@ export default defineType({
             options: {
                 hotspot: true,
             },
-            hidden: ({ parent }) => parent.isVideo,
+            hidden: ({ parent }) => parent?.isVideo,
             description:
                 'You only can choose one, using Video or Image as a banner image',
         }),
@@ -37,7 +37,7 @@ export default defineType({
             options: {
                 accept: 'video/*',
             },
-            hidden: ({ parent }) => !parent.isVideo,
+            hidden: ({ parent }) => !parent?.isVideo,
             description:
                 'You only can choose one, using Video or Image as a banner image',
         }),

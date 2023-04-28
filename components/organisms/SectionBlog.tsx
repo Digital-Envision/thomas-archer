@@ -44,7 +44,7 @@ const SectionBlog: React.FC<SectionBlogProps> = ({
         // heading={'Blog'}
         // paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed feugiat, lectus et viverra ullamcorper, nulla dui ullamcorper quam, et dictum arcu ipsum vel risus. Curabitur quis orci viverra, efficitur nunc in."
         // headingTagLevel={HeadingTagSemantic.H1}
-      />
+        />
 
       <Box pt={{ base: HeightVariants.less, md: HeightVariants.default }} />
 

@@ -17,6 +17,7 @@ import SectionImageTextMosaicType1 from 'components/modules/SectionImageTextMosa
 import SectionTextFeatured from 'components/modules/SectionTextFeatured'
 import Footer from 'components/organisms/Footer'
 import Navbar from 'components/organisms/Navbar'
+import ProjectScroll from 'components/organisms/ProjectScroll'
 import Section2ColCards from 'components/organisms/Section2ColCards'
 import Section3ColsCards from 'components/organisms/Section3ColsCards'
 import SectionBlog from 'components/organisms/SectionBlog'
@@ -33,6 +34,9 @@ const PageBuilder = ({ pages, ...rest }) => {
       switch (c._type) {
         case 'Carousel':
           el = <Carousel {...c} />
+          break
+        case 'SectionProjectScroll':
+          el = <ProjectScroll {...c} projects={rest.projects} />
           break
         case 'SectionHeroImageDefault':
           el = <SectionHeroImageDefault {...c} />
