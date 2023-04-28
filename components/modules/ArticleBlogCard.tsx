@@ -1,4 +1,5 @@
-import { Box, Image, Flex, Link } from '@chakra-ui/react'
+import { Box, Image, Flex } from '@chakra-ui/react'
+import Link from 'next/link'
 import Heading3 from '../base/Heading3'
 import Text from '../base/Text'
 import { isEmpty } from 'lodash'
@@ -82,7 +83,7 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
         </Box>
 
         <Box mt="auto">
-          <Link href={buttonLink} isExternal>
+          <Link href={buttonLink || '#'} target={buttonLink ? '_blank' : ''}>
             <Button variant={Variants.blackLine}>{buttonText}</Button>
           </Link>
         </Box>
