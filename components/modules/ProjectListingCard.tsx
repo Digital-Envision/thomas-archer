@@ -1,4 +1,5 @@
-import { Box, Image, Icon, Flex, Link } from '@chakra-ui/react'
+import { Box, Image, Icon, Flex } from '@chakra-ui/react'
+import Link from 'next/link'
 import Heading3 from '../base/Heading3'
 import Text from '../base/Text'
 import { BsArrowRight } from 'react-icons/bs'
@@ -62,14 +63,11 @@ const ProjectListingCard: React.FC<ProjectListingCardProps> = ({
           {description}
         </Text>
 
-        <Link
-          href={link}
-          isExternal={isExternal}
-          borderBottom="1px"
-          borderColor="#898989"
-        >
+        <Link href={link || '#'} target={link ? '_blank' : ''}>
           <Flex align="center">
-            <Text fontSize={'12px'}>Read more</Text>
+            <Text fontSize={'12px'} _hover={{ textDecoration: 'underline' }}>
+              Read more
+            </Text>
             <Icon
               as={BsArrowRight}
               color={'#898989'}

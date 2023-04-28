@@ -1,4 +1,5 @@
-import { Box, Image, Button, Link } from '@chakra-ui/react'
+import { Box, Image } from '@chakra-ui/react'
+import Link from 'next/link'
 import Text from '../base/Text'
 
 interface PortfolioCardProps {
@@ -39,7 +40,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({
         />
       </Box>
       <Box px={2} py={1}>
-        <Link href={linkUrl} isExternal textDecor="underline">
+        <Link href={linkUrl || '#'} target={linkUrl ? '_blank' : ''}>
           <Text noOfLines={1} fontSize={'14px'}>
             {label}
           </Text>

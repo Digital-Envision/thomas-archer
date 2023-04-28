@@ -1,9 +1,10 @@
-import { Box, Flex, Image, Link } from '@chakra-ui/react'
+import { Box, Flex, Image } from '@chakra-ui/react'
+import Link from 'next/link'
 import Text from '../base/Text'
 import Heading1, { HeadingTagSemantic } from 'components/base/Heading1'
 import Button, { Variants } from 'components/base/Button'
 import Dash from 'components/base/Dash'
-import Divider, { HeightVariants } from 'components/base/Divider'
+import { HeightVariants } from 'components/base/Divider'
 import { urlForImage } from 'lib/sanity.image'
 import { SanityFiles } from 'utils/interfaces'
 
@@ -51,7 +52,10 @@ const SectionHeadingParagraphCTAImage: React.FC<
             <Box>
               <Text>{paragraph}</Text>
               <Box pt={5}>
-                <Link href={buttonLink} isExternal>
+                <Link
+                  href={buttonLink || '#'}
+                  target={buttonLink ? '_blank' : ''}
+                >
                   <Button variant={Variants.blackLine}>{buttonText}</Button>
                 </Link>
               </Box>
