@@ -16,6 +16,7 @@ import SectionImageHeadingCTA from 'components/modules/SectionImageHeadingCTA'
 import SectionImageTextMosaicType1 from 'components/modules/SectionImageTextMosaicType1'
 import SectionTextFeatured from 'components/modules/SectionTextFeatured'
 import Footer from 'components/organisms/Footer'
+import GalleryScroll from 'components/organisms/GalleryScroll'
 import Navbar from 'components/organisms/Navbar'
 import ProjectScroll from 'components/organisms/ProjectScroll'
 import Section2ColCards from 'components/organisms/Section2ColCards'
@@ -34,6 +35,9 @@ const PageBuilder = ({ pages, ...rest }) => {
       switch (c._type) {
         case 'Carousel':
           el = <Carousel {...c} />
+          break
+        case 'SectionGalleryScroll':
+          el = <GalleryScroll {...c} />
           break
         case 'SectionProjectScroll':
           el = <ProjectScroll {...c} projects={rest.projects} />

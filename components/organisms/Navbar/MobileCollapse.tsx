@@ -179,9 +179,9 @@ const MobileCollapse: React.FC<Props> = ({
             })}
           </Flex>
         </Flex>
-        <Link href={`mailto:${contact.email}`}>
+        <Link href={`mailto:${contact?.email}`}>
           <Text textDecor={'underline'} mt={2}>
-            {contact.email}
+            {contact?.email}
           </Text>
         </Link>
       </Box>

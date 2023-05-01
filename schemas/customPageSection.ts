@@ -9,6 +9,7 @@ export default {
         { type: 'SectionHeroVideoBig' },
         { type: 'Carousel' },
         { type: 'SectionProjectScroll' },
+        { type: 'SectionGalleryScroll' },
         { type: 'SectionImageHeadingCTA' },
         { type: 'SectionHeadingParagraphCTA' },
         { type: 'SectionHeadingParagraphCTAImage' },

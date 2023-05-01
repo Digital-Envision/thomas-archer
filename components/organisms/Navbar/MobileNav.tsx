@@ -49,7 +49,7 @@ const MobileNav: React.FC<Props> = ({
             aria-label="button-telephone"
             variant={ButtonIconVariants.default}
             as={'a'}
-            href={`tel:${contact.phone.code}${contact.phone.number}`}
+            href={`tel:${contact?.phone?.code}${contact?.phone?.number}`}
           >
             <Telephone
               pathFill={

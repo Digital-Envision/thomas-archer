@@ -36,7 +36,9 @@ const SectionHeroImageBig: React.FC<SectionHeroImageBigProps> = ({
     <Box
       height={'100vh'}
       bg={bannerVideo?.asset?._ref ? 'gray.700' : ''}
-      backgroundImage={isVideo ? '' : urlForImage(bannerImage).url()}
+      backgroundImage={
+        isVideo ? '' : bannerImage ? urlForImage(bannerImage).url() : ''
+      }
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
       backgroundPosition={'center'}

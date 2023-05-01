@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import SectionHeadingParagraphCTA from 'components/modules/SectionHeadingParagraphCTA'
 import { Box } from '@chakra-ui/react'
 import Text from 'components/base/Text'
@@ -16,9 +16,6 @@ const ProjectScroll = ({
   paragraph,
   button,
 }) => {
-  useEffect(() => {
-    console.log({ projects })
-  }, [])
   return (
     <Box mt={marginTop} mb={marginBottom}>
       <SectionHeadingParagraphCTA

@@ -176,8 +176,8 @@ const DesktopSubNav: React.FC<Props> = ({
                 })}
               </Flex>
             </Flex>
-            <Link href={`mailto:${contact.email}`}>
-              <Text>{contact.email}</Text>
+            <Link href={`mailto:${contact?.email}`}>
+              <Text>{contact?.email}</Text>
             </Link>
           </SimpleGrid>
         </GridItem>
