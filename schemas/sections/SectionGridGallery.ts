@@ -6,20 +6,79 @@ export default {
     title: 'SectionGridGallery',
     fields: [
         {
-            name: 'images',
-            title: 'Images',
+            name: 'items',
             type: 'array',
             of: [
                 {
-                    name: 'image',  // TODO should be reference from images document
-                    title: 'Image',
-                    description:
-                        'This image will be displayed on the right section.',
-                    type: 'image',
-                    options: {
-                        hotspot: false,
-                    },
-                },
+                    name: 'item',
+                    title: 'Item',
+                    type: 'object',
+                    fields: [
+                        {
+                            name: 'name',
+                            type: 'string'
+                        },
+                        {
+                            name: 'location',
+                            type: 'string'
+                        },
+                        {
+                            name: 'product',
+                            type: 'string'
+                        },
+
+                        {   // should a dependencies from parent filterItems, at least can search the existing filterItems.
+                            name: 'tags',
+                            type: 'array',
+                            options: {
+                                layout: 'tags'
+                            },
+                            of: [
+                                {
+                                    name: 'tag',
+                                    type: 'string'
+                                }
+                            ]
+                        },
+                        {
+                            name: 'image',
+                            title: 'Image',
+                            description:
+                                'This image will be displayed on the right section.',
+                            type: 'image',
+                            options: {
+                                hotspot: false,
+                            },
+                        },
+                    ]
+                }
+            ]
+        },
+        {
+            name: 'filters',
+            type: 'array',
+            of: [
+                {
+                    name: 'filter',
+                    type: 'object',
+                    fields: [
+                        {
+                            name: 'name',
+                            type: 'string'
+                        },
+                        {
+                            name: 'filterItems',
+                            type: 'array',
+                            of: [
+                                {
+                                    name: 'filterItem',
+                                    type: 'string'
+                                }
+                            ]
+                        },
+
+                    ]
+                }
             ]
         },
         {

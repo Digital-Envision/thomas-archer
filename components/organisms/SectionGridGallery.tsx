@@ -7,132 +7,103 @@ import {
   ModalContent,
   ModalFooter,
   ModalOverlay,
-  Img,
+  HStack,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  StackDivider,
+  Image,
 } from '@chakra-ui/react'
 import { HeightVariants } from 'components/base/Divider'
 import Text from 'components/base/Text'
 import { ProjectListingCardProps } from 'components/modules/ProjectListingCard'
 import _ from 'lodash'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Facebook from 'components/icon/Facebook'
 import Instagram from 'components/icon/Instagram'
 import Pinterest from 'components/icon/Pinterest'
 import Twitter from 'components/icon/Twitter'
 import ButtonIcon from 'components/base/ButtonIcon'
 import Button, { Variants } from 'components/base/Button'
+import { urlForImage } from 'lib/sanity.image'
+import { BsChevronUp } from 'react-icons/bs'
+import { HiOutlineChevronDown } from 'react-icons/hi2'
+import { Filter } from 'components/base/Filter'
+import { SanityFiles } from 'utils/interfaces'
+
+export interface SectionGridGalleryInterface {
+  _key: string
+  _type: 'SectionGridGallery'
+  filters: {
+    _key: string
+    _type: 'filter'
+    filterItems: string[]
+    name: string
+  }[]
+  items: {
+    _key: string
+    _type: 'item'
+    image: {
+      _type: 'image'
+      asset: {
+        _ref: string
+        _type: 'reference'
+      }
+    }
+    location: string
+    name: string
+    product: string
+    tags?: string[]
+  }[]
+  marginBottom?: string
+  marginTop?: string
+}
 
 type SectionGridGalleryProps = {
   heading: string
-  projects: ProjectListingCardProps[]
-  imageUrl: string // load image from url; test purpose
-  image?: any // sanity io image
+  filters: SectionGridGalleryInterface['filters']
+  items: SectionGridGalleryInterface['items']
+  image?: SanityFiles
   marginTop: HeightVariants
   marginBottom: HeightVariants
 }
 
-const localImages = [
-  {
-    id: 1,
-    imageUrl: 'https://source.unsplash.com/VWcPlbHglYc',
-    heading: 'The Gallery',
-    subHeading: 'East Bentleigh',
-    description: 'Landmark Custom Design',
-    hashtags: ['#kitchen', '#modern'],
-  },
-  {
-    id: 2,
-    imageUrl: 'https://source.unsplash.com/e6FMMambeO4',
-    heading: 'The Gallery',
-    subHeading: 'East Bentleigh',
-    description: 'Landmark Custom Design',
-    hashtags: ['#kitchen', '#modern'],
-  },
-  {
-    id: 3,
-    imageUrl: 'https://source.unsplash.com/klCiPmzUw0Y',
-    heading: 'The Gallery',
-    subHeading: 'East Bentleigh',
-    description: 'Landmark Custom Design',
-    hashtags: ['#kitchen', '#modern'],
-  },
-  {
-    id: 4,
-    imageUrl: 'https://source.unsplash.com/O0N9MF--hK4',
-    heading: 'The Gallery',
-    subHeading: 'East Bentleigh',
-    description: 'Landmark Custom Design',
-    hashtags: ['#kitchen', '#modern'],
-  },
-  {
-    id: 5,
-    imageUrl: 'https://source.unsplash.com/FV3GConVSss',
-    heading: 'The Gallery',
-    subHeading: 'East Bentleigh',
-    description: 'Landmark Custom Design',
-    hashtags: ['#kitchen', '#modern'],
-  },
-  {
-    id: 6,
-    imageUrl: 'https://source.unsplash.com/0ESjL-Nw22Y',
-    heading: 'The Gallery',
-    subHeading: 'East Bentleigh',
-    description: 'Landmark Custom Design',
-    hashtags: ['#kitchen', '#modern'],
-  },
-  {
-    id: 7,
-    imageUrl: 'https://source.unsplash.com/VSeVhmW4_JQ',
-    heading: 'The Gallery',
-    subHeading: 'East Bentleigh',
-    description: 'Landmark Custom Design',
-    hashtags: ['#kitchen', '#modern'],
-  },
-  {
-    id: 8,
-    imageUrl: 'https://source.unsplash.com/07aFaTf24Kg',
-    heading: 'The Gallery',
-    subHeading: 'East Bentleigh',
-    description: 'Landmark Custom Design',
-    hashtags: ['#kitchen', '#modern'],
-  },
-  {
-    id: 9,
-    imageUrl: 'https://source.unsplash.com/DqyYTM7pR2o',
-    heading: 'The Gallery',
-    subHeading: 'East Bentleigh',
-    description: 'Landmark Custom Design',
-    hashtags: ['#kitchen', '#modern'],
-  },
-  {
-    id: 10,
-    imageUrl: 'https://source.unsplash.com/IdNOTjPeHrE',
-    heading: 'The Gallery',
-    subHeading: 'East Bentleigh',
-    description: 'Landmark Custom Design',
-    hashtags: ['#kitchen', '#modern'],
-  },
-]
-
 const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
-  heading,
-  projects,
+  items,
+  filters,
   marginTop,
   marginBottom,
 }) => {
-  const [selectedData, setSelectedData] = useState(null) // store the selected data in state
+  const [filteredData, setFilteredData] = useState<
+    SectionGridGalleryInterface['items']
+  >([])
+  const [selectedData, setSelectedData] =
+    useState<Partial<SectionGridGalleryInterface['items']>[0]>(null) // data for lightbox modal
+  const [selectedFilters, setSelectedFilters] = useState<any>({})
+
+  useEffect(() => {
+    const filtered = _.filter(items, ({ tags }) => {
+      if (_.isEmpty(selectedFilters)) return true
+      const isMatches = _.isEmpty(_.difference(_.values(selectedFilters), tags))
+
+      if (isMatches) return true
+    })
+
+    setFilteredData(filtered)
+  }, [selectedFilters])
 
   const handlePrevious = () => {
     setSelectedData(
-      _.nth(localImages, _.findIndex(localImages, { id: selectedData?.id }) - 1)
+      _.nth(items, _.findIndex(items, { _key: selectedData?._key }) - 1)
     )
   }
 
   const handleNext = () => {
     setSelectedData(
       _.nth(
-        localImages,
-        (_.findIndex(localImages, { id: selectedData?.id }) + 1) %
-          localImages.length
+        items,
+        (_.findIndex(items, { _key: selectedData?._key }) + 1) % items.length
       )
     )
   }
@@ -145,6 +116,13 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
     setSelectedData(null) // reset the selected data to null when modal is closed
   }
 
+  const handleFilterChange = (name, value) => {
+    setSelectedFilters((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }))
+  }
+
   return (
     <Flex
       direction={'column'}
@@ -152,27 +130,96 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
       marginTop={marginTop}
       marginBottom={marginBottom}
     >
-      <Box
-        mx="auto"
-        alignItems={'center'}
-        justifyContent="center"
-        maxW="1440px"
-        w={'98vw'}
-        sx={{ columnCount: [1, 1, 2, 3, 3], columnGap: '8px' }}
-        overflow="hidden"
-      >
-        {localImages?.map((image) => (
-          <Box onClick={() => handleListItemClick(image)}>
-            <Img
-              key={image?.imageUrl}
-              w="100%"
-              display="inline-block"
-              src={image?.imageUrl}
-              alt="Alt"
-              objectFit={'contain'}
-            />
-          </Box>
-        ))}
+      <Box>
+        <Box alignSelf={'flex-start'} pl={['1rem', '1rem', '1rem', '3rem']}>
+          <HStack
+            align={'flex-start'}
+            divider={<StackDivider borderColor="gray.400" />}
+          >
+            <Box minW={'70px'}>
+              <Text
+                textAlign="center"
+                textDecoration="underline"
+                onClick={() => setSelectedFilters({})}
+                cursor="pointer"
+              >
+                View All
+              </Text>
+            </Box>
+
+            {_.map(filters, (filter) => (
+              <Accordion
+                allowToggle
+                minW={'70px'}
+                style={{ borderColor: null, borderWidth: 0 }}
+              >
+                <AccordionItem key={filter._key} border={0}>
+                  {({ isExpanded }) => (
+                    <>
+                      <AccordionButton
+                        style={{
+                          padding: 0,
+                          margin: 0,
+                          borderWidth: 0,
+                        }}
+                        justifyContent="space-between"
+                      >
+                        <Text
+                          fontWeight={isExpanded ? 'bold' : 'light'}
+                          textDecoration={'underline'}
+                        >
+                          {_.capitalize(filter.name)}
+                        </Text>
+                        {isExpanded ? (
+                          <BsChevronUp color="#D9D9D9" />
+                        ) : (
+                          <HiOutlineChevronDown color="#D9D9D9" />
+                        )}
+                      </AccordionButton>
+                      <AccordionPanel p={0}>
+                        <Filter
+                          filterName={filter.name}
+                          filterItems={filter.filterItems}
+                          value={selectedFilters[filter.name] || ''}
+                          onValueChange={(value) =>
+                            handleFilterChange(filter.name, value)
+                          }
+                          selectedFilters={selectedFilters}
+                          setSelectedFilters={setSelectedFilters}
+                        />
+                      </AccordionPanel>
+                    </>
+                  )}
+                </AccordionItem>
+              </Accordion>
+            ))}
+          </HStack>
+        </Box>
+
+        <Box pt={'1rem'} />
+
+        <Box
+          mx="auto"
+          alignItems={'center'}
+          justifyContent="center"
+          maxW="1440px"
+          w={'98vw'}
+          sx={{ columnCount: [1, 1, 2, 3, 3], columnGap: '8px' }}
+          overflow="hidden"
+        >
+          {filteredData?.map((item) => (
+            <Box onClick={() => handleListItemClick(item)}>
+              <Image
+                key={urlForImage(item.image)?.url()}
+                w="100%"
+                display="inline-block"
+                src={urlForImage(item.image)?.url()}
+                alt={urlForImage(item.image)?.url()}
+                objectFit={'contain'}
+              />
+            </Box>
+          ))}
+        </Box>
       </Box>
 
       <Box pt="1rem" />
@@ -193,11 +240,13 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
             <ModalCloseButton />
           </Box>
           <ModalBody p={0} m={0}>
-            <Img
-              src={selectedData?.imageUrl}
-              alt={selectedData?.imageUrl}
-              maxW="100%"
-            />
+            {selectedData?.image && (
+              <Image
+                src={urlForImage(selectedData?.image)?.url()}
+                alt={urlForImage(selectedData?.image)?.url()}
+                maxW="100%"
+              />
+            )}
             <Flex
               justifyContent={'space-between'}
               direction={'row'}
@@ -206,12 +255,12 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
             >
               <Box>
                 <Text fontSize={'20px'} pb={'1rem'}>
-                  {selectedData?.heading}
+                  {selectedData?.name}
                 </Text>
-                <Text lineHeight={'1.4rem'}>{selectedData?.subHeading}</Text>
-                <Text lineHeight={'1.4rem'}>{selectedData?.description}</Text>
+                <Text lineHeight={'1.4rem'}>{selectedData?.location}</Text>
+                <Text lineHeight={'1.4rem'}>{selectedData?.product}</Text>
                 <Text lineHeight={'1.4rem'} color="gray.400">
-                  {selectedData?.hashtags?.join(' ')}
+                  {selectedData?.tags?.join(' ')}
                 </Text>
               </Box>
 
