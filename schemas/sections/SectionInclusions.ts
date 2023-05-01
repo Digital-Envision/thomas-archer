@@ -21,6 +21,35 @@ export default {
             },
         },
         {
+            name: 'items',
+            type: 'array',
+            of: [
+                {
+                    name: 'item',
+                    title: 'Item',
+                    type: 'object',
+                    fields: [
+                        {
+                            name: 'heading',
+                            type: 'string'
+                        },
+                        {
+                            name: 'paragraph',
+                            type: 'string'
+                        },
+                        {
+                            name: 'image',
+                            title: 'Image',
+                            type: 'image',
+                            options: {
+                                hotspot: false,
+                            },
+                        },
+                    ]
+                }
+            ]
+        },
+        {
             title: 'Margin Top',
             name: 'marginTop',
             type: 'string',

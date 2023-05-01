@@ -4,59 +4,44 @@ import { HeightVariants } from 'components/base/Divider'
 import { HeadingTagSemantic } from 'components/base/Heading1'
 import Heading2 from 'components/base/Heading2'
 import Heading3 from 'components/base/Heading3'
+import { urlForImage } from 'lib/sanity.image'
+import _ from 'lodash'
 import Text from '../base/Text'
+
+interface SectionInclusionsSchema {
+  _key: string
+  _type: 'SectionInclusions'
+  heading: string
+  headingTagLevel: HeadingTagSemantic
+  items: {
+    _key: string
+    _type: 'item'
+    heading: string
+    image: {
+      _type: 'image'
+      asset: {
+        _ref: string
+        _type: 'reference'
+      }
+    }
+    paragraph: string
+  }[]
+  marginBottom: string
+  marginTop: string
+}
 
 type SectionInclusionsProps = {
   heading: string
   headingTagLevel: HeadingTagSemantic
-  inclusions: any[]
-  image?: any // sanity io image
+  items: SectionInclusionsSchema['items']
   marginTop: HeightVariants
   marginBottom: HeightVariants
 }
 
-const inclusionsData = [
-  {
-    id: 1,
-    image: 'https://source.unsplash.com/tleCJiDOri0/500x500',
-    heading: 'Rendered Aerated Concrete Panelling',
-    paragraph:
-      'Beautiful and practical, the aerated concrete panelling used externally throughout the ground floor of our homes combines both function and form whist delivering supreme thermal and acoustic benefits. The modern aesthetic is enhanced as we apply three alternative render colours to your home as standard. This creates depth, interest and stand out for the right reasons.',
-  },
-  {
-    id: 2,
-    image: 'https://source.unsplash.com/8J49mtYWu7E/500x500',
-    heading: 'Colorbond Roofing',
-    paragraph:
-      'Beautiful and practical, the aerated concrete panelling used externally throughout the ground floor of our homes combines both function and form whist delivering supreme thermal and acoustic benefits. The modern aesthetic is enhanced as we apply three alternative render colours to your home as standard. This creates depth, interest and stand out for the right reasons.',
-  },
-  {
-    id: 3,
-    image: 'https://source.unsplash.com/PyeXkOVmG1Y/500x500',
-    heading: 'Double Glazed Windows',
-    paragraph:
-      'Beautiful and practical, the aerated concrete panelling used externally throughout the ground floor of our homes combines both function and form whist delivering supreme thermal and acoustic benefits. The modern aesthetic is enhanced as we apply three alternative render colours to your home as standard. This creates depth, interest and stand out for the right reasons.',
-  },
-  {
-    id: 4,
-    image: 'https://source.unsplash.com/C4EhHUxP9Fk/500x500',
-    heading: 'Engineered Stone Benchtops',
-    paragraph:
-      'Beautiful and practical, the aerated concrete panelling used externally throughout the ground floor of our homes combines both function and form whist delivering supreme thermal and acoustic benefits. The modern aesthetic is enhanced as we apply three alternative render colours to your home as standard. This creates depth, interest and stand out for the right reasons.',
-  },
-  {
-    id: 5,
-    image: 'https://source.unsplash.com/rOk4VSMS3Ck/500x500',
-    heading: 'Premium Appliances',
-    paragraph:
-      'Beautiful and practical, the aerated concrete panelling used externally throughout the ground floor of our homes combines both function and form whist delivering supreme thermal and acoustic benefits. The modern aesthetic is enhanced as we apply three alternative render colours to your home as standard. This creates depth, interest and stand out for the right reasons.',
-  },
-]
-
 const SectionInclusions: React.FC<SectionInclusionsProps> = ({
   heading,
   headingTagLevel,
-  inclusions,
+  items,
   marginTop,
   marginBottom,
 }) => {
@@ -81,6 +66,7 @@ const SectionInclusions: React.FC<SectionInclusionsProps> = ({
           md: '0.1vh',
           lg: '8vh',
         }}
+        as={headingTagLevel}
       >
         {heading}
       </Heading2>
@@ -97,22 +83,23 @@ const SectionInclusions: React.FC<SectionInclusionsProps> = ({
           lg: '3vh',
         }}
       >
-        {inclusionsData.map(({ image, heading, paragraph }, index) => (
-          <GridItem key={index} colSpan={1} maxW="600px">
-            <Flex align="center" direction={'column'}>
-              <Image src={image} pb={'2rem'} />
-              <Box>
-                <Text fontSize={'10px'} color={'#898989'} pb={'0.2rem'}>
-                  {`${index + 1}`.padStart(2, '0')}
-                </Text>
-                <Heading3 as={HeadingTagSemantic.H3} pb={'1.5rem'}>
-                  {heading}
-                </Heading3>
-                <Text>{paragraph}</Text>
-              </Box>
-            </Flex>
-          </GridItem>
-        ))}
+        {!_.isEmpty(items) &&
+          items.map(({ image, heading, paragraph }, index) => (
+            <GridItem key={index} colSpan={1} maxW="600px">
+              <Flex align="center" direction={'column'}>
+                <Image src={urlForImage(image)?.url()} pb={'2rem'} />
+                <Box>
+                  <Text fontSize={'10px'} color={'#898989'} pb={'0.2rem'}>
+                    {`${index + 1}`.padStart(2, '0')}
+                  </Text>
+                  <Heading3 as={HeadingTagSemantic.H3} pb={'1.5rem'}>
+                    {heading}
+                  </Heading3>
+                  <Text>{paragraph}</Text>
+                </Box>
+              </Flex>
+            </GridItem>
+          ))}
       </Grid>
 
       <Box pt="1rem" />
