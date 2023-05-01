@@ -112,7 +112,7 @@ const Section2ColHeading2ColParagraph: React.FC<
               width={'100%'}
               maxH="500px"
               objectFit={'cover'}
-              src={typeof image === 'string' ? image : urlForImage(image).url()}
+              src={(image && urlForImage(image).url()) || ''}
             />
           </Box>
         )}

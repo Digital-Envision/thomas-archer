@@ -30,6 +30,7 @@ const PortfolioCard: React.FC<PortfolioCardProps> = ({
     <Box overflow="hidden" width={width} height={height}>
       <Box display="flex" justifyContent="center" alignItems="center">
         <Image
+          // TODO implement: src={(image && urlForImage(image).url()) || ''}
           src={imageUrl}
           alt={label}
           maxW="360px"

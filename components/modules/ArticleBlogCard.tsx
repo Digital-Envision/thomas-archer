@@ -58,7 +58,7 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
     >
       <Box display="flex" justifyContent="center" alignItems="center">
         <Image
-          src={imageUrl || urlForImage(image).url()}
+          src={(image && urlForImage(image).url()) || ''}
           alt={heading}
           maxH="500px"
           w="full"

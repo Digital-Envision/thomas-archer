@@ -47,11 +47,7 @@ const Section2ColImageTextMosaicType2: React.FC<
         <Flex direction={'column'} pr={{ base: 0, md: '1rem' }}>
           <Image
             objectFit={'cover'}
-            src={
-              typeof leftImage === 'string'
-                ? leftImage
-                : urlForImage(leftImage).url()
-            }
+            src={(leftImage && urlForImage(leftImage).url()) || ''}
           />
           <Box pt="1.5rem" />
           <Heading1 as={headingTagLevel}>{heading}</Heading1>
@@ -87,11 +83,7 @@ const Section2ColImageTextMosaicType2: React.FC<
           width="100%"
           height={'auto'}
           objectFit={'cover'}
-          src={
-            typeof rightImage === 'string'
-              ? rightImage
-              : urlForImage(rightImage).url()
-          }
+          src={(rightImage && urlForImage(rightImage)?.url()) || ''}
         />
       </Flex>
     </Flex>

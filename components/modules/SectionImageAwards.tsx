@@ -60,7 +60,7 @@ const SectionImageAwards: React.FC<SectionImageAwardsProps> = ({
     >
       <Box alignSelf={'center'}>
         <Image
-          src={imageUrl || urlForImage(image).url()}
+          src={(image && urlForImage(image).url()) || ''}
           objectFit="cover"
           width="100%"
           height="80vh"

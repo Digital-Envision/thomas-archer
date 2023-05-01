@@ -43,7 +43,7 @@ const ProjectListingCard: React.FC<ProjectListingCardProps> = ({
     <Box overflow="hidden" width={width} height={height} borderBottomWidth={1}>
       <Box display="flex" justifyContent="center" alignItems="center">
         <Image
-          src={imageUrl || urlForImage(image).url()}
+          src={(image && urlForImage(image).url()) || ''}
           alt={heading}
           maxW="400px"
           maxH="280px"

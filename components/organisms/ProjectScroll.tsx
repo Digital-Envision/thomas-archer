@@ -65,7 +65,10 @@ const ProjectScroll = ({
                 >
                   {project?.image && (
                     <Image
-                      src={urlForImage(project?.image)?.url()}
+                      src={
+                        (project?.image && urlForImage(project?.image).url()) ||
+                        ''
+                      }
                       alt={project?.heading}
                       fill
                       objectFit="cover"

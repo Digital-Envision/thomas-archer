@@ -29,7 +29,7 @@ const SectionHeroImageDefault: React.FC<SectionHeroImageDefaultProps> = ({
         {image && (
           <Image
             priority
-            src={urlForImage(image).url()}
+            src={(image && urlForImage(image)?.url()) || ''}
             layout={'fill'}
             objectFit={'cover'}
             objectPosition={'center'}

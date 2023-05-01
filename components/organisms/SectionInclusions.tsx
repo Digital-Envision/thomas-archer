@@ -87,7 +87,10 @@ const SectionInclusions: React.FC<SectionInclusionsProps> = ({
           items.map(({ image, heading, paragraph }, index) => (
             <GridItem key={index} colSpan={1} maxW="600px">
               <Flex align="center" direction={'column'}>
-                <Image src={urlForImage(image)?.url()} pb={'2rem'} />
+                <Image
+                  src={(image && urlForImage(image)?.url()) || ''}
+                  pb={'2rem'}
+                />
                 <Box>
                   <Text fontSize={'10px'} color={'#898989'} pb={'0.2rem'}>
                     {`${index + 1}`.padStart(2, '0')}
