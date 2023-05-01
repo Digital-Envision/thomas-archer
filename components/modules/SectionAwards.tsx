@@ -63,7 +63,7 @@ const SectionAwards: React.FC<SectionAwardsProps> = ({
               alt={heading}
               maxW={'90px'}
               maxH={'95px'}
-              src={imageUrl || urlForImage(image).url()}
+              src={(image && urlForImage(image).url()) || ''}
             />
             <Box pr={3} />
             <VStack spacing={8} align="stretch">

@@ -213,7 +213,7 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
                 key={urlForImage(item.image)?.url()}
                 w="100%"
                 display="inline-block"
-                src={urlForImage(item.image)?.url()}
+                src={(item.image && urlForImage(item.image)?.url()) || ''}
                 alt={urlForImage(item.image)?.url()}
                 objectFit={'contain'}
               />

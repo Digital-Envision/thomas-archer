@@ -15,7 +15,7 @@ export default function CoverImage(props: CoverImageProps) {
   const image = source?.asset?._ref ? (
     <div
       className={cn('shadow-small', {
-        'transition-shadow duration-200 hover:shadow-medium': slug,
+        'hover:shadow-medium transition-shadow duration-200': slug,
       })}
     >
       <Image
@@ -23,7 +23,9 @@ export default function CoverImage(props: CoverImageProps) {
         width={2000}
         height={1000}
         alt={`Cover Image for ${title}`}
-        src={urlForImage(source).height(1000).width(2000).url()}
+        src={
+          (source && urlForImage(source).height(1000).width(2000).url()) || ''
+        }
         sizes="100vw"
         priority={priority}
       />

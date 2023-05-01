@@ -29,7 +29,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
             >
               <Box width={'100vw'}>
                 <Image
-                  src={urlForImage(image)?.url()}
+                  src={(image && urlForImage(image).url()) || ''}
                   alt={image._key}
                   width={0}
                   height={0}

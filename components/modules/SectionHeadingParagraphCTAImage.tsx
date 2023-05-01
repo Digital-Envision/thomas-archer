@@ -75,7 +75,7 @@ const SectionHeadingParagraphCTAImage: React.FC<
       <Flex flex={1.2} justify={'center'}>
         <Image
           objectFit={'cover'}
-          src={typeof image === 'string' ? image : urlForImage(image).url()}
+          src={(image && urlForImage(image).url()) || ''}
           alt={heading}
         />
       </Flex>

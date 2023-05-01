@@ -65,7 +65,7 @@ const SectionImageTextMosaicType1: React.FC<
           height={'auto'}
           maxWidth="450px"
           objectFit={'cover'}
-          src={leftImageUrl || urlForImage(leftImage).url()}
+          src={(leftImage && urlForImage(leftImage).url()) || ''}
         />
       </Flex>
 
