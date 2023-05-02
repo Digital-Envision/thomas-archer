@@ -50,6 +50,7 @@ import Projects from 'schemas/projects'
 import customPageSection from 'schemas/customPageSection'
 import SectionBreadcrumbs from 'schemas/sections/SectionBreadcrumbs'
 import SectionProjectScroll from 'schemas/sections/SectionProjectScroll'
+import SectionGalleryScroll from 'schemas/sections/SectionGalleryScroll'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -79,6 +80,7 @@ export default defineConfig({
       Enquire,
       fixedComponentType,
       Carousel,
+      SectionGalleryScroll,
       SectionProjectScroll,
       SectionHeroImageBig,
       SectionHeroImageDefault,
