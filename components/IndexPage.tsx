@@ -4,7 +4,6 @@ import PageBuilder from 'components/templates/PageBuilder'
 import Navbar from './organisms/Navbar'
 import Footer from './organisms/Footer'
 import { Box } from '@chakra-ui/react'
-import FloorPlanListing from './organisms/FloorPlanListing'
 
 export interface IndexPageProps {
   preview?: boolean
@@ -31,7 +30,6 @@ export default function IndexPage(props: IndexPageProps) {
       />
       <Box flex={1}>
         <PageBuilder pages={pages} {...rest} />
-        <FloorPlanListing />
       </Box>
       <Footer
         links={globals.Links}
