@@ -16,6 +16,7 @@ type SectionHeadingParagraphCTAProps = {
   marginTop?: HeightVariants
   marginBottom?: HeightVariants
   button?: LinksInterface
+  isEmbed?: boolean
 }
 
 const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
@@ -27,17 +28,10 @@ const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
   marginTop,
   marginBottom,
   button,
+  isEmbed,
 }) => {
-  return (
-    <Flex
-      mx={'auto'}
-      width={'w-full'}
-      maxWidth={'1800px'}
-      direction={{ base: 'column', md: isOffset ? 'column' : 'row' }}
-      px={{ base: '1rem', md: '4rem' }}
-      marginTop={marginTop}
-      marginBottom={marginBottom}
-    >
+  const body = (
+    <>
       <Flex direction={'row'} flex={1}>
         <Flex flex={1}>
           <Heading1 as={headingTagLevel}>{heading}</Heading1>
@@ -86,6 +80,25 @@ const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
           </Flex>
         </Flex>
       </Flex>
+    </>
+  )
+
+  // component is reused on Section - Blog
+  if (isEmbed) {
+    return <>{body}</>
+  }
+
+  return (
+    <Flex
+      mx={'auto'}
+      width={'w-full'}
+      maxWidth={'1800px'}
+      direction={{ base: 'column', md: isOffset ? 'column' : 'row' }}
+      px={{ base: '1rem', md: '4rem' }}
+      marginTop={marginTop}
+      marginBottom={marginBottom}
+    >
+      {body}
     </Flex>
   )
 }
