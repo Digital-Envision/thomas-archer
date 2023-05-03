@@ -3,6 +3,10 @@ import ArticleBlogCard from 'components/modules/ArticleBlogCard'
 import SectionHeadingParagraphCTA from 'components/modules/SectionHeadingParagraphCTA'
 import { HeightVariants } from 'components/base/Divider'
 import { HeadingTagSemantic } from 'components/base/Heading1'
+import _ from 'lodash'
+import { Blog } from 'lib/sanity.queries'
+import { blockToPlainText } from 'lib/utils'
+import { useRouter } from 'next/router'
 
 type SectionBlogProps = {
   heading: string
@@ -12,17 +16,22 @@ type SectionBlogProps = {
   marginTop: HeightVariants
   marginBottom: HeightVariants
   headingTagLevel: HeadingTagSemantic
+  blogs: Blog[]
 }
 
-// TODO from dynamic component later
-
+// data is pulled from 3 latest blogs documents
 const SectionBlog: React.FC<SectionBlogProps> = ({
   heading,
   headingTagLevel,
   paragraph, // TODO
   marginTop,
   marginBottom,
+  blogs,
+  ...rest
 }) => {
+  const { asPath } = useRouter()
+  const sortedBlogs = _.slice(_.orderBy(blogs, ['createdAt'], ['desc']), 0, 3)
+
   return (
     <Flex
       mx={'auto'}
@@ -31,51 +40,41 @@ const SectionBlog: React.FC<SectionBlogProps> = ({
       justify="center"
       align={'center'}
       direction="column"
-      maxWidth={'1440px'}
+      maxWidth={'1800px'}
       marginTop={marginTop}
       marginBottom={marginBottom}
     >
-      <SectionHeadingParagraphCTA
-        isOffset={false}
-        showButton={false}
-        heading={heading}
-        paragraph={paragraph}
-        headingTagLevel={headingTagLevel}
-        // heading={'Blog'}
-        // paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed feugiat, lectus et viverra ullamcorper, nulla dui ullamcorper quam, et dictum arcu ipsum vel risus. Curabitur quis orci viverra, efficitur nunc in."
-        // headingTagLevel={HeadingTagSemantic.H1}
+      <Flex
+        mx={'auto'}
+        width={'100%'}
+        maxWidth={'1800px'}
+        direction={{ base: 'column', md: 'row' }}
+        px={{ base: '1rem', md: '4rem' }}
+      >
+        <SectionHeadingParagraphCTA
+          heading={heading}
+          paragraph={paragraph}
+          isOffset={false}
+          headingTagLevel={headingTagLevel}
+          showButton={false}
+          isEmbed
         />
+      </Flex>
 
       <Box pt={{ base: HeightVariants.less, md: HeightVariants.default }} />
 
       <Stack direction={{ base: 'column', md: 'row' }} spacing={'1rem'}>
-        <ArticleBlogCard
-          imageUrl="https://via.placeholder.com/500x500"
-          createdAt="22 April 2022"
-          heading="Article Card"
-          paragraph="Our extensive range of pre-designed homes in our Expressions Series capture a refined modern aesthetic and have been developed to suit a variety of block sizes and lifestyles."
-          buttonText="Find Out More"
-          buttonLink={HeadingTagSemantic.H2}
-          headingTagLevel={HeadingTagSemantic.H1}
-        />
-        <ArticleBlogCard
-          imageUrl="https://via.placeholder.com/500x500"
-          createdAt="22 April 2022"
-          heading="Article Card"
-          paragraph="Our extensive range of pre-designed homes in our Expressions Series capture a refined modern aesthetic and have been developed to suit a variety of block sizes and lifestyles."
-          buttonText="Find Out More"
-          buttonLink={HeadingTagSemantic.H2}
-          headingTagLevel={HeadingTagSemantic.H1}
-        />
-        <ArticleBlogCard
-          imageUrl="https://via.placeholder.com/500x500"
-          createdAt="22 April 2022"
-          heading="Article Card"
-          paragraph="Our extensive range of pre-designed homes in our Expressions Series capture a refined modern aesthetic and have been developed to suit a variety of block sizes and lifestyles."
-          buttonText="Find Out More"
-          buttonLink={HeadingTagSemantic.H2}
-          headingTagLevel={HeadingTagSemantic.H1}
-        />
+        {sortedBlogs.map(({ image, content, createdAt, heading, slug }) => (
+          <ArticleBlogCard
+            image={image}
+            createdAt={createdAt}
+            heading={heading}
+            paragraph={blockToPlainText(content)}
+            buttonText="Find Out More"
+            buttonLink={`${asPath}/blog/${slug?.current}`}
+            headingTagLevel={HeadingTagSemantic.H1}
+          />
+        ))}
       </Stack>
     </Flex>
   )

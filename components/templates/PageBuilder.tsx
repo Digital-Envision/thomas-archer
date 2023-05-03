@@ -101,7 +101,7 @@ const PageBuilder = ({ pages, ...rest }) => {
           el = <SectionGridGallery {...c} />
           break
         case 'SectionBlog':
-          el = <SectionBlog {...c} />
+          el = <SectionBlog {...c} {...rest} />
           break
         case 'SectionBlogListing':
           el = <SectionBlogListing {...c} {...rest} />
