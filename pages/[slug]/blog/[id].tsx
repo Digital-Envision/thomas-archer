@@ -1,6 +1,9 @@
 import { PreviewSuspense } from '@sanity/preview-kit'
 import IndexPage from 'components/IndexPage'
+import moment from 'moment'
 import {
+  getAllBioSlugs,
+  getAllBlogs,
   getAllGlobals,
   getAllPages,
   getAllProjects,
@@ -20,6 +23,11 @@ import SectionHeroImageBig from 'components/modules/SectionHeroImageBig'
 import SectionHeadingParagraphCTA from 'components/modules/SectionHeadingParagraphCTA'
 import SectionBreadcrumbs from 'components/modules/SectionBreadcrumbs'
 import { PageProps, PreviewData, Query } from 'pages'
+import { PortableText } from '@portabletext/react'
+import Heading3 from 'components/base/Heading3'
+import Text from 'components/base/Text'
+import { Box, Flex } from '@chakra-ui/react'
+import Heading1 from 'components/base/Heading1'
 
 const PreviewIndexPage = lazy(() => import('components/PreviewIndexPage'))
 
@@ -33,6 +41,7 @@ export default function DynamicPage({
   projects,
   id,
   project,
+  blog,
 }) {
   const router = useRouter()
 
@@ -70,15 +79,46 @@ export default function DynamicPage({
         socialMedia={globals.SocialMedia}
         specialButtons={globals.SpecialButtons}
       />
+      <SectionBreadcrumbs {...blog?.page?.SectionBreadcrumbs} />
 
-      <SectionHeroImageBig {...project?.page?.SectionHeroImageBig} />
-      <SectionBreadcrumbs {...project?.page?.SectionBreadcrumbs} />
-      <SectionHeadingParagraphCTA
-        {...project?.page?.SectionHeadingParagraphCTA}
-      />
-      {/* TODO SectionImageGalleryScroll */}
-      <PageBuilder pages={[{ content: project?.page?.customPageSection }]} />
-      {/* TODO SectionProjectScroll */}
+      <Box pb={'4rem'} />
+
+      <Flex
+        mx="auto"
+        maxW="1800px"
+        width={'w-full'}
+        maxWidth={'1800px'}
+        px={{ base: '1rem', md: '4rem' }}
+      >
+        <Heading1>{blog?.heading}</Heading1>
+      </Flex>
+
+      <Box pb={'2rem'} />
+
+      <Flex
+        mx="auto"
+        maxW="1800px"
+        width={'w-full'}
+        maxWidth={'1800px'}
+        px={{ base: '1rem', md: '4rem' }}
+      >
+        <Text mb="4" fontSize={'10px'} color={'#898989'}>
+          {moment(blog?.createdAt).format('DD MMMM YYYY')}
+        </Text>
+      </Flex>
+
+      <Box pb={'1.5rem'} />
+
+      <Flex
+        mx="auto"
+        maxW="1800px"
+        width={'w-full'}
+        maxWidth={'1800px'}
+        px={{ base: '1rem', md: '4rem' }}
+        direction={'column'}
+      >
+        <PortableText value={blog?.content} />
+      </Flex>
       <Footer
         links={globals.Links}
         enquire={globals.Enquire}
@@ -91,14 +131,13 @@ export default function DynamicPage({
 }
 
 export async function getStaticPaths() {
-  // const slugsPages = (await getAllPagesSlugs()) || []
-  const slugsPages = ['dev', 'portfolio', 'all-component'] // restrict to this
-  const slugsProjects = (await getAllProjectSlugs()) || []
+  const slugsPages = ['dev', 'all-component', 'blog'] // restrict to this
+  const slugsBlogs = (await getAllBioSlugs()) || []
 
   const paths = []
 
   slugsPages.forEach((slug) => {
-    slugsProjects.forEach((id) => {
+    slugsBlogs.forEach((id) => {
       paths.push({ params: { slug, id } })
     })
   })
@@ -127,15 +166,13 @@ export const getStaticProps: GetStaticProps<
     return { notFound: true }
   }
 
-  const projects = await getAllProjects('')
-  const currentProject = await getAllProjects(params?.id as string)
+  const currentBlog = await getAllBlogs(params?.id as string)
 
   return {
     props: {
       id: params?.id,
       posts,
-      project: currentProject?.[0],
-      projects,
+      blog: currentBlog?.[0],
       settings,
       pages,
       globals,

@@ -25,6 +25,13 @@ export const projectQuery = (project: string) => {
   return groq`*[_type == "projects" && slug.current != null]`
 }
 
+export const blogQuery = (blog: string) => {
+  if (blog) {
+    return groq`*[_type == "blogs" && slug.current == "${blog}"]`
+  }
+  return groq`*[_type == "blogs" && slug.current != null]`
+}
+
 export const pageQuery = (slug: 'string' | { _id: string }) => {
   if (typeof slug === 'object' && slug._id) {
     return groq`*[_type == "page" && _id=="${slug._id}"][]{
@@ -195,4 +202,24 @@ export interface Project {
     current: string
   }
   subHeading: string
+}
+export interface Blog {
+  _createdAt: string;
+  _id: string;
+  _rev: string;
+  _type: string;
+  _updatedAt: string;
+  content: any[];
+  createdAt: string;
+  heading: string;
+  image: {
+    _type: 'image'
+    asset: {
+      _ref: string
+      _type: 'reference'
+    }
+  }, slug: {
+    _type: 'slug'
+    current: string
+  }
 }

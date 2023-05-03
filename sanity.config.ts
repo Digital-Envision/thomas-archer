@@ -51,6 +51,8 @@ import customPageSection from 'schemas/customPageSection'
 import SectionBreadcrumbs from 'schemas/sections/SectionBreadcrumbs'
 import SectionProjectScroll from 'schemas/sections/SectionProjectScroll'
 import SectionGalleryScroll from 'schemas/sections/SectionGalleryScroll'
+import Blog from 'schemas/blog'
+import SectionBlogListing from 'schemas/sections/SectionBlogListing'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -100,6 +102,7 @@ export default defineConfig({
       SectionGridGallery, // TODO DATASET LATER
       SectionInclusions, // TODO DATASET LATER
       SectionBreadcrumbs,
+      SectionBlogListing,
 
       // -- subSection
       ArticleBlogCard,
@@ -109,6 +112,7 @@ export default defineConfig({
 
       // -- Dataset,
       Projects,
+      Blog,
 
       Section2ColCards,
       Section2ColImageTextMosaicType2,

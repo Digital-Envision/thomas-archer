@@ -28,5 +28,6 @@ export default {
         { type: 'SectionBlog' },
         { type: 'SectionInclusions' },
         { type: 'SectionBreadcrumbs' },
+        { type: 'SectionBlogListing' },
     ],
 }
