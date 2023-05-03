@@ -2,13 +2,14 @@ import { PreviewSuspense } from '@sanity/preview-kit'
 import IndexPage from 'components/IndexPage'
 import {
   getAllBlogs,
+  getAllFloors,
   getAllGlobals,
   getAllPages,
   getAllPosts,
   getAllProjects,
   getSettings,
 } from 'lib/sanity.client'
-import { Blog, Post, Project, Settings } from 'lib/sanity.queries'
+import { Blog, Post, Project, Settings, Floor } from 'lib/sanity.queries'
 import _ from 'lodash'
 import { GetStaticProps } from 'next'
 import { lazy, useEffect } from 'react'
@@ -24,6 +25,7 @@ export interface PageProps {
   token: string | null
   projects?: Project[]
   blogs?: Blog[]
+  floors?: Floor[]
 }
 
 export interface Query {
@@ -36,8 +38,17 @@ export interface PreviewData {
 
 export default function HomePage(props: PageProps) {
   // console.log('✅pages/index', props)
-  const { posts, settings, preview, token, pages, globals, projects, blogs } =
-    props
+  const {
+    posts,
+    settings,
+    preview,
+    token,
+    pages,
+    globals,
+    projects,
+    blogs,
+    floors,
+  } = props
 
   // if (preview) {
   //   return (
@@ -67,6 +78,7 @@ export default function HomePage(props: PageProps) {
       globals={globals}
       projects={projects}
       blogs={blogs}
+      floors={floors}
     />
   )
 }
@@ -91,12 +103,14 @@ export const getStaticProps: GetStaticProps<
 
   const projects = await getAllProjects()
   const blogs = await getAllBlogs()
+  const floors = await getAllFloors()
 
   return {
     props: {
       posts,
       projects,
       blogs,
+      floors,
       settings,
       pages,
       globals,

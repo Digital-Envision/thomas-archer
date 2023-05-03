@@ -1,5 +1,7 @@
 import _ from 'lodash'
 import { groq } from 'next-sanity'
+import { HeightVariants } from 'components/base/Divider'
+import { SanityFiles } from 'utils/interfaces'
 
 const postFields = groq`
   _id,
@@ -30,6 +32,23 @@ export const blogQuery = (blog: string) => {
     return groq`*[_type == "blogs" && slug.current == "${blog}"]`
   }
   return groq`*[_type == "blogs" && slug.current != null]`
+}
+
+export const floorQuery = (floor: string) => {
+  if (floor) {
+    return groq`*[_type == "floors" && slug.current == "${floor}"]{
+      ...,
+      facades->{
+        listImages,
+      }
+    }`
+  }
+  return groq`*[_type == "floors" && slug.current != null]{
+      ...,
+      facades->{
+        listImages,
+      }
+    }`
 }
 
 export const pageQuery = (slug: 'string' | { _id: string }) => {
@@ -243,5 +262,61 @@ export interface Blog {
   }, slug: {
     _type: 'slug'
     current: string
+  }
+}
+
+export interface Floor {
+  _createdAt: string
+  _id: string
+  _rev: string
+  _type: 'projects'
+  _updatedAt: string
+  title: string
+  slug: {
+    _type: 'slug'
+    current: string
+  }
+  bannerImage: {
+    image: SanityFiles
+    isOverlay: boolean
+    marginTop: HeightVariants
+    marginBottom: HeightVariants
+  }
+  floorPlan: {
+    listSizes: {
+      sizes: {
+        size: number
+        roomDetails: {
+          bedRoom: number
+          bathRoom: number
+          carPort: number
+        }
+        description: string
+        options: {
+          description: string
+          options: {
+            name: string
+          }[]
+        }
+        listImages: {
+          images: {
+            name: string
+            image: {
+              _type: 'image'
+              asset: {
+                _ref: string
+                _type: 'reference'
+              }
+            }
+          }
+        }[]
+      }
+    }[]
+  }
+  facades: {
+    listImages: {
+      description: string
+      image: SanityFiles
+    }[]
   }
 }

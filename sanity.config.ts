@@ -47,6 +47,8 @@ import Enquire from 'schemas/global/Enquire'
 import SectionInclusions from 'schemas/sections/SectionInclusions'
 import SectionHeroVideoBig from 'schemas/sections/SectionHeroVideoBig'
 import Projects from 'schemas/projects'
+import Floors from 'schemas/floor'
+import Facades from 'schemas/facade'
 import customPageSection from 'schemas/customPageSection'
 import SectionBreadcrumbs from 'schemas/sections/SectionBreadcrumbs'
 import SectionProjectScroll from 'schemas/sections/SectionProjectScroll'
@@ -55,6 +57,8 @@ import Blog from 'schemas/blog'
 import SectionBlogListing from 'schemas/sections/SectionBlogListing'
 import Section2ColImageTextFeaturedImageLeftRight from 'schemas/sections/Section2ColImageTextFeaturedImageLeftRight'
 import SectionAwardsListing from 'schemas/sections/SectionAwardsListing'
+import CTAs from 'schemas/sections/CTAs'
+import FloorPlanListing from 'schemas/sections/FloorPlanListing'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -84,6 +88,8 @@ export default defineConfig({
       Enquire,
       fixedComponentType,
       Carousel,
+      CTAs,
+      FloorPlanListing,
       SectionGalleryScroll,
       SectionProjectScroll,
       SectionHeroImageBig,
@@ -117,6 +123,8 @@ export default defineConfig({
       // -- Dataset,
       Projects,
       Blog,
+      Floors,
+      Facades,
 
       Section2ColCards,
       Section2ColImageTextMosaicType2,

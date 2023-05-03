@@ -12,6 +12,7 @@ import {
   pageSlugsQuery,
   projectQuery,
   blogQuery,
+  floorQuery,
 } from 'lib/sanity.queries'
 import _ from 'lodash'
 import { createClient } from 'next-sanity'
@@ -61,6 +62,13 @@ export async function getAllProjects(project = ''): Promise<any[]> {
 export async function getAllBlogs(project = ''): Promise<any[]> {
   if (client) {
     return (await client.fetch(blogQuery(project))) || []
+  }
+  return []
+}
+
+export async function getAllFloors(floors = ''): Promise<any[]> {
+  if (client) {
+    return (await client.fetch(floorQuery(floors))) || []
   }
   return []
 }
