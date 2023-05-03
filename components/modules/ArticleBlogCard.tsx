@@ -36,6 +36,7 @@ export type ArticleBlogCardProps = {
 // TODO image should be have the same size and aspect ratio
 // TODO offset when there's createdAt
 // TODO handle image height above 700px
+// TODO update like BlogListingCard
 
 const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
   imageUrl,

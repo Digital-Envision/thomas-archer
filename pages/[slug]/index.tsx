@@ -1,6 +1,7 @@
 import { PreviewSuspense } from '@sanity/preview-kit'
 import IndexPage from 'components/IndexPage'
 import {
+  getAllBlogs,
   getAllGlobals,
   getAllPages,
   getAllProjects,
@@ -24,6 +25,7 @@ export default function DynamicPage({
   pages,
   globals,
   projects,
+  blogs,
 }) {
   const router = useRouter()
 
@@ -58,6 +60,7 @@ export default function DynamicPage({
       pages={pages}
       globals={globals}
       projects={projects}
+      blogs={blogs}
     />
   )
 }
@@ -91,11 +94,13 @@ export const getStaticProps: GetStaticProps<
   }
 
   const projects = await getAllProjects()
+  const blogs = await getAllBlogs()
 
   return {
     props: {
       posts,
       projects,
+      blogs,
       settings,
       pages,
       globals,
