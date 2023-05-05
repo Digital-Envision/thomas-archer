@@ -1,4 +1,4 @@
-import { Box, Flex } from '@chakra-ui/react'
+import { Box, Flex, HStack } from '@chakra-ui/react'
 import Text from '../base/Text'
 import Heading1, { HeadingTagSemantic } from 'components/base/Heading1'
 import Button, { Variants } from 'components/base/Button'
@@ -16,6 +16,7 @@ type SectionHeadingParagraphCTAProps = {
   marginTop?: HeightVariants
   marginBottom?: HeightVariants
   button?: LinksInterface
+  button2?: LinksInterface
   isEmbed?: boolean
 }
 
@@ -28,6 +29,7 @@ const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
   marginTop,
   marginBottom,
   button,
+  button2,
   isEmbed,
 }) => {
   const body = (
@@ -61,20 +63,44 @@ const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
             <Text>{paragraph}</Text>
             <Box pt={5}>
               {showButton && (
-                <Link
-                  href={
-                    button?.useInternal
-                      ? button?.internalHref
-                        ? `/${button?.internalHref}`
-                        : '#'
-                      : button?.externalHref
-                      ? button?.externalHref
-                      : '#'
-                  }
-                  target={button?.isExternal ? '_blank' : ''}
-                >
-                  <Button variant={Variants.blackLine}>{button?.label}</Button>
-                </Link>
+                <HStack spacing={'1rem'} flexDirection="row">
+                  {button?.label && (
+                    <Link
+                      href={
+                        button?.useInternal
+                          ? button?.internalHref
+                            ? `/${button?.internalHref}`
+                            : '#'
+                          : button?.externalHref
+                          ? button?.externalHref
+                          : '#'
+                      }
+                      target={button?.isExternal ? '_blank' : ''}
+                    >
+                      <Button variant={Variants.blackLine}>
+                        {button?.label}
+                      </Button>
+                    </Link>
+                  )}
+                  {button2?.label && (
+                    <Link
+                      href={
+                        button2?.useInternal
+                          ? button2?.internalHref
+                            ? `/${button2?.internalHref}`
+                            : '#'
+                          : button2?.externalHref
+                          ? button2?.externalHref
+                          : '#'
+                      }
+                      target={button2?.isExternal ? '_blank' : ''}
+                    >
+                      <Button variant={Variants.blackLine}>
+                        {button2?.label}
+                      </Button>
+                    </Link>
+                  )}
+                </HStack>
               )}
             </Box>
           </Flex>

@@ -20,7 +20,7 @@ export default function IndexPage(props: IndexPageProps) {
   const { settings, pages, globals, ...rest } = props // rest should be projects..etc
 
   return (
-    <>
+    <Box bgColor="#FFFFFF">
       <IndexPageHead settings={settings} />
       <Navbar
         links={globals.Links}
@@ -39,6 +39,6 @@ export default function IndexPage(props: IndexPageProps) {
         socialMedia={globals.SocialMedia}
         footer={globals.Footer}
       />
-    </>
+    </Box>
   )
 }
