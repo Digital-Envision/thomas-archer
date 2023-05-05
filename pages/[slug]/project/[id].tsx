@@ -20,6 +20,7 @@ import SectionHeroImageBig from 'components/modules/SectionHeroImageBig'
 import SectionHeadingParagraphCTA from 'components/modules/SectionHeadingParagraphCTA'
 import SectionBreadcrumbs from 'components/modules/SectionBreadcrumbs'
 import { PageProps, PreviewData, Query } from 'pages'
+import { Box } from '@chakra-ui/react'
 
 const PreviewIndexPage = lazy(() => import('components/PreviewIndexPage'))
 
@@ -61,7 +62,7 @@ export default function DynamicPage({
   // }
 
   return (
-    <>
+    <Box bgColor="white">
       <IndexPageHead settings={settings} />
       <Navbar
         links={globals.Links}
@@ -86,7 +87,7 @@ export default function DynamicPage({
         socialMedia={globals.SocialMedia}
         footer={globals.Footer}
       />
-    </>
+    </Box>
   )
 }
 

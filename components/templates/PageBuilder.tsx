@@ -1,7 +1,8 @@
-import { Flex } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import Divider from 'components/base/Divider'
 import Carousel from 'components/modules/Carousel'
 import Section2ColHeading2ColParagraph from 'components/modules/Section2ColHeading2ColParagraph'
+import Section2ColImageTextFeaturedImageLeftRight from 'components/modules/Section2ColImageTextFeaturedImageLeftRight'
 import Section2ColImageTextMosaicType2 from 'components/modules/Section2ColImageTextMosaicType2'
 import SectionAwards from 'components/modules/SectionAwards'
 import SectionBreadcrumbs from 'components/modules/SectionBreadcrumbs'
@@ -60,6 +61,9 @@ const PageBuilder = ({ pages, ...rest }) => {
           break
         case 'SectionHeadingParagraphCTA':
           el = <SectionHeadingParagraphCTA {...c} />
+          break
+        case 'Section2ColImageTextFeaturedImageLeftRight':
+          el = <Section2ColImageTextFeaturedImageLeftRight {...c} />
           break
         case 'SectionHeadingParagraphCTAImage':
           el = <SectionHeadingParagraphCTAImage {...c} />
@@ -131,7 +135,7 @@ const PageBuilder = ({ pages, ...rest }) => {
       return el
     })
 
-  return <div>{content}</div>
+  return <Box bgColor="#FFFFFF">{content}</Box>
 }
 
 export default PageBuilder

@@ -70,7 +70,7 @@ export default function DynamicPage({
   // }
 
   return (
-    <>
+    <Box bgColor="#FFFFFF">
       <IndexPageHead settings={settings} />
       <Navbar
         links={globals.Links}
@@ -126,7 +126,7 @@ export default function DynamicPage({
         socialMedia={globals.SocialMedia}
         footer={globals.Footer}
       />
-    </>
+    </Box>
   )
 }
 

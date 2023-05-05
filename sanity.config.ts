@@ -53,6 +53,7 @@ import SectionProjectScroll from 'schemas/sections/SectionProjectScroll'
 import SectionGalleryScroll from 'schemas/sections/SectionGalleryScroll'
 import Blog from 'schemas/blog'
 import SectionBlogListing from 'schemas/sections/SectionBlogListing'
+import Section2ColImageTextFeaturedImageLeftRight from 'schemas/sections/Section2ColImageTextFeaturedImageLeftRight'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -88,6 +89,7 @@ export default defineConfig({
       SectionHeroImageDefault,
       SectionHeroVideoBig,
       SectionImageHeadingCTA,
+      Section2ColImageTextFeaturedImageLeftRight,
       SectionHeadingParagraphCTAType,
       SectionHeadingParagraphCTAImageType,
       DividerType,
