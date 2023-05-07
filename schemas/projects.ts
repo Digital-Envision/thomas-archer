@@ -34,6 +34,49 @@ export default {
             },
         },
         {
+            name: 'award',
+            type: 'object',
+            options: {
+                collapsible: true,
+                collapsed: true,
+            },
+            fields: [
+                {
+                    name: 'awardImage',
+                    type: 'image',
+                },
+                {
+                    name: 'awardLogo',
+                    type: 'image',
+                },
+                {
+                    name: 'awards',
+                    title: 'Awards',
+                    type: 'array',
+                    of: [
+                        {
+                            name: 'award',
+                            title: 'Award',
+                            type: 'object',
+                            fields: [
+                                {
+                                    name: 'name',
+                                    title: 'Name',
+                                    type: 'string',
+                                },
+                                {
+                                    name: 'description',
+                                    title: 'Description',
+                                    type: 'text',
+                                }
+                            ]
+
+                        },
+                    ]
+                },
+            ]
+        },
+        {
             name: 'page',
             title: 'Detail Page',
             type: 'object',

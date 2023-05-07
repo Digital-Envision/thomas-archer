@@ -57,7 +57,7 @@ const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
         )}
         <Flex flex={1}>
           <Box pt={2} pr={2}>
-            <Dash width="50px" height="1px" />
+            {paragraph && <Dash width="50px" height="1px" />}
           </Box>
           <Flex direction={'column'}>
             <Text>{paragraph}</Text>

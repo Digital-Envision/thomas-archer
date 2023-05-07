@@ -12,25 +12,6 @@ type SectionTextFeaturedProps = {
   marginBottom: HeightVariants
 }
 
-/**
- * usage:
-  <SectionTextFeatured
-    leftHeading="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-        feugiat, lectus et viverra ullamcorper, nulla dui ullamcorper quam,
-        et dictum arcu ipsum vel risus. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit. Sed feugiat, lectus et viverra
-        ullamcorper, nulla dui ullamcorper quam, et dictum arcu ipsum vel
-        risus. arcu ipsum vel risus."
-    rightHeading="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-        feugiat, lectus et viverra ullamcorper, nulla dui ullamcorper quam,
-        et dictum arcu ipsum vel risus. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit. Sed feugiat, lectus et viverra
-        ullamcorper, nulla dui ullamcorper quam, et dictum arcu ipsum vel
-        risus. arcu ipsum vel risus."
-    postedBy="Frank Tarulli, Director Thomas Archer" 
-  />
- */
-
 const SectionTextFeatured: React.FC<SectionTextFeaturedProps> = ({
   leftHeading,
   rightHeading,
@@ -44,8 +25,8 @@ const SectionTextFeatured: React.FC<SectionTextFeaturedProps> = ({
       mx={'auto'}
       direction={'column'}
       width={'w-full'}
-      maxWidth={'1440px'}
-      px={'1rem'}
+      maxWidth={'1800px'}
+      px={'10%'}
       marginTop={marginTop}
       marginBottom={marginBottom}
     >
