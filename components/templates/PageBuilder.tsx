@@ -22,6 +22,7 @@ import Navbar from 'components/organisms/Navbar'
 import ProjectScroll from 'components/organisms/ProjectScroll'
 import Section2ColCards from 'components/organisms/Section2ColCards'
 import Section3ColsCards from 'components/organisms/Section3ColsCards'
+import SectionAwardsListing from 'components/organisms/SectionAwardsListing'
 import SectionBlog from 'components/organisms/SectionBlog'
 import SectionBlogListing from 'components/organisms/SectionBlogListing'
 import SectionGridGallery from 'components/organisms/SectionGridGallery'
@@ -103,6 +104,9 @@ const PageBuilder = ({ pages, ...rest }) => {
           break
         case 'SectionGridGallery':
           el = <SectionGridGallery {...c} />
+          break
+        case 'SectionAwardsListing':
+          el = <SectionAwardsListing {...c} {...rest} />
           break
         case 'SectionBlog':
           el = <SectionBlog {...c} {...rest} />

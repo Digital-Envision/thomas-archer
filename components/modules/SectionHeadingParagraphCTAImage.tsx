@@ -7,6 +7,7 @@ import Dash from 'components/base/Dash'
 import { HeightVariants } from 'components/base/Divider'
 import { urlForImage } from 'lib/sanity.image'
 import { SanityFiles } from 'utils/interfaces'
+import { LinksInterface } from 'components/organisms/Navbar'
 
 type SectionHeadingParagraphCTAImageProps = {
   heading: string
@@ -15,8 +16,7 @@ type SectionHeadingParagraphCTAImageProps = {
   image?: SanityFiles | string // sanity io image
   marginTop: HeightVariants
   marginBottom: HeightVariants
-  buttonText: string
-  buttonLink: string
+  button: LinksInterface
 }
 
 const SectionHeadingParagraphCTAImage: React.FC<
@@ -28,8 +28,7 @@ const SectionHeadingParagraphCTAImage: React.FC<
   image,
   marginTop,
   marginBottom,
-  buttonText,
-  buttonLink,
+  button,
 }) => {
   return (
     <Flex
@@ -52,12 +51,24 @@ const SectionHeadingParagraphCTAImage: React.FC<
             <Box>
               <Text>{paragraph}</Text>
               <Box pt={5}>
-                <Link
-                  href={buttonLink || '#'}
-                  target={buttonLink ? '_blank' : ''}
-                >
-                  <Button variant={Variants.blackLine}>{buttonText}</Button>
-                </Link>
+                {button?.label && (
+                  <Link
+                    href={
+                      button?.useInternal
+                        ? button?.internalHref
+                          ? `/${button?.internalHref}`
+                          : '#'
+                        : button?.externalHref
+                        ? button?.externalHref
+                        : '#'
+                    }
+                    target={button?.isExternal ? '_blank' : ''}
+                  >
+                    <Button variant={Variants.blackLine}>
+                      {button?.label}
+                    </Button>
+                  </Link>
+                )}
               </Box>
               <Box
                 pt={{
@@ -74,7 +85,8 @@ const SectionHeadingParagraphCTAImage: React.FC<
 
       <Flex flex={1.2} justify={'center'}>
         <Image
-          objectFit={'cover'}
+          width={'100%'}
+          objectFit={'cover'} // TODO CHANGE TO FILL
           src={(image && urlForImage(image).url()) || ''}
           alt={heading}
         />

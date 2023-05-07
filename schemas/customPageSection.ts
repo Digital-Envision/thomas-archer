@@ -30,5 +30,6 @@ export default {
         { type: 'SectionBreadcrumbs' },
         { type: 'SectionBlogListing' },
         { type: 'Section2ColImageTextFeaturedImageLeftRight' },
+        { type: 'SectionAwardsListing' },
     ],
 }

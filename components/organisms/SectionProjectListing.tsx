@@ -11,8 +11,6 @@ import { useRouter } from 'next/router'
 type SectionProjectListingProps = {
   heading: string
   projects: ProjectListingCardProps[]
-  imageUrl: string // load image from url; test purpose
-  image?: any // sanity io image
   marginTop: HeightVariants
   marginBottom: HeightVariants
 }

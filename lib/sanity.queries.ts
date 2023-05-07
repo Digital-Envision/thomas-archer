@@ -182,6 +182,23 @@ export interface Page {
   title: string
 }
 
+export interface ImageAsset {
+  _ref: string;
+  _type: string;
+}
+
+export interface Image {
+  _type: string;
+  asset: ImageAsset;
+}
+
+export interface Award {
+  _key: string;
+  _type: string;
+  description: string;
+  name: string;
+}
+
 export interface Project {
   _createdAt: string
   _id: string
@@ -202,6 +219,11 @@ export interface Project {
     current: string
   }
   subHeading: string
+  award: {
+    awardImage: Image;
+    awardLogo: Image;
+    awards: Award[];
+  };
 }
 export interface Blog {
   _createdAt: string;

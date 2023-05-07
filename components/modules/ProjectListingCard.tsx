@@ -18,16 +18,6 @@ export type ProjectListingCardProps = {
   slug?: { current: string }
 }
 
-/**
- * usage:
- * <PortfolioListingCard
-    imageUrl="https://via.placeholder.com/400x1000/"
-    heading="House Name"
-    subHeading="Suburb Name"
-    description="Landmark Custom Design"
-   />
- */
-
 const ProjectListingCard: React.FC<ProjectListingCardProps> = ({
   imageUrl,
   image,
