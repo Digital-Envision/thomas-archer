@@ -8,6 +8,8 @@ export default {
         { type: 'SectionHeroImageBig' },
         { type: 'SectionHeroVideoBig' },
         { type: 'Carousel' },
+        { type: 'CTAs' },
+        { type: 'FloorPlanListing' },
         { type: 'SectionProjectScroll' },
         { type: 'SectionGalleryScroll' },
         { type: 'SectionImageHeadingCTA' },

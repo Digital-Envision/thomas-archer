@@ -1,6 +1,7 @@
 import { Box } from '@chakra-ui/react'
 import Divider from 'components/base/Divider'
 import Carousel from 'components/modules/Carousel'
+import CTAs from 'components/modules/CTAs'
 import Section2ColHeading2ColParagraph from 'components/modules/Section2ColHeading2ColParagraph'
 import Section2ColImageTextFeaturedImageLeftRight from 'components/modules/Section2ColImageTextFeaturedImageLeftRight'
 import Section2ColImageTextMosaicType2 from 'components/modules/Section2ColImageTextMosaicType2'
@@ -16,6 +17,7 @@ import SectionImageAwards from 'components/modules/SectionImageAwards'
 import SectionImageHeadingCTA from 'components/modules/SectionImageHeadingCTA'
 import SectionImageTextMosaicType1 from 'components/modules/SectionImageTextMosaicType1'
 import SectionTextFeatured from 'components/modules/SectionTextFeatured'
+import FloorPlanListing from 'components/organisms/FloorPlanListing'
 import Footer from 'components/organisms/Footer'
 import GalleryScroll from 'components/organisms/GalleryScroll'
 import Navbar from 'components/organisms/Navbar'
@@ -38,6 +40,12 @@ const PageBuilder = ({ pages, ...rest }) => {
       switch (c._type) {
         case 'Carousel':
           el = <Carousel {...c} />
+          break
+        case 'CTAs':
+          el = <CTAs {...c} />
+          break
+        case 'FloorPlanListing':
+          el = <FloorPlanListing floors={rest.floors} />
           break
         case 'SectionGalleryScroll':
           el = <GalleryScroll {...c} />

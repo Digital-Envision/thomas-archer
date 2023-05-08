@@ -1,5 +1,5 @@
 import IndexPageHead from 'components/IndexPageHead'
-import type { Blog, Post, Project, Settings } from 'lib/sanity.queries'
+import type { Floor, Blog, Post, Project, Settings } from 'lib/sanity.queries'
 import PageBuilder from 'components/templates/PageBuilder'
 import Navbar from './organisms/Navbar'
 import Footer from './organisms/Footer'
@@ -14,6 +14,7 @@ export interface IndexPageProps {
   settings: Settings
   projects?: Project[]
   blogs?: Blog[]
+  floors?: Floor[]
 }
 
 export default function IndexPage(props: IndexPageProps) {

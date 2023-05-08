@@ -4,6 +4,19 @@ import ScrollBox from 'components/modules/ScrollBox'
 import Text from 'components/base/Text'
 import Image from 'next/image'
 import { urlForImage } from 'lib/sanity.image'
+import { SanityFiles } from 'utils/interfaces'
+import { HeightVariants } from 'components/base/Divider'
+
+export interface GalleryScrollProps {
+  listImages: {
+    description: string
+    image: SanityFiles
+    isVertical?: boolean
+    name?: string
+  }[]
+  marginTop?: HeightVariants
+  marginBottom?: HeightVariants
+}
 
 const HorizontalImage = ({ image, name, description }) => {
   return (
@@ -42,7 +55,7 @@ const HorizontalImage = ({ image, name, description }) => {
           userSelect: 'none',
         }}
       >
-        <Box width={'100%'} height={'100%'} position={'relative'} bg={'red'}>
+        <Box width={'100%'} height={'100%'} position={'relative'}>
           <Image
             src={image ? image : '#'}
             alt={name ? name : ''}
@@ -97,7 +110,7 @@ const VerticalImage = ({ image, name, description }) => {
           userSelect: 'none',
         }}
       >
-        <Box width={'100%'} height={'100%'} position={'relative'} bg={'red'}>
+        <Box width={'100%'} height={'100%'} position={'relative'}>
           <Image
             src={image ? image : '#'}
             alt={name ? name : ''}
@@ -115,7 +128,11 @@ const VerticalImage = ({ image, name, description }) => {
   )
 }
 
-const GalleryScroll = ({ listImages, marginTop, marginBottom }) => {
+const GalleryScroll: React.FC<GalleryScrollProps> = ({
+  listImages,
+  marginTop,
+  marginBottom,
+}) => {
   return (
     <Box marginTop={marginTop} marginBottom={marginBottom}>
       <ScrollBox>
@@ -152,18 +169,20 @@ const GalleryScroll = ({ listImages, marginTop, marginBottom }) => {
         {listImages?.map((image, key) => {
           return (
             <Box key={key}>
-              {image?.isVertical ? (
+              {image?.isVertical && image?.image ? (
                 <VerticalImage
                   image={urlForImage(image?.image)?.url()}
                   name={image?.name}
                   description={image?.description}
                 />
               ) : (
-                <HorizontalImage
-                  image={urlForImage(image?.image)?.url()}
-                  name={image?.name}
-                  description={image?.description}
-                />
+                image?.image && (
+                  <HorizontalImage
+                    image={urlForImage(image?.image)?.url()}
+                    name={image?.name}
+                    description={image?.description}
+                  />
+                )
               )}
             </Box>
           )
