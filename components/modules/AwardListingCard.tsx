@@ -23,7 +23,6 @@ const AwardListingCard: React.FC<AwardListingCardProps> = ({
   name,
   award,
 }) => {
-  console.log('AwardListingCard', award)
   return (
     <Box overflow="hidden" width={'400px'} minH={'450px'} borderBottomWidth={1}>
       <Box display="flex" justifyContent="center" alignItems="center">

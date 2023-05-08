@@ -19,17 +19,46 @@ export default {
             name: 'image',
             title: 'Image',
             type: 'image',
+        },
+        {
+            name: 'button',
+            title: 'Button',
+            type: 'object',
             options: {
-                hotspot: false,
+                collapsible: true,
+                collapsed: true,
             },
-        },
-        {
-            name: 'buttonText',
-            type: 'string',
-        },
-        {
-            name: 'buttonLink',
-            type: 'string',
+            fields: [
+                {
+                    name: 'label',
+                    title: 'Name',
+                    type: 'string',
+                },
+                {
+                    name: 'useInternal',
+                    title: 'Use Internal Link Pages',
+                    type: 'boolean',
+                },
+                {
+                    name: 'externalHref',
+                    title: 'External Link',
+                    type: 'url',
+                    hidden: ({ parent }) => parent?.useInternal,
+                },
+                {
+                    name: 'internalHref',
+                    title: 'Internal Link',
+                    type: 'reference',
+                    to: [{ type: 'page' }],
+                    hidden: ({ parent }) => !parent?.useInternal,
+                },
+                {
+                    name: 'isExternal',
+                    title: 'New Tab Link',
+                    type: 'boolean',
+                    initialValue: false,
+                },
+            ],
         },
     ],
     preview: {

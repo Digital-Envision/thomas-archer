@@ -68,12 +68,12 @@ const SectionHeadingParagraphContactForm: React.FC<
       mx={'auto'}
       direction={{ base: 'column', md: 'row' }}
       width={'w-full'}
-      maxWidth={'1440px'}
-      px={'1rem'}
+      maxWidth={'1800px'}
+      px={{ base: '1rem', md: '4rem' }}
       marginTop={marginTop}
       marginBottom={marginBottom}
     >
-      <Flex direction={'column'} flex={1} px={2}>
+      <Flex direction={'column'} flex={1}>
         <Heading1>{heading}</Heading1>
         <Box pt={HeightVariants.less} />
         <Text>{paragraph}</Text>
@@ -85,7 +85,9 @@ const SectionHeadingParagraphContactForm: React.FC<
         />
       </Flex>
 
-      <Flex direction={'column'} flex={1} px={2}>
+      <Box p="1rem" />
+
+      <Flex direction={'column'} flex={1}>
         <form onSubmit={handleSubmit(onSubmitForm)}>
           <VStack spacing="4">
             <Controller
@@ -205,8 +207,8 @@ const SectionHeadingParagraphContactForm: React.FC<
             </Flex>
           </VStack>
 
-          <Box pt={HeightVariants.less} />
-          <Divider variant={HeightVariants.default} />
+          <Box pt={HeightVariants.default} />
+          {/* <Divider variant={HeightVariants.default} /> */}
           <Text>{tnc}</Text>
         </form>
       </Flex>

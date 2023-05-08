@@ -4,7 +4,6 @@ import { HeightVariants } from 'components/base/Divider'
 import { ProjectListingCardProps } from 'components/modules/ProjectListingCard'
 import _ from 'lodash'
 import { useRouter } from 'next/router'
-import Text from 'components/base/Text'
 
 import AwardListingCard from 'components/modules/AwardListingCard'
 
@@ -32,7 +31,6 @@ const SectionAwardsListing: React.FC<SectionAwardsListingProps> = (props) => {
       marginBottom={marginBottom}
       direction="column"
     >
-      <Text>SectionAwardsListing</Text>
       <Box mt={'2rem'} />
 
       <Box alignSelf={'flex-start'} pl={['1rem', '1rem', '1rem', '3rem']}>
@@ -49,7 +47,6 @@ const SectionAwardsListing: React.FC<SectionAwardsListingProps> = (props) => {
           }}
         >
           {projects.map((props) => {
-            console.log('props', props)
             return (
               <>
                 <AwardListingCard

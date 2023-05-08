@@ -29,7 +29,7 @@ const Section3ColsCards: React.FC<Section3ColsCardsProps> = ({
       overflow="hidden"
       justify="center"
       align={'center'}
-      maxWidth={'1440px'}
+      maxWidth={'1800px'}
       marginTop={marginTop}
       marginBottom={marginBottom}
     >

@@ -5,6 +5,10 @@ import Button, { Variants } from 'components/base/Button'
 import Dash from 'components/base/Dash'
 import Divider, { HeightVariants } from 'components/base/Divider'
 import { urlForImage } from 'lib/sanity.image'
+import Link from 'next/link'
+import _ from 'lodash'
+import { getImageUrl } from 'lib/utils'
+import { LinksInterface } from 'components/organisms/Navbar'
 
 type SectionImageTextMosaicType1Props = {
   heading: string
@@ -16,6 +20,7 @@ type SectionImageTextMosaicType1Props = {
   leftImage?: any // sanity io image
   marginTop: HeightVariants
   marginBottom: HeightVariants
+  button: LinksInterface
   // buttonText: string
 }
 
@@ -44,6 +49,7 @@ const SectionImageTextMosaicType1: React.FC<
   marginBottom,
   leftImage,
   rightImage,
+  button,
   // buttonText,
 }) => {
   return (
@@ -63,9 +69,9 @@ const SectionImageTextMosaicType1: React.FC<
       >
         <Image
           height={'auto'}
-          maxWidth="450px"
+          width={{ base: '100vw', md: '450px' }}
           objectFit={'cover'}
-          src={(leftImage && urlForImage(leftImage).url()) || ''}
+          src={getImageUrl(leftImage)}
         />
       </Flex>
 
@@ -74,7 +80,7 @@ const SectionImageTextMosaicType1: React.FC<
       <Flex flex={1.2} justify={'center'} direction={'column'}>
         <Image
           objectFit={'cover'}
-          src={rightImageUrl || urlForImage(rightImage).url()}
+          src={getImageUrl(rightImage)}
           width="w-full"
           height={'auto'}
         />
@@ -83,15 +89,30 @@ const SectionImageTextMosaicType1: React.FC<
           <Box pt="1.5rem" />
           <Flex flex={1} direction={'row'} pt={2} pr={2}>
             <Box pt={2} pr={2}>
-              <Dash width="50px" height="1px" />
+              {paragraph && <Dash width="50px" height="1px" />}
             </Box>
 
             <Box>
               <Text>{paragraph}</Text>
               <Box pt={5}>
-                <Button variant={Variants.blackLine}>
-                  {'Why Thomas Archer'}
-                </Button>
+                {button?.label && (
+                  <Link
+                    href={
+                      button?.useInternal
+                        ? button?.internalHref
+                          ? `/${button?.internalHref}`
+                          : '#'
+                        : button?.externalHref
+                        ? button?.externalHref
+                        : '#'
+                    }
+                    target={button?.isExternal ? '_blank' : ''}
+                  >
+                    <Button variant={Variants.blackLine}>
+                      {button?.label}
+                    </Button>
+                  </Link>
+                )}
               </Box>
               <Box
                 pt={{

@@ -3,7 +3,7 @@ import Text from '../base/Text'
 import Heading1, { HeadingTagSemantic } from 'components/base/Heading1'
 import Button, { Variants } from 'components/base/Button'
 import { HeightVariants } from 'components/base/Divider'
-import { urlForImage } from 'lib/sanity.image'
+import { getImageUrl } from 'lib/utils'
 
 type SectionAwardsProps = {
   heading: string
@@ -63,7 +63,7 @@ const SectionAwards: React.FC<SectionAwardsProps> = ({
               alt={heading}
               maxW={'90px'}
               maxH={'95px'}
-              src={(image && urlForImage(image).url()) || ''}
+              src={getImageUrl(image)}
             />
             <Box pr={3} />
             <VStack spacing={8} align="stretch">

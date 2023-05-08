@@ -64,17 +64,21 @@ const SectionBlog: React.FC<SectionBlogProps> = ({
       <Box pt={{ base: HeightVariants.less, md: HeightVariants.default }} />
 
       <Stack direction={{ base: 'column', md: 'row' }} spacing={'1rem'}>
-        {sortedBlogs.map(({ image, content, createdAt, heading, slug }) => (
-          <ArticleBlogCard
-            image={image}
-            createdAt={createdAt}
-            heading={heading}
-            paragraph={blockToPlainText(content)}
-            buttonText="Find Out More"
-            buttonLink={`${asPath}/blog/${slug?.current}`}
-            headingTagLevel={HeadingTagSemantic.H1}
-          />
-        ))}
+        {sortedBlogs.map(
+          ({ image, content, createdAt, heading, slug, ...rest }) => (
+            <ArticleBlogCard
+              image={image}
+              createdAt={createdAt}
+              heading={heading}
+              paragraph={blockToPlainText(content)}
+              buttonText="Read More"
+              buttonLink={`${asPath}/blog/${slug?.current}`}
+              headingTagLevel={HeadingTagSemantic.H1}
+              // internalButton={}
+              {...rest}
+            />
+          )
+        )}
       </Stack>
     </Flex>
   )
