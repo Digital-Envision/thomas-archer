@@ -5,8 +5,8 @@ import Text from '../base/Text'
 import { isEmpty } from 'lodash'
 import Button, { Variants } from 'components/base/Button'
 import { urlForImage } from 'lib/sanity.image'
-import router from 'next/router'
 import { HeadingTagSemantic } from 'components/base/Heading1'
+import { LinksInterface } from 'components/organisms/Navbar'
 
 export type ArticleBlogCardProps = {
   image?: any // sanity io image
@@ -15,55 +15,44 @@ export type ArticleBlogCardProps = {
   heading: string
   headingTagLevel: HeadingTagSemantic
   paragraph: string
-  width?: string
-  height?: string
-  buttonText: string
-  buttonLink: string
+  button?: LinksInterface
+  buttonText?: string // for internal /blog/[slug.current]
+  buttonLink?: string // for internal /blog/[slug.current]
 }
 
+// TODO offset when there's createdAt
+// TODO fix internal link
+
 /**
- * usage:
- * <ArticleCard
-    imageUrl="https://via.placeholder.com/500x500"
-    createdAt={'01/01/2023'}
-    heading="Article Card"
-    paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse fringilla mauris eget fringilla imperdiet. Sed dictum ipsum velit, et vestibulum leo consectetur vel."
-    buttonText="Find Out More"
-    buttonOnClick={() => alert('Button clicked!')}
-  />
+ * used in:
+ * Section3ColsCards
+ * Section2ColCards
+ * SectionBlog
  */
 
-// TODO image should be have the same size and aspect ratio
-// TODO offset when there's createdAt
-// TODO handle image height above 700px
-// TODO update like BlogListingCard
-
 const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
-  imageUrl,
-  image,
-  createdAt,
   heading,
   headingTagLevel,
+  image,
+  createdAt,
   paragraph,
-  width = '100%',
-  height = '700px',
+  button,
   buttonText,
   buttonLink,
 }) => {
   return (
     <Flex
       direction={'column'}
-      width={width}
+      width={'100%'}
       maxWidth="550px"
-      maxHeight={height}
+      maxHeight={'700px'}
     >
       <Box display="flex" justifyContent="center" alignItems="center">
         <Image
           src={(image && urlForImage(image).url()) || ''}
           alt={heading}
-          maxH="500px"
+          height="450px"
           w="full"
-          h="auto"
           objectFit={'cover'}
         />
       </Box>
@@ -84,9 +73,28 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
         </Box>
 
         <Box mt="auto">
-          <Link href={buttonLink || '#'} target={buttonLink ? '_blank' : ''}>
-            <Button variant={Variants.blackLine}>{buttonText}</Button>
-          </Link>
+          {buttonText && (
+            <Link href={buttonLink || '#'} target={buttonLink ? '_blank' : ''}>
+              <Button variant={Variants.blackLine}>{buttonText}</Button>
+            </Link>
+          )}
+
+          {button?.label && (
+            <Link
+              href={
+                button?.useInternal
+                  ? button?.internalHref
+                    ? `/${button?.internalHref}`
+                    : '#'
+                  : button?.externalHref
+                  ? button?.externalHref
+                  : '#'
+              }
+              target={button?.isExternal ? '_blank' : ''}
+            >
+              <Button variant={Variants.blackLine}>{button?.label}</Button>
+            </Link>
+          )}
         </Box>
       </Flex>
     </Flex>

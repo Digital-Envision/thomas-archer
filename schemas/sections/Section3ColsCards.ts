@@ -10,16 +10,28 @@ export default {
             name: 'ArticleBlogCard1',
             title: 'ArticleBlogCard - 1',
             type: 'ArticleBlogCard',
+            options: {
+                collapsible: true,
+                collapsed: true,
+            },
         },
         {
             name: 'ArticleBlogCard2',
             title: 'ArticleBlogCard - 2',
             type: 'ArticleBlogCard',
+            options: {
+                collapsible: true,
+                collapsed: true,
+            },
         },
         {
             name: 'ArticleBlogCard3',
             title: 'ArticleBlogCard - 3',
             type: 'ArticleBlogCard',
+            options: {
+                collapsible: true,
+                collapsed: true,
+            },
         },
         {
             name: 'headingTagLevel',

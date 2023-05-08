@@ -41,7 +41,7 @@ const SectionHeadingParagraphCTAImage: React.FC<
       marginBottom={marginBottom}
     >
       <Flex flex={1} direction={'row'} align={'center'}>
-        <Flex flex={1} direction={'column'} justify={'center'} align={'center'}>
+        <Flex flex={1} direction={'column'} justify={'center'}>
           <Heading1 as={headingTagLevel}>{heading}</Heading1>
           <Flex flex={1} direction={'row'} pt={2} pr={2}>
             <Box pt={2} pr={2}>
@@ -83,7 +83,7 @@ const SectionHeadingParagraphCTAImage: React.FC<
 
       <Box p="1rem" />
 
-      <Flex flex={1.2} justify={'center'}>
+      <Flex flex={1.2} justify={'center'} maxHeight="450px">
         <Image
           width={'100%'}
           objectFit={'cover'} // TODO CHANGE TO FILL

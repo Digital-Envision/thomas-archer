@@ -1,4 +1,7 @@
+import _ from 'lodash'
+import { SanityFiles } from 'utils/interfaces'
 import { dataset, projectId } from './sanity.api'
+import { urlForImage } from './sanity.image'
 
 export const enumToArrayOfObjects = (e: any) => {
     return Object.keys(e).map((key) => ({ title: key, value: e[key] }))
@@ -15,6 +18,10 @@ export const getVideoUrl = (fileObject) => {
     } else {
         return ''
     }
+}
+
+export const getImageUrl = (image: SanityFiles) => {
+    return (!_.isEmpty(image) && urlForImage(image)?.url()) || ''
 }
 
 
