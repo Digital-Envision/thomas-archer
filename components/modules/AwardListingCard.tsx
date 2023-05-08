@@ -45,8 +45,8 @@ const AwardListingCard: React.FC<AwardListingCardProps> = ({
 
         {/* awards */}
         <HStack minHeight="80px" align="flex-start">
-          {!_.isEmpty(award.awards) &&
-            _.slice(award.awards, 0, 2).map((award) => {
+          {!_.isEmpty(award?.awards) &&
+            _.slice(award?.awards, 0, 2).map((award) => {
               return (
                 <Flex direction={'column'} flex={1}>
                   <Text fontWeight={'bold'}>{award.name}</Text>
