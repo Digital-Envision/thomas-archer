@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button as ChakraButton, ButtonProps } from '@chakra-ui/react'
+import Text from './Text'
 
 export enum Variants {
   white = 'white',
@@ -66,8 +67,7 @@ const Button: React.FC<Props> = ({ children, variant, ...props }) => {
       fontSize={'14px'}
       lineHeight={'17px'}
       px={'24px'}
-      pt={2}
-      textAlign={'center'}
+      pt={'6px'}
       borderRadius={'25px'}
       {...props}
     >

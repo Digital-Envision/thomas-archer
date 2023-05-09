@@ -1,40 +1,62 @@
-import { defineField, defineType } from 'sanity'
 import { HeightVariants } from 'components/base/Divider'
-import { HeightVariants as ImageHeightVariants } from 'components/modules/SectionImageHeadingCTA'
 import { enumToArrayOfObjects } from 'lib/utils'
-export default defineType({
-    name: 'SectionImageHeadingCTA',
-    title: 'SectionImageHeadingCTA',
+
+// Define a custom validation function for a Vimeo video URL
+function validateVimeoUrl(url) {
+    // Extract the video ID from the URL
+    const match = url.match(/^https?:\/\/player\.vimeo\.com\/video\/(\d+)/i)
+    const videoId = match && match[1]
+
+    // Check that the URL matches the expected format and that the video ID is valid
+    if (!videoId) {
+        return 'Please enter a valid Vimeo video URL in the format https://player.vimeo.com/video/{ID}'
+    }
+
+    return true
+}
+
+export default {
+    name: 'SectionVideoParagraphCTA',
+    title: 'SectionVideoParagraphCTA',
     type: 'object',
     fields: [
-        defineField({
+        {
             name: 'title',
             title: 'Title',
             type: 'string',
-            validation: (rule) => rule.required(),
-        }),
-        defineField({
+        },
+        {
             name: 'description',
             title: 'Description',
             type: 'string',
-            validation: (rule) => rule.required(),
-        }),
-        defineField({
-            name: 'headingTagLevel',
-            title: 'Heading Tag Level',
-            type: 'string',
-            options: {
-                list: ['H1', 'H2', 'H3'],
-            },
-        }),
-        defineField({
+        },
+        {
+            name: 'video',
+            title: 'Video',
             type: 'object',
+            fields: [
+                {
+                    name: 'cover',
+                    title: 'Cover Image',
+                    type: 'image',
+                    options: {
+                        hotspot: false,
+                    },
+                },
+                {
+                    name: 'video',
+                    title: 'Video',
+                    type: 'url',
+                    description: 'Please input vimeo url',
+                    validation: (Rule) =>
+                        Rule.custom((url) => validateVimeoUrl(url)),
+                },
+            ],
+        },
+        {
             name: 'button',
             title: 'Button',
-            options: {
-                collapsed: true,
-                collapsible: true,
-            },
+            type: 'object',
             fields: [
                 {
                     name: 'label',
@@ -67,54 +89,33 @@ export default defineType({
                     initialValue: false,
                 },
             ],
-        }),
-        defineField({
-            name: 'height',
-            title: 'Height',
-            type: 'string',
-            options: {
-                list: [...enumToArrayOfObjects(ImageHeightVariants)],
-            },
-            initialValue: HeightVariants.none,
-        }),
-        defineField({
-            name: 'image',
-            title: 'Image',
-            type: 'image',
-            options: {
-                hotspot: true,
-            },
-            validation: (rule) => rule.required(),
-        }),
-        defineField({
-            name: 'isOverlay',
-            title: 'Use Overlay',
-            type: 'boolean',
-            initialValue: true,
-            description: 'It will make a little dark for the cover image',
-        }),
-        defineField({
-            name: 'marginTop',
+        },
+        {
             title: 'Margin Top',
+            name: 'marginTop',
             type: 'string',
             options: {
                 list: [...enumToArrayOfObjects(HeightVariants)],
             },
-            initialValue: HeightVariants.none,
-        }),
-        defineField({
-            name: 'marginBottom',
+
+            layout: 'dropdown',
+        },
+        {
             title: 'Margin Bottom',
+            name: 'marginBottom',
             type: 'string',
             options: {
                 list: [...enumToArrayOfObjects(HeightVariants)],
             },
-            initialValue: HeightVariants.none,
-        }),
+
+            layout: 'dropdown',
+        },
     ],
     preview: {
         prepare() {
-            return { title: `SectionImageHeadingCTA` }
+            return {
+                title: 'SectionVideoParagraphCTA',
+            }
         },
     },
-})
+}

@@ -5,7 +5,7 @@ export default {
     fields: [
         {
             name: 'heading',
-            type: 'text',
+            type: 'string',
         },
         {
             name: 'paragraph',
@@ -65,12 +65,12 @@ export default {
         select: {
             title: 'heading',
             subtitle: 'label',
-            disabled: 'disabled'
+            disabled: 'disabled',
         },
         prepare({ title, disabled }) {
             return {
-                title: `ArticleBlogCard: ${disabled ? 'DISABLED' : title}`
+                title: `ArticleBlogCard: ${disabled ? 'DISABLED' : title}`,
             }
-        }
-    }
+        },
+    },
 }

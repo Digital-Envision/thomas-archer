@@ -1,9 +1,11 @@
-import { AspectRatio, Box } from '@chakra-ui/react'
+import { AspectRatio, Box, Circle } from '@chakra-ui/react'
 import { urlForImage } from 'lib/sanity.image'
-import React from 'react'
+import React, { useState } from 'react'
 import { getVideoUrl } from 'lib/utils'
 import { SanityFiles } from 'utils/interfaces'
 import Text from 'components/base/Text'
+import { HiChevronRight } from 'react-icons/hi2'
+import { isVimeoOrYouTubeEmbedURL } from 'utils/checkVideoResource'
 
 type SectionHeroVideoBigProps = {
   isExternalVideo: boolean
@@ -11,6 +13,39 @@ type SectionHeroVideoBigProps = {
   externalVideo: string
   marginBottom?: string
   marginTop?: string
+  cover?: SanityFiles
+}
+
+const Video = ({ withCover, isExternalVideo, externalVideo, video }) => {
+  return isExternalVideo
+    ? externalVideo && (
+        <AspectRatio ratio={16 / 9}>
+          <iframe
+            width={'100vw'}
+            height={'100vw'}
+            src={`${externalVideo}?autoplay=${withCover ? '1' : '0'}`}
+            frameBorder={0}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          />
+        </AspectRatio>
+      )
+    : video && (
+        <AspectRatio ratio={16 / 9}>
+          <video
+            onContextMenu={(e) => e.preventDefault()}
+            autoPlay={withCover}
+            controls
+            height={'100vw'}
+            width={'100vw'}
+          >
+            <source
+              src={`${getVideoUrl(urlForImage(video))}`}
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+        </AspectRatio>
+      )
 }
 
 export const EmbeddedVideoPlayer = (props) => {
@@ -34,7 +69,10 @@ const SectionHeroVideoBig: React.FC<SectionHeroVideoBigProps> = ({
   externalVideo,
   marginBottom,
   marginTop,
+  cover,
 }) => {
+  const [play, setPlay] = useState(false)
+
   return (
     <Box
       height={'100%'}
@@ -48,28 +86,63 @@ const SectionHeroVideoBig: React.FC<SectionHeroVideoBigProps> = ({
       marginTop={marginTop}
     >
       <Box>
-        {isExternalVideo
-          ? externalVideo && EmbeddedVideoPlayer(externalVideo)
-          : video && (
-              <AspectRatio ratio={16 / 9}>
-                <video
-                  onContextMenu={(e) => e.preventDefault()}
-                  controls
-                  height={'100vh'}
-                  width={'100vw'}
-                >
-                  <source
-                    src={`${getVideoUrl(urlForImage(video))}`}
-                    type="video/mp4"
-                  />
-                  Your browser does not support the video tag.
-                </video>
-              </AspectRatio>
-            )}
+        {cover ||
+        (isExternalVideo &&
+          isVimeoOrYouTubeEmbedURL(externalVideo).embedCorrect &&
+          isVimeoOrYouTubeEmbedURL(externalVideo).resource === 'youtube') ? (
+          play ? (
+            <Video
+              withCover={true}
+              isExternalVideo={isExternalVideo}
+              externalVideo={externalVideo}
+              video={video}
+            />
+          ) : (
+            <Box
+              width={'100%'}
+              height={'100vw'}
+              bgImg={
+                cover
+                  ? urlForImage(cover).url()
+                  : isExternalVideo &&
+                    isVimeoOrYouTubeEmbedURL(externalVideo).embedCorrect
+                  ? `https://i.ytimg.com/vi/${
+                      isVimeoOrYouTubeEmbedURL(externalVideo).videoId
+                    }/maxresdefault.jpg`
+                  : ''
+              }
+              backgroundRepeat="no-repeat"
+              backgroundSize="cover"
+              backgroundPosition={'center'}
+              display={'flex'}
+              alignItems={'center'}
+              justifyContent={'center'}
+              position={'relative'}
+            >
+              <Circle
+                size="140px"
+                bg="transparent"
+                border={'5px solid white'}
+                pt={1}
+                fontSize={'100px'}
+                color={'white'}
+                cursor={'pointer'}
+                onClick={() => setPlay(true)}
+              >
+                <HiChevronRight />
+              </Circle>
+            </Box>
+          )
+        ) : (
+          <Video
+            withCover={false}
+            isExternalVideo={isExternalVideo}
+            externalVideo={externalVideo}
+            video={video}
+          />
+        )}
         {!externalVideo && !video && (
-          <Text color={'white'} bg={'red'}>
-            No Video Found
-          </Text>
+          <Text bg={'gray.100'}>No Video Found</Text>
         )}
       </Box>
     </Box>

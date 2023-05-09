@@ -37,9 +37,11 @@ const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
   const body = (
     <>
       <Flex direction={'row'} flex={1}>
-        <Flex flex={1}>
-          <Heading1 as={headingTagLevel}>{heading}</Heading1>
-        </Flex>
+        {heading && (
+          <Flex flex={1}>
+            <Heading1 as={headingTagLevel}>{heading}</Heading1>
+          </Flex>
+        )}
         {isOffset && (
           <Flex
             display={{ base: 'none', md: 'block' }}
@@ -62,7 +64,7 @@ const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
             {paragraph && <Dash width="50px" height="1px" />}
           </Box>
           <Flex direction={'column'}>
-            <Text>{paragraph}</Text>
+            {paragraph && <Text>{paragraph}</Text>}
             <Box pt={5}>
               {customButton ? (
                 <Button onClick={customButton.fn} variant={Variants.blackLine}>

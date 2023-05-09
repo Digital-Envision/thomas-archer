@@ -22,14 +22,15 @@ import Footer from 'components/organisms/Footer'
 import GalleryScroll from 'components/organisms/GalleryScroll'
 import Navbar from 'components/organisms/Navbar'
 import ProjectScroll from 'components/organisms/ProjectScroll'
-import Section2ColCards from 'components/organisms/Section2ColCards'
-import Section3ColsCards from 'components/organisms/Section3ColsCards'
+import SectionColCards from 'components/organisms/SectionColCards'
 import SectionAwardsListing from 'components/organisms/SectionAwardsListing'
 import SectionBlog from 'components/organisms/SectionBlog'
 import SectionBlogListing from 'components/organisms/SectionBlogListing'
 import SectionGridGallery from 'components/organisms/SectionGridGallery'
 import SectionInclusions from 'components/organisms/SectionInclusions'
 import SectionProjectListing from 'components/organisms/SectionProjectListing'
+import SectionVideoParagraphCTA from 'components/organisms/SectionVideoParagraphCTA'
+import Steps from 'components/organisms/Steps'
 import React from 'react'
 
 const PageBuilder = ({ pages, ...rest }) => {
@@ -44,6 +45,9 @@ const PageBuilder = ({ pages, ...rest }) => {
         case 'CTAs':
           el = <CTAs {...c} />
           break
+        case 'Steps':
+          el = <Steps {...c} />
+          break
         case 'FloorPlanListing':
           el = <FloorPlanListing floors={rest.floors} />
           break
@@ -52,6 +56,9 @@ const PageBuilder = ({ pages, ...rest }) => {
           break
         case 'SectionProjectScroll':
           el = <ProjectScroll {...c} projects={rest.projects} />
+          break
+        case 'SectionVideoParagraphCTA':
+          el = <SectionVideoParagraphCTA {...c} />
           break
         case 'SectionHeroImageDefault':
           el = <SectionHeroImageDefault {...c} />
@@ -86,11 +93,8 @@ const PageBuilder = ({ pages, ...rest }) => {
         case 'Divider':
           el = <Divider {...c} />
           break
-        case 'Section3ColsCards':
-          el = <Section3ColsCards {...c} />
-          break
-        case 'Section2ColCards':
-          el = <Section2ColCards {...c} />
+        case 'SectionColCards':
+          el = <SectionColCards {...c} />
           break
         case 'Section2ColHeading2ColParagraph':
           el = <Section2ColHeading2ColParagraph {...c} />

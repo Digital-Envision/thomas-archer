@@ -1,4 +1,4 @@
-import { Box, Image, Flex } from '@chakra-ui/react'
+import { Box, Circle, Flex } from '@chakra-ui/react'
 import Link from 'next/link'
 import Heading3 from '../base/Heading3'
 import Text from '../base/Text'
@@ -7,6 +7,8 @@ import Button, { Variants } from 'components/base/Button'
 import { urlForImage } from 'lib/sanity.image'
 import { HeadingTagSemantic } from 'components/base/Heading1'
 import { LinksInterface } from 'components/organisms/Navbar'
+import Image from 'next/image'
+import { HiChevronRight } from 'react-icons/hi2'
 
 export type ArticleBlogCardProps = {
   image?: any // sanity io image
@@ -16,8 +18,6 @@ export type ArticleBlogCardProps = {
   headingTagLevel: HeadingTagSemantic
   paragraph: string
   button?: LinksInterface
-  buttonText?: string // for internal /blog/[slug.current]
-  buttonLink?: string // for internal /blog/[slug.current]
 }
 
 // TODO offset when there's createdAt
@@ -31,54 +31,71 @@ export type ArticleBlogCardProps = {
  */
 
 const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
-  heading,
-  headingTagLevel,
   image,
   createdAt,
+  heading,
+  headingTagLevel,
   paragraph,
   button,
-  buttonText,
-  buttonLink,
 }) => {
   return (
-    <Flex
-      direction={'column'}
-      width={'100%'}
-      maxWidth="550px"
-      maxHeight={'700px'}
-    >
-      <Box display="flex" justifyContent="center" alignItems="center">
-        <Image
-          src={(image && urlForImage(image).url()) || ''}
-          alt={heading}
-          height="450px"
-          w="full"
-          objectFit={'cover'}
-        />
+    <Flex flexDir={'column'} width={'100%'}>
+      <Box
+        mb={'8'}
+        minH={{
+          base: '160.55px',
+        }}
+        height={{
+          base: 'calc((100vw - 8rem)*.650)',
+          sm: 'calc((100vw - 10rem)*.650)',
+          md: 'calc(35vw - 6rem)',
+          lg: 'calc((35vw - 1rem)*.800)',
+          xl: 'calc((50vw - 13rem)*.720)',
+          '2xl': 'calc((50vw - 3rem)*.600)',
+        }}
+        maxH={{
+          '2xl': 'calc((73vw - 7rem)*.730)',
+        }}
+        _hover={{
+          userSelect: 'none',
+        }}
+      >
+        <Box
+          width={'100%'}
+          height={'100%'}
+          position={'relative'}
+          bg={'gray.100'}
+        >
+          <Image
+            src={(image && urlForImage(image).url()) || ''}
+            alt={heading}
+            fill
+            objectFit="cover"
+            objectPosition="center"
+          />
+        </Box>
       </Box>
-      <Flex flex="1" flexDirection={'column'} px="8" pt="8">
+      <Flex flex="1" flexDirection={'column'} px="8">
         <Box flex="1" overflow="hidden">
           {!isEmpty(createdAt) && (
             <Text mb="4" fontSize={'10px'} color={'#898989'}>
               {createdAt}
             </Text>
           )}
-          <Heading3 as={headingTagLevel} mb="4">
-            {heading}
-          </Heading3>
-
-          <Text noOfLines={3} fontSize={'14px'} mb="4">
-            {paragraph}
-          </Text>
+          {heading && (
+            <Heading3 as={headingTagLevel} mb="5">
+              {heading}
+            </Heading3>
+          )}
+          {paragraph && (
+            <Text noOfLines={3} fontSize={'14px'} mb="4">
+              {paragraph}
+            </Text>
+          )}
         </Box>
 
-        <Box mt="auto">
-          {buttonText && (
-            <Link href={buttonLink || '#'} target={buttonLink ? '_blank' : ''}>
-              <Button variant={Variants.blackLine}>{buttonText}</Button>
-            </Link>
-          )}
-
+        <Flex mt="auto" pt={6} gap={5}>
+          <Button variant={Variants.blackLine}>Watch Video</Button>
           {button?.label && (
             <Link
               href={
@@ -95,7 +112,7 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
               <Button variant={Variants.blackLine}>{button?.label}</Button>
             </Link>
           )}
-        </Box>
+        </Flex>
       </Flex>
     </Flex>
   )
