@@ -7,24 +7,31 @@ import { BsChevronDown } from 'react-icons/bs'
 import { animateScroll } from 'react-scroll'
 import { getVideoUrl } from 'lib/utils'
 import { SanityFiles } from 'utils/interfaces'
+import { EmbeddedVideoPlayer } from './SectionHeroVideoBig'
 
 type SectionHeroImageBigProps = {
   quotes: Array<any>
   isVideo: boolean
+  isExternalVideo: boolean
+  externalVideo: string
   bannerImage?: SanityFiles
   bannerVideo?: SanityFiles
   marginBottom?: string
   marginTop?: string
 }
 
-const SectionHeroImageBig: React.FC<SectionHeroImageBigProps> = ({
-  quotes,
-  isVideo,
-  bannerImage,
-  bannerVideo,
-  marginBottom,
-  marginTop,
-}) => {
+const SectionHeroImageBig: React.FC<SectionHeroImageBigProps> = (props) => {
+  const {
+    quotes,
+    isVideo,
+    bannerImage,
+    bannerVideo,
+    marginBottom,
+    marginTop,
+    isExternalVideo,
+    externalVideo,
+  } = props
+
   const handleScrollDown = () => {
     animateScroll.scrollTo((100 * window.innerHeight) / 100, {
       duration: 500,
@@ -48,7 +55,10 @@ const SectionHeroImageBig: React.FC<SectionHeroImageBigProps> = ({
       marginBottom={marginBottom}
       marginTop={marginTop}
     >
-      {isVideo && (
+      {isVideo && isExternalVideo && (
+        <EmbeddedVideoPlayer externalVideo={externalVideo} />
+      )}
+      {isVideo && !isExternalVideo && bannerVideo && (
         <Box position={'relative'}>
           <Box position={'absolute'} top={0} left={0} zIndex={0}>
             <AspectRatio height={'100vh'} width={'100vw'}>

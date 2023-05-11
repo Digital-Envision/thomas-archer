@@ -1,5 +1,3 @@
-import { PreviewSuspense } from '@sanity/preview-kit'
-import IndexPage from 'components/IndexPage'
 import {
   getAllGlobals,
   getAllPages,
@@ -9,7 +7,6 @@ import {
 } from 'lib/sanity.client'
 import { GetStaticProps } from 'next'
 import { lazy } from 'react'
-import { getAllPagesSlugs } from 'lib/sanity.client'
 import { useRouter } from 'next/router'
 import _ from 'lodash'
 import IndexPageHead from 'components/IndexPageHead'
@@ -20,7 +17,21 @@ import SectionHeroImageBig from 'components/modules/SectionHeroImageBig'
 import SectionHeadingParagraphCTA from 'components/modules/SectionHeadingParagraphCTA'
 import SectionBreadcrumbs from 'components/modules/SectionBreadcrumbs'
 import { PageProps, PreviewData, Query } from 'pages'
-import { Box } from '@chakra-ui/react'
+import {
+  Box,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  useDisclosure,
+} from '@chakra-ui/react'
+import GalleryScroll from 'components/organisms/GalleryScroll'
+import ProjectScroll from 'components/organisms/ProjectScroll'
+import { EmbeddedVideoPlayer } from 'components/modules/SectionHeroVideoBig'
+import { HeightVariants } from 'components/base/Divider'
+import SectionImageAwards from 'components/modules/SectionImageAwards'
 
 const PreviewIndexPage = lazy(() => import('components/PreviewIndexPage'))
 
@@ -35,6 +46,7 @@ export default function DynamicPage({
   id,
   project,
 }) {
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const router = useRouter()
 
   if (router.isFallback) {
@@ -73,13 +85,43 @@ export default function DynamicPage({
       />
 
       <SectionHeroImageBig {...project?.page?.SectionHeroImageBig} />
-      <SectionBreadcrumbs {...project?.page?.SectionBreadcrumbs} />
+      <SectionBreadcrumbs
+        {...project?.page?.SectionBreadcrumbs}
+        marginTop={HeightVariants.less}
+        marginBottom={HeightVariants.less}
+      />
       <SectionHeadingParagraphCTA
         {...project?.page?.SectionHeadingParagraphCTA}
+        // if embeddedVideo exist, show view
+        {...(project?.page?.SectionHeadingParagraphCTA?.embeddedVideo && {
+          customButton: {
+            label: 'View Video',
+            fn: () => {
+              onOpen()
+            },
+          },
+        })}
+        marginBottom={HeightVariants.less}
       />
-      {/* TODO SectionImageGalleryScroll */}
+      <GalleryScroll {...project?.page?.SectionGalleryScroll} />
       <PageBuilder pages={[{ content: project?.page?.customPageSection }]} />
-      {/* TODO SectionProjectScroll */}
+
+      {!_.isEmpty(project?.award) && (
+        <SectionImageAwards
+          image={project?.award?.awardImage}
+          awards={project?.award?.awards}
+          marginTop={HeightVariants.extra}
+          marginBottom={HeightVariants.more}
+        />
+      )}
+
+      <ProjectScroll
+        {...project?.page?.SectionProjectScroll}
+        heading="Related Projects"
+        projects={projects}
+        marginTop={HeightVariants.extra}
+        marginBottom={HeightVariants.more}
+      />
       <Footer
         links={globals.Links}
         enquire={globals.Enquire}
@@ -87,6 +129,24 @@ export default function DynamicPage({
         socialMedia={globals.SocialMedia}
         footer={globals.Footer}
       />
+
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent maxW="56rem">
+          <ModalHeader pb={'2rem'}>
+            <Box>
+              <ModalCloseButton />
+            </Box>
+          </ModalHeader>
+          <ModalBody p={0} m={0} borderRadius="md">
+            <EmbeddedVideoPlayer
+              externalVideo={
+                project?.page?.SectionHeadingParagraphCTA?.embeddedVideo
+              }
+            />
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </Box>
   )
 }
@@ -128,15 +188,43 @@ export const getStaticProps: GetStaticProps<
     return { notFound: true }
   }
 
-  const projects = await getAllProjects('')
-  const currentProject = await getAllProjects(params?.id as string)
+  const currentProject = (
+    await getAllProjects({ slug: params?.id as string })
+  )[0]
+
+  // if isSelectedProject toggled, get 3 selected projects
+  const selectedProjectsRef =
+    currentProject?.page?.SectionProjectScroll?.isSelectedProject &&
+    _.map(currentProject?.page?.SectionProjectScroll?.selectedProjects, '_ref')
+
+  const projects = _.slice(
+    !_.isEmpty(selectedProjectsRef)
+      ? await getAllProjects({ ids: selectedProjectsRef }) // get 3 selected projects
+      : await getAllProjects(), // get 3 latest project
+    0,
+    3
+  )
+
+  const selectedProjectsKeys =
+    currentProject.page?.SectionProjectScroll?.isSelectedProject &&
+    currentProject.page?.SectionProjectScroll?.selectedProjects
+
+  const sortedProjects = !_.isEmpty(selectedProjectsKeys)
+    ? _.sortBy(projects, (project) => {
+        // this will sort fetched projects, according to configured on selectedProjects array
+        const ref = selectedProjectsKeys.find(
+          (selected) => selected._ref === project._id
+        )
+        return selectedProjectsKeys.indexOf(ref)
+      })
+    : projects // projects already sorted on groq level
 
   return {
     props: {
       id: params?.id,
       posts,
-      project: currentProject?.[0],
-      projects,
+      project: currentProject,
+      projects: sortedProjects,
       settings,
       pages,
       globals,

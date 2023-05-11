@@ -18,6 +18,7 @@ type SectionHeadingParagraphCTAProps = {
   button?: LinksInterface
   button2?: LinksInterface
   isEmbed?: boolean
+  customButton?: any // contain customized button, currenly used on project detail
 }
 
 const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
@@ -31,6 +32,7 @@ const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
   button,
   button2,
   isEmbed,
+  customButton,
 }) => {
   const body = (
     <>
@@ -62,45 +64,51 @@ const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
           <Flex direction={'column'}>
             <Text>{paragraph}</Text>
             <Box pt={5}>
-              {showButton && (
-                <HStack spacing={'1rem'} flexDirection="row">
-                  {button?.label && (
-                    <Link
-                      href={
-                        button?.useInternal
-                          ? button?.internalHref
-                            ? `/${button?.internalHref}`
+              {customButton ? (
+                <Button onClick={customButton.fn} variant={Variants.blackLine}>
+                  {customButton?.label}
+                </Button>
+              ) : (
+                showButton && (
+                  <HStack spacing={'1rem'} flexDirection="row">
+                    {button?.label && (
+                      <Link
+                        href={
+                          button?.useInternal
+                            ? button?.internalHref
+                              ? `/${button?.internalHref}`
+                              : '#'
+                            : button?.externalHref
+                            ? button?.externalHref
                             : '#'
-                          : button?.externalHref
-                          ? button?.externalHref
-                          : '#'
-                      }
-                      target={button?.isExternal ? '_blank' : ''}
-                    >
-                      <Button variant={Variants.blackLine}>
-                        {button?.label}
-                      </Button>
-                    </Link>
-                  )}
-                  {button2?.label && (
-                    <Link
-                      href={
-                        button2?.useInternal
-                          ? button2?.internalHref
-                            ? `/${button2?.internalHref}`
+                        }
+                        target={button?.isExternal ? '_blank' : ''}
+                      >
+                        <Button variant={Variants.blackLine}>
+                          {button?.label}
+                        </Button>
+                      </Link>
+                    )}
+                    {button2?.label && (
+                      <Link
+                        href={
+                          button2?.useInternal
+                            ? button2?.internalHref
+                              ? `/${button2?.internalHref}`
+                              : '#'
+                            : button2?.externalHref
+                            ? button2?.externalHref
                             : '#'
-                          : button2?.externalHref
-                          ? button2?.externalHref
-                          : '#'
-                      }
-                      target={button2?.isExternal ? '_blank' : ''}
-                    >
-                      <Button variant={Variants.blackLine}>
-                        {button2?.label}
-                      </Button>
-                    </Link>
-                  )}
-                </HStack>
+                        }
+                        target={button2?.isExternal ? '_blank' : ''}
+                      >
+                        <Button variant={Variants.blackLine}>
+                          {button2?.label}
+                        </Button>
+                      </Link>
+                    )}
+                  </HStack>
+                )
               )}
             </Box>
           </Flex>
