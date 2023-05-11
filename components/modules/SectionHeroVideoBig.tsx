@@ -13,6 +13,21 @@ type SectionHeroVideoBigProps = {
   marginTop?: string
 }
 
+export const EmbeddedVideoPlayer = (props) => {
+  return (
+    <AspectRatio ratio={16 / 9}>
+      <iframe
+        width={'100vw'}
+        height={'100vh'}
+        src={props.externalVideo}
+        frameBorder={0}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        {...props}
+      />
+    </AspectRatio>
+  )
+}
+
 const SectionHeroVideoBig: React.FC<SectionHeroVideoBigProps> = ({
   isExternalVideo,
   video,
@@ -34,17 +49,7 @@ const SectionHeroVideoBig: React.FC<SectionHeroVideoBigProps> = ({
     >
       <Box>
         {isExternalVideo
-          ? externalVideo && (
-              <AspectRatio ratio={16 / 9}>
-                <iframe
-                  width={'100vw'}
-                  height={'100vh'}
-                  src={externalVideo}
-                  frameBorder={0}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                />
-              </AspectRatio>
-            )
+          ? externalVideo && EmbeddedVideoPlayer(externalVideo)
           : video && (
               <AspectRatio ratio={16 / 9}>
                 <video

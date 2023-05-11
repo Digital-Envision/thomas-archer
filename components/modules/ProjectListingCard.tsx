@@ -11,7 +11,7 @@ export type ProjectListingCardProps = {
   link: string
   heading: string
   subHeading: string
-  description: string
+  caption: string
   width?: string
   height?: string
   isExternal?: boolean
@@ -24,7 +24,7 @@ const ProjectListingCard: React.FC<ProjectListingCardProps> = ({
   link,
   heading,
   subHeading,
-  description,
+  caption,
   width = '400px',
   height = '450px',
   isExternal = true,
@@ -50,7 +50,7 @@ const ProjectListingCard: React.FC<ProjectListingCardProps> = ({
           {subHeading}
         </Text>
         <Text fontSize={'20px'} mb="5" color={'#898989'}>
-          {description}
+          {caption}
         </Text>
 
         <Link href={link || '#'} target={link ? '_blank' : ''}>

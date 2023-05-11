@@ -1,3 +1,8 @@
+import { listImagesFields } from './sections/SectionGalleryScroll';
+import { headingField, paragraphField } from './sections/SectionHeadingParagraphCTA';
+import { bannerImageField, bannerVideoField, externalVideoField, isExternalVideoField, isVideoField } from "./sections/SectionHeroImageBig"
+import { isSelectedProjectFields, selectedProjectsFields } from './sections/SectionProjectScroll';
+
 export default {
     type: 'document',
     title: 'Projects',
@@ -5,7 +10,9 @@ export default {
     fields: [
         {
             name: 'heading',
-            type: 'string'
+            title: 'Title',
+            type: 'string',
+            validation: (rule) => rule.required(),
         },
         {
             name: 'slug',
@@ -13,25 +20,29 @@ export default {
             type: 'slug',
             title: 'Slug',
             options: {
-                source: 'heading',
+                source: 'title',
                 maxLength: 96,
                 isUnique: (value, context) => context.defaultIsUnique(value, context),
             },
         },
         {
             name: 'subHeading',
+            title: 'Suburb',
             type: 'string'
         },
         {
             name: 'caption',
+            title: 'Product Name',
             type: 'string'
         },
         {
             name: 'image',
+            title: 'Feature Image',
             type: 'image',
             options: {
                 hotspot: false,
             },
+            validation: (rule) => rule.required(),
         },
         {
             name: 'award',
@@ -87,37 +98,71 @@ export default {
             fields: [
                 {
                     name: 'SectionHeroImageBig',
-                    type: 'SectionHeroImageBig',
+                    type: 'object',
                     options: {
                         collapsible: true,
                         collapsed: true,
                     },
+
+                    fields: [
+                        isVideoField(),
+                        isExternalVideoField(),
+                        externalVideoField(),
+                        bannerImageField({ title: 'Image' }),
+                        bannerVideoField({ title: 'Video' })
+                    ]
                 },
                 {
                     name: 'SectionBreadcrumbs',
-                    type: 'SectionBreadcrumbs',
-                    options: {
-                        collapsible: true,
-                        collapsed: true,
-                    },
-                },
-                {
-                    name: 'SectionHeadingParagraphCTA',
-                    type: 'SectionHeadingParagraphCTA',
-                    options: {
-                        collapsible: true,
-                        collapsed: true,
-                    },
-                },
-                {
-                    name: 'SectionImageGalleryScroll',
                     type: 'string',
                     options: {
                         collapsible: true,
                         collapsed: true,
                     },
-                    description: 'In development',
-                    readonly: true
+                    description: 'Fix in development',
+                },
+                {
+                    name: 'SectionHeadingParagraphCTA',
+                    type: 'object',
+                    options: {
+                        collapsible: true,
+                        collapsed: true,
+                    },
+                    fields: [
+                        headingField('Caption'),
+                        paragraphField(),
+                        {
+                            name: 'embeddedVideo',
+                            title: 'Embedded Video',
+                            type: 'url',
+                            description: 'Make sure you copied VIMEO embed video url.',
+                        },
+                    ]
+                },
+                {
+                    name: 'SectionGalleryScroll',
+                    type: 'object',
+                    fields: [
+                        listImagesFields()
+                    ],
+                    options: {
+                        collapsible: true,
+                        collapsed: true,
+                    },
+                },
+                {
+                    name: 'SectionProjectScroll',
+                    type: 'object',
+                    options: {
+                        collapsible: true,
+                        collapsed: true,
+                    },
+                    fields: [
+                        // headingField(),
+                        paragraphField(),
+                        isSelectedProjectFields(),
+                        selectedProjectsFields()
+                    ]
                 },
                 {
                     name: 'customPageSection',
@@ -126,16 +171,6 @@ export default {
                         collapsible: true,
                         collapsed: true,
                     },
-                },
-                {
-                    name: 'SectionProjectScroll',
-                    type: 'string',
-                    options: {
-                        collapsible: true,
-                        collapsed: true,
-                    },
-                    description: 'In development',
-                    readonly: true
                 },
             ]
         }

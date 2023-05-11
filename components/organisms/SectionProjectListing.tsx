@@ -15,6 +15,10 @@ type SectionProjectListingProps = {
   marginBottom: HeightVariants
 }
 
+// todo ADD HANDLE PAGINATION FUNCTIONALITY
+// todo The Load more button should only appear if there are more projects to be loaded
+// todo Initial load should display 12 projects and each "Load More" button will load another 12 projects
+
 const SectionProjectListing: React.FC<SectionProjectListingProps> = (props) => {
   const { asPath } = useRouter()
   const { heading, projects, marginTop, marginBottom } = props
@@ -26,8 +30,8 @@ const SectionProjectListing: React.FC<SectionProjectListingProps> = (props) => {
       justify="center"
       align={'center'}
       width={'100%'}
-      maxWidth={'1440px'}
-      px={'1rem'}
+      maxWidth={'1800px'}
+      px={{ base: '1rem', md: '4rem' }}
       marginTop={marginTop}
       marginBottom={marginBottom}
       direction="column"
@@ -55,25 +59,20 @@ const SectionProjectListing: React.FC<SectionProjectListingProps> = (props) => {
           lg: '3vh',
         }}
       >
-        {_.toArray(projects)?.map(
-          ({ image, subHeading, heading, description, slug }, index) => (
-            <GridItem key={index} colSpan={1}>
-              <ProjectListingCard
-                image={image}
-                heading={heading}
-                subHeading={subHeading}
-                description={description}
-                link={`${asPath}/project/${slug?.current}`}
-              />
-              <Box mb={'2rem'} />
-            </GridItem>
-          )
-        )}
+        {_.toArray(projects)?.map((props, index) => (
+          <GridItem key={index} colSpan={1}>
+            <ProjectListingCard
+              {...props}
+              link={`${asPath}/project/${props?.slug?.current}`}
+            />
+            <Box mb={'2rem'} />
+          </GridItem>
+        ))}
       </Grid>
 
       <Box pt="1rem" />
       <Button type="submit" variant={Variants.blackLine}>
-        Load More Inspiration
+        Load More Projects
       </Button>
     </Flex>
   )

@@ -20,11 +20,22 @@ export const indexQuery = groq`
   ${postFields}
 }`
 
-export const projectQuery = (project: string) => {
-  if (project) {
-    return groq`*[_type == "projects" && slug.current == "${project}"]`
+// TODO need add pagination 12 projects with orderBy: createdAt desc 
+
+export const projectQuery = (props) => {
+  const slug = props?.slug || ''
+  const ids = props?.ids || []
+
+  if (slug) {
+    return groq`*[_type == "projects" && slug.current == "${slug}"]`
   }
-  return groq`*[_type == "projects" && slug.current != null]`
+  else if (ids.length > 1) {
+    // else if (!_.isEmpty(ids)) {
+    return groq`*[_type == "projects" && _id in $ids]`
+  }
+
+
+  return groq`*[_type == "projects" && slug.current != null] | order(_createdAt desc)`
 }
 
 export const blogQuery = (blog: string) => {

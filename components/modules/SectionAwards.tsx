@@ -4,6 +4,8 @@ import Heading1, { HeadingTagSemantic } from 'components/base/Heading1'
 import Button, { Variants } from 'components/base/Button'
 import { HeightVariants } from 'components/base/Divider'
 import { getImageUrl } from 'lib/utils'
+import Link from 'next/link'
+import { LinksInterface } from 'components/organisms/Navbar'
 
 type SectionAwardsProps = {
   heading: string
@@ -11,10 +13,10 @@ type SectionAwardsProps = {
   paragraph: string
   onPressMore: () => void
   image?: any // sanity io image
-  imageUrl?: string // load image from url; test purpose
   awards: { name: string; description: string }[]
   marginTop: HeightVariants
   marginBottom: HeightVariants
+  button: LinksInterface
 }
 
 const SectionAwards: React.FC<SectionAwardsProps> = ({
@@ -22,11 +24,11 @@ const SectionAwards: React.FC<SectionAwardsProps> = ({
   headingTagLevel,
   paragraph,
   onPressMore,
-  imageUrl,
   image,
   awards,
   marginTop,
   marginBottom,
+  button,
 }) => {
   return (
     <Flex
@@ -45,9 +47,22 @@ const SectionAwards: React.FC<SectionAwardsProps> = ({
           <Text>{paragraph}</Text>
           <Box pt={HeightVariants.less} />
           <Box>
-            <Button variant={Variants.blackLine} onClick={onPressMore}>
-              {'Find Out More'}
-            </Button>
+            {button?.label && (
+              <Link
+                href={
+                  button?.useInternal
+                    ? button?.internalHref
+                      ? `/${button?.internalHref}`
+                      : '#'
+                    : button?.externalHref
+                    ? button?.externalHref
+                    : '#'
+                }
+                target={button?.isExternal ? '_blank' : ''}
+              >
+                <Button variant={Variants.blackLine}>{button?.label}</Button>
+              </Link>
+            )}
           </Box>
           <Box
             pt={{
@@ -59,12 +74,14 @@ const SectionAwards: React.FC<SectionAwardsProps> = ({
         <Box p={{ base: '1rem', md: '2rem' }} />
         <Flex flex={1} width={'w-full'}>
           <Flex direction={'row'}>
-            <Image
-              alt={heading}
-              maxW={'90px'}
-              maxH={'95px'}
-              src={getImageUrl(image)}
-            />
+            {getImageUrl(image) && (
+              <Image
+                alt={heading}
+                maxW={'90px'}
+                maxH={'95px'}
+                src={getImageUrl(image)}
+              />
+            )}
             <Box pr={3} />
             <VStack spacing={8} align="stretch">
               {awards?.map((o) => {
@@ -84,35 +101,3 @@ const SectionAwards: React.FC<SectionAwardsProps> = ({
 }
 
 export default SectionAwards
-
-/**
- * usage:
-    <SectionAwards
-      heading="Accolades"
-      paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed feugiat, lectus et viverra ullamcorper, nulla dui ullamcorper quam.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed feugiat, lectus et viverra ullamcorper, nulla dui ullamcorper quam."
-      onPressMore={() => alert('find out more')}
-      imageUrl="/images/logo/HIA-logo.png"
-      awards={[
-        {
-          name: 'Finalist 2021',
-          description: 'HIA Eastern Victorian Custom Build Home $750,001 - $1M',
-        },
-        {
-          name: 'Winner 2020',
-          description: 'HIA Australian Project Home Winner',
-        },
-        {
-          name: 'Winner 2019',
-          description: 'HIA Victorian Project Home',
-        },
-        {
-          name: 'Winner 2019',
-          description: 'HIA Victorian Project Home over $500,001',
-        },
-        {
-          name: 'Winner 2018',
-          description: 'HIA Victorian Project Home over $400,001',
-        },
-      ]}
-    />
- */

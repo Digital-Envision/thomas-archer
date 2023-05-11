@@ -1,11 +1,20 @@
 import { HeightVariants } from 'components/base/Divider'
 import { enumToArrayOfObjects } from 'lib/utils'
 
+export const headingField = (title?) => ({
+    name: 'heading',
+    type: 'text',
+    ...(title && { title: title }),
+})
+
+export const paragraphField = (title?) => ({
+    name: 'paragraph',
+    type: 'text',
+    ...(title && { title: title }),
+})
+
 export const fields = [
-    {
-        name: 'heading',
-        type: 'text',
-    },
+    headingField(),
     {
         name: 'headingTagLevel',
         title: 'Heading Tag Level',
@@ -14,10 +23,7 @@ export const fields = [
             list: ['H1', 'H2', 'H3'],
         },
     },
-    {
-        name: 'paragraph',
-        type: 'text',
-    },
+    paragraphField(),
     {
         name: 'isOffset',
         type: 'boolean',
@@ -75,7 +81,6 @@ export const fields = [
                 name: 'label',
                 title: 'Name',
                 type: 'string',
-                validation: (rule) => rule.required(),
             },
             {
                 name: 'useInternal',

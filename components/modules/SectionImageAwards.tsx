@@ -1,11 +1,11 @@
 import { Box, Flex, Image, VStack } from '@chakra-ui/react'
 import { HeightVariants } from 'components/base/Divider'
 import { urlForImage } from 'lib/sanity.image'
+import { SanityFiles } from 'utils/interfaces'
 import Text from '../base/Text'
 
 type SectionImageAwardsProps = {
-  imageUrl: string // load image from url; test purpose
-  image?: any // sanity io image
+  image?: SanityFiles // sanity io image
   awards: { name: string; description: string }[]
   marginTop: HeightVariants
   marginBottom: HeightVariants
@@ -41,7 +41,6 @@ type SectionImageAwardsProps = {
  */
 
 const SectionImageAwards: React.FC<SectionImageAwardsProps> = ({
-  imageUrl,
   image,
   awards,
   marginTop,

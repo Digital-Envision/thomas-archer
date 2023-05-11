@@ -52,9 +52,11 @@ export async function getAllGlobals(): Promise<Post[]> {
   return []
 }
 
-export async function getAllProjects(project = ''): Promise<any[]> {
+export async function getAllProjects(props?): Promise<any[]> {
   if (client) {
-    return (await client.fetch(projectQuery(project))) || []
+    return (await client.fetch(projectQuery(props),
+      !_.isEmpty(props?.ids) ? { ...props } : undefined
+    )) || []
   }
   return []
 }
