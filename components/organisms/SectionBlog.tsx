@@ -64,8 +64,9 @@ const SectionBlog: React.FC<SectionBlogProps> = ({
       <Box pt={{ base: HeightVariants.less, md: HeightVariants.default }} />
 
       <Stack direction={{ base: 'column', md: 'row' }} spacing={'1rem'}>
-        {sortedBlogs.map(
-          ({ image, content, createdAt, heading, slug, ...rest }) => (
+        {/*sortedBlogs.map(
+          ({ image, content, createdAt, heading, slug, ...rest }) => ({
+            /*
             <ArticleBlogCard
               image={image}
               createdAt={createdAt}
@@ -75,9 +76,9 @@ const SectionBlog: React.FC<SectionBlogProps> = ({
               buttonLink={`${asPath}/blog/${slug?.current}`}
               headingTagLevel={HeadingTagSemantic.H1}
               {...rest}
-            />
-          )
-        )}
+              />
+          })
+          )*/}
       </Stack>
     </Flex>
   )
