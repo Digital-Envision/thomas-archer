@@ -5,8 +5,9 @@ import Text from '../base/Text'
 import { BsArrowRight } from 'react-icons/bs'
 import { urlForImage } from 'lib/sanity.image'
 import { blockToPlainText } from 'lib/utils'
+import { PaginationData } from 'utils/interfaces'
 
-export type BlogListingCardProps = {
+export type BlogListingCardDataProps = {
   image?: any // sanity io image
   link: string
   heading: string
@@ -16,7 +17,12 @@ export type BlogListingCardProps = {
   height?: string
 }
 
-const BlogListingCard: React.FC<BlogListingCardProps> = ({
+export type BlogListingCardProps = {
+  data: BlogListingCardDataProps[]
+  pagination: PaginationData
+}
+
+const BlogListingCard: React.FC<BlogListingCardProps['data'][0]> = ({
   image,
   link,
   heading,
@@ -32,8 +38,8 @@ const BlogListingCard: React.FC<BlogListingCardProps> = ({
           alt={heading}
           maxW="400px"
           maxH="280px"
+          height="280px"
           w="full"
-          h="auto"
           objectFit="cover"
         />
       </Box>

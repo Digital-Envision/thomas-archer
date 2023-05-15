@@ -25,7 +25,12 @@ const AwardListingCard: React.FC<AwardListingCardProps> = ({
 }) => {
   return (
     <Box overflow="hidden" width={'400px'} minH={'450px'} borderBottomWidth={1}>
-      <Box display="flex" justifyContent="center" alignItems="center">
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        position="relative"
+      >
         <Image
           src={(image && urlForImage(image).url()) || ''}
           alt={heading}
@@ -34,7 +39,24 @@ const AwardListingCard: React.FC<AwardListingCardProps> = ({
           w="full"
           h="auto"
           objectFit="cover"
+          bgColor={'white'}
         />
+        {award?.awardLogo && (
+          <Image
+            bg="rgba(255,255,255,1)"
+            src={
+              (award?.awardLogo && urlForImage(award?.awardLogo).url()) || ''
+            }
+            alt="award?.awardLogo"
+            position="absolute"
+            top="0px"
+            right="1rem"
+            maxW="50px"
+            maxH="50px"
+            objectFit="cover"
+            p="5px"
+          />
+        )}
       </Box>
       <Flex flex={1} direction={'column'} pt="5">
         <Heading3 fontSize={'28px'} lineHeight={'20px'} mb="5">

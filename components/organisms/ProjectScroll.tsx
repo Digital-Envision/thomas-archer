@@ -45,7 +45,7 @@ const ProjectScroll = ({
             ></Box>
           </Box>
         </Box>
-        {projects?.map((project, key) => {
+        {projects?.data?.map((project, key) => {
           return (
             <Box>
               <Box

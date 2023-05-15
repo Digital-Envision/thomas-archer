@@ -3,6 +3,7 @@ import {
   getAllPages,
   getAllProjects,
   getAllProjectSlugs,
+  getSanityData,
   getSettings,
 } from 'lib/sanity.client'
 import { GetStaticProps } from 'next'
@@ -197,13 +198,18 @@ export const getStaticProps: GetStaticProps<
     currentProject?.page?.SectionProjectScroll?.isSelectedProject &&
     _.map(currentProject?.page?.SectionProjectScroll?.selectedProjects, '_ref')
 
-  const projects = _.slice(
-    !_.isEmpty(selectedProjectsRef)
-      ? await getAllProjects({ ids: selectedProjectsRef }) // get 3 selected projects
-      : await getAllProjects(), // get 3 latest project
-    0,
-    3
-  )
+  // if toggled: selected projects, or else get latest 12 projects
+  const projects = !_.isEmpty(selectedProjectsRef)
+    ? ((await getSanityData({
+        type: 'projects',
+        condition: `&& slug.current != null && _id != "${currentProject?._id}" && _id in $ids`,
+        params: { ids: selectedProjectsRef },
+      })) as any)
+    : ((await getSanityData({
+        type: 'projects',
+        condition: `&& slug.current != null && _id != "${currentProject?._id}"`,
+        limit: 12,
+      })) as any)
 
   const selectedProjectsKeys =
     currentProject.page?.SectionProjectScroll?.isSelectedProject &&

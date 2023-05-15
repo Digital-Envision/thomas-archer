@@ -78,11 +78,20 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
   const [filteredData, setFilteredData] = useState<
     SectionGridGalleryInterface['items']
   >([])
+  const [showedData, setShowedData] = useState<
+    SectionGridGalleryInterface['items']
+  >([])
   const [selectedData, setSelectedData] =
     useState<Partial<SectionGridGalleryInterface['items']>[0]>(null) // data for lightbox modal
   const [selectedFilters, setSelectedFilters] = useState<any>({})
 
+  const limit = 16
+  const [page, setPage] = useState(1)
+  const [isMore, setIsMore] = useState(false)
+
   useEffect(() => {
+    // change filter will reset page to 1
+
     const filtered = _.filter(items, ({ tags }) => {
       if (_.isEmpty(selectedFilters)) return true
       const isMatches = _.isEmpty(_.difference(_.values(selectedFilters), tags))
@@ -90,8 +99,23 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
       if (isMatches) return true
     })
 
+    setPage(1)
+    setIsMore(true)
     setFilteredData(filtered)
   }, [selectedFilters])
+
+  useEffect(() => {
+    // set showed content based on page and filter
+
+    const pages = Math.ceil(filteredData.length / limit)
+    const isMore = page < pages
+
+    if (isMore) setIsMore(true)
+    else setIsMore(false)
+
+    const sliced = _.slice(filteredData, 0, page * limit)
+    setShowedData(sliced)
+  }, [filteredData, page])
 
   const handlePrevious = () => {
     setSelectedData(
@@ -132,11 +156,8 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
     >
       <Box>
         <Box alignSelf={'flex-start'} pl={['1rem', '1rem', '1rem', '3rem']}>
-          <HStack
-            align={'flex-start'}
-            divider={<StackDivider borderColor="gray.400" />}
-          >
-            <Box minW={'70px'}>
+          <HStack align={'flex-start'} height={'80px'}>
+            <Box minW={'70px'} borderRightWidth={1} borderColor="#000000">
               <Text
                 textAlign="center"
                 textDecoration="underline"
@@ -161,6 +182,9 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
                           padding: 0,
                           margin: 0,
                           borderWidth: 0,
+                          borderColor: '#000000',
+                          borderRightWidth: 1,
+                          paddingRight: 3,
                         }}
                         justifyContent="space-between"
                       >
@@ -202,12 +226,13 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
           mx="auto"
           alignItems={'center'}
           justifyContent="center"
-          maxW="1440px"
+          maxW="1400px"
+          px={{ base: '1rem', md: '4rem' }}
           w={'98vw'}
-          sx={{ columnCount: [1, 1, 2, 3, 3], columnGap: '8px' }}
+          sx={{ columnCount: [1, 1, 2, 3, 3, 4], columnGap: '8px' }}
           overflow="hidden"
         >
-          {filteredData?.map((item) => (
+          {showedData?.map((item) => (
             <Box onClick={() => handleListItemClick(item)}>
               <Image
                 key={urlForImage(item.image)?.url()}
@@ -224,9 +249,15 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
 
       <Box pt="1rem" />
       <Box>
-        <Button type="submit" variant={Variants.blackLine}>
-          Load More Inspiration
-        </Button>
+        {isMore && (
+          <Button
+            type="submit"
+            variant={Variants.blackLine}
+            onClick={() => setPage((prev) => prev + 1)}
+          >
+            Load More
+          </Button>
+        )}
       </Box>
 
       <Modal

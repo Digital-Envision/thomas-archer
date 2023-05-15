@@ -1,11 +1,10 @@
 import { PreviewSuspense } from '@sanity/preview-kit'
 import IndexPage from 'components/IndexPage'
 import {
-  getAllBlogs,
   getAllFloors,
   getAllGlobals,
   getAllPages,
-  getAllProjects,
+  getSanityData,
   getSettings,
 } from 'lib/sanity.client'
 import { Post, Settings } from 'lib/sanity.queries'
@@ -28,6 +27,7 @@ export default function DynamicPage({
   projects,
   blogs,
   floors,
+  awardedProjects,
 }) {
   const router = useRouter()
 
@@ -64,6 +64,7 @@ export default function DynamicPage({
       projects={projects}
       blogs={blogs}
       floors={floors}
+      awardedProjects={awardedProjects}
     />
   )
 }
@@ -96,14 +97,30 @@ export const getStaticProps: GetStaticProps<
     return { notFound: true }
   }
 
-  const projects = await getAllProjects()
-  const blogs = await getAllBlogs()
+  const projects = await getSanityData({
+    type: 'projects',
+    condition: `&& slug.current != null`,
+    limit: 12,
+  })
+
+  const awardedProjects = await getSanityData({
+    type: 'projects',
+    condition: `&& slug.current != null && award.awards != null`,
+    limit: 12,
+  })
+
+  const blogs = await getSanityData({
+    type: 'blogs',
+    condition: `&& slug.current != null`,
+    limit: 12,
+  })
   const floors = await getAllFloors()
 
   return {
     props: {
       posts,
       projects,
+      awardedProjects,
       blogs,
       floors,
       settings,

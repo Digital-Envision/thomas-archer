@@ -5,23 +5,43 @@ import Heading2 from 'components/base/Heading2'
 import ProjectListingCard, {
   ProjectListingCardProps,
 } from 'components/modules/ProjectListingCard'
+import { getSanityData } from 'lib/sanity.client'
 import _ from 'lodash'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 
 type SectionProjectListingProps = {
   heading: string
-  projects: ProjectListingCardProps[]
+  projects: ProjectListingCardProps
   marginTop: HeightVariants
   marginBottom: HeightVariants
 }
 
-// todo ADD HANDLE PAGINATION FUNCTIONALITY
-// todo The Load more button should only appear if there are more projects to be loaded
-// todo Initial load should display 12 projects and each "Load More" button will load another 12 projects
-
 const SectionProjectListing: React.FC<SectionProjectListingProps> = (props) => {
   const { asPath } = useRouter()
-  const { heading, projects, marginTop, marginBottom } = props
+  const { heading, projects: _projects, marginTop, marginBottom } = props
+  const [projects, setProjects] = useState(_projects)
+
+  const handleViewMore = async () => {
+    const currentPagination = projects?.pagination
+
+    if (!currentPagination?.isMore) return
+
+    const newProjects = await getSanityData({
+      type: 'projects',
+      condition: `&& slug.current != null`,
+      page: currentPagination?.page + 1,
+      limit: 12,
+    })
+
+    setProjects((prev) => {
+      return {
+        pagination: { ...newProjects.pagination },
+        data: [...prev.data, ...newProjects.data],
+      }
+    })
+  }
+
   return (
     <Flex
       mx={'auto'}
@@ -59,7 +79,7 @@ const SectionProjectListing: React.FC<SectionProjectListingProps> = (props) => {
           lg: '3vh',
         }}
       >
-        {_.toArray(projects)?.map((props, index) => (
+        {_.toArray(projects?.data)?.map((props, index) => (
           <GridItem key={index} colSpan={1}>
             <ProjectListingCard
               {...props}
@@ -71,9 +91,16 @@ const SectionProjectListing: React.FC<SectionProjectListingProps> = (props) => {
       </Grid>
 
       <Box pt="1rem" />
-      <Button type="submit" variant={Variants.blackLine}>
-        Load More Projects
-      </Button>
+
+      {projects?.pagination?.isMore && (
+        <Button
+          type="submit"
+          variant={Variants.blackLine}
+          onClick={handleViewMore}
+        >
+          Load More Projects
+        </Button>
+      )}
     </Flex>
   )
 }

@@ -1,12 +1,14 @@
 import { PreviewSuspense } from '@sanity/preview-kit'
 import IndexPage from 'components/IndexPage'
+import { BlogListingCardProps } from 'components/modules/BlogListingCard'
+import { ProjectListingCardProps } from 'components/modules/ProjectListingCard'
 import {
   getAllBlogs,
   getAllFloors,
   getAllGlobals,
   getAllPages,
   getAllPosts,
-  getAllProjects,
+  getSanityData,
   getSettings,
 } from 'lib/sanity.client'
 import { Blog, Post, Project, Settings, Floor } from 'lib/sanity.queries'
@@ -23,8 +25,10 @@ export interface PageProps {
   settings: Settings
   preview: boolean
   token: string | null
-  projects?: Project[]
-  blogs?: Blog[]
+  projects?: ProjectListingCardProps
+  project?: ProjectListingCardProps['data'][0]
+  awardedProjects?: ProjectListingCardProps
+  blogs?: BlogListingCardProps
   floors?: Floor[]
 }
 
@@ -101,8 +105,18 @@ export const getStaticProps: GetStaticProps<
     pages = [...(await getAllPages({ _id: settings?.indexPage?._ref }))]
   }
 
-  const projects = await getAllProjects()
-  const blogs = await getAllBlogs()
+  const projects = (await getSanityData({
+    type: 'projects',
+    condition: `&& slug.current != null`,
+    limit: 12,
+  })) as any
+
+  const blogs = await getSanityData({
+    type: 'blogs',
+    condition: `&& slug.current != null`,
+    limit: 12,
+  })
+
   const floors = await getAllFloors()
 
   return {
