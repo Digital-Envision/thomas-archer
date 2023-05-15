@@ -7,6 +7,13 @@ export default defineType({
     type: 'object',
     fields: [
         defineField({
+            name: 'autoSlide',
+            title: 'Auto Slide',
+            type: 'boolean',
+            description: 'The slide will changes every 4 seconds',
+            initialValue: false,
+        }),
+        defineField({
             name: 'images',
             title: 'Images',
             type: 'array',
@@ -39,8 +46,8 @@ export default defineType({
     preview: {
         prepare() {
             return {
-                title: 'Carousel'
+                title: 'Carousel',
             }
-        }
-    }
+        },
+    },
 })

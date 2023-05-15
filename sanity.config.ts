@@ -21,8 +21,6 @@ import fixedComponentType from 'schemas/fixedComponent'
 import SectionHeadingParagraphCTAType from 'schemas/sections/SectionHeadingParagraphCTA'
 import SectionHeadingParagraphCTAImageType from 'schemas/sections/SectionHeadingParagraphCTAImage'
 import DividerType from 'schemas/sections/Divider'
-import Section3ColsCards from 'schemas/sections/Section3ColsCards'
-import Section2ColCards from 'schemas/sections/Section2ColCards'
 import SectionBlog from 'schemas/sections/SectionBlog'
 import SectionHeadingParagraphContactForm from 'schemas/sections/SectionHeadingParagraphContactForm'
 import SectionAwards from 'schemas/sections/SectionAwards'
@@ -59,6 +57,9 @@ import Section2ColImageTextFeaturedImageLeftRight from 'schemas/sections/Section
 import SectionAwardsListing from 'schemas/sections/SectionAwardsListing'
 import CTAs from 'schemas/sections/CTAs'
 import FloorPlanListing from 'schemas/sections/FloorPlanListing'
+import Steps from 'schemas/sections/Steps'
+import SectionVideoParagraphCTA from 'schemas/sections/SectionVideoParagraphCTA'
+import SectionColCards from 'schemas/sections/SectionColCards'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -89,9 +90,11 @@ export default defineConfig({
       fixedComponentType,
       Carousel,
       CTAs,
+      Steps,
       FloorPlanListing,
       SectionGalleryScroll,
       SectionProjectScroll,
+      SectionVideoParagraphCTA,
       SectionHeroImageBig,
       SectionHeroImageDefault,
       SectionHeroVideoBig,
@@ -100,7 +103,6 @@ export default defineConfig({
       SectionHeadingParagraphCTAType,
       SectionHeadingParagraphCTAImageType,
       DividerType,
-      Section3ColsCards,
       SectionBlog, // TODO DATASET LATER
       SectionHeadingParagraphContactForm,
       SectionAwards,
@@ -126,7 +128,7 @@ export default defineConfig({
       Floors,
       Facades,
 
-      Section2ColCards,
+      SectionColCards,
       Section2ColImageTextMosaicType2,
       Section2ColHeading2ColParagraph,
 

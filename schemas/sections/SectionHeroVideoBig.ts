@@ -8,6 +8,14 @@ export default defineType({
     type: 'object',
     fields: [
         defineField({
+            name: 'cover',
+            title: 'Cover Image',
+            type: 'image',
+            options: {
+                hotspot: false,
+            },
+        }),
+        defineField({
             name: 'isExternalVideo',
             title: 'Use External Video',
             type: 'boolean',

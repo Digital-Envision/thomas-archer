@@ -73,15 +73,17 @@ const ProjectScroll = ({
                   )}
                 </Box>
               </Box>
-              <Link
-                href={
-                  project?.slug?.current ? `/${project?.slug?.current}` : '#'
-                }
-              >
-                <Text mt={4} textDecor={'underline'}>
-                  {project?.heading}
-                </Text>
-              </Link>
+              {project?.heading && (
+                <Link
+                  href={
+                    project?.slug?.current ? `/${project?.slug?.current}` : '#'
+                  }
+                >
+                  <Text mt={4} textDecor={'underline'}>
+                    {project?.heading}
+                  </Text>
+                </Link>
+              )}
             </Box>
           )
         })}

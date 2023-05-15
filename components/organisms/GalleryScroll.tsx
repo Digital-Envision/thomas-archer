@@ -55,7 +55,12 @@ const HorizontalImage = ({ image, name, description }) => {
           userSelect: 'none',
         }}
       >
-        <Box width={'100%'} height={'100%'} position={'relative'}>
+        <Box
+          width={'100%'}
+          height={'100%'}
+          position={'relative'}
+          bg={'gray.100'}
+        >
           <Image
             src={image ? image : '#'}
             alt={name ? name : ''}
@@ -110,7 +115,12 @@ const VerticalImage = ({ image, name, description }) => {
           userSelect: 'none',
         }}
       >
-        <Box width={'100%'} height={'100%'} position={'relative'}>
+        <Box
+          width={'100%'}
+          height={'100%'}
+          position={'relative'}
+          bg={'gray.100'}
+        >
           <Image
             src={image ? image : '#'}
             alt={name ? name : ''}
