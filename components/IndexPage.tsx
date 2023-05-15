@@ -4,6 +4,8 @@ import PageBuilder from 'components/templates/PageBuilder'
 import Navbar from './organisms/Navbar'
 import Footer from './organisms/Footer'
 import { Box } from '@chakra-ui/react'
+import { ProjectListingCardProps } from './modules/ProjectListingCard'
+import { BlogListingCardProps } from './modules/BlogListingCard'
 
 export interface IndexPageProps {
   preview?: boolean
@@ -12,8 +14,9 @@ export interface IndexPageProps {
   pages?: any[]
   globals?: any
   settings: Settings
-  projects?: Project[]
-  blogs?: Blog[]
+  projects?: ProjectListingCardProps
+  awardedProjects?: ProjectListingCardProps
+  blogs?: BlogListingCardProps
   floors?: Floor[]
 }
 

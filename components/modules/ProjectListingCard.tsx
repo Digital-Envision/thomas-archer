@@ -4,8 +4,9 @@ import Heading3 from '../base/Heading3'
 import Text from '../base/Text'
 import { BsArrowRight } from 'react-icons/bs'
 import { urlForImage } from 'lib/sanity.image'
+import { PaginationData } from 'utils/interfaces'
 
-export type ProjectListingCardProps = {
+interface ProjectListingCardDataProps {
   image?: any // sanity io image
   imageUrl?: string // load image from url; test purpose
   link: string
@@ -18,7 +19,12 @@ export type ProjectListingCardProps = {
   slug?: { current: string }
 }
 
-const ProjectListingCard: React.FC<ProjectListingCardProps> = ({
+export type ProjectListingCardProps = {
+  data: ProjectListingCardDataProps[]
+  pagination: PaginationData
+}
+
+const ProjectListingCard: React.FC<ProjectListingCardProps['data'][0]> = ({
   imageUrl,
   image,
   link,

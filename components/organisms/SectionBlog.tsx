@@ -23,7 +23,7 @@ type SectionBlogProps = {
 const SectionBlog: React.FC<SectionBlogProps> = ({
   heading,
   headingTagLevel,
-  paragraph, // TODO
+  paragraph,
   marginTop,
   marginBottom,
   blogs,
@@ -74,7 +74,6 @@ const SectionBlog: React.FC<SectionBlogProps> = ({
               buttonText="Read More"
               buttonLink={`${asPath}/blog/${slug?.current}`}
               headingTagLevel={HeadingTagSemantic.H1}
-              // internalButton={}
               {...rest}
             />
           )

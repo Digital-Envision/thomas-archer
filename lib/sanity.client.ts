@@ -20,9 +20,41 @@ import { createClient } from 'next-sanity'
 /**
  * Checks if it's safe to create a client instance, as `@sanity/client` will throw an error if `projectId` is false
  */
-const client = projectId
+export const client = projectId
   ? createClient({ projectId, dataset, apiVersion, useCdn })
   : null
+
+
+export const getSanityData = async ({ type, condition = '', params = {}, page = 1, limit = 100, sortByField = '_createdAt', sortOrder = 'desc', options = '' }) => {
+  try {
+    const query = `*[_type == "${type}" ${condition}] | order(${sortByField} ${sortOrder})`
+
+    const slicingQuery = `[$firstIndex..$lastIndex]`
+    const slicingParams = {
+      firstIndex: (page - 1) * limit,
+      lastIndex: (page - 1) * limit + limit - 1,
+
+    };
+
+    const data = await client.fetch(query + slicingQuery, { ...slicingParams, ...params });
+    const counts = await client.fetch(`count(${query})`, params);
+
+    const pages = Math.ceil(counts / limit);
+    const isMore = page < pages;
+    const pagination = {
+      page,
+      limit,
+      counts,
+      pages,
+      isMore,
+    }
+
+    return { pagination, data };
+  } catch (error) {
+    console.error('Error fetching Sanity data:', error);
+    return null;
+  }
+}
 
 export async function getSettings(): Promise<Settings> {
   if (client) {

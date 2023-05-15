@@ -6,16 +6,39 @@ import _ from 'lodash'
 import { useRouter } from 'next/router'
 
 import AwardListingCard from 'components/modules/AwardListingCard'
+import { useState } from 'react'
+import { getSanityData } from 'lib/sanity.client'
 
 type SectionAwardsListingProps = {
-  projects: ProjectListingCardProps[]
+  awardedProjects: ProjectListingCardProps
   marginTop: HeightVariants
   marginBottom: HeightVariants
 }
 
 const SectionAwardsListing: React.FC<SectionAwardsListingProps> = (props) => {
-  const { marginTop, marginBottom, projects } = props
+  const { marginTop, marginBottom, awardedProjects: _projects } = props
   const { asPath } = useRouter()
+  const [projects, setProjects] = useState(_projects)
+
+  const handleViewMore = async () => {
+    const currentPagination = projects?.pagination
+
+    if (!currentPagination?.isMore) return
+
+    const newProjects = await getSanityData({
+      type: 'projects',
+      condition: `&& slug.current != null  && award.awards != null`,
+      page: currentPagination?.page + 1,
+      limit: 12,
+    })
+
+    setProjects((prev) => {
+      return {
+        pagination: { ...newProjects.pagination },
+        data: [...prev.data, ...newProjects.data],
+      }
+    })
+  }
 
   return (
     <Flex
@@ -26,42 +49,44 @@ const SectionAwardsListing: React.FC<SectionAwardsListingProps> = (props) => {
       align={'center'}
       width={'100%'}
       maxWidth={'1800px'}
-      px={'1rem'}
+      px={{ base: '1rem', md: '4rem' }}
       marginTop={marginTop}
       marginBottom={marginBottom}
       direction="column"
     >
       <Box mt={'2rem'} />
 
-      <Box alignSelf={'flex-start'} pl={['1rem', '1rem', '1rem', '3rem']}>
-        <Grid
-          templateColumns={{
-            base: 'repeat(1, 1fr)',
-            md: 'repeat(2, 1fr)',
-            lg: 'repeat(3, 1fr)',
-          }}
-          gap={{
-            base: 2,
-            md: 4,
-            lg: '3vh',
-          }}
-        >
-          {projects.map((props) => {
-            return (
-              <>
-                <AwardListingCard
-                  {...props}
-                  link={`${asPath}/project/${props?.slug?.current}`}
-                />
-              </>
-            )
-          })}
-        </Grid>
-      </Box>
+      <Grid
+        templateColumns={{
+          base: 'repeat(1, 1fr)',
+          md: 'repeat(2, 1fr)',
+          lg: 'repeat(3, 1fr)',
+        }}
+        gap={{
+          base: 2,
+          md: 4,
+          lg: '3vh',
+        }}
+      >
+        {projects?.data.map((props) => {
+          return (
+            <AwardListingCard
+              {...props}
+              link={`${asPath}/project/${props?.slug?.current}`}
+            />
+          )
+        })}
+      </Grid>
       <Box pt="1rem" />
-      <Button type="submit" variant={Variants.blackLine}>
-        Load More Inspiration
-      </Button>
+      {projects?.pagination?.isMore && (
+        <Button
+          type="submit"
+          variant={Variants.blackLine}
+          onClick={handleViewMore}
+        >
+          Load More Inspiration
+        </Button>
+      )}
     </Flex>
   )
 }

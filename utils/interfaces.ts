@@ -6,3 +6,12 @@ export interface SanityFiles {
 	_key: string
 	_type: string
 }
+
+
+export interface PaginationData {
+	page: number;
+	limit: number;
+	counts: number;
+	pages: number;
+	isMore: boolean;
+}
