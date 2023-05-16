@@ -1,19 +1,6 @@
 import { HeightVariants } from 'components/base/Divider'
 import { enumToArrayOfObjects } from 'lib/utils'
-
-// Define a custom validation function for a Vimeo video URL
-function validateVimeoUrl(url) {
-    // Extract the video ID from the URL
-    const match = url.match(/^https?:\/\/player\.vimeo\.com\/video\/(\d+)/i)
-    const videoId = match && match[1]
-
-    // Check that the URL matches the expected format and that the video ID is valid
-    if (!videoId) {
-        return 'Please enter a valid Vimeo video URL in the format https://player.vimeo.com/video/{ID}'
-    }
-
-    return true
-}
+import { validateVimeoUrl } from 'utils/checkVideoResource'
 
 export default {
     name: 'SectionVideoParagraphCTA',

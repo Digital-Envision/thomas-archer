@@ -1,3 +1,6 @@
+import _ from 'lodash'
+import { validateVimeoUrl } from 'utils/checkVideoResource'
+
 export default {
     type: 'object',
     name: 'ArticleBlogCard',
@@ -19,6 +22,30 @@ export default {
             name: 'image',
             title: 'Image',
             type: 'image',
+        },
+        {
+            name: 'isVideoMode',
+            title: 'Use Video Mode',
+            type: 'boolean',
+            validation: (Rule) =>
+                Rule.custom((value, { parent }) => {
+                    if (!value && !_.isEmpty(parent?.video)) {
+                        return 'Please remove the video url first'
+                    }
+
+                    return true
+                }),
+        },
+        {
+            name: 'video',
+            title: 'Video',
+            type: 'url',
+            description: 'Please input vimeo url',
+            validation: (Rule) =>
+                Rule.custom((url, { parent }) =>
+                    validateVimeoUrl(url, !parent?.isVideoMode)
+                ),
+            hidden: ({ parent }) => !parent.isVideoMode,
         },
         {
             name: 'button',

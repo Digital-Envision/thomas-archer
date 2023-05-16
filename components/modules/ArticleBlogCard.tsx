@@ -9,6 +9,8 @@ import { HeadingTagSemantic } from 'components/base/Heading1'
 import { LinksInterface } from 'components/organisms/Navbar'
 import Image from 'next/image'
 import { HiChevronRight } from 'react-icons/hi2'
+import { useState } from 'react'
+import ModalVideo from './ModalVideo'
 
 export type ArticleBlogCardProps = {
   image?: any // sanity io image
@@ -18,6 +20,8 @@ export type ArticleBlogCardProps = {
   headingTagLevel: HeadingTagSemantic
   paragraph: string
   button?: LinksInterface
+  video?: string
+  isVideoMode?: boolean
 }
 
 // TODO offset when there's createdAt
@@ -37,9 +41,24 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
   headingTagLevel,
   paragraph,
   button,
+  video,
+  isVideoMode,
 }) => {
+  const [playVideo, setPlayVideo] = useState(false)
+
+  const onCloseVideo = () => {
+    setPlayVideo(false)
+  }
+
   return (
     <Flex flexDir={'column'} width={'100%'}>
+      {isVideoMode && video && (
+        <ModalVideo
+          isOpen={playVideo}
+          onClose={onCloseVideo}
+          videoUrl={video}
+        />
+      )}
       <Box
         mb={'8'}
         minH={{
@@ -73,6 +92,30 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
             objectFit="cover"
             objectPosition="center"
           />
+          {isVideoMode && video && (
+            <Box
+              zIndex={2}
+              height={'100%'}
+              width={'100%'}
+              position={'absolute'}
+              display={'flex'}
+              alignItems={'center'}
+              justifyContent={'center'}
+            >
+              <Circle
+                size="140px"
+                bg="transparent"
+                border={'5px solid white'}
+                pt={1}
+                fontSize={'100px'}
+                color={'white'}
+                cursor={'pointer'}
+                onClick={() => setPlayVideo(true)}
+              >
+                <HiChevronRight />
+              </Circle>
+            </Box>
+          )}
         </Box>
       </Box>
       <Flex flex="1" flexDirection={'column'} px="8">
@@ -95,7 +138,14 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
         </Box>
 
         <Flex mt="auto" pt={6} gap={5}>
-          <Button variant={Variants.blackLine}>Watch Video</Button>
+          {isVideoMode && video && (
+            <Button
+              variant={Variants.blackLine}
+              onClick={() => setPlayVideo(true)}
+            >
+              Watch Video
+            </Button>
+          )}
           {button?.label && (
             <Link
               href={
