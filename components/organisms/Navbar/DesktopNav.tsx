@@ -76,7 +76,7 @@ const DesktopNav: React.FC<Props> = ({
           height={'full'}
           justifyContent={'right'}
           pr={'3.5em'}
-          pt={'3.8em'}
+          pt={'4.4em'}
         >
           {NAV_ITEMS?.map((link, key) => {
             return (

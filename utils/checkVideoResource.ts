@@ -26,3 +26,22 @@ export const isVimeoOrYouTubeEmbedURL = (url: string) => {
     }
   }
 }
+
+export const validateVimeoUrl = (url: string, disabled?: boolean) => {
+  if (disabled) {
+    return true
+  }
+
+  if (url) {
+    // Extract the video ID from the URL
+    const match = url.match(/^https?:\/\/player\.vimeo\.com\/video\/(\d+)/i)
+    const videoId = match && match[1]
+
+    // Check that the URL matches the expected format and that the video ID is valid
+    if (!videoId) {
+      return 'Please enter a valid Vimeo video URL in the format https://player.vimeo.com/video/{ID}'
+    }
+  }
+
+  return true
+}

@@ -4,6 +4,7 @@ import ArticleBlogCard, {
 } from 'components/modules/ArticleBlogCard'
 import { HeightVariants } from 'components/base/Divider'
 import { HeadingTagSemantic } from 'components/base/Heading1'
+import { useEffect } from 'react'
 
 type Section2ColCardsProps = {
   marginTop: HeightVariants
