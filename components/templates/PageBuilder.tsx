@@ -31,10 +31,12 @@ import SectionInclusions from 'components/organisms/SectionInclusions'
 import SectionProjectListing from 'components/organisms/SectionProjectListing'
 import SectionVideoParagraphCTA from 'components/organisms/SectionVideoParagraphCTA'
 import Steps from 'components/organisms/Steps'
+import _ from 'lodash'
 import React from 'react'
 
 const PageBuilder = ({ pages, ...rest }) => {
-  const content = (pages?.[0]?.content || [])
+  const page = pages?.[0] //current  page documents
+  const content = (page?.content || [])
     .filter((c) => !c.disabled)
     .map((c) => {
       let el = null
@@ -64,7 +66,7 @@ const PageBuilder = ({ pages, ...rest }) => {
           el = <SectionHeroImageDefault {...c} />
           break
         case 'SectionBreadcrumbs':
-          el = <SectionBreadcrumbs {...c} />
+          el = <SectionBreadcrumbs {...c} {...rest} page={page} />
           break
         case 'SectionHeroImageBig':
           el = <SectionHeroImageBig {...c} />
