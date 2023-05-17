@@ -37,6 +37,7 @@
     "sanity": "3.7.1",
     "sanity-plugin-asset-source-unsplash": "1.0.6",
     "sanity-plugin-dashboard-widget-netlify": "^2.0.1",
+    "sass": "^1.62.1",
     "suspend-react": "0.0.9",
     "swr": "2.1.1"
   },

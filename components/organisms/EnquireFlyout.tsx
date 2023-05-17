@@ -1,20 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   Box,
   Drawer,
   DrawerContent,
   DrawerOverlay,
   Flex,
-  FormControl,
-  FormErrorMessage,
-  Textarea,
-  VStack,
 } from '@chakra-ui/react'
 import Input from 'components/base/Input'
 import Heading1 from 'components/base/Heading1'
 import Text from 'components/base/Text'
 import Button, { Variants as ButtonVariants } from 'components/base/Button'
-import { Controller, useForm } from 'react-hook-form'
 import { HeightVariants } from 'components/base/Divider'
 import ButtonIcon from 'components/base/ButtonIcon'
 import Close from 'components/icon/Close'
@@ -36,16 +31,33 @@ const EnquireFlyout = ({
   privacyAndPolicy,
   contact,
 }) => {
-  const {
-    register,
-    formState: { errors },
-    control,
-  } = useForm<FormInputs>()
+  const region = 'na1'
+  const portalId = '8929845'
+  const formId = 'bdf6ff06-20d1-43c8-94d0-605a164255f1'
+
+  useEffect(() => {
+    const script = document.createElement('script')
+    script.src = 'https://js.hsforms.net/forms/shell.js'
+    document.body.appendChild(script)
+
+    script.addEventListener('load', () => {
+      // @TS-ignore
+      if ((window as any).hbspt) {
+        // @TS-ignore
+        ;(window as any).hbspt.forms.create({
+          region: region,
+          portalId: portalId,
+          formId: formId,
+          target: '#hubspotForm',
+        })
+      }
+    })
+  }, [isOpen])
 
   return (
     <Drawer isOpen={isOpen} placement={'right'} onClose={onClose} size={'lg'}>
       <DrawerOverlay />
-      <DrawerContent py={'33px'}>
+      <DrawerContent py={'33px'} overflowY={'auto'}>
         <Flex justifyContent={'right'} px={'36px'} mb={'47px'}>
           <ButtonIcon aria-label="close-button" onClick={onClose}>
             <Close />
@@ -92,141 +104,29 @@ const EnquireFlyout = ({
           </Box>
 
           <Flex direction={'column'} flex={1} px={2}>
-            <form>
-              <VStack spacing="4">
-                <Controller
-                  name="name"
-                  control={control}
-                  rules={{ required: 'This field is required' }}
-                  render={({ field: { onChange, value } }) => (
-                    <FormControl isInvalid={!!errors.name}>
-                      <Input
-                        placeholder="Name*"
-                        type="text"
-                        id="name"
-                        onChange={onChange}
-                        value={value}
-                      />
-                      <FormErrorMessage>
-                        This field is required
-                      </FormErrorMessage>
-                    </FormControl>
-                  )}
-                />
-
-                <Controller
-                  name="contactNumber"
-                  control={control}
-                  rules={{ required: 'This field is required' }}
-                  render={({ field: { onChange, value } }) => (
-                    <FormControl isInvalid={!!errors.contactNumber}>
-                      <Input
-                        placeholder="Contact Number*"
-                        type="tel"
-                        id="contactNumber"
-                        onChange={onChange}
-                        value={value}
-                      />
-                      <FormErrorMessage>
-                        Please enter a valid phone number
-                      </FormErrorMessage>
-                    </FormControl>
-                  )}
-                />
-
-                <Controller
-                  name="email"
-                  control={control}
-                  rules={{ required: 'This field is required' }}
-                  render={({ field: { onChange, value } }) => (
-                    <FormControl isInvalid={!!errors.email}>
-                      <Input
-                        placeholder="Email Address*"
-                        type="email"
-                        id="email"
-                        onChange={onChange}
-                        value={value}
-                      />
-                      <FormErrorMessage>
-                        Please enter a valid email address
-                      </FormErrorMessage>
-                    </FormControl>
-                  )}
-                />
-
-                <FormControl isInvalid={!!errors.message}>
-                  <Textarea
-                    {...register('message', { required: false })}
-                    bg={'transparent'}
-                    outline={0}
-                    boxShadow="none"
-                    px={0}
-                    borderColor="#898989"
-                    borderRadius={0}
-                    borderTop={0}
-                    borderX={0}
-                    _focus={{
-                      borderColor: '#898989',
-                      borderTopColor: 'transparent',
-                      outline: 'none',
-                      boxShadow: 'none',
-                      resize: 'vertical',
-                    }}
-                    _placeholder={{
-                      color: '#898989',
-                    }}
-                    fontWeight={300}
-                    fontSize={'12px'}
-                    lineHeight={'base'}
-                    placeholder="Your Message"
-                    id="message"
-                    minHeight="initial"
-                    overflow="hidden"
-                    onChange={(event) => {
-                      event.target.style.height = 'auto'
-                      event.target.style.height = `${event.target.scrollHeight}px`
-                    }}
-                  />
-                  <FormErrorMessage>This field is required</FormErrorMessage>
-                </FormControl>
-
-                <Flex
-                  pt={2}
-                  width={'100%'}
-                  flex={1}
-                  direction={'row'}
-                  justify={'space-between'}
-                  alignItems={'center'}
-                >
-                  <Button type="submit" variant={ButtonVariants.blackLine}>
-                    Submit Enquiry
-                  </Button>
-                  <Text fontSize={'12px'}>*Required Fields.</Text>
-                </Flex>
-              </VStack>
-
-              <Box pt={HeightVariants.more} />
-              <Text>
-                By submitting this form you are consenting to receive marketing
-                communications from Thomas Archer in future, on the
-                understanding that you have read and agree to our{' '}
-                <Link
-                  href={
-                    privacyAndPolicy?.useInternal
-                      ? privacyAndPolicy?.useInternal
-                        ? `/${privacyAndPolicy?.internalHref}`
-                        : '#'
-                      : privacyAndPolicy?.externalHref
-                      ? privacyAndPolicy?.externalHref
+            <Box id="hubspotForm"></Box>
+            <Text mt={'53px'} fontSize={'xs'}>
+              By submitting this form you are consenting to receive marketing
+              communications from Thomas Archer in future, on the understanding
+              that you have read and agree to our{' '}
+              <Link
+                href={
+                  privacyAndPolicy?.useInternal
+                    ? privacyAndPolicy?.useInternal
+                      ? `/${privacyAndPolicy?.internalHref}`
                       : '#'
-                  }
-                  target={privacyAndPolicy?.isExternal ? '_blank' : ''}
-                >
-                  Privacy and
-                </Link>
-                Data Collection Statement and that you can opt-out at any time.
-              </Text>
-            </form>
+                    : privacyAndPolicy?.externalHref
+                    ? privacyAndPolicy?.externalHref
+                    : '#'
+                }
+                target={privacyAndPolicy?.isExternal ? '_blank' : ''}
+              >
+                <Text as={'span'} fontSize={'xs'} textDecor={'underline'}>
+                  Privacy and Data Collection Statement
+                </Text>
+              </Link>{' '}
+              and that you can opt-out at any time.
+            </Text>
           </Flex>
         </Box>
       </DrawerContent>

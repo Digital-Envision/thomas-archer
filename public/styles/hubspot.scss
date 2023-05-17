@@ -1,0 +1,63 @@
+.hs-form-field {
+	margin-bottom: 32px;
+	font-family: 'Helvetica Neue LT Std', sans-serif;
+
+	input {
+		border-bottom: 1px solid #898989;
+		outline: none;
+		width: 100%;
+		font-size: 12px;
+		padding: 14px 0px 14px 0px;
+		&:focus {
+			outline: none;
+			border-bottom-color: black;
+			&::placeholder {
+				color: black;
+			}
+		}
+	}
+
+	textarea {
+		border-bottom: 1px solid #898989;
+		outline: none;
+		width: 100%;
+		font-size: 12px;
+		padding: 14px 0px 14px 0px;
+		&:focus {
+			outline: none;
+			border-bottom-color: black;
+			&::placeholder {
+				color: black;
+			}
+		}
+	}
+}
+
+.hs-error-msgs {
+	display: none;
+}
+
+.invalid {
+	border-bottom-color: red !important;
+}
+
+.error {
+	border-bottom-color: red !important;
+}
+
+.hs-button {
+	padding: 10px 24px 6px 24px;
+	border: 1px solid black;
+	border-radius: 25px;
+	font-size: 14px;
+	font-family: 'Helvetica Neue LT Std', sans-serif;
+	background: white;
+	margin-top: 40px;
+	cursor: pointer;
+	transition: all 0.2s;
+
+	&:hover {
+		background: black;
+		color: white;
+	}
+}
