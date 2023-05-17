@@ -22,9 +22,11 @@ import { EmbeddedVideoPlayer } from 'components/modules/SectionHeroVideoBig'
 import { HeightVariants } from 'components/base/Divider'
 import SectionImageAwards from 'components/modules/SectionImageAwards'
 
+// TODO FIX page props
 export default function ProjectPageTemplate(props: any) {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const { settings, preview, pages, globals, projects, project } = props // rest should be projects..etc
+  const { settings, preview, pages, globals, projects, project, routeDetail } =
+    props // rest should be projects..etc
 
   return (
     <Box bgColor="white">
@@ -40,6 +42,7 @@ export default function ProjectPageTemplate(props: any) {
       <SectionHeroImageBig {...project?.page?.SectionHeroImageBig} />
       <SectionBreadcrumbs
         {...project?.page?.SectionBreadcrumbs}
+        routeDetail={routeDetail}
         marginTop={HeightVariants.less}
         marginBottom={HeightVariants.less}
       />

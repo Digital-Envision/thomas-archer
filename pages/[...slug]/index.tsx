@@ -142,9 +142,16 @@ export const getStaticProps: GetStaticProps<
     ]
   }
 
+  if (
+    _.isEmpty(pages) ||
+    (!_.isEmpty(routeDetail?.detail) && routeDetail?.detail?.length < 2)
+  ) {
+    return { notFound: true }
+  }
+
   // if detail page, fetch customized data based on document type and params
-  const isDetailPage = !_.isEmpty(routeDetail?.detail)
-  if (isDetailPage) {
+
+  if (routeDetail.isDetailPage) {
     pageProps = await setPropsForDetailPage({ routeDetail, page: pages?.[0] })
   } else {
     // else, fetch universal data
@@ -155,11 +162,13 @@ export const getStaticProps: GetStaticProps<
   return {
     props: {
       settings,
+      // isDetailPage,
       pages,
       globals,
       preview,
       token: previewData.token ?? null,
       routeDetail,
+      // routeDetail: { ...routeDetail, isDetailPage },
       ...pageProps,
     },
   }

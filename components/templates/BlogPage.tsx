@@ -9,8 +9,9 @@ import { PortableText } from '@portabletext/react'
 import Text from 'components/base/Text'
 import Heading1 from 'components/base/Heading1'
 
+// TODO FIX page props
 export default function BlogPageTemplate(props: any) {
-  const { settings, preview, pages, globals, blog } = props // rest should be projects..etc
+  const { settings, preview, pages, globals, blog, routeDetail } = props // rest should be projects..etc
 
   return (
     <Box bgColor="#FFFFFF">
@@ -22,7 +23,10 @@ export default function BlogPageTemplate(props: any) {
         socialMedia={globals.SocialMedia}
         specialButtons={globals.SpecialButtons}
       />
-      <SectionBreadcrumbs {...blog?.page?.SectionBreadcrumbs} />
+      <SectionBreadcrumbs
+        {...blog?.page?.SectionBreadcrumbs}
+        routeDetail={routeDetail}
+      />
 
       <Box pb={'4rem'} />
 

@@ -9,6 +9,7 @@ import { useEffect } from 'react'
 import FloorPlanDetails from 'components/organisms/FloorPlanDetails'
 import GalleryScroll from 'components/organisms/GalleryScroll'
 import { HeightVariants } from 'components/base/Divider'
+import { RouteDetail } from 'utils/interfaces'
 
 export interface FloorPageProps {
   preview?: boolean
@@ -17,10 +18,11 @@ export interface FloorPageProps {
   globals?: any
   //settings: Settings
   floors?: Floor
+  routeDetail: RouteDetail
 }
 
 export default function FloorPageTemplate(props: FloorPageProps) {
-  const { pages, globals, floors } = props // rest should be projects..etc
+  const { pages, globals, floors, routeDetail } = props // rest should be projects..etc
 
   return (
     <>
