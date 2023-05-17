@@ -33,7 +33,7 @@ const SectionBreadcrumbs: React.FC<SectionBreadcrumbsProps> = (props) => {
       const href = '/' + pathArray.slice(0, index + 1).join('/')
       return {
         href,
-        label: path.charAt(0).toUpperCase() + path.slice(1),
+        label: _.startCase(path),
       }
     }),
   ]
@@ -54,7 +54,7 @@ const SectionBreadcrumbs: React.FC<SectionBreadcrumbsProps> = (props) => {
           const lastItem = breadcrumbsNav.length === i + 1
 
           return (
-            <BreadcrumbItem isCurrentPage={lastItem}>
+            <BreadcrumbItem isCurrentPage={lastItem} key={`${label}-${i}`}>
               <BreadcrumbLink href={href}>{label}</BreadcrumbLink>
             </BreadcrumbItem>
           )

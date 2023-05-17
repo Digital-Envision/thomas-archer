@@ -173,6 +173,7 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
                 allowToggle
                 minW={'70px'}
                 style={{ borderColor: null, borderWidth: 0 }}
+                key={filter._key}
               >
                 <AccordionItem key={filter._key} border={0}>
                   {({ isExpanded }) => (
@@ -233,7 +234,7 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
           overflow="hidden"
         >
           {showedData?.map((item) => (
-            <Box onClick={() => handleListItemClick(item)}>
+            <Box onClick={() => handleListItemClick(item)} key={item?._key}>
               <Image
                 key={urlForImage(item.image)?.url()}
                 w="100%"

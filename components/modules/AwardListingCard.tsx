@@ -69,7 +69,7 @@ const AwardListingCard: React.FC<AwardListingCardProps> = ({
           {!_.isEmpty(award?.awards) &&
             _.slice(award?.awards, 0, 2).map((award) => {
               return (
-                <Flex direction={'column'} flex={1}>
+                <Flex direction={'column'} flex={1} key={award._key}>
                   <Text fontWeight={'bold'}>{award.name}</Text>
                   <Text>{award.description}</Text>
                 </Flex>
