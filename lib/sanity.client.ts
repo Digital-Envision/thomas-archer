@@ -25,6 +25,18 @@ export const client = projectId
   : null
 
 
+export const getSanityDataById = async ({ type, condition = '' }) => {
+  try {
+    const query = `*[_type == "${type}" ${condition}]`
+    const [data] = await client.fetch(query);
+
+    return data;
+  } catch (error) {
+    console.error('Error fetching Sanity data:', error);
+    return null;
+  }
+}
+
 export const getSanityData = async ({ type, condition = '', params = {}, page = 1, limit = 100, sortByField = '_createdAt', sortOrder = 'desc', options = '' }) => {
   try {
     const query = `*[_type == "${type}" ${condition}] | order(${sortByField} ${sortOrder})`

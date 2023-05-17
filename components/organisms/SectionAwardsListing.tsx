@@ -68,10 +68,11 @@ const SectionAwardsListing: React.FC<SectionAwardsListingProps> = (props) => {
           lg: '3vh',
         }}
       >
-        {projects?.data.map((props) => {
+        {projects?.data.map((props, i) => {
           return (
             <AwardListingCard
               {...props}
+              key={`${props?.slug?.current}-${i}`}
               link={`${asPath}/project/${props?.slug?.current}`}
             />
           )

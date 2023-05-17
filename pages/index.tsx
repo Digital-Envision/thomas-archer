@@ -15,11 +15,12 @@ import { Blog, Post, Project, Settings, Floor } from 'lib/sanity.queries'
 import _ from 'lodash'
 import { GetStaticProps } from 'next'
 import { lazy, useEffect } from 'react'
+import { setPropsForPage } from 'utils/page'
 
 const PreviewIndexPage = lazy(() => import('components/PreviewIndexPage'))
 
 export interface PageProps {
-  posts: Post[]
+  posts?: Post[]
   pages: any[]
   globals: any[]
   settings: Settings
@@ -94,9 +95,8 @@ export const getStaticProps: GetStaticProps<
 > = async (ctx) => {
   const { preview = false, previewData = {} } = ctx
   let pages = []
-  const [settings, posts = [], globals = []] = await Promise.all([
+  const [settings, globals = []] = await Promise.all([
     getSettings(),
-    getAllPosts(), // can remove
     getAllGlobals(),
   ])
 
@@ -105,31 +105,18 @@ export const getStaticProps: GetStaticProps<
     pages = [...(await getAllPages({ _id: settings?.indexPage?._ref }))]
   }
 
-  const projects = (await getSanityData({
-    type: 'projects',
-    condition: `&& slug.current != null`,
-    limit: 12,
-  })) as any
-
-  const blogs = await getSanityData({
-    type: 'blogs',
-    condition: `&& slug.current != null`,
-    limit: 12,
-  })
-
-  const floors = await getAllFloors()
+  // fetch universal data
+  const pageProps = await setPropsForPage()
+  // TODO fetch data based on page content, example: if there's SectionProjectLlisting, need to fetch projects
 
   return {
     props: {
-      posts,
-      projects,
-      blogs,
-      floors,
       settings,
       pages,
       globals,
       preview,
       token: previewData.token ?? null,
+      ...pageProps,
     },
   }
 }
