@@ -15,3 +15,6 @@ export interface PaginationData {
 	pages: number;
 	isMore: boolean;
 }
+export interface RouteDetail {
+	route: []; detail: []; isDetailPage: boolean
+}

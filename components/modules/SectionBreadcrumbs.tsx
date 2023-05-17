@@ -7,14 +7,16 @@ import {
 import { HeightVariants } from 'components/base/Divider'
 import { useRouter } from 'next/router'
 import _ from 'lodash'
+import { RouteDetail } from 'utils/interfaces'
 
 type SectionBreadcrumbsProps = {
   marginTop: HeightVariants
   marginBottom: HeightVariants
+  routeDetail: RouteDetail
 }
 
 const SectionBreadcrumbs: React.FC<SectionBreadcrumbsProps> = (props) => {
-  const { marginBottom, marginTop } = props
+  const { marginBottom, marginTop, routeDetail } = props
   const { asPath } = useRouter()
 
   // TODO HOW TO ADJUST [BLOG/PROJECT/] to be linked to the route before that
@@ -53,9 +55,18 @@ const SectionBreadcrumbs: React.FC<SectionBreadcrumbsProps> = (props) => {
           const { href, label } = o
           const lastItem = breadcrumbsNav.length === i + 1
 
+          // handle project/blog/floor breadcrumbs
+          const isOnTypeDetail =
+            routeDetail?.isDetailPage && breadcrumbsNav.length === i + 2
+          const routeHref =
+            routeDetail?.isDetailPage &&
+            breadcrumbsNav[breadcrumbsNav.length - 3].href
+
           return (
             <BreadcrumbItem isCurrentPage={lastItem} key={`${label}-${i}`}>
-              <BreadcrumbLink href={href}>{label}</BreadcrumbLink>
+              <BreadcrumbLink href={isOnTypeDetail ? routeHref : href}>
+                {label}
+              </BreadcrumbLink>
             </BreadcrumbItem>
           )
         })}

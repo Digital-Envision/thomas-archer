@@ -13,7 +13,9 @@ export const getRouteDetail = (testCase) => {
         result[currentPart].push(item)
     })
 
-    return result
+    const isDetailPage = !_.isEmpty(result?.detail)
+
+    return { ...result, isDetailPage }
 }
 
 export const setPropsForPage = async () => {
