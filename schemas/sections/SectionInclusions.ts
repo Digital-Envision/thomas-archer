@@ -6,21 +6,6 @@ export default {
     title: 'SectionInclusions',
     fields: [
         {
-            name: 'heading',
-            title: 'Heading',
-            type: 'string',
-        },
-        {
-            name: 'headingTagLevel',
-            title: 'Heading Tag Level',
-            type: 'string',
-            options: {
-                list: [
-                    'H1', 'H2', 'H3'
-                ],
-            },
-        },
-        {
             name: 'items',
             type: 'array',
             of: [
@@ -35,7 +20,7 @@ export default {
                         },
                         {
                             name: 'paragraph',
-                            type: 'string'
+                            type: 'text'
                         },
                         {
                             name: 'image',
@@ -48,6 +33,50 @@ export default {
                     ]
                 }
             ]
+        },
+        {
+            name: 'brochure',
+            title: 'Brochure',
+            type: 'object',
+            options: {
+                collapsible: true,
+                collapsed: true,
+            },
+            fields: [
+                {
+                    name: 'file',
+                    title: 'File',
+                    type: 'file',
+                    options: {
+                        accept: '.pdf',
+                        // accept: '.png,.jpeg,.jpg,.pdf,.doc,.docx,.xls,.xlsx',
+                        storeOriginalFilename: true
+                    },
+                },
+                {
+                    name: 'isFileDownloadable',
+                    title: 'Is File Downloadable?',
+                    type: 'boolean',
+                    hidden: ({ parent }) => !parent?.file,
+                    description: 'if toggled off, download button will be hidden',
+                },
+            ]
+        },
+        {
+            name: 'button',
+            title: 'Button',
+            type: 'object',
+            options: {
+                collapsible: true,
+                collapsed: true,
+            },
+            fields: [
+                {
+                    name: 'label',
+                    title: 'Name',
+                    type: 'string',
+                },
+            ],
         },
         {
             title: 'Margin Top',

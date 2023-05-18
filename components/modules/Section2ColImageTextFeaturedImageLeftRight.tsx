@@ -39,9 +39,6 @@ const Section2ColImageTextFeaturedImageLeftRight: React.FC<
         md: IsImageRight ? 'column' : 'column-reverse',
         lg: IsImageRight ? 'row' : 'row-reverse',
       }}
-      width={'w-full'}
-      maxWidth={'1800px'}
-      px={{ base: '1rem', md: '4rem' }}
       marginTop={marginTop}
       marginBottom={marginBottom}
     >
@@ -49,42 +46,47 @@ const Section2ColImageTextFeaturedImageLeftRight: React.FC<
         <Flex
           flex={1}
           direction={'column'}
-          justify="space-between"
+          alignItems={IsImageRight ? 'flex-end' : 'flex-start'}
+          justify="center"
           height={'100%'}
-          py={'2rem'}
+          maxWidth="800px"
+          px={{ base: '1rem', sm: '1rem', lg: 0 }}
+          pr={!IsImageRight && { base: 0, sm: 0, lg: '4rem' }}
+          pl={IsImageRight && { base: 0, sm: 0, lg: '4rem' }}
         >
-          <Box fontFamily={'heading'}>
+          <Box fontFamily={'heading'} pb="34px" maxWidth="800px">
             <PortableText value={quotes} />
           </Box>
 
+          <Text pb="34px">{postedBy}</Text>
+
           <Box>
-            <Text>{postedBy}</Text>
-            <Box pt={5}>
-              {button.label && (
-                <Link
-                  href={
-                    button?.useInternal
-                      ? button?.internalHref
-                        ? `/${button?.internalHref}`
-                        : '#'
-                      : button?.externalHref
-                      ? button?.externalHref
+            {button.label && (
+              <Link
+                href={
+                  button?.useInternal
+                    ? button?.internalHref
+                      ? `/${button?.internalHref}`
                       : '#'
-                  }
-                  target={button?.isExternal ? '_blank' : ''}
-                >
-                  <Button variant={Variants.blackLine}>{button?.label}</Button>
-                </Link>
-              )}
-            </Box>
+                    : button?.externalHref
+                    ? button?.externalHref
+                    : '#'
+                }
+                target={button?.isExternal ? '_blank' : ''}
+              >
+                <Button variant={Variants.blackLine}>{button?.label}</Button>
+              </Link>
+            )}
           </Box>
         </Flex>
       </Flex>
 
-      <Box p="1rem" />
+      <Box p="2rem" />
 
-      <Flex flex={1.3} justify={'center'}>
+      <Flex flex={1.3} bgColor="blue.100">
         <Image
+          width="100%"
+          height={'auto'}
           objectFit={'cover'}
           src={(image && urlForImage(image).url()) || ''}
           alt={heading}
