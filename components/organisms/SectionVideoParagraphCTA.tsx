@@ -32,9 +32,49 @@ const SectionVideoParagraphCTA = ({
           videoUrl={video?.video}
         />
       )}
-      <Box mb={'30px'} width={'100%'} height={'800px'}>
-        <Box position={'absolute'} width={'100%'} height={'800px'} px={'76px'}>
-          <Box position={'relative'} width={'100%'} height={'100%'}>
+      <Box
+        mb={'30px'}
+        width={'100%'}
+        minHeight={{
+          base: '320px',
+        }}
+        height={{
+          base: 'calc((150vw - 13rem)*.650)',
+          sm: 'calc((150vw - 15rem)*.650)',
+          md: 'calc(60vw - 6rem)',
+          lg: 'calc((67vw - 1rem)*.800)',
+          xl: 'calc((82vw - 13rem)*.720)',
+          '2xl': 'calc((82vw - 3rem)*.600)',
+        }}
+        maxH={{
+          '2xl': 'calc((73vw - 7rem)*.730)',
+        }}
+      >
+        <Box
+          position={'absolute'}
+          width={'100%'}
+          minHeight={{
+            base: '320px',
+          }}
+          height={{
+            base: 'calc((150vw - 13rem)*.650)',
+            sm: 'calc((150vw - 15rem)*.650)',
+            md: 'calc(60vw - 6rem)',
+            lg: 'calc((67vw - 1rem)*.800)',
+            xl: 'calc((82vw - 13rem)*.720)',
+            '2xl': 'calc((82vw - 3rem)*.600)',
+          }}
+          maxH={{
+            '2xl': 'calc((73vw - 7rem)*.730)',
+          }}
+          px={{ md: '76px' }}
+        >
+          <Box
+            position={'relative'}
+            width={'100%'}
+            height={'100%'}
+            bg={'gray.100'}
+          >
             {video?.cover && (
               <Image
                 alt={'image'}
@@ -50,8 +90,21 @@ const SectionVideoParagraphCTA = ({
           <Box
             position={'absolute'}
             width={'100%'}
-            height={'800px'}
-            px={'76px'}
+            minHeight={{
+              base: '320px',
+            }}
+            height={{
+              base: 'calc((150vw - 13rem)*.650)',
+              sm: 'calc((150vw - 15rem)*.650)',
+              md: 'calc(60vw - 6rem)',
+              lg: 'calc((67vw - 1rem)*.800)',
+              xl: 'calc((82vw - 13rem)*.720)',
+              '2xl': 'calc((82vw - 3rem)*.600)',
+            }}
+            maxH={{
+              '2xl': 'calc((73vw - 7rem)*.730)',
+            }}
+            px={{ md: '76px' }}
           >
             <Box
               position={'relative'}
@@ -62,11 +115,11 @@ const SectionVideoParagraphCTA = ({
               justifyContent={'center'}
             >
               <Circle
-                size="140px"
+                size={{ base: '100px', md: '140px' }}
                 bg="transparent"
                 border={'5px solid white'}
                 pt={1}
-                fontSize={'100px'}
+                fontSize={{ base: '80px', md: '100px' }}
                 color={'white'}
                 cursor={'pointer'}
                 onClick={() => setPlayVideo(true)}
@@ -77,12 +130,19 @@ const SectionVideoParagraphCTA = ({
           </Box>
         )}
       </Box>
-      <Flex px={'76px'}>
+      <Flex
+        px={{ base: 8, md: '76px' }}
+        flexDir={{ base: 'column', md: 'row' }}
+      >
         <Box maxW={'606px'}>
           {title && <Heading2>{title}</Heading2>}
-          {description && <Text mt={'34px'}>{description}</Text>}
+          {description && (
+            <Text mt={'34px'} mb={4}>
+              {description}
+            </Text>
+          )}
         </Box>
-        <Flex ml={'auto'}>
+        <Flex ml={{ md: 'auto' }} pt={{ base: 6, md: 0 }}>
           {video?.video && (
             <Button
               variant={ButtonVariants.blackLine}

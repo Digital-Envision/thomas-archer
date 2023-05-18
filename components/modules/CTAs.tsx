@@ -11,6 +11,10 @@ const CTAs = ({ listButtons, marginTop, marginBottom }) => {
       gap={5}
       mt={marginTop}
       mb={marginBottom}
+      flexDir={{
+        base: 'column',
+        md: 'row',
+      }}
     >
       {listButtons?.map((button, key) => {
         return (

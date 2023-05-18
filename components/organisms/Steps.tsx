@@ -25,7 +25,7 @@ const Steps = ({ title, description, steps, marginBottom, marginTop }) => {
       marginBottom={marginBottom}
       marginTop={marginTop}
     >
-      <Box textAlign={'center'} maxWidth={'682px'} px={5}>
+      <Box textAlign={'center'} maxWidth={'682px'} px={{ base: 5, lg: 16 }}>
         {title && (
           <Heading2 fontSize={{ base: '25px', lg: '28px' }}>{title}</Heading2>
         )}
@@ -33,7 +33,7 @@ const Steps = ({ title, description, steps, marginBottom, marginTop }) => {
       </Box>
       <Grid
         mt={'53px'}
-        px={5}
+        px={{ base: 5, lg: 16 }}
         maxWidth={{
           base: '306px',
           lg:
@@ -43,20 +43,33 @@ const Steps = ({ title, description, steps, marginBottom, marginTop }) => {
               ? '682px'
               : '306px',
         }}
-        templateColumns={{ lg: `repeat(${cloneData.length}, 1fr)` }}
-        rowGap={{ base: 10, lg: 0 }}
+        templateColumns={{
+          lg: `repeat(${
+            steps?.length * steps?.length + steps?.length - 1
+          }, 1fr)`,
+        }}
+        rowGap={{ base: 12, lg: 0 }}
       >
         {cloneData.map((num, key) => {
           if (num === 'dash') {
             return (
-              <Box pt={5} px={7} display={{ base: 'none', lg: 'block' }}>
+              <GridItem
+                colSpan={1}
+                pt={5}
+                display={{ base: 'none', lg: 'block' }}
+              >
                 <Divider borderColor={'black'} />
-              </Box>
+              </GridItem>
             )
           } else {
             const step = stepNumber++
             return (
-              <GridItem key={key} alignItems={'center'} width={'100%'}>
+              <GridItem
+                key={key}
+                colSpan={4}
+                alignItems={'center'}
+                width={'100%'}
+              >
                 <Flex
                   flexDir={'column'}
                   alignItems={'center'}

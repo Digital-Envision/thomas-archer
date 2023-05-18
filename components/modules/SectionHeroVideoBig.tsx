@@ -100,7 +100,7 @@ const SectionHeroVideoBig: React.FC<SectionHeroVideoBigProps> = ({
           ) : (
             <Box
               width={'100%'}
-              height={'100vw'}
+              height={'80vh'}
               bgImg={
                 cover
                   ? urlForImage(cover).url()

@@ -1,4 +1,4 @@
-import { Box, Flex } from '@chakra-ui/react'
+import { Box, Flex, Text } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { urlForImage } from 'lib/sanity.image'
@@ -27,7 +27,76 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoSlide = false }) => {
 
   return (
     <Box>
-      <Flex width={'100%'} overflow={'hidden'}>
+      <Box>
+        <Text
+          display={{
+            base: 'block',
+            sm: 'none',
+          }}
+        >
+          base
+        </Text>
+        <Text
+          display={{
+            base: 'none',
+            sm: 'block',
+            md: 'none',
+          }}
+        >
+          sm
+        </Text>
+        <Text
+          display={{
+            base: 'none',
+            md: 'block',
+            lg: 'none',
+          }}
+        >
+          md
+        </Text>
+        <Text
+          display={{
+            base: 'none',
+            lg: 'block',
+            xl: 'none',
+          }}
+        >
+          lg
+        </Text>
+        <Text
+          display={{
+            base: 'none',
+            xl: 'block',
+            '2xl': 'none',
+          }}
+        >
+          xl
+        </Text>
+        <Text
+          display={{
+            base: 'none',
+            '2xl': 'block',
+          }}
+        >
+          2xl
+        </Text>
+      </Box>
+      <Flex
+        width={'100%'}
+        minHeight={{ base: '244px', '2xl': 'calc(60vw - 10rem)' }}
+        height={{
+          base: 'calc(80vw - 8rem)',
+          sm: 'calc(80vw - 10rem)',
+          md: 'calc(70vw - 10rem)',
+          lg: 'calc(70vw - 8rem)',
+          xl: 'calc((70vw - 5rem))',
+          '2xl': 'calc((100vh - 3rem))',
+        }}
+        maxHeight={{
+          '2xl': 'calc((73vw - 7rem))',
+        }}
+        overflow={'hidden'}
+      >
         {images.map((image, key) => {
           return (
             <Box
@@ -35,18 +104,15 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoSlide = false }) => {
               right={`${slide}00vw`}
               transition={'all .6s'}
               key={key}
-              height="780px"
+              height={`100%`}
             >
               <Box width={'100vw'}>
                 <Image
                   src={(image && urlForImage(image).url()) || ''}
                   alt={image._key}
-                  width={0}
-                  height={0}
-                  sizes="100vw"
-                  style={{ width: '100%' }}
-                  layout={'fill'}
-                  objectPosition={'center'}
+                  fill
+                  objectFit="cover"
+                  objectPosition="center"
                 />
               </Box>
             </Box>

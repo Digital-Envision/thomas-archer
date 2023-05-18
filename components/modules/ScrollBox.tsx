@@ -5,17 +5,58 @@ import ButtonIcon, {
 } from 'components/base/ButtonIcon'
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from 'react-icons/hi2'
 
-const ScrollBox = ({ children, ...props }) => {
+const ScrollBox = ({
+  children,
+  widthImage = 362,
+  padding = 64,
+  gap = 8,
+  ...props
+}) => {
   const [scrollInterval, setScrollInterval] = useState(null)
 
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const leftButtonRef = useRef<HTMLButtonElement>(null)
   const rightButtonRef = useRef<HTMLButtonElement>(null)
 
+  const countScrollLeft = ({ width = widthImage, scroll }) => {
+    const firstScroll = width + padding + gap
+    const range = width * 2 + gap * 2 + padding - firstScroll
+
+    if (scroll === 0) {
+      return scroll
+    }
+
+    if (scroll % range === padding || scroll === firstScroll) {
+      return scroll - width - gap
+    }
+
+    if (scroll < range) return 0
+    return range * Math.floor(scroll / range) + padding
+  }
+
+  const countScrollRight = ({ width = widthImage, scroll }) => {
+    const firstScroll = width + padding + gap
+    const range = width * 2 + gap * 2 + padding - firstScroll
+
+    if (scroll === 0) {
+      return firstScroll
+    }
+
+    if (scroll % range === padding || scroll === firstScroll) {
+      return width + scroll + gap
+    }
+
+    if (scroll < range) return firstScroll
+    return range * Math.round(scroll / range) + padding
+  }
+
   const handleScrollRight = () => {
     const scrollContainer = scrollContainerRef.current
     scrollContainer.scrollTo({
-      left: scrollContainer.scrollLeft + scrollContainer.clientWidth / 2,
+      left: countScrollRight({
+        width: widthImage,
+        scroll: scrollContainer.scrollLeft,
+      }),
       behavior: 'smooth',
     })
   }
@@ -23,7 +64,10 @@ const ScrollBox = ({ children, ...props }) => {
   const handleScrollLeft = () => {
     const scrollContainer = scrollContainerRef.current
     scrollContainer.scrollTo({
-      left: scrollContainer.scrollLeft - scrollContainer.clientWidth / 2,
+      left: countScrollLeft({
+        width: widthImage,
+        scroll: scrollContainer.scrollLeft,
+      }),
       behavior: 'smooth',
     })
   }

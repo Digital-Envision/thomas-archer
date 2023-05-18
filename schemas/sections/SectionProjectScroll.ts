@@ -1,4 +1,4 @@
-import { fields } from "./SectionHeadingParagraphCTA"
+import { fields } from './SectionHeadingParagraphCTA'
 
 export const isSelectedProjectFields = (props?) => ({
     name: 'isSelectedProject',
@@ -6,9 +6,8 @@ export const isSelectedProjectFields = (props?) => ({
     type: 'boolean',
     description:
         'Toggled off: use latest project. Toggled on: selected project',
-    ...props
+    ...props,
 })
-
 
 export const selectedProjectsFields = (props?) => ({
     name: 'selectedProjects',
@@ -28,24 +27,21 @@ export const selectedProjectsFields = (props?) => ({
                         params: {
                             currentId: document._id,
                             currentSlug: document.slug.current,
-                            currentRev: document._rev
+                            currentRev: document._rev,
                         },
-                    };
+                    }
                 },
             },
         },
     ],
-    ...props
+    ...props,
 })
 
 export default {
     name: 'SectionProjectScroll',
     title: 'Project Scroll',
     type: 'object',
-    fields: [
-        ...fields,
-        isSelectedProjectFields()
-    ],
+    fields: [...fields, isSelectedProjectFields(), selectedProjectsFields()],
     preview: {
         select: {
             title: 'heading',
@@ -54,9 +50,8 @@ export default {
         },
         prepare({ title, disabled }) {
             return {
-                title: `Project Scroll: ${disabled ? 'DISABLED' : title
-                    }`,
+                title: `Project Scroll: ${disabled ? 'DISABLED' : title}`,
             }
         },
-    }
+    },
 }

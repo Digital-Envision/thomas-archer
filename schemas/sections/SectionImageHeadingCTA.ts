@@ -11,13 +11,11 @@ export default defineType({
             name: 'title',
             title: 'Title',
             type: 'string',
-            validation: (rule) => rule.required(),
         }),
         defineField({
             name: 'description',
             title: 'Description',
             type: 'string',
-            validation: (rule) => rule.required(),
         }),
         defineField({
             name: 'headingTagLevel',
@@ -40,7 +38,6 @@ export default defineType({
                     name: 'label',
                     title: 'Name',
                     type: 'string',
-                    validation: (rule) => rule.required(),
                 },
                 {
                     name: 'useInternal',

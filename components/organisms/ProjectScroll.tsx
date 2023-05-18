@@ -1,4 +1,5 @@
-import React from 'react'
+import _ from 'lodash'
+import React, { useEffect, useState } from 'react'
 import SectionHeadingParagraphCTA from 'components/modules/SectionHeadingParagraphCTA'
 import { Box } from '@chakra-ui/react'
 import Text from 'components/base/Text'
@@ -16,6 +17,25 @@ const ProjectScroll = ({
   paragraph,
   button,
 }) => {
+  const [mediaWidth, setMediaWidth] = useState(0)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setMediaWidth(window.innerWidth)
+    }
+
+    // Initial media width on component mount
+    setMediaWidth(window.innerWidth)
+
+    // Event listener for window resize
+    window.addEventListener('resize', handleResize)
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
   return (
     <Box mt={marginTop} mb={marginBottom}>
       <SectionHeadingParagraphCTA
@@ -25,7 +45,11 @@ const ProjectScroll = ({
         paragraph={paragraph}
         button={button}
       />
-      <ScrollBox mt={'66px'}>
+      <ScrollBox
+        widthImage={mediaWidth > 767 ? 362 : 277}
+        padding={mediaWidth > 767 ? 64 : 18}
+        mt={'66px'}
+      >
         {/* spacing */}
         <Box>
           <Box
@@ -45,7 +69,7 @@ const ProjectScroll = ({
             ></Box>
           </Box>
         </Box>
-        {projects?.data?.map((project, key) => {
+        {_.sortBy(projects?.data, '_createdAt')?.map((project, key) => {
           return (
             <Box>
               <Box
@@ -61,15 +85,24 @@ const ProjectScroll = ({
                   position={'relative'}
                 >
                   {project?.image && (
-                    <Image
-                      src={
-                        (project?.image && urlForImage(project?.image).url()) ||
-                        ''
+                    <Link
+                      href={
+                        project?.slug?.current
+                          ? `/${project?.slug?.current}`
+                          : '#'
                       }
-                      alt={project?.heading}
-                      fill
-                      objectFit="cover"
-                    />
+                    >
+                      <Image
+                        src={
+                          (project?.image &&
+                            urlForImage(project?.image).url()) ||
+                          ''
+                        }
+                        alt={project?.heading}
+                        fill
+                        objectFit="cover"
+                      />
+                    </Link>
                   )}
                 </Box>
               </Box>
