@@ -5,8 +5,11 @@ import { HeadingTagSemantic } from 'components/base/Heading1'
 import Heading2 from 'components/base/Heading2'
 import Heading3 from 'components/base/Heading3'
 import { urlForImage } from 'lib/sanity.image'
+import { getUrlFromSanityFile } from 'lib/utils'
 import _ from 'lodash'
+import { SanityFiles } from 'utils/interfaces'
 import Text from '../base/Text'
+import { LinksInterface } from './Navbar'
 
 interface SectionInclusionsSchema {
   _key: string
@@ -31,19 +34,19 @@ interface SectionInclusionsSchema {
 }
 
 type SectionInclusionsProps = {
-  heading: string
-  headingTagLevel: HeadingTagSemantic
-  items: SectionInclusionsSchema['items']
+  items?: SectionInclusionsSchema['items']
+  brochure: { file?: SanityFiles; isFileDownloadable: boolean }
+  button?: LinksInterface
   marginTop: HeightVariants
   marginBottom: HeightVariants
 }
 
 const SectionInclusions: React.FC<SectionInclusionsProps> = ({
-  heading,
-  headingTagLevel,
   items,
   marginTop,
   marginBottom,
+  brochure,
+  button,
 }) => {
   return (
     <Flex
@@ -53,24 +56,12 @@ const SectionInclusions: React.FC<SectionInclusionsProps> = ({
       justify="center"
       align={'center'}
       width={'100%'}
-      maxWidth={'1440px'}
-      px={'1rem'}
+      maxWidth={'1800px'}
+      px={{ base: '1rem', md: '4rem' }}
       marginTop={marginTop}
       marginBottom={marginBottom}
       direction="column"
     >
-      <Heading2
-        alignSelf={'flex-start'}
-        pl={{
-          base: '3vh',
-          md: '0.1vh',
-          lg: '8vh',
-        }}
-        as={headingTagLevel}
-      >
-        {heading}
-      </Heading2>
-      <Box mt={'2rem'} />
       <Grid
         templateColumns={{
           base: 'repeat(1, 1fr)',
@@ -85,11 +76,14 @@ const SectionInclusions: React.FC<SectionInclusionsProps> = ({
       >
         {!_.isEmpty(items) &&
           items.map(({ image, heading, paragraph }, index) => (
-            <GridItem key={index} colSpan={1} maxW="600px">
+            <GridItem key={index} colSpan={1} maxW="420px" minH={'450px'}>
               <Flex align="center" direction={'column'}>
                 <Image
                   src={(image && urlForImage(image)?.url()) || ''}
                   pb={'2rem'}
+                  height="420px"
+                  width="420px"
+                  objectFit="cover"
                 />
                 <Box>
                   <Text fontSize={'10px'} color={'#898989'} pb={'0.2rem'}>
@@ -98,7 +92,7 @@ const SectionInclusions: React.FC<SectionInclusionsProps> = ({
                   <Heading3 as={HeadingTagSemantic.H3} pb={'1.5rem'}>
                     {heading}
                   </Heading3>
-                  <Text>{paragraph}</Text>
+                  <Text noOfLines={8}>{paragraph}</Text>
                 </Box>
               </Flex>
             </GridItem>
@@ -106,9 +100,22 @@ const SectionInclusions: React.FC<SectionInclusionsProps> = ({
       </Grid>
 
       <Box pt="1rem" />
-      <Button type="submit" variant={Variants.blackLine}>
-        Load More Inspiration
-      </Button>
+      {button?.label &&
+        brochure?.isFileDownloadable &&
+        !_.isEmpty(brochure?.file) && (
+          <Button
+            type="submit"
+            variant={Variants.blackLine}
+            onClick={() => {
+              if (_.isEmpty(brochure?.file)) {
+                return alert('File not uploaded')
+              }
+              window.open(getUrlFromSanityFile(brochure?.file), '_blank')
+            }}
+          >
+            Download Inclusions Brochure
+          </Button>
+        )}
     </Flex>
   )
 }

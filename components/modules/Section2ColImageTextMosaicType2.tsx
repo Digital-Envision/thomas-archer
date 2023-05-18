@@ -6,6 +6,8 @@ import Dash from 'components/base/Dash'
 import Divider, { HeightVariants } from 'components/base/Divider'
 import { urlForImage } from 'lib/sanity.image'
 import router from 'next/router'
+import { LinksInterface } from 'components/organisms/Navbar'
+import Link from 'next/link'
 
 type Section2ColImageTextMosaicType2Props = {
   heading: string
@@ -15,8 +17,7 @@ type Section2ColImageTextMosaicType2Props = {
   leftImage?: any // sanity io image
   marginTop: HeightVariants
   marginBottom: HeightVariants
-  // buttonText: string
-  // buttonLink: string
+  button?: LinksInterface
 }
 
 const Section2ColImageTextMosaicType2: React.FC<
@@ -29,19 +30,18 @@ const Section2ColImageTextMosaicType2: React.FC<
   marginBottom,
   leftImage,
   rightImage,
-  // buttonText,
-  // buttonLink,
+  button,
 }) => {
   return (
     <Flex
       mx={'auto'}
       direction={{ base: 'column', md: 'row' }}
       width={'w-full'}
-      maxWidth={'1880px'}
+      maxWidth={'1800px'}
+      px={{ base: '1rem', md: '4rem' }}
       marginTop={marginTop}
       marginBottom={marginBottom}
       justify="end"
-      px="1rem"
     >
       <Flex flex={1} justify={'end'} maxWidth={'650px'}>
         <Flex direction={'column'} pr={{ base: 0, md: '1rem' }}>
@@ -54,16 +54,31 @@ const Section2ColImageTextMosaicType2: React.FC<
           <Box pt="1.5rem" />
 
           <Flex flex={1.2} direction={'row'} pt={2} pr={2}>
-            <Box pt={2} pr={2}>
+            <Box pt={'0.5rem'} pr={2}>
               <Dash width="50px" height="1px" />
             </Box>
 
             <Box>
               <Text>{paragraph}</Text>
               <Box pt={5}>
-                <Button variant={Variants.blackLine}>
-                  {'Book an Exploration Session'}
-                </Button>
+                {button?.label && (
+                  <Link
+                    href={
+                      button?.useInternal
+                        ? button?.internalHref
+                          ? `/${button?.internalHref}`
+                          : '#'
+                        : button?.externalHref
+                        ? button?.externalHref
+                        : '#'
+                    }
+                    target={button?.isExternal ? '_blank' : ''}
+                  >
+                    <Button variant={Variants.blackLine}>
+                      {button?.label}
+                    </Button>
+                  </Link>
+                )}
               </Box>
               <Box
                 pt={{
@@ -78,7 +93,12 @@ const Section2ColImageTextMosaicType2: React.FC<
 
       <Box p={{ base: '0.5rem', md: 0 }} />
 
-      <Flex flex={1.2} align="center" maxW={'1020px'}>
+      <Flex
+        flex={1.2}
+        align="center"
+        maxW={'900px'}
+        mt={{ base: '0px', sm: '0px', md: '0px', lg: '100px' }}
+      >
         <Image
           width="100%"
           height={'auto'}

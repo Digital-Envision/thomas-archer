@@ -44,9 +44,9 @@ const Section2ColHeading2ColParagraph: React.FC<
     <Flex
       mx={'auto'}
       width={'w-full'}
-      maxWidth={'1440px'}
+      maxWidth={'1800px'}
+      px={{ base: '1rem', md: '4rem' }}
       direction={{ base: 'column', md: 'row' }}
-      px={'1rem'}
       marginTop={marginTop}
       marginBottom={marginBottom}
     >
@@ -57,7 +57,9 @@ const Section2ColHeading2ColParagraph: React.FC<
         mr={{ base: 0, md: 8 }}
       >
         <Flex flex={1}>
-          <Heading2 as={headingTagLevel}>{leftHeading}</Heading2>
+          <Heading2 mb={{ base: '2.5rem', md: 0 }} as={headingTagLevel}>
+            {leftHeading}
+          </Heading2>
         </Flex>
       </Flex>
 
@@ -65,7 +67,7 @@ const Section2ColHeading2ColParagraph: React.FC<
         <SimpleGrid
           flex={1}
           columns={{ base: 1, md: 2 }}
-          spacing={{ base: 6, md: 20 }}
+          spacing={{ base: 6, md: '2.5rem' }}
           mb={{ base: 6, md: 20 }}
         >
           <Box>
