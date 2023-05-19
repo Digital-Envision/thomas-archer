@@ -62,11 +62,14 @@ const SectionBreadcrumbs: React.FC<SectionBreadcrumbsProps> = (props) => {
             routeDetail?.isDetailPage &&
             breadcrumbsNav[breadcrumbsNav.length - 3].href
 
+          //not render type detail
+          if (isOnTypeDetail) {
+            return <></>
+          }
+
           return (
             <BreadcrumbItem isCurrentPage={lastItem} key={`${label}-${i}`}>
-              <BreadcrumbLink href={isOnTypeDetail ? routeHref : href}>
-                {label}
-              </BreadcrumbLink>
+              <BreadcrumbLink href={href}>{label}</BreadcrumbLink>
             </BreadcrumbItem>
           )
         })}

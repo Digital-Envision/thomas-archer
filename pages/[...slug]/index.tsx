@@ -23,7 +23,7 @@ import {
 const PreviewIndexPage = lazy(() => import('components/PreviewIndexPage'))
 
 export default function DynamicPage(props) {
-  console.log('🔥 newpage props', props)
+  console.log('Dynamic page props', props)
 
   const {
     posts,

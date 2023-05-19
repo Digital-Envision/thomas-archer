@@ -15,7 +15,6 @@ interface ProjectListingCardDataProps {
   caption: string
   width?: string
   height?: string
-  isExternal?: boolean
   slug?: { current: string }
 }
 
@@ -25,55 +24,50 @@ export type ProjectListingCardProps = {
 }
 
 const ProjectListingCard: React.FC<ProjectListingCardProps['data'][0]> = ({
-  imageUrl,
   image,
   link,
   heading,
   subHeading,
   caption,
   width = '400px',
-  height = '450px',
-  isExternal = true,
+  height = '480px',
 }) => {
   return (
-    <Box overflow="hidden" width={width} height={height} borderBottomWidth={1}>
-      <Box display="flex" justifyContent="center" alignItems="center">
-        <Image
-          src={(image && urlForImage(image).url()) || ''}
-          alt={heading}
-          maxW="400px"
-          maxH="280px"
-          w="full"
-          h="auto"
-          objectFit="cover"
-        />
+    <Link href={link || '#'}>
+      <Box
+        overflow="hidden"
+        width={width}
+        height={height}
+        borderBottomWidth={1}
+      >
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <Image
+            src={(image && urlForImage(image).url()) || ''}
+            alt={heading}
+            objectFit="cover"
+            w="full"
+            h="280px"
+          />
+        </Box>
+        <Box py="5" h="170px">
+          <Heading3 fontSize={'28px'} lineHeight={'20px'} mb="5">
+            {heading}
+          </Heading3>
+          <Text fontSize={'20px'} mb="1">
+            {subHeading}
+          </Text>
+          <Text fontSize={'20px'} mb="5" color={'#898989'} noOfLines={3}>
+            {caption}
+          </Text>
+        </Box>
+        <Flex align="center">
+          <Text fontSize={'12px'} _hover={{ textDecoration: 'underline' }}>
+            Read more
+          </Text>
+          <Icon as={BsArrowRight} color={'#898989'} fontSize={'24px'} pl={2} />
+        </Flex>
       </Box>
-      <Box py="5">
-        <Heading3 fontSize={'28px'} lineHeight={'20px'} mb="5">
-          {heading}
-        </Heading3>
-        <Text fontSize={'20px'} mb="2">
-          {subHeading}
-        </Text>
-        <Text fontSize={'20px'} mb="5" color={'#898989'}>
-          {caption}
-        </Text>
-
-        <Link href={link || '#'} target={link ? '_blank' : ''}>
-          <Flex align="center">
-            <Text fontSize={'12px'} _hover={{ textDecoration: 'underline' }}>
-              Read more
-            </Text>
-            <Icon
-              as={BsArrowRight}
-              color={'#898989'}
-              fontSize={'24px'}
-              pl={2}
-            />
-          </Flex>
-        </Link>
-      </Box>
-    </Box>
+    </Link>
   )
 }
 

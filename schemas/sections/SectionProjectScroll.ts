@@ -22,7 +22,6 @@ export const selectedProjectsFields = (props?) => ({
             options: {
                 disableNew: true,
                 filter: (props) => {
-                    console.log('🔥', props)
                     const { document } = props
                     return {
                         filter: 'slug.current != $currentSlug && _id != $currentId',

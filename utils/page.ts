@@ -68,11 +68,11 @@ export const setPropsForDetailPage = async (props) => {
 }
 
 export const getDataProjectDetailPage = async ({ routeDetail }) => {
-    const [docType, docId] = routeDetail?.detail
+    const [docType, docSlug] = routeDetail?.detail
 
     const currentProject = await getSanityDataById({
         type: docType + 's',
-        condition: `&& slug.current != null && _id != "${docId}"`,
+        condition: `&& slug.current == "${docSlug}"`,
     })
 
     // if isSelectedProject toggled, get 3 selected projects
@@ -111,22 +111,22 @@ export const getDataProjectDetailPage = async ({ routeDetail }) => {
 }
 
 export const getDataBlogDetailPage = async ({ routeDetail }) => {
-    const [docType, docId] = routeDetail?.detail
+    const [docType, docSlug] = routeDetail?.detail
 
     const currentBlog = await getSanityDataById({
         type: docType + 's',
-        condition: `&& slug.current != null && _id != "${docId}"`,
+        condition: `&& slug.current == "${docSlug}"`,
     })
 
     return { blog: currentBlog }
 }
 
 export const getDataFloorDetailPage = async ({ routeDetail }) => {
-    const [docType, docId] = routeDetail?.detail
+    const [docType, docSlug] = routeDetail?.detail
 
     const currentFloor = await getSanityDataById({
         type: docType + 's',
-        condition: `&& slug.current != null && _id != "${docId}"`,
+        condition: `&& slug.current == "${docSlug}"`,
     })
 
     return { floors: currentFloor }

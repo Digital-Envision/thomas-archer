@@ -1,3 +1,5 @@
+import { listImagesFields } from "./sections/SectionGalleryScroll";
+
 export default {
     type: 'document',
     title: 'Blog',
@@ -24,10 +26,6 @@ export default {
             of: [{ type: 'block' }]
         },
         {
-            name: 'createdAt',
-            type: 'date',
-        },
-        {
             name: 'image',
             type: 'image',
             options: {
@@ -44,22 +42,15 @@ export default {
             },
             fields: [
                 {
-                    name: 'SectionBreadcrumbs',
-                    type: 'SectionBreadcrumbs',
+                    name: 'SectionGalleryScroll',
+                    type: 'object',
                     options: {
                         collapsible: true,
                         collapsed: true,
                     },
-                },
-                {
-                    name: 'SectionImageGalleryScroll',
-                    type: 'string',
-                    options: {
-                        collapsible: true,
-                        collapsed: true,
-                    },
-                    description: 'In development',
-                    readonly: true
+                    fields: [
+                        listImagesFields()
+                    ]
                 },
             ]
         }

@@ -60,6 +60,7 @@ const SectionImageTextMosaicType1: React.FC<
       maxWidth={'1880px'}
       marginTop={marginTop}
       marginBottom={marginBottom}
+      px={{ base: '1rem', md: 0, lg: 0 }}
     >
       <Flex
         flex={1}
