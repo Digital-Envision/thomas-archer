@@ -8,6 +8,9 @@ import moment from 'moment'
 import { PortableText } from '@portabletext/react'
 import Text from 'components/base/Text'
 import Heading1 from 'components/base/Heading1'
+import SectionGalleryScroll from 'schemas/sections/SectionGalleryScroll'
+import GalleryScroll from 'components/organisms/GalleryScroll'
+import { HeightVariants } from 'components/base/Divider'
 
 // TODO FIX page props
 export default function BlogPageTemplate(props: any) {
@@ -23,6 +26,9 @@ export default function BlogPageTemplate(props: any) {
         socialMedia={globals.SocialMedia}
         specialButtons={globals.SpecialButtons}
       />
+
+      <Box pt="150px" />
+
       <SectionBreadcrumbs
         {...blog?.page?.SectionBreadcrumbs}
         routeDetail={routeDetail}
@@ -32,7 +38,6 @@ export default function BlogPageTemplate(props: any) {
 
       <Flex
         mx="auto"
-        maxW="1800px"
         width={'w-full'}
         maxWidth={'1800px'}
         px={{ base: '1rem', md: '4rem' }}
@@ -50,11 +55,15 @@ export default function BlogPageTemplate(props: any) {
         px={{ base: '1rem', md: '4rem' }}
       >
         <Text mb="4" fontSize={'10px'} color={'#898989'}>
-          {moment(blog?.createdAt).format('DD MMMM YYYY')}
+          {moment(blog?._createdAt).format('DD MMMM YYYY')}
         </Text>
       </Flex>
 
       <Box pb={'1.5rem'} />
+
+      <GalleryScroll {...blog?.page?.SectionGalleryScroll} />
+
+      <Box pb={HeightVariants.extra} />
 
       <Flex
         mx="auto"

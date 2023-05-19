@@ -42,7 +42,6 @@ export interface PreviewData {
 }
 
 export default function HomePage(props: PageProps) {
-  // console.log('✅pages/index', props)
   const {
     posts,
     settings,

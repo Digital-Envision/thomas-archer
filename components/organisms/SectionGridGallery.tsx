@@ -154,98 +154,110 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
       marginTop={marginTop}
       marginBottom={marginBottom}
     >
-      <Box>
-        <Box alignSelf={'flex-start'} pl={['1rem', '1rem', '1rem', '3rem']}>
-          <HStack align={'flex-start'} height={'80px'}>
-            <Box minW={'70px'} borderRightWidth={1} borderColor="#000000">
-              <Text
-                textAlign="center"
-                textDecoration="underline"
-                onClick={() => setSelectedFilters({})}
-                cursor="pointer"
-              >
-                View All
-              </Text>
-            </Box>
+      <Box
+        maxWidth={'1800px'}
+        width="100%"
+        px={['0.2rem', '1rem', '1rem', '3.4rem']}
+        zIndex={'dropdown'}
+      >
+        <HStack align={'flex-start'} minHeight={'76px'}>
+          <Box minW={'70px'} borderRightWidth={1} borderColor="#000000">
+            <Text
+              textAlign="center"
+              textDecoration="underline"
+              onClick={() => setSelectedFilters({})}
+              cursor="pointer"
+            >
+              View All
+            </Text>
+          </Box>
 
-            {_.map(filters, (filter) => (
-              <Accordion
-                allowToggle
-                minW={'70px'}
-                style={{ borderColor: null, borderWidth: 0 }}
-                key={filter._key}
-              >
-                <AccordionItem key={filter._key} border={0}>
-                  {({ isExpanded }) => (
-                    <>
-                      <AccordionButton
-                        style={{
-                          padding: 0,
-                          margin: 0,
-                          borderWidth: 0,
-                          borderColor: '#000000',
-                          borderRightWidth: 1,
-                          paddingRight: 3,
-                        }}
-                        justifyContent="space-between"
+          {_.map(filters, (filter) => (
+            <Accordion
+              allowToggle
+              minW={'70px'}
+              style={{ borderColor: null, borderWidth: 0 }}
+              key={filter._key}
+            >
+              <AccordionItem key={filter._key} border={0}>
+                {({ isExpanded }) => (
+                  <>
+                    <AccordionButton
+                      style={{
+                        padding: 0,
+                        margin: 0,
+                        borderWidth: 0,
+                        borderColor: '#000000',
+                        borderRightWidth: 1,
+                        paddingRight: 3,
+                      }}
+                      justifyContent="space-between"
+                    >
+                      <Text
+                        fontWeight={isExpanded ? 'bold' : 'light'}
+                        textDecoration={'underline'}
                       >
-                        <Text
-                          fontWeight={isExpanded ? 'bold' : 'light'}
-                          textDecoration={'underline'}
-                        >
-                          {_.capitalize(filter.name)}
-                        </Text>
-                        {isExpanded ? (
-                          <BsChevronUp color="#D9D9D9" />
-                        ) : (
-                          <HiOutlineChevronDown color="#D9D9D9" />
-                        )}
-                      </AccordionButton>
-                      <AccordionPanel p={0}>
-                        <Filter
-                          filterName={filter.name}
-                          filterItems={filter.filterItems}
-                          value={selectedFilters[filter.name] || ''}
-                          onValueChange={(value) =>
-                            handleFilterChange(filter.name, value)
-                          }
-                          selectedFilters={selectedFilters}
-                          setSelectedFilters={setSelectedFilters}
-                        />
-                      </AccordionPanel>
-                    </>
-                  )}
-                </AccordionItem>
-              </Accordion>
-            ))}
-          </HStack>
-        </Box>
-
-        <Box pt={'1rem'} />
-
-        <Box
-          mx="auto"
-          alignItems={'center'}
-          justifyContent="center"
-          maxW="1400px"
-          px={{ base: '1rem', md: '4rem' }}
-          w={'98vw'}
-          sx={{ columnCount: [1, 1, 2, 3, 3, 4], columnGap: '8px' }}
-          overflow="hidden"
-        >
-          {showedData?.map((item) => (
-            <Box onClick={() => handleListItemClick(item)} key={item?._key}>
-              <Image
-                key={urlForImage(item.image)?.url()}
-                w="100%"
-                display="inline-block"
-                src={(item.image && urlForImage(item.image)?.url()) || ''}
-                alt={urlForImage(item.image)?.url()}
-                objectFit={'contain'}
-              />
-            </Box>
+                        {_.capitalize(filter.name)}
+                      </Text>
+                      {isExpanded ? (
+                        <BsChevronUp color="#D9D9D9" />
+                      ) : (
+                        <HiOutlineChevronDown color="#D9D9D9" />
+                      )}
+                    </AccordionButton>
+                    <AccordionPanel p={0}>
+                      <Filter
+                        filterName={filter.name}
+                        filterItems={filter.filterItems}
+                        value={selectedFilters[filter.name] || ''}
+                        onValueChange={(value) =>
+                          handleFilterChange(filter.name, value)
+                        }
+                        selectedFilters={selectedFilters}
+                        setSelectedFilters={setSelectedFilters}
+                      />
+                    </AccordionPanel>
+                  </>
+                )}
+              </AccordionItem>
+            </Accordion>
           ))}
-        </Box>
+        </HStack>
+      </Box>
+
+      <Box
+        mx="auto"
+        alignItems={'center'}
+        justifyContent="center"
+        // maxW="1400px"
+        px={{ base: '1rem', md: '4rem' }}
+        w={'98vw'}
+        sx={{
+          columnCount: {
+            base: 1,
+            sm: 1,
+            md: 2,
+            lg: 3,
+            xl: 3,
+            '2xl': 3,
+            custom2xl: 4,
+          },
+          columnGap: '8px',
+        }}
+        overflow="hidden"
+      >
+        {showedData?.map((item) => (
+          <Box onClick={() => handleListItemClick(item)} key={item?._key}>
+            <Image
+              key={urlForImage(item.image)?.url()}
+              w="100%"
+              display="inline-block"
+              src={(item.image && urlForImage(item.image)?.url()) || ''}
+              alt={urlForImage(item.image)?.url()}
+              objectFit={'contain'}
+            />
+          </Box>
+        ))}
       </Box>
 
       <Box pt="1rem" />
@@ -265,6 +277,7 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
         isOpen={selectedData !== null}
         onClose={handleCloseModal}
         isCentered
+        size={'xl'}
       >
         <ModalOverlay />
         <ModalContent>
@@ -276,7 +289,7 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
               <Image
                 src={urlForImage(selectedData?.image)?.url()}
                 alt={urlForImage(selectedData?.image)?.url()}
-                maxW="100%"
+                width="100%"
               />
             )}
             <Flex

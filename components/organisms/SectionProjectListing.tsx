@@ -56,16 +56,7 @@ const SectionProjectListing: React.FC<SectionProjectListingProps> = (props) => {
       marginBottom={marginBottom}
       direction="column"
     >
-      <Heading2
-        alignSelf={'flex-start'}
-        pl={{
-          base: '3vh',
-          md: '0.1vh',
-          lg: '8vh',
-        }}
-      >
-        {heading}
-      </Heading2>
+      <Heading2 alignSelf={'flex-start'}>{heading}</Heading2>
       <Box mt={'2rem'} />
       <Grid
         templateColumns={{
