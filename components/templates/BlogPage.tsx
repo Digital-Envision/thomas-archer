@@ -3,14 +3,13 @@ import IndexPageHead from 'components/IndexPageHead'
 import Navbar from 'components/organisms/Navbar'
 import Footer from 'components/organisms/Footer'
 import SectionBreadcrumbs from 'components/modules/SectionBreadcrumbs'
-import { Box, Flex, useDisclosure } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 import moment from 'moment'
-import { PortableText } from '@portabletext/react'
 import Text from 'components/base/Text'
 import Heading1 from 'components/base/Heading1'
-import SectionGalleryScroll from 'schemas/sections/SectionGalleryScroll'
 import GalleryScroll from 'components/organisms/GalleryScroll'
 import { HeightVariants } from 'components/base/Divider'
+import CustomPortableText from 'components/base/CustomPortableText'
 
 // TODO FIX page props
 export default function BlogPageTemplate(props: any) {
@@ -54,16 +53,19 @@ export default function BlogPageTemplate(props: any) {
         maxWidth={'1800px'}
         px={{ base: '1rem', md: '4rem' }}
       >
-        <Text mb="4" fontSize={'10px'} color={'#898989'}>
+        <Text mb="4" color={'#898989'}>
           {moment(blog?._createdAt).format('DD MMMM YYYY')}
         </Text>
       </Flex>
 
       <Box pb={'1.5rem'} />
 
-      <GalleryScroll {...blog?.page?.SectionGalleryScroll} />
-
-      <Box pb={HeightVariants.extra} />
+      {!_.isEmpty(blog?.page?.SectionGalleryScroll) && (
+        <>
+          <GalleryScroll {...blog?.page?.SectionGalleryScroll} />
+          <Box pb={HeightVariants.extra} />
+        </>
+      )}
 
       <Flex
         mx="auto"
@@ -73,7 +75,7 @@ export default function BlogPageTemplate(props: any) {
         px={{ base: '1rem', md: '4rem' }}
         direction={'column'}
       >
-        <PortableText value={blog?.content} />
+        <CustomPortableText value={blog?.content} />
       </Flex>
       <Footer
         links={globals.Links}

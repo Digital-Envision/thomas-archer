@@ -99,7 +99,7 @@ const SectionInclusions: React.FC<SectionInclusionsProps> = ({
           ))}
       </Grid>
 
-      <Box pt="1rem" />
+      <Box pb={HeightVariants.more} />
       {button?.label &&
         brochure?.isFileDownloadable &&
         !_.isEmpty(brochure?.file) && (

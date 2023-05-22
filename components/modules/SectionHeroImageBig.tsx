@@ -8,6 +8,7 @@ import { animateScroll } from 'react-scroll'
 import { getVideoUrl } from 'lib/utils'
 import { SanityFiles } from 'utils/interfaces'
 import { EmbeddedVideoPlayer } from './SectionHeroVideoBig'
+import CustomPortableText from 'components/base/CustomPortableText'
 
 type SectionHeroImageBigProps = {
   quotes: Array<any>
@@ -92,7 +93,7 @@ const SectionHeroImageBig: React.FC<SectionHeroImageBigProps> = (props) => {
         color={'#FFFFFF'}
         px={'16px'}
       >
-        <PortableText value={quotes} />
+        <CustomPortableText value={quotes} />
       </Box>
       <Box mb={'61px'}>
         <Button

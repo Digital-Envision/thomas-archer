@@ -36,13 +36,35 @@ export default {
             type: 'string'
         },
         {
+            name: 'paragraph',
+            title: 'Paragraph',
+            type: 'text',
+            options: {
+                collapsible: true,
+                collapsed: true,
+            },
+        },
+        {
             name: 'image',
             title: 'Feature Image',
             type: 'image',
-            options: {
-                hotspot: false,
-            },
             validation: (rule) => rule.required(),
+        },
+        {
+            //only support video -> image should just use featured image
+            name: 'video',
+            type: 'object',
+            options: {
+                collapsible: true,
+                collapsed: true,
+            },
+            description: 'If filled, it will replace Feature Image',
+            fields: [
+                isVideoField(),
+                isExternalVideoField(),
+                externalVideoField(),
+                bannerVideoField({ title: 'Video' })
+            ]
         },
         {
             name: 'award',
@@ -88,8 +110,7 @@ export default {
             ]
         },
         {
-            name: 'page',
-            title: 'Detail Page',
+            name: 'SectionHeadingParagraphCTA',
             type: 'object',
             options: {
                 collapsible: true,
@@ -97,82 +118,45 @@ export default {
             },
             fields: [
                 {
-                    name: 'SectionHeroImageBig',
-                    type: 'object',
-                    options: {
-                        collapsible: true,
-                        collapsed: true,
-                    },
-
-                    fields: [
-                        isVideoField(),
-                        isExternalVideoField(),
-                        externalVideoField(),
-                        bannerImageField({ title: 'Image' }),
-                        bannerVideoField({ title: 'Video' })
-                    ]
-                },
-                {
-                    name: 'SectionBreadcrumbs',
-                    type: 'string',
-                    options: {
-                        collapsible: true,
-                        collapsed: true,
-                    },
-                    description: 'Fix in development',
-                },
-                {
-                    name: 'SectionHeadingParagraphCTA',
-                    type: 'object',
-                    options: {
-                        collapsible: true,
-                        collapsed: true,
-                    },
-                    fields: [
-                        headingField('Caption'),
-                        paragraphField(),
-                        {
-                            name: 'embeddedVideo',
-                            title: 'Embedded Video',
-                            type: 'url',
-                            description: 'Make sure you copied VIMEO embed video url.',
-                        },
-                    ]
-                },
-                {
-                    name: 'SectionGalleryScroll',
-                    type: 'object',
-                    fields: [
-                        listImagesFields()
-                    ],
-                    options: {
-                        collapsible: true,
-                        collapsed: true,
-                    },
-                },
-                {
-                    name: 'SectionProjectScroll',
-                    type: 'object',
-                    options: {
-                        collapsible: true,
-                        collapsed: true,
-                    },
-                    fields: [
-                        // headingField(),
-                        paragraphField(),
-                        isSelectedProjectFields(),
-                        selectedProjectsFields()
-                    ]
-                },
-                {
-                    name: 'customPageSection',
-                    type: 'customPageSection',
-                    options: {
-                        collapsible: true,
-                        collapsed: true,
-                    },
+                    name: 'embeddedVideo',
+                    title: 'Embedded Video',
+                    type: 'url',
+                    description: 'Make sure you copied VIMEO embed video url.',
                 },
             ]
-        }
+        },
+        {
+            name: 'SectionGalleryScroll',
+            type: 'object',
+            fields: [
+                listImagesFields()
+            ],
+            options: {
+                collapsible: true,
+                collapsed: true,
+            },
+        },
+        {
+            name: 'SectionProjectScroll',
+            type: 'object',
+            options: {
+                collapsible: true,
+                collapsed: true,
+            },
+            fields: [
+                // paragraphField(),
+                isSelectedProjectFields(),
+                selectedProjectsFields()
+            ]
+        },
+        {
+            name: 'customPageSection',
+            type: 'customPageSection',
+            options: {
+                collapsible: true,
+                collapsed: true,
+            },
+        },
+
     ],
 }
