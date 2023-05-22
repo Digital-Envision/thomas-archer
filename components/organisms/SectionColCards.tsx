@@ -4,7 +4,6 @@ import ArticleBlogCard, {
 } from 'components/modules/ArticleBlogCard'
 import { HeightVariants } from 'components/base/Divider'
 import { HeadingTagSemantic } from 'components/base/Heading1'
-import { useEffect } from 'react'
 
 type Section2ColCardsProps = {
   marginTop: HeightVariants
@@ -30,7 +29,7 @@ const SectionColCards: React.FC<Section2ColCardsProps> = ({
           templateColumns={{
             md: `repeat(${ListArticleBlogCards?.length}, 1fr)`,
           }}
-          gap={5}
+          gap={{ base: 14, md: 5 }}
         >
           {ListArticleBlogCards.map((article, key) => {
             return (

@@ -24,8 +24,8 @@ export enum HeightVariants {
 }
 
 type SectionImageHeadingCTAProps = {
-  title: string
-  description: string
+  title?: string
+  description?: string
   isOverlay?: boolean
   image: SanityFiles
   button: {
@@ -37,7 +37,7 @@ type SectionImageHeadingCTAProps = {
   }
   marginTop?: string
   marginBottom?: string
-  headingTagLevel: HeadingTagSemantic
+  headingTagLevel?: HeadingTagSemantic
   height?: HeightVariants
 }
 
@@ -76,34 +76,38 @@ const SectionImageHeadingCTA: React.FC<SectionImageHeadingCTAProps> = (
         justifyContent={'center'}
         alignItems={'center'}
       >
-        <Box width={'498px'} px={{ base: 3, lg: 0 }}>
-          <Text
-            zIndex={1}
-            my={'auto'}
-            fontFamily={'heading'}
-            fontSize={'28px'}
-            color={'#FFFFFF'}
-            mb={'32px'}
-            as={headingTagLevel}
-          >
-            {title}
-          </Text>
-          <Text color={'#FFFFFF'}>{description}</Text>
-          {button.internalHref || button.externalHref ? (
+        <Box width={'498px'} px={'1rem'}>
+          {title && (
+            <Text
+              zIndex={1}
+              my={'auto'}
+              fontFamily={'heading'}
+              fontSize={'28px'}
+              color={'#FFFFFF'}
+              mb={'32px'}
+              as={headingTagLevel}
+            >
+              {title}
+            </Text>
+          )}
+          {description && <Text color={'#FFFFFF'}>{description}</Text>}
+          {button.label && (
             <Link
               href={
                 button.useInternal
-                  ? `/${button.internalHref}`
+                  ? button.internalHref
+                    ? `/${button.internalHref}`
+                    : '#'
                   : button.externalHref
+                  ? button.externalHref
+                  : '#'
               }
               target={button?.isExternal ? '_blank' : ''}
             >
               <Button variant={ButtonVariants.whiteLine} mt={'42px'}>
-                Book an Appointment
+                {button?.label}
               </Button>
             </Link>
-          ) : (
-            <></>
           )}
         </Box>
       </Box>

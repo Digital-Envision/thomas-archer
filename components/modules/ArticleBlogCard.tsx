@@ -103,11 +103,11 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
               justifyContent={'center'}
             >
               <Circle
-                size="140px"
+                size="100px"
                 bg="transparent"
                 border={'5px solid white'}
                 pt={1}
-                fontSize={'100px'}
+                fontSize={'80px'}
                 color={'white'}
                 cursor={'pointer'}
                 onClick={() => setPlayVideo(true)}
@@ -118,7 +118,7 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
           )}
         </Box>
       </Box>
-      <Flex flex="1" flexDirection={'column'} px="8">
+      <Flex flex="1" flexDirection={'column'} px={{ base: 8, md: 2 }}>
         <Box flex="1" overflow="hidden">
           {!isEmpty(createdAt) && (
             <Text mb="4" fontSize={'10px'} color={'#898989'}>
