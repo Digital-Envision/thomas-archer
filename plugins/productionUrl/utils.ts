@@ -26,7 +26,7 @@ export async function getSecret(
       await client
         .transaction()
         .createIfNotExists({ _id: id, _type: id })
-        .patch(patch)
+        // .patch(patch) // TODO NEED TO INVESTIGATE; SECRET getSecret used FOR PREVIEW PAGE
         .commit({ tag })
       return newSecret
     } catch (err) {

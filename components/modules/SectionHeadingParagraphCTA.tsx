@@ -9,9 +9,9 @@ import { LinksInterface } from 'components/organisms/Navbar'
 
 type SectionHeadingParagraphCTAProps = {
   heading: string
-  headingTagLevel: HeadingTagSemantic
+  headingTagLevel?: HeadingTagSemantic
   paragraph: string
-  isOffset: boolean
+  isOffset?: boolean
   showButton?: boolean
   marginTop?: HeightVariants
   marginBottom?: HeightVariants

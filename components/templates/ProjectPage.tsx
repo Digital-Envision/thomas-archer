@@ -26,7 +26,7 @@ import SectionImageAwards from 'components/modules/SectionImageAwards'
 export default function ProjectPageTemplate(props: any) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { settings, preview, pages, globals, projects, project, routeDetail } =
-    props // rest should be projects..etc
+    props
 
   return (
     <Box bgColor="white">
@@ -39,28 +39,45 @@ export default function ProjectPageTemplate(props: any) {
         specialButtons={globals.SpecialButtons}
       />
 
-      <SectionHeroImageBig {...project?.page?.SectionHeroImageBig} />
+      <SectionHeroImageBig
+        bannerImage={project?.image}
+        isVideo={project?.video?.bannerVideo || project?.video?.isExternalVideo}
+        isExternalVideo={!!project?.video?.externalVideo}
+        externalVideo={project?.video?.externalVideo}
+        bannerVideo={project?.video?.bannerVideo}
+        {...project?.SectionHeroImageBig}
+      />
+
       <SectionBreadcrumbs
-        {...project?.page?.SectionBreadcrumbs}
         routeDetail={routeDetail}
         marginTop={HeightVariants.less}
         marginBottom={HeightVariants.less}
       />
-      <SectionHeadingParagraphCTA
-        {...project?.page?.SectionHeadingParagraphCTA}
-        // if embeddedVideo exist, show view
-        {...(project?.page?.SectionHeadingParagraphCTA?.embeddedVideo && {
-          customButton: {
-            label: 'View Video',
-            fn: () => {
-              onOpen()
+
+      {(project?.heading ||
+        project?.paragraph ||
+        project?.SectionHeadingParagraphCTA?.embeddedVideo) && (
+        <SectionHeadingParagraphCTA
+          heading={project?.heading}
+          paragraph={project?.paragraph}
+          // if embeddedVideo exist, show view
+          {...(project?.SectionHeadingParagraphCTA?.embeddedVideo && {
+            customButton: {
+              label: 'View Video',
+              fn: () => {
+                onOpen()
+              },
             },
-          },
-        })}
-        marginBottom={HeightVariants.less}
-      />
-      <GalleryScroll {...project?.page?.SectionGalleryScroll} />
-      <PageBuilder pages={[{ content: project?.page?.customPageSection }]} />
+          })}
+          marginBottom={HeightVariants.less}
+        />
+      )}
+
+      {!_.isEmpty(project?.SectionGalleryScroll) && (
+        <GalleryScroll {...project?.SectionGalleryScroll} />
+      )}
+
+      <PageBuilder pages={[{ content: project?.customPageSection }]} />
 
       {!_.isEmpty(project?.award) && (
         <SectionImageAwards
@@ -71,13 +88,15 @@ export default function ProjectPageTemplate(props: any) {
         />
       )}
 
-      <ProjectScroll
-        {...project?.page?.SectionProjectScroll}
-        heading="Related Projects"
-        projects={projects}
-        marginTop={HeightVariants.extra}
-        marginBottom={HeightVariants.more}
-      />
+      {_.isEmpty(projects) && (
+        <ProjectScroll
+          {...project?.SectionProjectScroll}
+          heading="Related Projects"
+          projects={projects}
+          marginTop={HeightVariants.extra}
+          marginBottom={HeightVariants.more}
+        />
+      )}
       <Footer
         links={globals.Links}
         enquire={globals.Enquire}
@@ -96,9 +115,7 @@ export default function ProjectPageTemplate(props: any) {
           </ModalHeader>
           <ModalBody p={0} m={0} borderRadius="md">
             <EmbeddedVideoPlayer
-              externalVideo={
-                project?.page?.SectionHeadingParagraphCTA?.embeddedVideo
-              }
+              externalVideo={project?.SectionHeadingParagraphCTA?.embeddedVideo}
             />
           </ModalBody>
         </ModalContent>
