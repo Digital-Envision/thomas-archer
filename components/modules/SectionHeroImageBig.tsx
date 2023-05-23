@@ -93,7 +93,7 @@ const SectionHeroImageBig: React.FC<SectionHeroImageBigProps> = (props) => {
         color={'#FFFFFF'}
         px={'16px'}
       >
-        <CustomPortableText value={quotes} />
+        <PortableText value={quotes} />
       </Box>
       <Box mb={'61px'}>
         <Button
