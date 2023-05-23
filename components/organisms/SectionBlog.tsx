@@ -1,12 +1,13 @@
-import { Box, Flex, Stack } from '@chakra-ui/react'
-import ArticleBlogCard from 'components/modules/ArticleBlogCard'
+import { Box } from '@chakra-ui/react'
 import SectionHeadingParagraphCTA from 'components/modules/SectionHeadingParagraphCTA'
 import { HeightVariants } from 'components/base/Divider'
 import { HeadingTagSemantic } from 'components/base/Heading1'
 import _ from 'lodash'
-import { Blog } from 'lib/sanity.queries'
 import { blockToPlainText } from 'lib/utils'
 import { useRouter } from 'next/router'
+import { BlogListingCardProps } from 'components/modules/BlogListingCard'
+import SectionColCards from './SectionColCards'
+import { LinksInterface } from './Navbar'
 
 type SectionBlogProps = {
   heading: string
@@ -16,7 +17,8 @@ type SectionBlogProps = {
   marginTop: HeightVariants
   marginBottom: HeightVariants
   headingTagLevel: HeadingTagSemantic
-  blogs: Blog[]
+  blogs: BlogListingCardProps
+  button: LinksInterface
 }
 
 // data is pulled from 3 latest blogs documents
@@ -26,61 +28,53 @@ const SectionBlog: React.FC<SectionBlogProps> = ({
   paragraph,
   marginTop,
   marginBottom,
-  blogs,
+  blogs: _blogs,
+  button,
   ...rest
 }) => {
   const { asPath } = useRouter()
-  const sortedBlogs = _.slice(_.orderBy(blogs, ['createdAt'], ['desc']), 0, 3)
+  const sortedBlogs = _.slice(
+    _.orderBy(_blogs?.data, ['createdAt'], ['desc']),
+    0,
+    3
+  )
+
+  // convert blogs to compatible with SectionColCards
+  const blogs = _.map(sortedBlogs, (blog) => {
+    return {
+      ...blog,
+      paragraph: blockToPlainText(blog?.content),
+      headingTagLevel: HeadingTagSemantic.H1,
+      button: {
+        label: 'Read More',
+        useInternal: true,
+        internalHref: `${asPath}/blog/${blog.slug?.current}`,
+        externalHref: '',
+        isExternal: false,
+        mobileOnly: false,
+      },
+      isClickable: true,
+    }
+  })
 
   return (
-    <Flex
-      mx={'auto'}
-      flex={1}
-      overflow="hidden"
-      justify="center"
-      align={'center'}
-      direction="column"
-      maxWidth={'1800px'}
+    <Box
       marginTop={marginTop}
       marginBottom={marginBottom}
+      px={{ md: sortedBlogs.length > 2 ? '0px' : '76px' }}
     >
-      <Flex
-        mx={'auto'}
-        width={'100%'}
-        maxWidth={'1800px'}
-        direction={{ base: 'column', md: 'row' }}
-        px={{ base: '1rem', md: '4rem' }}
-      >
-        <SectionHeadingParagraphCTA
-          heading={heading}
-          paragraph={paragraph}
-          isOffset={false}
-          headingTagLevel={headingTagLevel}
-          showButton={false}
-          isEmbed
-        />
-      </Flex>
+      <SectionHeadingParagraphCTA
+        isOffset={false}
+        heading={heading}
+        headingTagLevel={headingTagLevel}
+        paragraph={paragraph}
+        button={button}
+      />
 
       <Box pt={{ base: HeightVariants.less, md: HeightVariants.default }} />
 
-      <Stack direction={{ base: 'column', md: 'row' }} spacing={'1rem'}>
-        {/*sortedBlogs.map(
-          ({ image, content, createdAt, heading, slug, ...rest }) => ({
-            /*
-            <ArticleBlogCard
-              image={image}
-              createdAt={createdAt}
-              heading={heading}
-              paragraph={blockToPlainText(content)}
-              buttonText="Read More"
-              buttonLink={`${asPath}/blog/${slug?.current}`}
-              headingTagLevel={HeadingTagSemantic.H1}
-              {...rest}
-              />
-          })
-          )*/}
-      </Stack>
-    </Flex>
+      <SectionColCards ListArticleBlogCards={blogs} />
+    </Box>
   )
 }
 

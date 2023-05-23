@@ -11,17 +11,20 @@ import Image from 'next/image'
 import { HiChevronRight } from 'react-icons/hi2'
 import { useState } from 'react'
 import ModalVideo from './ModalVideo'
+import moment from 'moment'
 
 export type ArticleBlogCardProps = {
   image?: any // sanity io image
   imageUrl?: string // load image from url; test purpose
-  createdAt?: string
+  _createdAt?: string
+  isShowCreatedAt?: boolean
   heading: string
   headingTagLevel: HeadingTagSemantic
   paragraph: string
   button?: LinksInterface
   video?: string
   isVideoMode?: boolean
+  isClickable?: boolean
 }
 
 // TODO offset when there's createdAt
@@ -36,13 +39,15 @@ export type ArticleBlogCardProps = {
 
 const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
   image,
-  createdAt,
+  _createdAt,
+  isShowCreatedAt = false,
   heading,
   headingTagLevel,
   paragraph,
   button,
   video,
   isVideoMode,
+  isClickable = false,
 }) => {
   const [playVideo, setPlayVideo] = useState(false)
 
@@ -50,7 +55,7 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
     setPlayVideo(false)
   }
 
-  return (
+  const Card = () => (
     <Flex flexDir={'column'} width={'100%'}>
       {isVideoMode && video && (
         <ModalVideo
@@ -120,9 +125,9 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
       </Box>
       <Flex flex="1" flexDirection={'column'} px={{ base: 8, md: 2 }}>
         <Box flex="1" overflow="hidden">
-          {!isEmpty(createdAt) && (
+          {_createdAt && isShowCreatedAt && (
             <Text mb="4" fontSize={'10px'} color={'#898989'}>
-              {createdAt}
+              {moment(_createdAt).format('DD MMMM YYYY')}
             </Text>
           )}
           {heading && (
@@ -166,6 +171,16 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
       </Flex>
     </Flex>
   )
+
+  if (isClickable) {
+    return (
+      <Link href={`${button?.internalHref}`}>
+        <Card />
+      </Link>
+    )
+  }
+
+  return <Card />
 }
 
 export default ArticleBlogCard
