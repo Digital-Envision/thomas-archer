@@ -98,13 +98,17 @@ export const getDataProjectDetailPage = async ({ routeDetail }) => {
         currentProject.page?.SectionProjectScroll?.selectedProjects
 
     const sortedProjects = !_.isEmpty(selectedProjectsKeys)
-        ? _.sortBy(projects, (project) => {
-            // this will sort fetched projects, according to configured on selectedProjects array
-            const ref = selectedProjectsKeys.find(
-                (selected) => selected._ref === project._id
-            )
-            return selectedProjectsKeys.indexOf(ref)
-        })
+        ?
+        {
+            pagination: projects?.pagination,
+            data: _.sortBy(projects.data, (project) => {
+                // this will sort fetched projects, according to configured on selectedProjects array
+                const ref = selectedProjectsKeys.find(
+                    (selected) => selected._ref === project._id
+                )
+                return selectedProjectsKeys.indexOf(ref)
+            })
+        }
         : projects // projects already sorted on groq level
 
     return { project: currentProject, projects: sortedProjects }

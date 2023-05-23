@@ -6,9 +6,9 @@ import { HeightVariants } from 'components/base/Divider'
 import { HeadingTagSemantic } from 'components/base/Heading1'
 
 type Section2ColCardsProps = {
-  marginTop: HeightVariants
-  marginBottom: HeightVariants
-  headingTagLevel: HeadingTagSemantic
+  marginTop?: HeightVariants
+  marginBottom?: HeightVariants
+  headingTagLevel?: HeadingTagSemantic
   ListArticleBlogCards: ArticleBlogCardProps[]
 }
 
@@ -18,6 +18,8 @@ const SectionColCards: React.FC<Section2ColCardsProps> = ({
   headingTagLevel,
   ListArticleBlogCards,
 }) => {
+  // TODO ADJUST TO JOINING THE _REF to return the actual data
+
   return (
     <Box
       marginTop={marginTop}

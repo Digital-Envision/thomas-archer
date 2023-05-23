@@ -15,10 +15,6 @@ export default {
             type: 'text',
         },
         {
-            name: 'createdAt',
-            type: 'date',
-        },
-        {
             name: 'image',
             title: 'Image',
             type: 'image',
