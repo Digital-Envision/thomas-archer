@@ -25,6 +25,7 @@ import { CollapseRadio } from './CollapseSort'
 
 import { useEffect, useState } from 'react'
 import { getSanityData } from 'lib/sanity.client'
+import { ListingContainer, ListingGrid } from 'components/base/Listing'
 
 type SectionBlogListingProps = {
   heading: string
@@ -91,31 +92,11 @@ const SectionBlogListing: React.FC<SectionBlogListingProps> = (props) => {
   }
 
   return (
-    <Flex
-      mx={'auto'}
-      flex={1}
-      overflow="hidden"
-      justify="center"
-      align={'center'}
-      width={'100%'}
-      maxWidth={'1440px'}
-      px={'1rem'}
-      marginTop={marginTop}
-      marginBottom={marginBottom}
-      direction="column"
-    >
+    <ListingContainer {...props}>
       <Box mt={'2rem'} />
-
-      <Box alignSelf={'flex-start'} pl={['1rem', '1rem', '1rem', '3rem']}>
-        <HStack
-          // bgColor={'red.100'}
-          // mb={'1rem'}
-          // align={'center'}
-          align={'flex-start'}
-          divider={<StackDivider borderColor="gray.400" />}
-          pb={'1rem'}
-        >
-          <Box minW={'70px'}>
+      <Box alignSelf={'flex-start'}>
+        <HStack align={'flex-start'} minHeight={'76px'}>
+          <Box minW={'70px'} borderRightWidth={1} borderColor="#000000">
             <Text
               textAlign="center"
               textDecoration="underline"
@@ -133,7 +114,6 @@ const SectionBlogListing: React.FC<SectionBlogListingProps> = (props) => {
             allowToggle
             minW={'70px'}
             style={{ borderColor: null, borderWidth: 0 }}
-            // index={accordionIndex}
           >
             <AccordionItem key={'sortBy'} border={0}>
               {({ isExpanded }) => (
@@ -175,41 +155,19 @@ const SectionBlogListing: React.FC<SectionBlogListingProps> = (props) => {
             </AccordionItem>
           </Accordion>
         </HStack>
-        <Grid
-          templateColumns={{
-            base: 'repeat(1, 1fr)',
-            md: 'repeat(2, 1fr)',
-            lg: 'repeat(3, 1fr)',
-          }}
-          gap={{
-            base: 2,
-            md: 4,
-            lg: '3vh',
-          }}
-        >
-          {
-            // _.orderBy(
-            //   _.toArray(blogs?.data),
-            //   ['heading'],
-            //   selectedSort.sortBy === 'Newest' ? ['desc'] : ['asc']
-            // )
-            _.toArray(blogs?.data)?.map((prop, index) => {
-              const { image, content, heading, slug } = prop
-
-              return (
-                <GridItem key={index} colSpan={1}>
-                  <BlogListingCard
-                    image={image}
-                    heading={heading}
-                    content={content}
-                    link={`${asPath}/blog/${slug?.current}`}
-                  />
-                </GridItem>
-              )
-            })
-          }
-        </Grid>
       </Box>
+
+      <ListingGrid>
+        {_.toArray(blogs?.data)?.map((props, index) => (
+          <GridItem key={index} colSpan={1}>
+            <BlogListingCard
+              {...props}
+              link={`${asPath}/blog/${props?.slug?.current}`}
+            />
+          </GridItem>
+        ))}
+      </ListingGrid>
+
       <Box pt="1rem" />
       {blogs?.pagination?.isMore && (
         <Button
@@ -220,7 +178,7 @@ const SectionBlogListing: React.FC<SectionBlogListingProps> = (props) => {
           Load More Inspiration
         </Button>
       )}
-    </Flex>
+    </ListingContainer>
   )
 }
 

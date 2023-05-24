@@ -1,4 +1,4 @@
-import { Box, Flex, Grid } from '@chakra-ui/react'
+import { Box, Flex, Grid, GridItem } from '@chakra-ui/react'
 import Button, { Variants } from 'components/base/Button'
 import { HeightVariants } from 'components/base/Divider'
 import { ProjectListingCardProps } from 'components/modules/ProjectListingCard'
@@ -8,6 +8,7 @@ import { useRouter } from 'next/router'
 import AwardListingCard from 'components/modules/AwardListingCard'
 import { useState } from 'react'
 import { getSanityData } from 'lib/sanity.client'
+import { ListingContainer, ListingGrid } from 'components/base/Listing'
 
 type SectionAwardsListingProps = {
   awardedProjects: ProjectListingCardProps
@@ -41,43 +42,22 @@ const SectionAwardsListing: React.FC<SectionAwardsListingProps> = (props) => {
   }
 
   return (
-    <Flex
-      mx={'auto'}
-      flex={1}
-      overflow="hidden"
-      justify="center"
-      align={'center'}
-      width={'100%'}
-      maxWidth={'1800px'}
-      px={{ base: '1rem', md: '4rem' }}
-      marginTop={marginTop}
-      marginBottom={marginBottom}
-      direction="column"
-    >
+    <ListingContainer {...props}>
       <Box mt={'2rem'} />
 
-      <Grid
-        templateColumns={{
-          base: 'repeat(1, 1fr)',
-          md: 'repeat(2, 1fr)',
-          lg: 'repeat(3, 1fr)',
-        }}
-        gap={{
-          base: 2,
-          md: 4,
-          lg: '3vh',
-        }}
-      >
-        {projects?.data.map((props, i) => {
+      <ListingGrid>
+        {projects?.data.map((props, index) => {
           return (
-            <AwardListingCard
-              {...props}
-              key={`${props?.slug?.current}-${i}`}
-              link={`${asPath}/project/${props?.slug?.current}`}
-            />
+            <GridItem key={index} colSpan={1}>
+              <AwardListingCard
+                {...props}
+                link={`${asPath}/project/${props?.slug?.current}`}
+              />
+            </GridItem>
           )
         })}
-      </Grid>
+      </ListingGrid>
+
       <Box pt="1rem" />
       {projects?.pagination?.isMore && (
         <Button
@@ -88,7 +68,7 @@ const SectionAwardsListing: React.FC<SectionAwardsListingProps> = (props) => {
           Load More Inspiration
         </Button>
       )}
-    </Flex>
+    </ListingContainer>
   )
 }
 

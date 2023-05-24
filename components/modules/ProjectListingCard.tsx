@@ -5,6 +5,8 @@ import Text from '../base/Text'
 import { BsArrowRight } from 'react-icons/bs'
 import { urlForImage } from 'lib/sanity.image'
 import { PaginationData } from 'utils/interfaces'
+import CardContainer from 'components/base/Card'
+import { getImageUrl } from 'lib/utils'
 
 interface ProjectListingCardDataProps {
   image?: any // sanity io image
@@ -29,26 +31,20 @@ const ProjectListingCard: React.FC<ProjectListingCardProps['data'][0]> = ({
   heading,
   subHeading,
   caption,
-  width = '400px',
-  height = '480px',
 }) => {
   return (
     <Link href={link || '#'}>
-      <Box
-        overflow="hidden"
-        width={width}
-        height={height}
-        borderBottomWidth={1}
-      >
+      <CardContainer>
         <Box display="flex" justifyContent="center" alignItems="center">
           <Image
-            src={(image && urlForImage(image).url()) || ''}
+            src={getImageUrl(image)}
             alt={heading}
             objectFit="cover"
             w="full"
-            h="280px"
+            h="300px"
           />
         </Box>
+
         <Box py="5" h="170px">
           <Heading3 fontSize={'28px'} lineHeight={'20px'} mb="5">
             {heading}
@@ -60,13 +56,14 @@ const ProjectListingCard: React.FC<ProjectListingCardProps['data'][0]> = ({
             {caption}
           </Text>
         </Box>
-        <Flex align="center">
+
+        <Flex flex={1} align="center">
           <Text fontSize={'12px'} _hover={{ textDecoration: 'underline' }}>
             Read more
           </Text>
           <Icon as={BsArrowRight} color={'#898989'} fontSize={'24px'} pl={2} />
         </Flex>
-      </Box>
+      </CardContainer>
     </Link>
   )
 }

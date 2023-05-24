@@ -12,12 +12,10 @@ import {
   AccordionItem,
   AccordionButton,
   AccordionPanel,
-  StackDivider,
   Image,
 } from '@chakra-ui/react'
 import { HeightVariants } from 'components/base/Divider'
 import Text from 'components/base/Text'
-import { ProjectListingCardProps } from 'components/modules/ProjectListingCard'
 import _ from 'lodash'
 import { useEffect, useState } from 'react'
 import Facebook from 'components/icon/Facebook'
