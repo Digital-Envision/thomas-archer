@@ -28,10 +28,17 @@ export interface NavLinksInterfaces extends LinksInterface {
   }
 }
 
-const Navbar = ({ links, enquire, contact, socialMedia, specialButtons }) => {
+const Navbar = ({
+  links,
+  enquire,
+  contact,
+  socialMedia,
+  specialButtons,
+  isForceOnLightNavbar = false,
+}) => {
   const Links = links || []
 
-  const [onLightNavbar, setOnLightNavbar] = useState(false)
+  const [onLightNavbar, setOnLightNavbar] = useState(isForceOnLightNavbar)
 
   const [onHover, setOnHover] = useState(false)
   const [onOpenDropdown, setOnOpenDropdown] = useState(false)
@@ -41,7 +48,9 @@ const Navbar = ({ links, enquire, contact, socialMedia, specialButtons }) => {
 
   useEffect(() => {
     function handleScroll() {
-      setOnLightNavbar(window.pageYOffset > 499)
+      if (!isForceOnLightNavbar) {
+        setOnLightNavbar(window.pageYOffset > 499)
+      }
     }
 
     window.addEventListener('scroll', handleScroll)

@@ -13,7 +13,7 @@ export default function StudioPage() {
   return (
     <>
       <Head>
-        <NextStudioHead favicons={false} />
+        <NextStudioHead favicons={true} />
       </Head>
 
       <NextStudio config={config}>
