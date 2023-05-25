@@ -19,6 +19,27 @@ const config = {
     NETLIFY_API_ID: process.env.NETLIFY_API_ID,
     NETLIFY_BUILD_HOOK_ID: process.env.NETLIFY_BUILD_HOOK_ID,
   },
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: '/dev/:slug*',
+  //       destination: '/v1/dev/:slug*',
+  //       permanent: false,
+  //       // destination: '/v1/dev/:slug*',
+  //     },
+  //     {
+  //       source: '/dev1/:slug*',
+  //       destination: '/dev2/:slug*',
+  //       // destination: '/v1/dev/:slug*',
+  //       permanent: false,
+  //     },
+  //     {
+  //       source: '/dev4/:slug*',
+  //       destination: '/dev5/:slug*',
+  //       permanent: false,
+  //     },
+  //   ]
+  // },
 }
 
 export default config

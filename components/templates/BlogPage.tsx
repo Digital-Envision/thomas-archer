@@ -24,6 +24,7 @@ export default function BlogPageTemplate(props: any) {
         contact={globals.Contact}
         socialMedia={globals.SocialMedia}
         specialButtons={globals.SpecialButtons}
+        isForceOnLightNavbar={true}
       />
 
       <Box pt="150px" />
