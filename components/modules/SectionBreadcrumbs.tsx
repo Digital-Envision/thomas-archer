@@ -10,9 +10,9 @@ import _ from 'lodash'
 import { RouteDetail } from 'utils/interfaces'
 
 type SectionBreadcrumbsProps = {
-  marginTop: HeightVariants
-  marginBottom: HeightVariants
-  routeDetail: RouteDetail
+  marginTop?: HeightVariants
+  marginBottom?: HeightVariants
+  routeDetail?: RouteDetail
 }
 
 const SectionBreadcrumbs: React.FC<SectionBreadcrumbsProps> = (props) => {

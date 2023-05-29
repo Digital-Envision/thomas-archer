@@ -20,7 +20,7 @@ export const indexQuery = groq`
   ${postFields}
 }`
 
-// TODO need add pagination 12 projects with orderBy: createdAt desc 
+// TODO need add pagination 12 projects with orderBy: createdAt desc
 
 export const projectQuery = (props) => {
   const slug = props?.slug || ''
@@ -28,12 +28,10 @@ export const projectQuery = (props) => {
 
   if (slug) {
     return groq`*[_type == "projects" && slug.current == "${slug}"]`
-  }
-  else if (ids.length > 1) {
+  } else if (ids.length > 1) {
     // else if (!_.isEmpty(ids)) {
     return groq`*[_type == "projects" && _id in $ids]`
   }
-
 
   return groq`*[_type == "projects" && slug.current != null] | order(_createdAt desc)`
 }
@@ -51,14 +49,14 @@ export const floorQuery = (floor: string) => {
       ...,
       facades->{
         listImages,
-      }
+      },
     }`
   }
   return groq`*[_type == "floors" && slug.current != null]{
       ...,
       facades->{
         listImages,
-      }
+      },
     }`
 }
 
@@ -74,7 +72,7 @@ export const pageQuery = (slug: 'string' | { _id: string }) => {
             "internalHref": button.internalHref->slug.current,
           },
         },
-      }
+      },
     }`
   }
 
@@ -102,6 +100,7 @@ export const pageQuery = (slug: 'string' | { _id: string }) => {
             "internalHref": button.internalHref->slug.current,
           },
         },
+        "listButtons": {}
       }
     }`
 }
@@ -213,20 +212,20 @@ export interface Page {
 }
 
 export interface ImageAsset {
-  _ref: string;
-  _type: string;
+  _ref: string
+  _type: string
 }
 
 export interface Image {
-  _type: string;
-  asset: ImageAsset;
+  _type: string
+  asset: ImageAsset
 }
 
 export interface Award {
-  _key: string;
-  _type: string;
-  description: string;
-  name: string;
+  _key: string
+  _type: string
+  description: string
+  name: string
 }
 
 export interface Project {
@@ -250,27 +249,28 @@ export interface Project {
   }
   subHeading: string
   award: {
-    awardImage: Image;
-    awardLogo: Image;
-    awards: Award[];
-  };
+    awardImage: Image
+    awardLogo: Image
+    awards: Award[]
+  }
 }
 export interface Blog {
-  _createdAt: string;
-  _id: string;
-  _rev: string;
-  _type: string;
-  _updatedAt: string;
-  content: any[];
-  createdAt: string;
-  heading: string;
+  _createdAt: string
+  _id: string
+  _rev: string
+  _type: string
+  _updatedAt: string
+  content: any[]
+  createdAt: string
+  heading: string
   image: {
     _type: 'image'
     asset: {
       _ref: string
       _type: 'reference'
     }
-  }, slug: {
+  }
+  slug: {
     _type: 'slug'
     current: string
   }
@@ -330,4 +330,5 @@ export interface Floor {
       image: SanityFiles
     }[]
   }
+  customPageSection?: any
 }

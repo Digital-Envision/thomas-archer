@@ -1,8 +1,8 @@
-import { getSanityData, getSanityDataById } from "lib/sanity.client"
-import _ from "lodash"
+import { getSanityData, getSanityDataById } from 'lib/sanity.client'
+import _ from 'lodash'
 
 export const getRouteDetail = (testCase) => {
-    const detailSlugs = ['project', 'blog', 'floor'] // todo fetch list from sanity
+    const detailSlugs = ['project', 'blog', 'view-range'] // todo fetch list from sanity
     const result = { route: [], detail: [] }
     let currentPart = 'route'
 
@@ -60,7 +60,7 @@ export const setPropsForDetailPage = async (props) => {
         data = await getDataProjectDetailPage(props)
     } else if (docType === 'blog') {
         data = await getDataBlogDetailPage(props)
-    } else if (docType === 'floor') {
+    } else if (docType === 'view-range') {
         data = await getDataFloorDetailPage(props)
     }
 
@@ -78,7 +78,10 @@ export const getDataProjectDetailPage = async ({ routeDetail }) => {
     // if isSelectedProject toggled, get 3 selected projects
     const selectedProjectsRef =
         currentProject?.page?.SectionProjectScroll?.isSelectedProject &&
-        _.map(currentProject?.page?.SectionProjectScroll?.selectedProjects, '_ref')
+        _.map(
+            currentProject?.page?.SectionProjectScroll?.selectedProjects,
+            '_ref'
+        )
 
     // if toggled: selected projects, or else get latest 12 projects
     const projects = !_.isEmpty(selectedProjectsRef)
@@ -129,10 +132,9 @@ export const getDataFloorDetailPage = async ({ routeDetail }) => {
     const [docType, docSlug] = routeDetail?.detail
 
     const currentFloor = await getSanityDataById({
-        type: docType + 's',
+        type: 'floors',
         condition: `&& slug.current == "${docSlug}"`,
     })
 
     return { floors: currentFloor }
 }
-

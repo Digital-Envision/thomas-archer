@@ -51,7 +51,7 @@ const PageBuilder = ({ pages, ...rest }) => {
           el = <Steps {...c} key={c?._key} />
           break
         case 'FloorPlanListing':
-          el = <FloorPlanListing floors={rest.floors} key={c?._key} />
+          el = <FloorPlanListing floors={rest.floors} {...c} key={c?._key} />
           break
         case 'SectionGalleryScroll':
           el = <GalleryScroll {...c} key={c?._key} />
