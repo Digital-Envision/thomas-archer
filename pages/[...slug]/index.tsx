@@ -19,11 +19,12 @@ import {
   setPropsForDetailPage,
   setPropsForPage,
 } from 'utils/page'
+import separatePages from 'utils/separate-pages'
 
 const PreviewIndexPage = lazy(() => import('components/PreviewIndexPage'))
 
 export default function DynamicPage(props) {
-  console.log('Dynamic page props', props)
+  //console.log('Dynamic page props', props)
 
   const {
     posts,
@@ -51,7 +52,7 @@ export default function DynamicPage(props) {
         return <ProjectPageTemplate {...props} />
       case 'blog':
         return <BlogPageTemplate {...props} />
-      case 'floor':
+      case 'view-range':
         return <FloorPageTemplate {...props} />
     }
   }
@@ -92,19 +93,15 @@ export default function DynamicPage(props) {
 }
 
 export const getStaticPaths = async () => {
-  const parentPages = ['gallery', 'home-design', 'custom-design'] // todo fetch list from sanity
-  const subPages = ['portfolio', 'inspiration-moodboards', 'upcoming-projects'] // todo fetch list from sanity
+  const links = await getAllGlobals()
+  const separated = separatePages(links?.Links)
 
-  const paths = []
-
-  parentPages.forEach((slug) => {
-    subPages.forEach((sub) => {
-      paths.push({ params: { slug: [slug, sub] } })
-    })
+  const paths = separated.slug.map((slug) => {
+    return { params: { slug: [`${slug}`] } }
   })
 
   return {
-    paths: [{ params: { slug: ['gallery', 'whateverpage'] } }],
+    paths,
     fallback: true,
   }
 }
@@ -120,13 +117,11 @@ export const getStaticProps: GetStaticProps<
    * 2. return particular document id and required data
    */
 
-  console.log('getStaticProps ctx', ctx)
   const { preview = false, previewData = {}, params } = ctx
   let pages = []
   let pageProps
 
   const routeDetail = getRouteDetail(params?.slug)
-  console.log('getStaticProps routeDetail', routeDetail)
 
   const [settings, globals = []] = await Promise.all([
     getSettings(),

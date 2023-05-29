@@ -1,9 +1,13 @@
 import { Flex } from '@chakra-ui/react'
 import Button, { Variants } from 'components/base/Button'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const CTAs = ({ listButtons, marginTop, marginBottom }) => {
+  useEffect(() => {
+    console.log({ listButtons })
+  }, [])
+
   return (
     <Flex
       justifyContent={'center'}

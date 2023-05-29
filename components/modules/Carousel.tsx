@@ -27,60 +27,6 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoSlide = false }) => {
 
   return (
     <Box>
-      <Box>
-        <Text
-          display={{
-            base: 'block',
-            sm: 'none',
-          }}
-        >
-          base
-        </Text>
-        <Text
-          display={{
-            base: 'none',
-            sm: 'block',
-            md: 'none',
-          }}
-        >
-          sm
-        </Text>
-        <Text
-          display={{
-            base: 'none',
-            md: 'block',
-            lg: 'none',
-          }}
-        >
-          md
-        </Text>
-        <Text
-          display={{
-            base: 'none',
-            lg: 'block',
-            xl: 'none',
-          }}
-        >
-          lg
-        </Text>
-        <Text
-          display={{
-            base: 'none',
-            xl: 'block',
-            '2xl': 'none',
-          }}
-        >
-          xl
-        </Text>
-        <Text
-          display={{
-            base: 'none',
-            '2xl': 'block',
-          }}
-        >
-          2xl
-        </Text>
-      </Box>
       <Flex
         width={'100%'}
         minHeight={{ base: '244px', '2xl': 'calc(60vw - 10rem)' }}

@@ -1,5 +1,6 @@
+import _ from 'lodash'
 import React, { useEffect, useState } from 'react'
-import { Box, Flex, Grid, Img } from '@chakra-ui/react'
+import { Box, Flex, Grid, GridItem, Img, SimpleGrid } from '@chakra-ui/react'
 import ButtonIcon, {
   Variants as ButtonIconVariants,
 } from 'components/base/ButtonIcon'
@@ -27,36 +28,55 @@ const FloorList = ({ floor }) => {
     }
   }
 
-  return (
+  return _.isArray(floorPlan?.listImages) &&
+    floorPlan?.listImages?.length > 0 ? (
     <>
-      <Flex alignItems={'center'} justifyContent={'center'}>
-        <ButtonIcon
-          aria-label="floor-arrow-left"
-          variant={ButtonIconVariants.state2}
-          bg={'transparent'}
-          onClick={handlePrev}
+      <Grid
+        templateColumns={'repeat(6, 1fr)'}
+        alignItems={'center'}
+        justifyContent={'center'}
+        bg={'#F5F5F5'}
+        px={'16px'}
+      >
+        <GridItem colSpan={1}>
+          <ButtonIcon
+            aria-label="floor-arrow-left"
+            variant={ButtonIconVariants.state2}
+            bg={'transparent'}
+            onClick={handlePrev}
+          >
+            <HiOutlineArrowLeft />
+          </ButtonIcon>
+        </GridItem>
+        <GridItem
+          colSpan={4}
+          display={'flex'}
+          alignItems={'center'}
+          justifyContent={'center'}
         >
-          <HiOutlineArrowLeft />
-        </ButtonIcon>
-        {floorPlan?.listImages[slide]?.image && (
-          <Box mx={'60px'} textAlign={'center'}>
-            <Img
-              src={urlForImage(floorPlan?.listImages[slide]?.image).url()}
-              width={'202px'}
-              height={'446px'}
-            />
-            <Text my={'16px'}>{floorPlan?.listImages[slide]?.name}</Text>
-          </Box>
-        )}
-        <ButtonIcon
-          aria-label="floor-arrow-right"
-          variant={ButtonIconVariants.state2}
-          bg={'transparent'}
-          onClick={handleNext}
-        >
-          <HiOutlineArrowRight />
-        </ButtonIcon>
-      </Flex>
+          {_.isArray(floorPlan?.listImages) &&
+            floorPlan?.listImages[slide]?.image && (
+              <Box mt={'32px'} textAlign={'center'}>
+                <Img
+                  src={urlForImage(floorPlan?.listImages[slide]?.image).url()}
+                  width={'202px'}
+                  height={'446px'}
+                />
+                <Text mb={'18px'}>{floorPlan?.listImages[slide]?.name}</Text>
+              </Box>
+            )}
+        </GridItem>
+        <GridItem colSpan={1} display={'flex'} justifyContent={'right'}>
+          <ButtonIcon
+            aria-label="floor-arrow-right"
+            variant={ButtonIconVariants.state2}
+            bg={'transparent'}
+            onClick={handleNext}
+          >
+            <HiOutlineArrowRight />
+          </ButtonIcon>
+        </GridItem>
+      </Grid>
       <Flex
         alignItems={'center'}
         justifyContent={'center'}
@@ -66,7 +86,7 @@ const FloorList = ({ floor }) => {
         px={'20px'}
         pb={'10px'}
       >
-        <Link href={`/floor/${floor?.slug?.current}`} target={'_blank'}>
+        <Link href={`/view-range/${floor?.slug?.current}`}>
           <Text textDecor={'underline'}>
             {floor?.title}{' '}
             {floor?.floorPlan?.listSizes?.map((type, key) => {
@@ -96,12 +116,18 @@ const FloorList = ({ floor }) => {
         </Flex>
       </Flex>
     </>
+  ) : (
+    <></>
   )
 }
 
-const FloorPlanListing = ({ floors }) => {
+const FloorPlanListing = ({ floors, marginTop, marginBottom }) => {
   return (
-    <Box px={{ base: '1rem', md: '4rem' }}>
+    <Box
+      px={{ base: '1rem', md: '4rem' }}
+      marginTop={marginTop}
+      marginBottom={marginBottom}
+    >
       <Grid
         templateColumns={{
           base: 'repeat(1, 1fr)',

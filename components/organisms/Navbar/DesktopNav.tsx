@@ -6,7 +6,7 @@ import ButtonIcon, {
 } from 'components/base/ButtonIcon'
 import Person from 'components/icon/Person'
 import Telephone from 'components/icon/Telephone'
-import React from 'react'
+import React, { useEffect } from 'react'
 import DesktopSubNav from './DesktopSubNav'
 import { NavLinksInterfaces, LinksInterface } from '.'
 import Link from 'next/link'
@@ -63,6 +63,10 @@ const DesktopNav: React.FC<Props> = ({
   contact,
   socialMedia,
 }) => {
+  useEffect(() => {
+    console.log({ NAV_ITEMS })
+  }, [])
+
   return (
     <Grid
       templateColumns={'repeat(9, 1fr)'}

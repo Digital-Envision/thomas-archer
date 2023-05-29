@@ -24,20 +24,28 @@ export const client = projectId
   ? createClient({ projectId, dataset, apiVersion, useCdn })
   : null
 
-
 export const getSanityDataById = async ({ type, condition = '' }) => {
   try {
     const query = `*[_type == "${type}" ${condition}]`
-    const [data] = await client.fetch(query);
+    const [data] = await client.fetch(query)
 
-    return data;
+    return data
   } catch (error) {
-    console.error('Error fetching Sanity data:', error);
-    return null;
+    console.error('Error fetching Sanity data:', error)
+    return null
   }
 }
 
-export const getSanityData = async ({ type, condition = '', params = {}, page = 1, limit = 100, sortByField = '_createdAt', sortOrder = 'desc', options = '' }) => {
+export const getSanityData = async ({
+  type,
+  condition = '',
+  params = {},
+  page = 1,
+  limit = 100,
+  sortByField = '_createdAt',
+  sortOrder = 'desc',
+  options = '',
+}) => {
   try {
     const query = `*[_type == "${type}" ${condition}] | order(${sortByField} ${sortOrder})`
 
@@ -45,14 +53,16 @@ export const getSanityData = async ({ type, condition = '', params = {}, page = 
     const slicingParams = {
       firstIndex: (page - 1) * limit,
       lastIndex: (page - 1) * limit + limit - 1,
+    }
 
-    };
+    const data = await client.fetch(query + slicingQuery, {
+      ...slicingParams,
+      ...params,
+    })
+    const counts = await client.fetch(`count(${query})`, params)
 
-    const data = await client.fetch(query + slicingQuery, { ...slicingParams, ...params });
-    const counts = await client.fetch(`count(${query})`, params);
-
-    const pages = Math.ceil(counts / limit);
-    const isMore = page < pages;
+    const pages = Math.ceil(counts / limit)
+    const isMore = page < pages
     const pagination = {
       page,
       limit,
@@ -61,10 +71,10 @@ export const getSanityData = async ({ type, condition = '', params = {}, page = 
       isMore,
     }
 
-    return { pagination, data };
+    return { pagination, data }
   } catch (error) {
-    console.error('Error fetching Sanity data:', error);
-    return null;
+    console.error('Error fetching Sanity data:', error)
+    return null
   }
 }
 
@@ -89,8 +99,10 @@ export async function getAllPages(page): Promise<Post[]> {
   return []
 }
 
-export async function getAllGlobals(): Promise<Post[]> {
+export async function getAllGlobals() {
   if (client) {
+    const getData = await client.fetch(globalQuery())
+
     return (await client.fetch(globalQuery())) || []
   }
   return []
@@ -98,9 +110,12 @@ export async function getAllGlobals(): Promise<Post[]> {
 
 export async function getAllProjects(props?): Promise<any[]> {
   if (client) {
-    return (await client.fetch(projectQuery(props),
-      !_.isEmpty(props?.ids) ? { ...props } : undefined
-    )) || []
+    return (
+      (await client.fetch(
+        projectQuery(props),
+        !_.isEmpty(props?.ids) ? { ...props } : undefined
+      )) || []
+    )
   }
   return []
 }
