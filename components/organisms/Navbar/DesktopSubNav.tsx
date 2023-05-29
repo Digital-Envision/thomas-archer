@@ -9,7 +9,7 @@ import {
 import Button, { Variants as ButtonVariants } from 'components/base/Button'
 import Text from 'components/base/Text'
 import Heading1 from 'components/base/Heading1'
-import React, { useEffect } from 'react'
+import React from 'react'
 import DropdownItem from 'components/modules/DropdownItem'
 import { LinksInterface } from '.'
 import Link from 'next/link'

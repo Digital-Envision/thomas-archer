@@ -20,6 +20,8 @@ import Car from 'components/icon/Car'
 import { urlForImage } from 'lib/sanity.image'
 import React, { useState } from 'react'
 import FloorPlanDetailsModal from './Modal'
+import { getUrlFromSanityFile } from 'lib/utils'
+import Link from 'next/link'
 
 const FloorPlanDetailsMobile = ({
   title,
@@ -237,11 +239,34 @@ const FloorPlanDetailsMobile = ({
                 Download Price List
               </Button>
             )}
-            {floorPlan?.homeFlyer && (
-              <Button variant={ButtonVariants.blackLine} mb={'20px'}>
-                Download Home Flyer
-              </Button>
-            )}
+            {_.isArray(floorPlan?.listSizes) &&
+              floorPlan?.listSizes[floorType].homeFlyer && (
+                <Link
+                  href={
+                    !floorPlan?.listSizes[floorType]?.homeFlyer?.isExternalFile
+                      ? floorPlan?.listSizes[floorType]?.homeFlyer?.fileName
+                        ? `${getUrlFromSanityFile(
+                            floorPlan?.listSizes[floorType]?.homeFlyer?.file
+                          )}?dl=${
+                            floorPlan?.listSizes[floorType]?.homeFlyer?.fileName
+                          }`
+                        : `${getUrlFromSanityFile(
+                            floorPlan?.listSizes[floorType]?.homeFlyer?.file
+                          )}?dl`
+                      : floorPlan?.listSizes[floorType]?.homeFlyer?.externalFile
+                      ? floorPlan?.listSizes[floorType]?.homeFlyer?.externalFile
+                      : '#'
+                  }
+                >
+                  <Button
+                    variant={ButtonVariants.blackLine}
+                    mb={'20px'}
+                    width={'100%'}
+                  >
+                    Download Home Flyer
+                  </Button>
+                </Link>
+              )}
             {floorPlan?.inclusionsBrochure && (
               <Button
                 variant={ButtonVariants.blackLine}
