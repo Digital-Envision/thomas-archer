@@ -6,7 +6,7 @@ import _ from 'lodash'
 import { useRouter } from 'next/router'
 
 import AwardListingCard from 'components/modules/AwardListingCard'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getSanityData } from 'lib/sanity.client'
 import { ListingContainer, ListingGrid } from 'components/base/Listing'
 
@@ -20,6 +20,10 @@ const SectionAwardsListing: React.FC<SectionAwardsListingProps> = (props) => {
   const { marginTop, marginBottom, awardedProjects: _projects } = props
   const { asPath } = useRouter()
   const [projects, setProjects] = useState(_projects)
+
+  useEffect(() => {
+    console.log('masuk sini', { projects, _projects })
+  }, [])
 
   const handleViewMore = async () => {
     const currentPagination = projects?.pagination

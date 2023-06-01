@@ -1,6 +1,5 @@
 import React from 'react'
 import { Button as ChakraButton, ButtonProps } from '@chakra-ui/react'
-import Text from './Text'
 
 export enum Variants {
   white = 'white',

@@ -4,7 +4,7 @@ import React from 'react'
 import DropdownItem from 'components/modules/DropdownItem'
 import Heading1 from 'components/base/Heading1'
 import { NavLinksInterfaces } from '.'
-import Link from 'next/link'
+import Link from 'components/base/Link'
 import Text from 'components/base/Text'
 
 export interface Props {
@@ -38,10 +38,7 @@ const MobileNavLevel2: React.FC<Props> = ({
             <>
               <DropdownItem
                 key={key}
-                href={
-                  link.useInternal ? `/${link.internalHref}` : link.externalHref
-                }
-                isExternal={link.isExternal}
+                link={link}
                 width={'auto'}
                 paddingY={3}
                 paddingX={0}
@@ -54,18 +51,7 @@ const MobileNavLevel2: React.FC<Props> = ({
         })}
         {button && button.label && (
           <Box>
-            <Link
-              href={
-                button.useInternal
-                  ? button.internalHref
-                    ? `/${button?.internalHref}`
-                    : '#'
-                  : button.externalHref
-                  ? button.externalHref
-                  : '#'
-              }
-              target={button?.isExternal ? '_blank' : ''}
-            >
+            <Link link={button}>
               <Button mt={'50px'} variant={ButtonVariants.black}>
                 {button?.label}
               </Button>

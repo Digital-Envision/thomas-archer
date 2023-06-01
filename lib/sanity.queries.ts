@@ -66,12 +66,6 @@ export const pageQuery = (slug: 'string' | { _id: string }) => {
       ...,
       content[]{
         ...,
-        "button": {
-          ...button,
-          ...{
-            "internalHref": button.internalHref->slug.current,
-          },
-        },
       },
     }`
   }
@@ -81,26 +75,14 @@ export const pageQuery = (slug: 'string' | { _id: string }) => {
       ...,
       content[]{
         ...,
-        "button": {
-          ...button,
-          ...{
-            "internalHref": button.internalHref->slug.current,
-          },
-        },
       }
     }`
   }
+
   return groq`*[_type == "page"][]{
       ...,
       content[]{
         ...,
-        "button": {
-          ...button,
-          ...{
-            "internalHref": button.internalHref->slug.current,
-          },
-        },
-        "listButtons": {}
       }
     }`
 }
@@ -110,34 +92,16 @@ export const globalQuery = () => {
     ...,
     Links[]{
       ...,
-      "internalHref": internalHref->slug.current,
-      "button": {
-        ...button,
-        ...{
-          "internalHref": button.internalHref->slug.current,
-        },
+      "href": {
+        ...internalHref,
+        "internalHref": internalHref->slug.current,
       },
       children[] {
         ...,
-        "internalHref": internalHref->slug.current
-      }
-    },
-    SpecialButtons{
-      ...,
-      "specialButtonTwo": {
-        ...specialButtonTwo,
-        "internalHref": specialButtonTwo.internalHref->slug.current,
-      },
-    },
-    SocialMedia{
-      ...,
-      "connectWithUs": {
-        ...connectWithUs,
-        "internalHref": connectWithUs.internalHref->slug.current,
-      },
-      socialMedia[] {
-        ...,
-        "internalHref": internalHref->slug.current,
+        "href": {
+          ...internalHref,
+          "internalHref": internalHref->slug.current,
+        },
       }
     }
   }`
@@ -158,7 +122,7 @@ export const postAndMoreStoriesQuery = groq`
 export const postSlugsQuery = groq`
 *[_type == "post" && defined(slug.current)][].slug.current
 `
-export const pageSlugsQuery = groq`*[_type == 'page' && slug.current != null ] { slug }`
+export const pageSlugsQuery = groq`*[_type == 'page' && slug.current != null ] { slug, _id }`
 // export const pageSlugsQuery = groq`*[_type == "page"] {slug}`
 // export const pageSlugsQuery = groq`*[_type == "page"]`
 // export const pageSlugsQuery = groq`*[_type == "page" && defined(slug.current)][].slug.current`

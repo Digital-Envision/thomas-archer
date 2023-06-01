@@ -17,7 +17,11 @@ const FloorPlanDetails = ({ title, floorPlan, marginTop, marginBottom }) => {
       marginTop={marginTop}
       marginBottom={marginBottom}
     >
-      <Box display={{ base: 'none', lg: 'block' }} maxW={{ md: '1800px' }}>
+      <Box
+        display={{ base: 'none', lg: 'block' }}
+        width={'100%'}
+        maxW={{ md: '1800px' }}
+      >
         <FloorPlanDetailsDesktop
           title={title}
           floorPlan={floorPlan}

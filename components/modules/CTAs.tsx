@@ -1,6 +1,6 @@
 import { Flex } from '@chakra-ui/react'
 import Button, { Variants } from 'components/base/Button'
-import Link from 'next/link'
+import Link from 'components/base/Link'
 import React from 'react'
 
 const CTAs = ({ listButtons, marginTop, marginBottom }) => {
@@ -18,15 +18,7 @@ const CTAs = ({ listButtons, marginTop, marginBottom }) => {
     >
       {listButtons?.map((button, key) => {
         return (
-          <Link
-            key={key}
-            href={
-              button.useInternal
-                ? `/${button.internalHref}`
-                : button.externalHref
-            }
-            target={button?.isExternal ? '_blank' : ''}
-          >
+          <Link link={button} key={key}>
             <Button variant={Variants.blackLine} fontSize={'14px'}>
               {button?.label}
             </Button>

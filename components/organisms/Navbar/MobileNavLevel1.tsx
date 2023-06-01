@@ -4,8 +4,8 @@ import Text from 'components/base/Text'
 import Person from 'components/icon/Person'
 import React from 'react'
 import DropdownItem from 'components/modules/DropdownItem'
-import { LinksInterface, NavLinksInterfaces } from '.'
-import Link from 'next/link'
+import { NavLinksInterfaces } from '.'
+import Link, { LinksInterface } from 'components/base/Link'
 
 export interface Props {
   openDrawer?: () => void
@@ -38,14 +38,15 @@ const MobileNavLevel1: React.FC<Props> = ({
           return (
             <DropdownItem
               key={key}
-              href={
+              link={
                 link.children
-                  ? '#'
-                  : link.useInternal
-                  ? `/${link.internalHref}`
-                  : link.externalHref
+                  ? {
+                      ...link,
+                      useInternal: false,
+                      externalHref: '#',
+                    }
+                  : link
               }
-              isExternal={link.children ? false : link.isExternal}
               onClick={() =>
                 link.children
                   ? setSubLinks(link.children, link.label, link.button)
@@ -65,16 +66,10 @@ const MobileNavLevel1: React.FC<Props> = ({
           )
         })}
         {specialButtonTwo && specialButtonTwo.showButton && (
-          <Link
-            href={
-              specialButtonTwo.useInternal
-                ? `/${specialButtonTwo.internalHref}`
-                : specialButtonTwo.externalHref
-            }
-          >
+          <Link link={specialButtonTwo}>
             <Flex
               alignItems={'center'}
-              py={5}
+              py={2}
               _hover={{
                 textDecor: 'none',
               }}
@@ -83,7 +78,7 @@ const MobileNavLevel1: React.FC<Props> = ({
                 pathFill={'black'}
                 width={'17px'}
                 height={'20px'}
-                mr={2}
+                mr={3}
               />
               {specialButtonTwo.label && (
                 <Text
@@ -91,8 +86,9 @@ const MobileNavLevel1: React.FC<Props> = ({
                   color={'black'}
                   fontSize={'1.3em'}
                   lineHeight={'1.57em'}
+                  mt={2}
                 >
-                  Client Login
+                  {specialButtonTwo.label}
                 </Text>
               )}
             </Flex>

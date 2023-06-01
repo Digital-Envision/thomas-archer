@@ -6,8 +6,7 @@ import Dash from 'components/base/Dash'
 import Divider, { HeightVariants } from 'components/base/Divider'
 import { urlForImage } from 'lib/sanity.image'
 import router from 'next/router'
-import { LinksInterface } from 'components/organisms/Navbar'
-import Link from 'next/link'
+import Link, { LinksInterface } from 'components/base/Link'
 
 type Section2ColImageTextMosaicType2Props = {
   heading: string
@@ -62,18 +61,7 @@ const Section2ColImageTextMosaicType2: React.FC<
               <Text>{paragraph}</Text>
               <Box pt={5}>
                 {button?.label && (
-                  <Link
-                    href={
-                      button?.useInternal
-                        ? button?.internalHref
-                          ? `/${button?.internalHref}`
-                          : '#'
-                        : button?.externalHref
-                        ? button?.externalHref
-                        : '#'
-                    }
-                    target={button?.isExternal ? '_blank' : ''}
-                  >
+                  <Link link={button}>
                     <Button variant={Variants.blackLine}>
                       {button?.label}
                     </Button>

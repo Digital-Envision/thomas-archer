@@ -1,7 +1,7 @@
 import { Box, Collapse, Flex } from '@chakra-ui/react'
 import Text from 'components/base/Text'
 import Dropdown from 'components/icon/Dropdown'
-import Link from 'next/link'
+import Link from 'components/base/Link'
 import React, { useState } from 'react'
 import { NavLinksInterfaces } from '../Navbar'
 
@@ -52,14 +52,7 @@ const MobileNav: React.FC<Props> = ({ NAV_ITEMS }) => {
                   )}
                 </>
               ) : (
-                <Link
-                  href={
-                    link.useInternal
-                      ? `/${link.internalHref}`
-                      : link.externalHref
-                  }
-                  target={link.isExternal ? '_blank' : ''}
-                >
+                <Link link={link}>
                   <Text fontWeight={700}>{link.label}</Text>
                 </Link>
               )}
@@ -68,15 +61,7 @@ const MobileNav: React.FC<Props> = ({ NAV_ITEMS }) => {
               <Collapse in={dropdown === key}>
                 {link?.children?.map((childLink, childKey) => {
                   return (
-                    <Link
-                      href={
-                        childLink.useInternal
-                          ? `/${childLink.internalHref}`
-                          : childLink.externalHref
-                      }
-                      target={childLink.isExternal ? '_blank' : ''}
-                      key={childKey}
-                    >
+                    <Link link={childLink} key={childKey}>
                       <Text fontSize={'12px'} mt={'20px'} ml={5}>
                         {childLink.label}
                       </Text>

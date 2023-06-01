@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import {
   Box,
   Divider,
@@ -11,8 +12,8 @@ import Text from 'components/base/Text'
 import Heading1 from 'components/base/Heading1'
 import React from 'react'
 import DropdownItem from 'components/modules/DropdownItem'
-import { LinksInterface } from '.'
-import Link from 'next/link'
+import Link, { LinksInterface } from 'components/base/Link'
+import NextLink from 'next/link'
 import { SanityFiles } from 'utils/interfaces'
 
 export interface Props {
@@ -33,14 +34,11 @@ export interface Props {
   }
   socialMedia: {
     connectWithUs: LinksInterface
-    socialMedia: Array<{
-      label: string
-      icon: SanityFiles
-      useInternal: boolean
-      internalHref: string
-      externalHref: string
-      isExternal: boolean
-    }>
+    socialMedia: Array<
+      {
+        icon: SanityFiles
+      } & LinksInterface
+    >
   }
 }
 
@@ -84,12 +82,7 @@ const DesktopSubNav: React.FC<Props> = ({
                 !link.mobileOnly && (
                   <DropdownItem
                     key={key}
-                    href={
-                      link.useInternal
-                        ? `/${link.internalHref}`
-                        : link.externalHref
-                    }
-                    isExternal={link.isExternal}
+                    link={link}
                     width={'auto'}
                     paddingX={0}
                     _hover={{}}
@@ -105,18 +98,7 @@ const DesktopSubNav: React.FC<Props> = ({
       <Grid templateColumns={'repeat(11, 1fr)'}>
         <GridItem colSpan={4}>
           {button && button?.label && (
-            <Link
-              href={
-                button.useInternal
-                  ? button.internalHref
-                    ? `/${button?.internalHref}`
-                    : '#'
-                  : button.externalHref
-                  ? button.externalHref
-                  : '#'
-              }
-              target={button?.isExternal ? '_blank' : ''}
-            >
+            <Link link={button}>
               <Button variant={ButtonVariants.black}>{button?.label}</Button>
             </Link>
           )}
@@ -126,20 +108,7 @@ const DesktopSubNav: React.FC<Props> = ({
             <Flex alignItems={'center'}>
               {socialMedia?.connectWithUs && (
                 <Box>
-                  <Link
-                    href={
-                      socialMedia?.connectWithUs?.useInternal
-                        ? socialMedia?.connectWithUs?.internalHref
-                          ? `/${socialMedia?.connectWithUs?.internalHref}`
-                          : '#'
-                        : socialMedia?.connectWithUs?.externalHref
-                        ? socialMedia?.connectWithUs?.externalHref
-                        : '#'
-                    }
-                    target={
-                      socialMedia?.connectWithUs?.isExternal ? '_blank' : ''
-                    }
-                  >
+                  <Link link={socialMedia?.connectWithUs}>
                     <Text textDecor={'underline'}>Connect with us</Text>
                   </Link>
                 </Box>
@@ -161,14 +130,7 @@ const DesktopSubNav: React.FC<Props> = ({
                           height={'14px'}
                         />
                       )}
-                      <Link
-                        href={
-                          sc.useInternal
-                            ? `/${sc.internalHref}`
-                            : sc.externalHref
-                        }
-                        rel="noopener noreferrer"
-                      >
+                      <Link link={sc}>
                         <Text textDecor={'underline'}>{sc.label}</Text>
                       </Link>
                     </>
@@ -176,9 +138,9 @@ const DesktopSubNav: React.FC<Props> = ({
                 })}
               </Flex>
             </Flex>
-            <Link href={`mailto:${contact?.email}`}>
+            <NextLink href={`mailto:${contact?.email}`}>
               <Text>{contact?.email}</Text>
-            </Link>
+            </NextLink>
           </SimpleGrid>
         </GridItem>
       </Grid>

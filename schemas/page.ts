@@ -24,19 +24,6 @@ export default {
             },
         },
         {
-            name: 'isSubNav',
-            description: 'to set if the page is the subpage of page',
-            type: 'boolean',
-            title: 'Is SubPage',
-        },
-        {
-            name: 'subPage',
-            title: 'SubPage of',
-            type: 'reference',
-            to: [{ type: 'page' }],
-            hidden: ({ parent }) => !parent.isSubNav,
-        },
-        {
             name: 'content',
             type: 'customPageSection',
             title: 'Page sections',

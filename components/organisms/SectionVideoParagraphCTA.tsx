@@ -7,7 +7,7 @@ import Image from 'next/image'
 import { HiChevronRight } from 'react-icons/hi2'
 import ModalVideo from 'components/modules/ModalVideo'
 import { urlForImage } from 'lib/sanity.image'
-import Link from 'next/link'
+import Link from 'components/base/Link'
 
 const SectionVideoParagraphCTA = ({
   marginTop,
@@ -152,14 +152,7 @@ const SectionVideoParagraphCTA = ({
             </Button>
           )}
           {button?.label && (
-            <Link
-              href={
-                button?.useInternal
-                  ? `/${button?.internalHref}`
-                  : button?.externalHref
-              }
-              target={button?.isExternal ? '_blank' : ''}
-            >
+            <Link link={button}>
               <Button variant={ButtonVariants.blackLine} ml={5}>
                 {button?.label}
               </Button>

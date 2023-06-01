@@ -7,7 +7,7 @@ import { blockToPlainText } from 'lib/utils'
 import { useRouter } from 'next/router'
 import { BlogListingCardProps } from 'components/modules/BlogListingCard'
 import SectionColCards from './SectionColCards'
-import { LinksInterface } from './Navbar'
+import { LinksInterface } from 'components/base/Link'
 
 type SectionBlogProps = {
   heading: string

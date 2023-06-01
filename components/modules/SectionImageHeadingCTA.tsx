@@ -4,7 +4,7 @@ import React from 'react'
 import { urlForImage } from 'lib/sanity.image'
 import { SanityFiles } from 'utils/interfaces'
 import Button, { Variants as ButtonVariants } from 'components/base/Button'
-import Link from 'next/link'
+import Link from 'components/base/Link'
 import { HeadingTagSemantic } from 'components/base/Heading1'
 
 const Height = {
@@ -92,18 +92,7 @@ const SectionImageHeadingCTA: React.FC<SectionImageHeadingCTAProps> = (
           )}
           {description && <Text color={'#FFFFFF'}>{description}</Text>}
           {button.label && (
-            <Link
-              href={
-                button.useInternal
-                  ? button.internalHref
-                    ? `/${button.internalHref}`
-                    : '#'
-                  : button.externalHref
-                  ? button.externalHref
-                  : '#'
-              }
-              target={button?.isExternal ? '_blank' : ''}
-            >
+            <Link link={button}>
               <Button variant={ButtonVariants.whiteLine} mt={'42px'}>
                 {button?.label}
               </Button>

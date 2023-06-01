@@ -4,7 +4,8 @@ import Button, { Variants as ButtonVariants } from 'components/base/Button'
 import ButtonIcon from 'components/base/ButtonIcon'
 import Logo, { LogoVariants } from 'components/base/Logo'
 import Text from 'components/base/Text'
-import Link from 'next/link'
+import Link from 'components/base/Link'
+import NextLink from 'next/link'
 import React, { useState } from 'react'
 import DesktopNav from './DesktopNav'
 import MobileNav from './MobileNav'
@@ -69,7 +70,7 @@ const Footer = ({ links, enquire, contact, socialMedia, footer }) => {
                 </Text>
               </GridItem>
               <GridItem>
-                <Link
+                <NextLink
                   href={`tel:${contact?.phone?.code}${contact?.phone?.number}`}
                 >
                   <Text>
@@ -78,15 +79,15 @@ const Footer = ({ links, enquire, contact, socialMedia, footer }) => {
                     </Text>
                     {contact?.phone?.code} {contact?.phone?.number}
                   </Text>
-                </Link>
-                <Link href={`mailto:${contact?.email}`}>
+                </NextLink>
+                <NextLink href={`mailto:${contact?.email}`}>
                   <Text>
                     <Text as={'span'} fontSize={'12px'} fontWeight={700} mr={2}>
                       e.
                     </Text>
                     {contact?.email}
                   </Text>
-                </Link>
+                </NextLink>
               </GridItem>
             </Grid>
             <Flex
@@ -104,15 +105,7 @@ const Footer = ({ links, enquire, contact, socialMedia, footer }) => {
               </Button>
               {socialMedia?.socialMedia?.map((sc, key) => {
                 return (
-                  <Link
-                    href={
-                      sc?.useInternal
-                        ? `/${sc?.internalHref}`
-                        : sc?.externalHref
-                    }
-                    target={sc?.isExternal ? '_blank' : ''}
-                    key={key}
-                  >
+                  <Link link={sc} key={key}>
                     <ButtonIcon aria-label={sc?.label}>
                       <ReactSVG
                         src={urlForImage(sc?.icon).url()}
@@ -170,16 +163,7 @@ const Footer = ({ links, enquire, contact, socialMedia, footer }) => {
                 key={key}
                 ml={1}
               >
-                |{' '}
-                <Link
-                  href={
-                    link.useInternal
-                      ? `/${link.internalHref}`
-                      : link.externalHref
-                  }
-                >
-                  {link.label}
-                </Link>
+                | <Link link={link}>{link.label}</Link>
               </Text>
             )
           })}

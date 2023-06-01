@@ -13,7 +13,8 @@ import Button, { Variants as ButtonVariants } from 'components/base/Button'
 import { HeightVariants } from 'components/base/Divider'
 import ButtonIcon from 'components/base/ButtonIcon'
 import Close from 'components/icon/Close'
-import Link from 'next/link'
+import Link from 'components/base/Link'
+import NextLink from 'next/link'
 
 type FormInputs = {
   name: string
@@ -68,18 +69,7 @@ const EnquireFlyout = ({
           <Box mb={'5vh'}>
             <Heading1 mb={'32px'}>{title}</Heading1>
             <Text mb={'24px'}>{description}</Text>
-            <Link
-              href={
-                button?.useInternal
-                  ? button?.internalHref
-                    ? `/${button?.internalHref}`
-                    : '#'
-                  : button?.externalHref
-                  ? button?.externalHref
-                  : '#'
-              }
-              target={button?.isExternal ? '_blank' : ''}
-            >
+            <Link link={button}>
               <Button variant={ButtonVariants.black}>{button?.name}</Button>
             </Link>
             <Box mt={'24px'}>
@@ -90,16 +80,16 @@ const EnquireFlyout = ({
                 {contact?.address?.streetName} {contact?.address?.suburb}{' '}
                 {contact?.address?.postalCode}
               </Text>
-              <Link
+              <NextLink
                 href={`tel:${contact?.phone?.code}${contact?.phone?.number}`}
               >
                 <Text textDecor={'underline'} mb={1}>
                   ({contact?.phone?.code}) {contact?.phone?.number}
                 </Text>
-              </Link>
-              <Link href={`mailto:${contact?.email}`}>
+              </NextLink>
+              <NextLink href={`mailto:${contact?.email}`}>
                 <Text textDecor={'underline'}>{contact?.email}</Text>
-              </Link>
+              </NextLink>
             </Box>
           </Box>
 
@@ -109,18 +99,7 @@ const EnquireFlyout = ({
               By submitting this form you are consenting to receive marketing
               communications from Thomas Archer in future, on the understanding
               that you have read and agree to our{' '}
-              <Link
-                href={
-                  privacyAndPolicy?.useInternal
-                    ? privacyAndPolicy?.useInternal
-                      ? `/${privacyAndPolicy?.internalHref}`
-                      : '#'
-                    : privacyAndPolicy?.externalHref
-                    ? privacyAndPolicy?.externalHref
-                    : '#'
-                }
-                target={privacyAndPolicy?.isExternal ? '_blank' : ''}
-              >
+              <Link link={privacyAndPolicy}>
                 <Text as={'span'} fontSize={'xs'} textDecor={'underline'}>
                   Privacy and Data Collection Statement
                 </Text>

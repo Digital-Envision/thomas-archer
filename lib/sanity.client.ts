@@ -101,8 +101,6 @@ export async function getAllPages(page): Promise<Post[]> {
 
 export async function getAllGlobals() {
   if (client) {
-    const getData = await client.fetch(globalQuery())
-
     return (await client.fetch(globalQuery())) || []
   }
   return []
@@ -141,10 +139,28 @@ export async function getAllPostsSlugs(): Promise<Pick<Post, 'slug'>[]> {
   }
   return []
 }
-export async function getAllPagesSlugs(): Promise<Pick<Post, 'slug'>[]> {
+export async function getAllPagesSlugs(): Promise<
+  Array<{
+    _id: string
+    url: string
+  }>
+> {
   if (client) {
-    const slugs = (await client.fetch<string[]>(pageSlugsQuery)) || []
-    return _.map(slugs, 'slug.current')
+    const slugs =
+      (await client.fetch<
+        Array<{
+          _id: string
+          slug: {
+            current: string
+          }
+        }>
+      >(pageSlugsQuery)) || []
+    return _.map(slugs, (slug) => {
+      return {
+        _id: slug._id,
+        url: slug.slug.current,
+      }
+    })
   }
   return []
 }
