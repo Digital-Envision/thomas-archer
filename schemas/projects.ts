@@ -1,3 +1,4 @@
+import { SEOSchema } from './components/fields';
 import { listImagesFields } from './sections/SectionGalleryScroll';
 import { headingField, paragraphField } from './sections/SectionHeadingParagraphCTA';
 import { bannerImageField, bannerVideoField, externalVideoField, isExternalVideoField, isVideoField } from "./sections/SectionHeroImageBig"
@@ -157,6 +158,6 @@ export default {
                 collapsed: true,
             },
         },
-
+        SEOSchema
     ],
 }

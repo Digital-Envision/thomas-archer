@@ -7,6 +7,18 @@ export interface SanityFiles {
 	_type: string
 }
 
+export interface SEO {
+	description: string;
+	image: {
+		_type: "image";
+		asset: {
+			_ref: string;
+			_type: "reference";
+		};
+	};
+	title: string;
+}
+
 
 export interface PaginationData {
 	page: number;
@@ -17,4 +29,11 @@ export interface PaginationData {
 }
 export interface RouteDetail {
 	route: []; detail: []; isDetailPage: boolean
+}
+export interface SanityImage {
+	_type: "image";
+	asset: {
+		_ref: string;
+		_type: "reference";
+	}
 }

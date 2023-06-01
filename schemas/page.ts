@@ -1,3 +1,5 @@
+import { SEOSchema } from "./components/fields";
+
 export default {
     type: 'document',
     name: 'page',
@@ -40,5 +42,6 @@ export default {
             title: 'Page sections',
             description: 'Add, edit, and reorder sections',
         },
+        SEOSchema
     ],
 }

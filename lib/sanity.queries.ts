@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import { groq } from 'next-sanity'
 import { HeightVariants } from 'components/base/Divider'
-import { SanityFiles } from 'utils/interfaces'
+import { SanityFiles, SanityImage, SEO } from 'utils/interfaces'
 
 const postFields = groq`
   _id,
@@ -192,9 +192,8 @@ export interface Pet {
 export interface Settings {
   title?: string
   description?: any[]
-  ogImage?: {
-    title?: string
-  }
+  ogImage?: any
+  image?: SanityImage
   indexPage?: { _ref: string; _type: string }
 }
 export interface Page {
@@ -331,4 +330,5 @@ export interface Floor {
     }[]
   }
   customPageSection?: any
+  seo: SEO
 }
