@@ -9,8 +9,10 @@ import GalleryScroll from 'components/organisms/GalleryScroll'
 import { HeightVariants } from 'components/base/Divider'
 import { RouteDetail } from 'utils/interfaces'
 import SectionBreadcrumbs from 'components/modules/SectionBreadcrumbs'
+import IndexPageHead from 'components/IndexPageHead'
 
 export interface FloorPageProps {
+  settings: any
   preview?: boolean
   loading?: boolean
   pages?: any[]
@@ -21,10 +23,11 @@ export interface FloorPageProps {
 }
 
 export default function FloorPageTemplate(props: FloorPageProps) {
-  const { pages, globals, floors, routeDetail } = props // rest should be projects..etc
+  const { settings, pages, globals, floors, routeDetail } = props // rest should be projects..etc
 
   return (
     <>
+      <IndexPageHead settings={settings} seo={floors?.seo} />
       <Navbar
         links={globals.Links}
         enquire={globals.Enquire}

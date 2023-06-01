@@ -1,3 +1,4 @@
+import { SEOSchema } from "./components/fields";
 import { listImagesFields } from "./sections/SectionGalleryScroll";
 
 export default {
@@ -53,6 +54,7 @@ export default {
                     ]
                 },
             ]
-        }
+        },
+        SEOSchema,
     ],
 }

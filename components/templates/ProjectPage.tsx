@@ -25,12 +25,13 @@ import SectionImageAwards from 'components/modules/SectionImageAwards'
 // TODO FIX page props
 export default function ProjectPageTemplate(props: any) {
   const { isOpen, onOpen, onClose } = useDisclosure()
+
   const { settings, preview, pages, globals, projects, project, routeDetail } =
     props
 
   return (
     <Box bgColor="white">
-      <IndexPageHead settings={settings} />
+      <IndexPageHead settings={settings} seo={project?.seo} />
       <Navbar
         links={globals.Links}
         enquire={globals.Enquire}

@@ -1,6 +1,7 @@
 import { HeightVariants } from 'components/base/Divider'
 import { enumToArrayOfObjects } from 'lib/utils'
 import _ from 'lodash'
+import { SEOSchema } from './components/fields'
 import { FloorPlanDetails } from './sections/FloorPlanDetails'
 import { SectionHeroImageDefaultFields } from './sections/SectionHeroImageDefault'
 
@@ -243,5 +244,6 @@ export default {
         collapsed: true,
       },
     },
+    SEOSchema,
   ],
 }

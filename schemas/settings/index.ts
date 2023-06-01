@@ -24,55 +24,36 @@ export default defineType({
     defineField({
       name: 'description',
       description:
-        'Used both for the <meta> description tag for SEO, and the blog subheader.',
+        'Used for the <meta> description tag for SEO and Social Sharing',
       title: 'Description',
-      type: 'array',
-      initialValue: demo.description,
-      of: [
-        defineArrayMember({
-          type: 'block',
-          options: {},
-          styles: [],
-          lists: [],
-          marks: {
-            decorators: [],
-            annotations: [
-              defineField({
-                type: 'object',
-                name: 'link',
-                fields: [
-                  {
-                    type: 'string',
-                    name: 'href',
-                    title: 'URL',
-                    validation: (rule) => rule.required(),
-                  },
-                ],
-              }),
-            ],
-          },
-        }),
-      ],
-      validation: (rule) => rule.max(155).required(),
+      type: 'text',
     }),
-    defineField({
-      name: 'ogImage',
-      title: 'Open Graph Image',
+    {
+      name: 'image',
+      title: 'Image',
       description:
         'Used for social media previews when linking to the index page.',
-      type: 'object',
-      components: {
-        input: OpenGraphInput as any,
-      },
-      fields: [
-        defineField({
-          name: 'title',
-          title: 'Title',
-          type: 'string',
-          initialValue: demo.ogImageTitle,
-        }),
-      ],
-    }),
+      type: 'image',
+      validation: (rule) => rule.required(),
+    },
+    // defineField({
+    //   name: 'ogImage',
+    //   title: 'Open Graph Image',
+    //   description:
+    //     'Used for social media previews when linking to the index page.',
+    //   type: 'object',
+    //   components: {
+    //     input: OpenGraphInput as any,
+    //   },
+    //   fields: [
+    //     defineField({
+    //       name: 'title',
+    //       title: 'Title',
+    //       type: 'string',
+    //       initialValue: demo.ogImageTitle,
+    //     }),
+    //   ],
+    // }),
     defineField({
       name: 'indexPage',
       title: 'Index Page',

@@ -2,38 +2,53 @@ import { toPlainText } from '@portabletext/react'
 import BlogMeta from 'components/BlogMeta'
 import * as demo from 'lib/demo.data'
 import { Settings } from 'lib/sanity.queries'
+import { getImageUrl, origin } from 'lib/utils'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { SEO } from 'utils/interfaces'
 
 export interface IndexPageHeadProps {
   settings: Settings
+  seo?: SEO
 }
 
-export default function IndexPageHead({ settings }: IndexPageHeadProps) {
-  const {
-    title = demo.title,
-    description = demo.description,
-    ogImage = {},
-  } = settings
-  const ogImageTitle = ogImage?.title || demo.ogImageTitle
+export default function IndexPageHead({ settings, seo }: IndexPageHeadProps) {
+  // if seo object is empty, we use default from settings
+  const seoData = {
+    title: seo?.title || settings?.title || demo.title,
+    description: seo?.description || settings?.description || demo.description,
+    ogImage: seo?.image || settings?.image,
+  }
+
+  const { title, description, ogImage } = seoData
+
+  const router = useRouter()
+
+  //TODO INVESTIGATE BlogMeta Component
 
   return (
     <Head>
       <title>{title}</title>
+      <meta property="og:title" content={title} />
+
       <BlogMeta />
+
       <meta
         key="description"
         name="description"
-        content={toPlainText(description)}
+        content={description as string}
       />
+      <meta property="og:description" content={description as string} />
+
+      <meta property="og:url" content={`${origin}${router?.asPath}`} />
+
       <meta
         property="og:image"
         // Because OG images must have a absolute URL, we use the
         // `VERCEL_URL` environment variable to get the deployment’s URL.
         // More info:
         // https://vercel.com/docs/concepts/projects/environment-variables
-        content={`${
-          process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : ''
-        }/api/og?${new URLSearchParams({ title: ogImageTitle })}`}
+        content={getImageUrl(ogImage)}
       />
     </Head>
   )

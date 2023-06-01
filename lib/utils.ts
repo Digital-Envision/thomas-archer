@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { SanityFiles } from 'utils/interfaces'
+import { SanityFiles, SanityImage } from 'utils/interfaces'
 import { dataset, projectId } from './sanity.api'
 import { urlForImage } from './sanity.image'
 
@@ -20,9 +20,14 @@ export const getVideoUrl = (fileObject) => {
     }
 }
 
-export const getImageUrl = (image: SanityFiles) => {
+export const getImageUrl = (image: SanityImage | SanityFiles) => {
     return (!_.isEmpty(image) && urlForImage(image)?.url()) || ''
 }
+
+export const origin =
+    typeof window !== 'undefined' && window.location.origin
+        ? window.location.origin
+        : ''
 
 
 // for previewing the sanity block type

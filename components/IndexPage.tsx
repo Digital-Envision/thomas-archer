@@ -25,7 +25,7 @@ export default function IndexPage(props: IndexPageProps) {
 
   return (
     <Box bgColor="#FFFFFF">
-      <IndexPageHead settings={settings} />
+      <IndexPageHead settings={settings} seo={pages?.[0]?.seo} />
       <Navbar
         links={globals.Links}
         enquire={globals.Enquire}

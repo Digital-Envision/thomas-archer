@@ -17,7 +17,7 @@ export default function BlogPageTemplate(props: any) {
 
   return (
     <Box bgColor="#FFFFFF">
-      <IndexPageHead settings={settings} />
+      <IndexPageHead settings={settings} seo={blog?.seo} />
       <Navbar
         links={globals.Links}
         enquire={globals.Enquire}
