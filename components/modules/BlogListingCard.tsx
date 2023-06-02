@@ -1,11 +1,10 @@
 import { Box, Image, Icon, Flex } from '@chakra-ui/react'
 import Link from 'next/link'
-import Heading3 from '../base/Heading3'
 import Text from '../base/Text'
 import { BsArrowRight } from 'react-icons/bs'
 import { blockToPlainText, getImageUrl } from 'lib/utils'
 import { PaginationData } from 'utils/interfaces'
-import CardContainer from 'components/base/Card'
+import { CardContainer, CardHeading } from 'components/base/Card'
 
 export type BlogListingCardDataProps = {
   image?: any // sanity io image
@@ -42,9 +41,7 @@ const BlogListingCard: React.FC<BlogListingCardProps['data'][0]> = ({
         </Box>
 
         <Box py="5" h="170px">
-          <Heading3 fontSize={'28px'} lineHeight={'20px'} mb="5">
-            {heading}
-          </Heading3>
+          <CardHeading>{heading}</CardHeading>
           <Flex flex={1} minHeight="80px" pb="1rem">
             <Text noOfLines={4}>{blockToPlainText(content)}</Text>
           </Flex>

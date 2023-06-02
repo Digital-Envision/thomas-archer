@@ -7,7 +7,7 @@ import { urlForImage } from 'lib/sanity.image'
 import _ from 'lodash'
 import { Project } from 'lib/sanity.queries'
 import { SanityFiles } from 'utils/interfaces'
-import CardContainer from 'components/base/Card'
+import { CardContainer, CardHeading } from 'components/base/Card'
 import { getImageUrl } from 'lib/utils'
 
 export interface AwardListingCardProps {
@@ -61,9 +61,7 @@ const AwardListingCard: React.FC<AwardListingCardProps> = ({
         </Box>
 
         <Flex flex={1} direction={'column'} pt="5">
-          <Heading3 fontSize={'28px'} lineHeight={'20px'} mb="5">
-            {heading}
-          </Heading3>
+          <CardHeading>{heading}</CardHeading>
           <Text fontWeight={'bold'}>{name}</Text>
 
           {/* awards */}

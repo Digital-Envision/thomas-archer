@@ -1,6 +1,6 @@
 import { Box, Flex, Grid, GridItem, Image } from '@chakra-ui/react'
 import Button, { Variants } from 'components/base/Button'
-import CardContainer from 'components/base/Card'
+import { CardContainer } from 'components/base/Card'
 import { HeightVariants } from 'components/base/Divider'
 import { HeadingTagSemantic } from 'components/base/Heading1'
 import Heading3 from 'components/base/Heading3'

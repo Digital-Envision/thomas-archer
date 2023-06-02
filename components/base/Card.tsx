@@ -1,11 +1,11 @@
 import { Box } from '@chakra-ui/react'
+import Heading3 from './Heading3'
 
-const CardContainer: React.FC<any> = ({ children, ...props }) => {
+export const CardContainer: React.FC<any> = ({ children, ...props }) => {
   return (
     <Box
       overflow="hidden"
       borderBottomWidth={1}
-      minW={'420px'}
       w={{ base: '420px', sm: '420px', md: '100%', lg: '100%' }}
       h="auto"
       {...props}
@@ -15,4 +15,10 @@ const CardContainer: React.FC<any> = ({ children, ...props }) => {
   )
 }
 
-export default CardContainer
+export const CardHeading = ({ children, ...props }) => {
+  return (
+    <Heading3 fontSize={'20px'} lineHeight={'20px'} mb="5" {...props}>
+      {children}
+    </Heading3>
+  )
+}
