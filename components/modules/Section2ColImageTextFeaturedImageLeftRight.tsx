@@ -1,12 +1,11 @@
 import { Box, Flex, Image } from '@chakra-ui/react'
-import Link from 'next/link'
 import Text from '../base/Text'
 import Button, { Variants } from 'components/base/Button'
 import { HeightVariants } from 'components/base/Divider'
 import { urlForImage } from 'lib/sanity.image'
 import { SanityFiles } from 'utils/interfaces'
 import { PortableText } from '@portabletext/react'
-import { LinksInterface } from 'components/organisms/Navbar'
+import Link, { LinksInterface } from 'components/base/Link'
 import CustomPortableText from 'components/base/CustomPortableText'
 
 type Section2ColImageTextFeaturedImageLeftRightProps = {
@@ -69,18 +68,7 @@ const Section2ColImageTextFeaturedImageLeftRight: React.FC<
 
             <Box>
               {button.label && (
-                <Link
-                  href={
-                    button?.useInternal
-                      ? button?.internalHref
-                        ? `/${button?.internalHref}`
-                        : '#'
-                      : button?.externalHref
-                      ? button?.externalHref
-                      : '#'
-                  }
-                  target={button?.isExternal ? '_blank' : ''}
-                >
+                <Link link={button}>
                   <Button variant={Variants.blackLine}>{button?.label}</Button>
                 </Link>
               )}

@@ -3,12 +3,11 @@ import { FlexProps, Icon, Flex, TextProps, Box } from '@chakra-ui/react'
 import { ReactNode } from 'react'
 import { HiArrowSmallRight } from 'react-icons/hi2'
 import Text from 'components/base/Text'
-import Link from 'next/link'
+import Link, { LinksInterface } from 'components/base/Link'
 
 interface LinkProps extends FlexProps {
   children: ReactNode
-  href: string
-  isExternal?: boolean
+  link: LinksInterface
   width?: string
   textProps?: TextProps
 }
@@ -29,14 +28,13 @@ const dropdownTextStyle: TextProps = {
 
 const DropdownItem = ({
   children,
-  href,
-  isExternal,
+  link,
   width = '400px',
   textProps, // override text style props
   ...props
 }: LinkProps) => {
   return (
-    <Link href={href} target={isExternal ? '_blank' : ''}>
+    <Link link={link}>
       <Box
         paddingY={2}
         borderBottom="1px"

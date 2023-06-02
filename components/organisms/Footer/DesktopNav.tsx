@@ -1,6 +1,6 @@
 import { Box, Flex, SimpleGrid } from '@chakra-ui/react'
 import Text from 'components/base/Text'
-import Link from 'next/link'
+import Link from 'components/base/Link'
 import React from 'react'
 import { NavLinksInterfaces } from '../Navbar'
 
@@ -21,10 +21,7 @@ const DesktopNav: React.FC<Props> = ({ NAV_ITEMS }) => {
       {NAV_ITEMS?.map((nav, key) => {
         return (
           <Box key={key}>
-            <Link
-              href={nav.useInternal ? `/${nav.internalHref}` : nav.externalHref}
-              target={nav.isExternal ? '_blank' : ''}
-            >
+            <Link link={nav}>
               <Text
                 fontWeight={700}
                 fontSize={'12px'}
@@ -39,15 +36,7 @@ const DesktopNav: React.FC<Props> = ({ NAV_ITEMS }) => {
                 {nav.children.map((childLink, childKey) => {
                   return (
                     !childLink.mobileOnly && (
-                      <Link
-                        href={
-                          childLink.useInternal
-                            ? `/${childLink.internalHref}`
-                            : childLink.externalHref
-                        }
-                        target={childLink.isExternal ? '_blank' : ''}
-                        key={childKey}
-                      >
+                      <Link link={childLink} key={childKey}>
                         <Text
                           fontSize={'12px'}
                           lineHeight={'14px'}

@@ -4,8 +4,7 @@ import Heading1, { HeadingTagSemantic } from 'components/base/Heading1'
 import Button, { Variants } from 'components/base/Button'
 import Dash from 'components/base/Dash'
 import { HeightVariants } from 'components/base/Divider'
-import Link from 'next/link'
-import { LinksInterface } from 'components/organisms/Navbar'
+import Link, { LinksInterface } from 'components/base/Link'
 
 type SectionHeadingParagraphCTAProps = {
   heading: string
@@ -74,36 +73,14 @@ const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
                 showButton && (
                   <HStack spacing={'1rem'} flexDirection="row">
                     {button?.label && (
-                      <Link
-                        href={
-                          button?.useInternal
-                            ? button?.internalHref
-                              ? `/${button?.internalHref}`
-                              : '#'
-                            : button?.externalHref
-                            ? button?.externalHref
-                            : '#'
-                        }
-                        target={button?.isExternal ? '_blank' : ''}
-                      >
+                      <Link link={button}>
                         <Button variant={Variants.blackLine}>
                           {button?.label}
                         </Button>
                       </Link>
                     )}
                     {button2?.label && (
-                      <Link
-                        href={
-                          button2?.useInternal
-                            ? button2?.internalHref
-                              ? `/${button2?.internalHref}`
-                              : '#'
-                            : button2?.externalHref
-                            ? button2?.externalHref
-                            : '#'
-                        }
-                        target={button2?.isExternal ? '_blank' : ''}
-                      >
+                      <Link link={button2}>
                         <Button variant={Variants.blackLine}>
                           {button2?.label}
                         </Button>

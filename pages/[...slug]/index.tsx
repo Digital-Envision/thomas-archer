@@ -2,6 +2,7 @@ import IndexPage from 'components/IndexPage'
 import {
   getAllGlobals,
   getAllPages,
+  getAllPagesSlugs,
   getSanityData,
   getSanityDataById,
   getSettings,
@@ -94,7 +95,8 @@ export default function DynamicPage(props) {
 
 export const getStaticPaths = async () => {
   const links = await getAllGlobals()
-  const separated = separatePages(links?.Links)
+  const pagesSlug = await getAllPagesSlugs()
+  const separated = separatePages(links?.Links, pagesSlug)
 
   const paths = separated.slug.map((slug) => {
     return { params: { slug: [`${slug}`] } }

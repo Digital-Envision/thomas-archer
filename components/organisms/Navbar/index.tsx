@@ -11,7 +11,10 @@ import Link from 'next/link'
 export interface LinksInterface {
   label: string
   useInternal: boolean
-  internalHref: string
+  internalHref: {
+    _ref: string
+    _type: string
+  }
   externalHref: string
   isExternal: boolean
   mobileOnly: boolean
@@ -22,7 +25,10 @@ export interface NavLinksInterfaces extends LinksInterface {
   button?: {
     label: string
     useInternal: boolean
-    internalHref: string
+    internalHref: {
+      _ref: string
+      _type: string
+    }
     externalHref: string
     isExternal: boolean
   }

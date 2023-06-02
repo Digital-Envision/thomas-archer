@@ -1,6 +1,7 @@
 import { Box, Divider, Flex, Grid, GridItem } from '@chakra-ui/react'
 import Text from 'components/base/Text'
-import Link from 'next/link'
+import Link from 'components/base/Link'
+import NextLink from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { SanityFiles } from 'utils/interfaces'
 import { LinksInterface, NavLinksInterfaces } from '.'
@@ -134,18 +135,7 @@ const MobileCollapse: React.FC<Props> = ({
         <Flex alignItems={'center'}>
           {socialMedia?.connectWithUs && (
             <Box>
-              <Link
-                href={
-                  socialMedia?.connectWithUs?.useInternal
-                    ? socialMedia?.connectWithUs?.internalHref
-                      ? `/${socialMedia?.connectWithUs?.internalHref}`
-                      : '#'
-                    : socialMedia?.connectWithUs?.externalHref
-                    ? socialMedia?.connectWithUs?.externalHref
-                    : '#'
-                }
-                target={socialMedia?.connectWithUs?.isExternal ? '_blank' : ''}
-              >
+              <Link link={socialMedia?.connectWithUs}>
                 <Text width={'100px'}>Connect with us</Text>
               </Link>
             </Box>
@@ -167,11 +157,7 @@ const MobileCollapse: React.FC<Props> = ({
                       height={'14px'}
                     />
                   )}
-                  <Link
-                    href={
-                      sc.useInternal ? `/${sc.internalHref}` : sc.externalHref
-                    }
-                  >
+                  <Link link={sc}>
                     <Text>{sc.label}</Text>
                   </Link>
                 </>
@@ -179,11 +165,11 @@ const MobileCollapse: React.FC<Props> = ({
             })}
           </Flex>
         </Flex>
-        <Link href={`mailto:${contact?.email}`}>
+        <NextLink href={`mailto:${contact?.email}`}>
           <Text textDecor={'underline'} mt={2}>
             {contact?.email}
           </Text>
-        </Link>
+        </NextLink>
       </Box>
     </Box>
   )

@@ -4,8 +4,7 @@ import Heading1, { HeadingTagSemantic } from 'components/base/Heading1'
 import Button, { Variants } from 'components/base/Button'
 import { HeightVariants } from 'components/base/Divider'
 import { getImageUrl } from 'lib/utils'
-import Link from 'next/link'
-import { LinksInterface } from 'components/organisms/Navbar'
+import Link, { LinksInterface } from 'components/base/Link'
 
 type SectionAwardsProps = {
   heading: string
@@ -48,18 +47,7 @@ const SectionAwards: React.FC<SectionAwardsProps> = ({
           <Box pt={HeightVariants.less} />
           <Box>
             {button?.label && (
-              <Link
-                href={
-                  button?.useInternal
-                    ? button?.internalHref
-                      ? `/${button?.internalHref}`
-                      : '#'
-                    : button?.externalHref
-                    ? button?.externalHref
-                    : '#'
-                }
-                target={button?.isExternal ? '_blank' : ''}
-              >
+              <Link link={button}>
                 <Button variant={Variants.blackLine}>{button?.label}</Button>
               </Link>
             )}

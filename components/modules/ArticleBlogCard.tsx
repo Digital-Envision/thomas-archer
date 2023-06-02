@@ -1,12 +1,11 @@
 import { Box, Circle, Flex } from '@chakra-ui/react'
-import Link from 'next/link'
 import Heading3 from '../base/Heading3'
 import Text from '../base/Text'
 import { isEmpty } from 'lodash'
 import Button, { Variants } from 'components/base/Button'
 import { urlForImage } from 'lib/sanity.image'
 import { HeadingTagSemantic } from 'components/base/Heading1'
-import { LinksInterface } from 'components/organisms/Navbar'
+import Link, { LinksInterface } from 'components/base/Link'
 import Image from 'next/image'
 import { HiChevronRight } from 'react-icons/hi2'
 import { useState } from 'react'
@@ -152,18 +151,7 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
             </Button>
           )}
           {button?.label && (
-            <Link
-              href={
-                button?.useInternal
-                  ? button?.internalHref
-                    ? `/${button?.internalHref}`
-                    : '#'
-                  : button?.externalHref
-                  ? button?.externalHref
-                  : '#'
-              }
-              target={button?.isExternal ? '_blank' : ''}
-            >
+            <Link link={button}>
               <Button variant={Variants.blackLine}>{button?.label}</Button>
             </Link>
           )}
@@ -174,7 +162,7 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
 
   if (isClickable) {
     return (
-      <Link href={`${button?.internalHref}`}>
+      <Link link={button}>
         <Card />
       </Link>
     )

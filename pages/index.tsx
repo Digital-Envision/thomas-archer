@@ -1,3 +1,4 @@
+import { Button } from '@chakra-ui/react'
 import { PreviewSuspense } from '@sanity/preview-kit'
 import IndexPage from 'components/IndexPage'
 import { BlogListingCardProps } from 'components/modules/BlogListingCard'
@@ -7,15 +8,18 @@ import {
   getAllFloors,
   getAllGlobals,
   getAllPages,
+  getAllPagesSlugs,
   getAllPosts,
   getSanityData,
   getSettings,
 } from 'lib/sanity.client'
 import { Blog, Post, Project, Settings, Floor } from 'lib/sanity.queries'
+import { useStoreLink, Links as LinkStoreType } from 'lib/store/link'
 import _ from 'lodash'
 import { GetStaticProps } from 'next'
 import { lazy, useEffect } from 'react'
 import { setPropsForPage } from 'utils/page'
+import separatePages from 'utils/separate-pages'
 
 const PreviewIndexPage = lazy(() => import('components/PreviewIndexPage'))
 
@@ -31,6 +35,10 @@ export interface PageProps {
   awardedProjects?: ProjectListingCardProps
   blogs?: BlogListingCardProps
   floors?: Floor[]
+  slugAndPages?: {
+    pages: LinkStoreType
+    slug: string[]
+  }
 }
 
 export interface Query {
@@ -52,7 +60,13 @@ export default function HomePage(props: PageProps) {
     projects,
     blogs,
     floors,
+    slugAndPages,
   } = props
+  const storeLink = useStoreLink((state) => state)
+
+  useEffect(() => {
+    storeLink.setLink(slugAndPages?.pages)
+  }, [slugAndPages])
 
   // if (preview) {
   //   return (
@@ -94,10 +108,12 @@ export const getStaticProps: GetStaticProps<
 > = async (ctx) => {
   const { preview = false, previewData = {} } = ctx
   let pages = []
-  const [settings, globals = []] = await Promise.all([
+  const [settings, globals = [], pagesSlug] = await Promise.all([
     getSettings(),
     getAllGlobals(),
+    getAllPagesSlugs(),
   ])
+  const slugAndPages = separatePages(globals?.Links, pagesSlug)
 
   // get index page reference from settings
   if (!_.isEmpty(settings)) {
@@ -114,6 +130,7 @@ export const getStaticProps: GetStaticProps<
       pages,
       globals,
       preview,
+      slugAndPages,
       token: previewData.token ?? null,
       ...pageProps,
     },

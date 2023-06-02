@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import { Box, Divider, Flex, Grid, GridItem, Stack } from '@chakra-ui/react'
 import Button, { Variants as ButtonVariants } from 'components/base/Button'
 import Text from 'components/base/Text'
@@ -6,10 +7,10 @@ import ButtonIcon, {
 } from 'components/base/ButtonIcon'
 import Person from 'components/icon/Person'
 import Telephone from 'components/icon/Telephone'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import DesktopSubNav from './DesktopSubNav'
-import { NavLinksInterfaces, LinksInterface } from '.'
-import Link from 'next/link'
+import { NavLinksInterfaces } from '.'
+import Link, { LinksInterface } from 'components/base/Link'
 import { SanityFiles } from 'utils/interfaces'
 
 export interface Props {
@@ -21,13 +22,8 @@ export interface Props {
     showButton: boolean
   }
   specialButtonTwo: {
-    label: string
-    useInternal: boolean
-    externalHref: string
-    internalHref: string
-    isExternal: boolean
     showButton: boolean
-  }
+  } & LinksInterface
   contact: {
     phone: {
       code: string
@@ -42,14 +38,11 @@ export interface Props {
   }
   socialMedia: {
     connectWithUs: LinksInterface
-    socialMedia: Array<{
-      label: string
-      icon: SanityFiles
-      useInternal: boolean
-      internalHref: string
-      externalHref: string
-      isExternal: boolean
-    }>
+    socialMedia: Array<
+      {
+        icon: SanityFiles
+      } & LinksInterface
+    >
   }
 }
 
@@ -63,13 +56,21 @@ const DesktopNav: React.FC<Props> = ({
   contact,
   socialMedia,
 }) => {
+  const [hasSpecialButton1, setHasSpecialButton1] = useState(false)
+  const [hasSpecialButton2, setHasSpecialButton2] = useState(false)
+
+  useEffect(() => {
+    setHasSpecialButton1(specialButtonOne && specialButtonOne.showButton)
+    setHasSpecialButton2(specialButtonTwo && specialButtonTwo.showButton)
+  }, [specialButtonOne, specialButtonTwo])
+
   return (
     <Grid
       templateColumns={'repeat(9, 1fr)'}
       display={{ base: 'none', xl: 'grid' }}
       height={'full'}
     >
-      <GridItem colSpan={6}>
+      <GridItem colSpan={hasSpecialButton1 && hasSpecialButton2 ? 6 : 7}>
         <Stack
           direction={'row'}
           spacing={10}
@@ -88,14 +89,7 @@ const DesktopNav: React.FC<Props> = ({
                   borderBottomColor: 'black',
                 }}
               >
-                <Link
-                  href={
-                    link.useInternal
-                      ? `/${link.internalHref}`
-                      : link.externalHref
-                  }
-                  target={link.isExternal ? '_blank' : ''}
-                >
+                <Link link={link}>
                   <Text
                     fontSize={'14px'}
                     fontWeight={400}
@@ -129,12 +123,25 @@ const DesktopNav: React.FC<Props> = ({
           })}
         </Stack>
       </GridItem>
-      <GridItem colSpan={2} pt={'3.4em'}>
+      <GridItem
+        colSpan={hasSpecialButton1 && hasSpecialButton2 ? 2 : 1}
+        pr={
+          hasSpecialButton1 && hasSpecialButton2 ? 0 : hasSpecialButton1 ? 0 : 3
+        }
+        pt={'3.4em'}
+      >
         <Flex
-          gap={specialButtonOne && specialButtonTwo ? 3 : 1}
+          gap={hasSpecialButton1 && hasSpecialButton2 ? 3 : 1}
           height={'full'}
+          justifyContent={
+            hasSpecialButton1 && hasSpecialButton2
+              ? 'left'
+              : hasSpecialButton1
+              ? 'center'
+              : 'left'
+          }
         >
-          {specialButtonOne && specialButtonOne.showButton && (
+          {hasSpecialButton1 && (
             <ButtonIcon
               aria-label="button-telephone"
               variant={ButtonIconVariants.default}
@@ -153,52 +160,48 @@ const DesktopNav: React.FC<Props> = ({
               />
             </ButtonIcon>
           )}
-          {specialButtonOne &&
-            specialButtonTwo &&
-            specialButtonOne.showButton &&
-            specialButtonTwo.showButton && (
-              <Divider
-                orientation="vertical"
-                borderColor={
-                  parentHover ? '#000000' : onLightNavbar ? '#000000' : 'white'
-                }
-                height={'28px'}
-                mt={'8px'}
-              />
-            )}
-          {specialButtonTwo && specialButtonTwo.showButton && (
-            <ButtonIcon
-              aria-label="button-client-login"
-              as={'a'}
-              href={
-                specialButtonTwo.useInternal
-                  ? `/${specialButtonTwo.internalHref}`
-                  : specialButtonTwo.externalHref
+          {hasSpecialButton1 && hasSpecialButton2 && (
+            <Divider
+              orientation="vertical"
+              borderColor={
+                parentHover ? '#000000' : onLightNavbar ? '#000000' : 'white'
               }
-            >
-              <Flex alignItems={'center'}>
-                <Person
-                  pathFill={
-                    parentHover ? 'black' : onLightNavbar ? 'black' : 'white'
-                  }
-                  width={'21.6px'}
-                  height={'20.78px'}
-                  mr={2}
-                  ml={1}
-                />
-                {specialButtonTwo.label && (
-                  <Text
-                    fontWeight={400}
-                    fontSize={'14px'}
-                    color={
+              height={'28px'}
+              mt={'8px'}
+            />
+          )}
+          {hasSpecialButton2 && (
+            <Link link={specialButtonTwo}>
+              <ButtonIcon aria-label="button-client-login">
+                <Flex alignItems={'center'}>
+                  <Person
+                    pathFill={
                       parentHover ? 'black' : onLightNavbar ? 'black' : 'white'
                     }
-                  >
-                    {specialButtonTwo.label}
-                  </Text>
-                )}
-              </Flex>
-            </ButtonIcon>
+                    width={'21.6px'}
+                    height={'20.78px'}
+                    mr={2}
+                    ml={1}
+                  />
+                  {specialButtonTwo.label && (
+                    <Text
+                      mt={1}
+                      fontWeight={400}
+                      fontSize={'14px'}
+                      color={
+                        parentHover
+                          ? 'black'
+                          : onLightNavbar
+                          ? 'black'
+                          : 'white'
+                      }
+                    >
+                      {specialButtonTwo.label}
+                    </Text>
+                  )}
+                </Flex>
+              </ButtonIcon>
+            </Link>
           )}
         </Flex>
       </GridItem>

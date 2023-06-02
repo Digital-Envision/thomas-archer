@@ -10,7 +10,7 @@ import { getImageUrl, getUrlFromSanityFile } from 'lib/utils'
 import _ from 'lodash'
 import { SanityFiles } from 'utils/interfaces'
 import Text from '../base/Text'
-import { LinksInterface } from './Navbar'
+import { LinksInterface } from 'components/base/Link'
 
 interface SectionInclusionsSchema {
   _key: string
