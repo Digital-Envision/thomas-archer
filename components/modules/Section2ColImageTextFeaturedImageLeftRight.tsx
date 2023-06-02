@@ -56,9 +56,7 @@ const Section2ColImageTextFeaturedImageLeftRight: React.FC<
             justify="center"
             height={'100%'}
             maxWidth="800px"
-            px={{ base: '2rem', sm: '2rem', lg: 0 }}
-            pr={!IsImageRight && { base: 0, sm: 0, lg: '4rem' }}
-            pl={IsImageRight && { base: 0, sm: 0, lg: '4rem' }}
+            px={{ base: '2rem', sm: '2rem', md: '2rem', lg: '4rem' }}
           >
             <Box fontFamily={'heading'} pb="34px" maxWidth="800px">
               <CustomPortableText value={quotes} />
