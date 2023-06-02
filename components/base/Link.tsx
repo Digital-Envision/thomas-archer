@@ -43,7 +43,7 @@ const Link: React.FC<Props> = ({ link, children, ...props }) => {
     )
   }
 
-  return <>link nothing</>
+  return <></>
 }
 
 export default Link
