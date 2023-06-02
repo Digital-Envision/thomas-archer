@@ -5,7 +5,7 @@ import Text from '../base/Text'
 import { BsArrowRight } from 'react-icons/bs'
 import { urlForImage } from 'lib/sanity.image'
 import { PaginationData } from 'utils/interfaces'
-import CardContainer from 'components/base/Card'
+import { CardContainer, CardHeading } from 'components/base/Card'
 import { getImageUrl } from 'lib/utils'
 
 interface ProjectListingCardDataProps {
@@ -46,13 +46,11 @@ const ProjectListingCard: React.FC<ProjectListingCardProps['data'][0]> = ({
         </Box>
 
         <Box py="5" h="170px">
-          <Heading3 fontSize={'28px'} lineHeight={'20px'} mb="5">
-            {heading}
-          </Heading3>
-          <Text fontSize={'20px'} mb="1">
+          <CardHeading>{heading}</CardHeading>
+          <Text fontSize={'14px'} mb="1">
             {subHeading}
           </Text>
-          <Text fontSize={'20px'} mb="5" color={'#898989'} noOfLines={3}>
+          <Text fontSize={'14px'} mb="5" color={'#898989'} noOfLines={3}>
             {caption}
           </Text>
         </Box>

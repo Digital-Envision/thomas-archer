@@ -70,7 +70,7 @@ export default function ProjectPageTemplate(props: any) {
               },
             },
           })}
-          marginBottom={HeightVariants.less}
+          marginBottom={HeightVariants.more}
         />
       )}
 
@@ -89,7 +89,7 @@ export default function ProjectPageTemplate(props: any) {
         />
       )}
 
-      {_.isEmpty(projects) && (
+      {!_.isEmpty(projects) && (
         <ProjectScroll
           {...project?.SectionProjectScroll}
           heading="Related Projects"

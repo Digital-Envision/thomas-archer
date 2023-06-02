@@ -39,6 +39,7 @@ const SectionColCards: React.FC<Section2ColCardsProps> = ({
                 <ArticleBlogCard
                   {...article}
                   headingTagLevel={headingTagLevel}
+                  parentLength={ListArticleBlogCards.length}
                 />
               </GridItem>
             )

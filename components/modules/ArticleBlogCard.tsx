@@ -14,7 +14,6 @@ import moment from 'moment'
 
 export type ArticleBlogCardProps = {
   image?: any // sanity io image
-  imageUrl?: string // load image from url; test purpose
   _createdAt?: string
   isShowCreatedAt?: boolean
   heading: string
@@ -24,6 +23,7 @@ export type ArticleBlogCardProps = {
   video?: string
   isVideoMode?: boolean
   isClickable?: boolean
+  parentLength?: number
 }
 
 // TODO offset when there's createdAt
@@ -47,6 +47,7 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
   video,
   isVideoMode,
   isClickable = false,
+  parentLength,
 }) => {
   const [playVideo, setPlayVideo] = useState(false)
 
@@ -122,7 +123,12 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
           )}
         </Box>
       </Box>
-      <Flex flex="1" flexDirection={'column'} px={{ base: 8, md: 2 }}>
+
+      <Flex
+        flex="1"
+        flexDirection={'column'}
+        px={{ base: '2rem', md: parentLength >= 3 ? '2rem' : 0 }}
+      >
         <Box flex="1" overflow="hidden">
           {_createdAt && isShowCreatedAt && (
             <Text mb="4" fontSize={'10px'} color={'#898989'}>
