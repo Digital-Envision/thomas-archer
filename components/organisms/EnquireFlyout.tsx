@@ -15,6 +15,7 @@ import ButtonIcon from 'components/base/ButtonIcon'
 import Close from 'components/icon/Close'
 import Link from 'components/base/Link'
 import NextLink from 'next/link'
+import useHubspot from 'lib/hooks/useHubspot'
 
 type FormInputs = {
   name: string
@@ -35,25 +36,9 @@ const EnquireFlyout = ({
   const region = 'na1'
   const portalId = '8929845'
   const formId = 'bdf6ff06-20d1-43c8-94d0-605a164255f1'
+  const target = '#hubspotForm'
 
-  useEffect(() => {
-    const script = document.createElement('script')
-    script.src = 'https://js.hsforms.net/forms/shell.js'
-    document.body.appendChild(script)
-
-    script.addEventListener('load', () => {
-      // @TS-ignore
-      if ((window as any).hbspt) {
-        // @TS-ignore
-        ;(window as any).hbspt.forms.create({
-          region: region,
-          portalId: portalId,
-          formId: formId,
-          target: '#hubspotForm',
-        })
-      }
-    })
-  }, [isOpen])
+  useHubspot({ isOpen, region, portalId, formId, target })
 
   return (
     <Drawer isOpen={isOpen} placement={'right'} onClose={onClose} size={'lg'}>
