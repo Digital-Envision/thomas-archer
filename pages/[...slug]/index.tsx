@@ -8,7 +8,7 @@ import {
   getSettings,
 } from 'lib/sanity.client'
 import { GetStaticProps } from 'next'
-import { lazy } from 'react'
+import { lazy, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import _ from 'lodash'
 import { PageProps, PreviewData, Query } from 'pages'
@@ -21,6 +21,8 @@ import {
   setPropsForPage,
 } from 'utils/page'
 import separatePages from 'utils/separate-pages'
+import { useStoreLink } from 'lib/store/link'
+import { DOCUMENT_TYPES_PAGE_NAME } from 'schemas/global/DetailsPage'
 
 const PreviewIndexPage = lazy(() => import('components/PreviewIndexPage'))
 
@@ -39,44 +41,29 @@ export default function DynamicPage(props) {
     floors,
     awardedProjects,
     routeDetail,
+    slugAndPages,
   } = props
   const router = useRouter()
+  const storeLink = useStoreLink((state) => state)
+
+  useEffect(() => {
+    storeLink.setLink(slugAndPages?.pages)
+  }, [slugAndPages])
 
   if (router.isFallback) {
     return <div></div>
   }
 
-  // if /[project/floor/blog]/[id], render one these
-  if (!_.isEmpty(routeDetail?.detail)) {
-    switch (_.first(routeDetail?.detail)) {
-      case 'project':
+  if (!_.isEmpty(routeDetail?.detailsPage)) {
+    switch (routeDetail?.detailsPage) {
+      case DOCUMENT_TYPES_PAGE_NAME.Projects:
         return <ProjectPageTemplate {...props} />
-      case 'blog':
+      case DOCUMENT_TYPES_PAGE_NAME.Blog:
         return <BlogPageTemplate {...props} />
-      case 'view-range':
+      case DOCUMENT_TYPES_PAGE_NAME.FloorPlan:
         return <FloorPageTemplate {...props} />
     }
   }
-
-  // if (preview) {
-  //   return (
-  //     <PreviewSuspense
-  //       fallback={
-  //         <IndexPage
-  //           loading
-  //           preview
-  //           posts={posts}
-  //           settings={settings}
-  //           pages={pages}
-  //           globals={globals}
-  //           projects={projects}
-  //         />
-  //       }
-  //     >
-  //       <PreviewIndexPage token={token} />
-  //     </PreviewSuspense>
-  //   )
-  // }
 
   return (
     <IndexPage
@@ -121,51 +108,45 @@ export const getStaticProps: GetStaticProps<
 
   const { preview = false, previewData = {}, params } = ctx
   let pages = []
-  let pageProps
-
-  const routeDetail = getRouteDetail(params?.slug)
+  let pageProps = {}
 
   const [settings, globals = []] = await Promise.all([
     getSettings(),
     getAllGlobals(),
   ])
+  const pagesSlug = await getAllPagesSlugs()
+  const slugAndPages = separatePages(globals?.Links, pagesSlug)
 
-  // fetch page based on route, or else fetch configured page from settings.indexPage
-  if (!_.isEmpty(settings)) {
-    pages = [
-      ...(await getAllPages(
-        _.last(routeDetail?.route) || { _id: settings?.indexPage?._ref }
-      )),
-    ]
-  }
+  const routeDetail = getRouteDetail(
+    params?.slug,
+    slugAndPages.pages,
+    globals?.DetailsPage
+  )
 
-  if (
-    _.isEmpty(pages) ||
-    (!_.isEmpty(routeDetail?.detail) && routeDetail?.detail?.length < 2)
-  ) {
+  if (_.isEmpty(routeDetail)) {
     return { notFound: true }
-  }
-
-  // if detail page, fetch customized data based on document type and params
-
-  if (routeDetail.isDetailPage) {
-    pageProps = await setPropsForDetailPage({ routeDetail, page: pages?.[0] })
   } else {
-    // else, fetch universal data
-    pageProps = await setPropsForPage()
-    // TODO fetch data based on page content, example: if there's SectionProjectLlisting, need to fetch projects
+    // fetch page based on route or details page
+    if (routeDetail.detailsPage) {
+      pageProps = await setPropsForDetailPage({ routeDetail })
+      if (_.isEmpty(pageProps)) {
+        return { notFound: true }
+      }
+    } else {
+      pages = [...(await getAllPages(routeDetail.page))]
+      pageProps = await setPropsForPage()
+    }
   }
 
   return {
     props: {
       settings,
-      // isDetailPage,
       pages,
       globals,
       preview,
       token: previewData.token ?? null,
       routeDetail,
-      // routeDetail: { ...routeDetail, isDetailPage },
+      slugAndPages,
       ...pageProps,
     },
   }
