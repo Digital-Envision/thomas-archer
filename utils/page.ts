@@ -1,21 +1,61 @@
 import { getSanityData, getSanityDataById } from 'lib/sanity.client'
 import _ from 'lodash'
+import { DOCUMENT_TYPES_PAGE_NAME } from 'schemas/global/DetailsPage'
 
-export const getRouteDetail = (testCase) => {
-    const detailSlugs = ['project', 'blog', 'view-range'] // todo fetch list from sanity
-    const result = { route: [], detail: [] }
-    let currentPart = 'route'
+export const getRouteDetail = (slugs, pages, detailsPage) => {
+    // set page to parent/children
+    let currentPath = ''
+    let currentDetailPath = ''
+    let detailPathId = ''
 
-    _.forEach(testCase, (item) => {
-        if (_.includes(detailSlugs, item)) {
-            currentPart = 'detail'
+    slugs.map((slug, index) => {
+        if (index !== 0) {
+            currentPath += `/${slug}`
+
+            if (index !== slugs.length - 1) {
+                currentDetailPath += `/${slug}`
+            } else {
+                detailPathId += slug
+            }
+        } else {
+            currentPath += slug
+            currentDetailPath += slug
         }
-        result[currentPart].push(item)
     })
 
-    const isDetailPage = !_.isEmpty(result?.detail)
+    // find if currentPath is available in pages
+    const isPageExist = _.find(pages, { url: currentPath })
 
-    return { ...result, isDetailPage }
+    if (isPageExist) {
+        return {
+            page: _.last(slugs),
+        }
+    }
+
+    // to check if the page available
+    const isDetailPathPageExist = _.find(pages, { url: currentDetailPath })
+
+    if (isDetailPathPageExist) {
+        const keyDetailPathPage = _.findKey(
+            pages,
+            (page) => page.url === isDetailPathPageExist.url
+        )
+
+        // to check if the page is exist in detailPages
+        const isDetailPathExist = _.findKey(detailsPage, (page) => {
+            return page.parentPage._ref === keyDetailPathPage
+        })
+
+        if (isDetailPathExist) {
+            return {
+                detailsPage: isDetailPathExist,
+                detailPathId,
+                page: `${currentDetailPath}/${detailPathId}`,
+            }
+        }
+    }
+
+    return {}
 }
 
 export const setPropsForPage = async () => {
@@ -52,28 +92,36 @@ export const setPropsForPage = async () => {
 }
 
 export const setPropsForDetailPage = async (props) => {
-    const { page, routeDetail } = props
-    const [docType, docId] = routeDetail?.detail
-    let data
+    const { routeDetail } = props
+    const { detailsPage, detailPathId } = routeDetail
+    let data = {}
 
-    if (docType === 'project') {
-        data = await getDataProjectDetailPage(props)
-    } else if (docType === 'blog') {
-        data = await getDataBlogDetailPage(props)
-    } else if (docType === 'view-range') {
-        data = await getDataFloorDetailPage(props)
+    switch (detailsPage) {
+        case DOCUMENT_TYPES_PAGE_NAME.FloorPlan:
+            data = await getDataFloorDetailPage({ slug: detailPathId })
+            break
+        case DOCUMENT_TYPES_PAGE_NAME.Projects:
+            data = await getDataProjectDetailPage({ slug: detailPathId })
+            break
+        case DOCUMENT_TYPES_PAGE_NAME.Blog:
+            data = await getDataBlogDetailPage({ slug: detailPathId })
+            break
+        default:
+            data = {}
     }
 
     return data
 }
 
-export const getDataProjectDetailPage = async ({ routeDetail }) => {
-    const [docType, docSlug] = routeDetail?.detail
-
+export const getDataProjectDetailPage = async ({ slug }) => {
     const currentProject = await getSanityDataById({
-        type: docType + 's',
-        condition: `&& slug.current == "${docSlug}"`,
+        type: 'projects',
+        condition: `&& slug.current == "${slug}"`,
     })
+
+    if (_.isEmpty(currentProject)) {
+        return {}
+    }
 
     // if isSelectedProject toggled, get 3 selected projects
     const selectedProjectsRef =
@@ -86,55 +134,58 @@ export const getDataProjectDetailPage = async ({ routeDetail }) => {
     // if toggled: selected projects, or else get latest 12 projects
     const projects = !_.isEmpty(selectedProjectsRef)
         ? ((await getSanityData({
-            type: 'projects',
-            condition: `&& slug.current != null && _id != "${currentProject?._id}" && _id in $ids`,
-            params: { ids: selectedProjectsRef },
-        })) as any)
+              type: 'projects',
+              condition: `&& slug.current != null && _id != "${currentProject?._id}" && _id in $ids`,
+              params: { ids: selectedProjectsRef },
+          })) as any)
         : ((await getSanityData({
-            type: 'projects',
-            condition: `&& slug.current != null && _id != "${currentProject?._id}"`,
-            limit: 12,
-        })) as any)
+              type: 'projects',
+              condition: `&& slug.current != null && _id != "${currentProject?._id}"`,
+              limit: 12,
+          })) as any)
 
     const selectedProjectsKeys =
         currentProject.page?.SectionProjectScroll?.isSelectedProject &&
         currentProject.page?.SectionProjectScroll?.selectedProjects
 
     const sortedProjects = !_.isEmpty(selectedProjectsKeys)
-        ?
-        {
-            pagination: projects?.pagination,
-            data: _.sortBy(projects.data, (project) => {
-                // this will sort fetched projects, according to configured on selectedProjects array
-                const ref = selectedProjectsKeys.find(
-                    (selected) => selected._ref === project._id
-                )
-                return selectedProjectsKeys.indexOf(ref)
-            })
-        }
+        ? {
+              pagination: projects?.pagination,
+              data: _.sortBy(projects.data, (project) => {
+                  // this will sort fetched projects, according to configured on selectedProjects array
+                  const ref = selectedProjectsKeys.find(
+                      (selected) => selected._ref === project._id
+                  )
+                  return selectedProjectsKeys.indexOf(ref)
+              }),
+          }
         : projects // projects already sorted on groq level
 
     return { project: currentProject, projects: sortedProjects }
 }
 
-export const getDataBlogDetailPage = async ({ routeDetail }) => {
-    const [docType, docSlug] = routeDetail?.detail
-
+export const getDataBlogDetailPage = async ({ slug }) => {
     const currentBlog = await getSanityDataById({
-        type: docType + 's',
-        condition: `&& slug.current == "${docSlug}"`,
+        type: 'blogs',
+        condition: `&& slug.current == "${slug}"`,
     })
+
+    if (_.isEmpty(currentBlog)) {
+        return {}
+    }
 
     return { blog: currentBlog }
 }
 
-export const getDataFloorDetailPage = async ({ routeDetail }) => {
-    const [docType, docSlug] = routeDetail?.detail
-
+export const getDataFloorDetailPage = async ({ slug }) => {
     const currentFloor = await getSanityDataById({
         type: 'floors',
-        condition: `&& slug.current == "${docSlug}"`,
+        condition: `&& slug.current == "${slug}"`,
     })
+
+    if (_.isEmpty(currentFloor)) {
+        return {}
+    }
 
     return { floors: currentFloor }
 }
