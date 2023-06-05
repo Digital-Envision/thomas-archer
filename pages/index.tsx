@@ -68,28 +68,17 @@ export default function HomePage(props: PageProps) {
     storeLink.setLink(slugAndPages?.pages)
   }, [slugAndPages])
 
-  // if (preview) {
-  //   return (
-  //     <PreviewSuspense
-  //       fallback={
-  //         <IndexPage
-  //           loading
-  //           preview
-  //           posts={posts}
-  //           settings={settings}
-  //           pages={pages}
-  //           globals={globals}
-  //           projects={projects}
-  //         />
-  //       }
-  //     >
-  //       <PreviewIndexPage token={token} />
-  //     </PreviewSuspense>
-  //   )
-  // }
+  if (preview && !_.isEmpty(storeLink?.links)) {
+    return (
+      <PreviewSuspense fallback={<div>Loading Preview Page</div>}>
+        <PreviewIndexPage {...props} />
+      </PreviewSuspense>
+    )
+  }
 
   return (
     <IndexPage
+      {...props}
       posts={posts}
       settings={settings}
       pages={pages}

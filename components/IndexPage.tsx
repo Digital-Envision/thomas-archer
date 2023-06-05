@@ -6,6 +6,7 @@ import Footer from './organisms/Footer'
 import { Box } from '@chakra-ui/react'
 import { ProjectListingCardProps } from './modules/ProjectListingCard'
 import { BlogListingCardProps } from './modules/BlogListingCard'
+import ExitPreviewButton from './ExitPreviewButton'
 
 export interface IndexPageProps {
   preview?: boolean
@@ -21,10 +22,11 @@ export interface IndexPageProps {
 }
 
 export default function IndexPage(props: IndexPageProps) {
-  const { settings, pages, globals, ...rest } = props // rest should be projects..etc
+  const { preview, settings, pages, globals, ...rest } = props // rest should be projects..etc
 
   return (
     <Box bgColor="#FFFFFF">
+      {preview && <ExitPreviewButton />}
       <IndexPageHead settings={settings} seo={pages?.[0]?.seo} />
       <Navbar
         links={globals.Links}

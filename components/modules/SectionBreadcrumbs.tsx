@@ -62,6 +62,8 @@ const SectionBreadcrumbs: React.FC<SectionBreadcrumbsProps> = (props) => {
             routeDetail?.isDetailPage &&
             breadcrumbsNav[breadcrumbsNav.length - 3].href
 
+          // console.log('isOnTypeDetail', isOnTypeDetail)
+          // console.log('🔥 breadcrumbs nav', o)
           //not render type detail
           if (isOnTypeDetail) {
             return <></>

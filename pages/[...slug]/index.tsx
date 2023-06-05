@@ -23,8 +23,18 @@ import {
 import separatePages from 'utils/separate-pages'
 import { useStoreLink } from 'lib/store/link'
 import { DOCUMENT_TYPES_PAGE_NAME } from 'schemas/global/DetailsPage'
+import { PreviewSuspense } from 'components/PreviewSuspense'
 
 const PreviewIndexPage = lazy(() => import('components/PreviewIndexPage'))
+const PreviewProjectPage = lazy(
+  () => import('components/templates/preview/PreviewProjectPage')
+)
+const PreviewBlogPage = lazy(
+  () => import('components/templates/preview/PreviewBlogPage')
+)
+const PreviewFloorPage = lazy(
+  () => import('components/templates/preview/PreviewFloorPage')
+)
 
 export default function DynamicPage(props) {
   //console.log('Dynamic page props', props)
@@ -54,15 +64,47 @@ export default function DynamicPage(props) {
     return <div></div>
   }
 
-  if (!_.isEmpty(routeDetail?.detailsPage)) {
+  if (!_.isEmpty(routeDetail?.detailsPage) && !_.isEmpty(storeLink?.links)) {
     switch (routeDetail?.detailsPage) {
       case DOCUMENT_TYPES_PAGE_NAME.Projects:
+        if (preview) {
+          return (
+            <PreviewSuspense fallback={<div>Loading Preview Page</div>}>
+              <PreviewProjectPage {...props} />
+            </PreviewSuspense>
+          )
+        }
+
         return <ProjectPageTemplate {...props} />
       case DOCUMENT_TYPES_PAGE_NAME.Blog:
+        if (preview) {
+          return (
+            <PreviewSuspense fallback={<div>Loading Preview Page</div>}>
+              <PreviewBlogPage {...props} />
+            </PreviewSuspense>
+          )
+        }
+
         return <BlogPageTemplate {...props} />
       case DOCUMENT_TYPES_PAGE_NAME.FloorPlan:
+        if (preview) {
+          return (
+            <PreviewSuspense fallback={<div>Loading Preview Page</div>}>
+              <PreviewFloorPage {...props} />
+            </PreviewSuspense>
+          )
+        }
+
         return <FloorPageTemplate {...props} />
     }
+  }
+
+  if (preview && !_.isEmpty(storeLink?.links)) {
+    return (
+      <PreviewSuspense fallback={<div>Loading Preview Page</div>}>
+        <PreviewIndexPage {...props} />
+      </PreviewSuspense>
+    )
   }
 
   return (
