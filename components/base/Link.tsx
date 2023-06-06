@@ -34,6 +34,14 @@ const Link: React.FC<Props> = ({ link, children, ...props }) => {
           </NextLink>
         )
       }
+    } else {
+      //used on section blog (internal link without _ref)
+      if (link?.internalHref)
+        return (
+          <NextLink href={`${link?.internalHref}`} {...props}>
+            {children}
+          </NextLink>
+        )
     }
   } else {
     return (

@@ -36,7 +36,7 @@ export default function IndexPage(props: IndexPageProps) {
         specialButtons={globals.SpecialButtons}
       />
       <Box flex={1}>
-        <PageBuilder pages={pages} {...rest} />
+        <PageBuilder pages={pages} {...props} />
       </Box>
       <Footer
         links={globals.Links}
