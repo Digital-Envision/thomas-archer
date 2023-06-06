@@ -79,8 +79,8 @@ export default defineConfig({
   schema: {
     // If you want more content types, you can add them to this array
     types: [
-      authorType,
-      postType,
+      // authorType,
+      // postType,
 
       // -- section
       settingsType,

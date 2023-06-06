@@ -179,7 +179,7 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
             >
               <AccordionItem key={filter._key} border={0}>
                 {({ isExpanded }) => (
-                  <>
+                  <Box pb={isExpanded ? HeightVariants.less : '0px'}>
                     <AccordionButton
                       style={{
                         padding: 0,
@@ -215,7 +215,7 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
                         setSelectedFilters={setSelectedFilters}
                       />
                     </AccordionPanel>
-                  </>
+                  </Box>
                 )}
               </AccordionItem>
             </Accordion>
@@ -227,9 +227,8 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
         mx="auto"
         alignItems={'center'}
         justifyContent="center"
-        // maxW="1400px"
-        px={{ base: '1rem', md: '4rem' }}
-        w={'98vw'}
+        // px={{ base: '1rem', md: '4rem' }}
+        w={'100vw'}
         sx={{
           columnCount: {
             base: 1,
@@ -307,7 +306,7 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
                 </Text>
               </Box>
 
-              <Box>
+              {/* <Box>
                 <Text textAlign={'right'}>Share this house</Text>
 
                 <Flex
@@ -328,7 +327,7 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
                     <Twitter />
                   </ButtonIcon>
                 </Flex>
-              </Box>
+              </Box> */}
             </Flex>
           </ModalBody>
           <ModalFooter justifyContent={'space-between'}>
