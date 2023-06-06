@@ -48,7 +48,7 @@ const SectionBlog: React.FC<SectionBlogProps> = ({
       button: {
         label: 'Read More',
         useInternal: true,
-        internalHref: `${asPath}/blog/${blog.slug?.current}`,
+        internalHref: `${asPath}/${blog.slug?.current}`,
         externalHref: '',
         isExternal: false,
         mobileOnly: false,
