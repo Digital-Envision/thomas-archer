@@ -10,6 +10,7 @@ import { HeightVariants } from 'components/base/Divider'
 import { RouteDetail } from 'utils/interfaces'
 import SectionBreadcrumbs from 'components/modules/SectionBreadcrumbs'
 import IndexPageHead from 'components/IndexPageHead'
+import ExitPreviewButton from 'components/ExitPreviewButton'
 
 export interface FloorPageProps {
   settings: any
@@ -23,10 +24,11 @@ export interface FloorPageProps {
 }
 
 export default function FloorPageTemplate(props: FloorPageProps) {
-  const { settings, pages, globals, floors, routeDetail } = props // rest should be projects..etc
+  const { settings, preview, pages, globals, floors, routeDetail } = props // rest should be projects..etc
 
   return (
     <>
+      {preview && <ExitPreviewButton />}
       <IndexPageHead settings={settings} seo={floors?.seo} />
       <Navbar
         links={globals.Links}

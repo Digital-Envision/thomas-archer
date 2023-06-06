@@ -10,6 +10,7 @@ import Heading1 from 'components/base/Heading1'
 import GalleryScroll from 'components/organisms/GalleryScroll'
 import { HeightVariants } from 'components/base/Divider'
 import CustomPortableText from 'components/base/CustomPortableText'
+import ExitPreviewButton from 'components/ExitPreviewButton'
 
 // TODO FIX page props
 export default function BlogPageTemplate(props: any) {
@@ -17,6 +18,7 @@ export default function BlogPageTemplate(props: any) {
 
   return (
     <Box bgColor="#FFFFFF">
+      {preview && <ExitPreviewButton />}
       <IndexPageHead settings={settings} seo={blog?.seo} />
       <Navbar
         links={globals.Links}

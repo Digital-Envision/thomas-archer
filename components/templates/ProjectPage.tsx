@@ -21,16 +21,17 @@ import ProjectScroll from 'components/organisms/ProjectScroll'
 import { EmbeddedVideoPlayer } from 'components/modules/SectionHeroVideoBig'
 import { HeightVariants } from 'components/base/Divider'
 import SectionImageAwards from 'components/modules/SectionImageAwards'
+import ExitPreviewButton from 'components/ExitPreviewButton'
+import { Variants } from 'components/base/Button'
 
 // TODO FIX page props
 export default function ProjectPageTemplate(props: any) {
   const { isOpen, onOpen, onClose } = useDisclosure()
-
-  const { settings, preview, pages, globals, projects, project, routeDetail } =
-    props
+  const { settings, preview, globals, projects, project, routeDetail } = props
 
   return (
     <Box bgColor="white">
+      {preview && <ExitPreviewButton variant={Variants.black} />}
       <IndexPageHead settings={settings} seo={project?.seo} />
       <Navbar
         links={globals.Links}

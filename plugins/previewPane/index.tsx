@@ -4,12 +4,16 @@
 // It's part of the Studio's “Structure Builder API” and is documented here:
 // https://www.sanity.io/docs/structure-builder-reference
 
+import Iframe from 'sanity-plugin-iframe-pane'
 import { DefaultDocumentNodeResolver } from 'sanity/desk'
 import authorType from 'schemas/author'
 import postType from 'schemas/post'
+import pageType from 'schemas/page'
 
 import AuthorAvatarPreviewPane from './AuthorAvatarPreviewPane'
 import PostPreviewPane from './PostPreviewPane'
+import { getPathFromDetailType, getPathFromPage } from 'utils/page'
+import { DOCUMENT_TYPES_PAGE_NAME } from 'schemas/global/DetailsPage'
 
 export const previewDocumentNode = ({
   apiVersion,
@@ -47,8 +51,72 @@ export const previewDocumentNode = ({
             .title('Preview'),
         ])
 
+      case pageType.name:
+        return S.document().views([
+          S.view.form(),
+          S.view
+            .component(Iframe)
+            .options({
+              url: async (doc) => {
+                const path = await getPathFromPage(doc?._id)
+                return getPreviewURL(path)
+              },
+            })
+            .title('Preview'),
+        ])
+
+      case DOCUMENT_TYPES_PAGE_NAME.Projects:
+        return S.document().views([
+          S.view.form(),
+          S.view
+            .component(Iframe)
+            .options({
+              url: async (doc) => {
+                const path = await getPathFromDetailType(
+                  DOCUMENT_TYPES_PAGE_NAME.Projects
+                )
+                return getPreviewURL(path, doc)
+              },
+            })
+            .title('Preview'),
+        ])
+      case 'blogs':
+        return S.document().views([
+          S.view.form(),
+          S.view
+            .component(Iframe)
+            .options({
+              url: async (doc) => {
+                const path = await getPathFromDetailType('blogs')
+                return getPreviewURL(path, doc)
+              },
+            })
+            .title('Preview'),
+        ])
+      case 'floors':
+        return S.document().views([
+          S.view.form(),
+          S.view
+            .component(Iframe)
+            .options({
+              url: async (doc) => {
+                const path = await getPathFromDetailType('floors')
+                return getPreviewURL(path, doc)
+              },
+            })
+            .title('Preview'),
+        ])
+
       default:
         return null
     }
   }
+}
+
+const getPreviewURL = (route, doc?) => {
+  const host = location.origin
+  const slugId = doc?.slug?.current
+
+  if (doc) return `${host}/${route}/${slugId}`
+  else return `${host}/${route}`
 }

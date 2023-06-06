@@ -44,7 +44,7 @@ import Section2ColHeading2ColParagraph from 'schemas/sections/Section2ColHeading
 import Enquire from 'schemas/global/Enquire'
 import SectionInclusions from 'schemas/sections/SectionInclusions'
 import SectionHeroVideoBig from 'schemas/sections/SectionHeroVideoBig'
-import Projects from 'schemas/projects'
+import Project from 'schemas/project'
 import Floors from 'schemas/floor'
 import Facades from 'schemas/facade'
 import customPageSection from 'schemas/customPageSection'
@@ -79,8 +79,8 @@ export default defineConfig({
   schema: {
     // If you want more content types, you can add them to this array
     types: [
-      // authorType,
-      // postType,
+      authorType,
+      postType,
 
       // -- section
       settingsType,
@@ -123,7 +123,7 @@ export default defineConfig({
       PortfolioListingCard,
 
       // -- Dataset,
-      Projects,
+      Project,
       Blog,
       Floors,
       Facades,
