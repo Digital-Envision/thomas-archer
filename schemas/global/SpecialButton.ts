@@ -1,4 +1,5 @@
 import { defineField } from 'sanity'
+import link from 'schemas/components/link'
 
 export const specialButtonFieldset = {
   name: 'SpecialButtons',
@@ -36,35 +37,7 @@ export default defineField({
       type: 'object',
       description: 'User client login navbar button',
       fields: [
-        {
-          name: 'label',
-          title: 'Name',
-          type: 'string',
-        },
-        {
-          name: 'useInternal',
-          title: 'Use Internal Link Pages',
-          type: 'boolean',
-        },
-        {
-          name: 'externalHref',
-          title: 'External Link',
-          type: 'url',
-          hidden: ({ parent }) => parent?.useInternal,
-        },
-        {
-          name: 'internalHref',
-          title: 'Internal Link',
-          type: 'reference',
-          to: [{ type: 'page' }],
-          hidden: ({ parent }) => !parent?.useInternal,
-        },
-        {
-          name: 'isExternal',
-          title: 'New Tab Link',
-          type: 'boolean',
-          initialValue: false,
-        },
+        ...link,
         {
           name: 'showButton',
           title: 'Show button',

@@ -4,7 +4,7 @@ import React from 'react'
 import { urlForImage } from 'lib/sanity.image'
 import { SanityFiles } from 'utils/interfaces'
 import Button, { Variants as ButtonVariants } from 'components/base/Button'
-import Link from 'components/base/Link'
+import Link, { LinksInterface } from 'components/base/Link'
 import { HeadingTagSemantic } from 'components/base/Heading1'
 
 const Height = {
@@ -28,13 +28,7 @@ type SectionImageHeadingCTAProps = {
   description?: string
   isOverlay?: boolean
   image: SanityFiles
-  button: {
-    label: string
-    useInternal: boolean
-    internalHref: string
-    externalHref: string
-    isExternal: boolean
-  }
+  button: LinksInterface
   marginTop?: string
   marginBottom?: string
   headingTagLevel?: HeadingTagSemantic

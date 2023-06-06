@@ -16,13 +16,8 @@ export interface Props {
     button: Omit<LinksInterface, 'mobileOnly'>
   ) => void
   specialButtonTwo: {
-    label: string
-    useInternal: boolean
-    externalHref: string
-    internalHref: string
-    isExternal: boolean
     showButton: boolean
-  }
+  } & LinksInterface
 }
 
 const MobileNavLevel1: React.FC<Props> = ({

@@ -1,10 +1,10 @@
 import { Box, Divider, Flex, Grid, GridItem } from '@chakra-ui/react'
 import Text from 'components/base/Text'
-import Link from 'components/base/Link'
+import Link, { LinksInterface } from 'components/base/Link'
 import NextLink from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { SanityFiles } from 'utils/interfaces'
-import { LinksInterface, NavLinksInterfaces } from '.'
+import { NavLinksInterfaces } from '.'
 import MobileNavLevel1 from './MobileNavLevel1'
 import MobileNavLevel2 from './MobileNavLevel2'
 
@@ -14,13 +14,8 @@ export interface Props {
   onOpenLevel2: boolean
   setOnOpenLevel2: (status: boolean) => void
   specialButtonTwo: {
-    label: string
-    useInternal: boolean
-    externalHref: string
-    internalHref: string
-    isExternal: boolean
     showButton: boolean
-  }
+  } & LinksInterface
   contact: {
     phone: {
       code: string
@@ -35,14 +30,11 @@ export interface Props {
   }
   socialMedia: {
     connectWithUs: LinksInterface
-    socialMedia: Array<{
-      label: string
-      icon: SanityFiles
-      useInternal: boolean
-      internalHref: string
-      externalHref: string
-      isExternal: boolean
-    }>
+    socialMedia: Array<
+      {
+        icon: SanityFiles
+      } & LinksInterface
+    >
   }
 }
 

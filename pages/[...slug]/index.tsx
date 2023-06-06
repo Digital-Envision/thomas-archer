@@ -3,6 +3,7 @@ import {
   getAllGlobals,
   getAllPages,
   getAllPagesSlugs,
+  getDocumentTypeSlugs,
   getSanityData,
   getSanityDataById,
   getSettings,
@@ -20,7 +21,10 @@ import {
   setPropsForDetailPage,
   setPropsForPage,
 } from 'utils/page'
-import separatePages from 'utils/separate-pages'
+import separatePages, {
+  checkLinkType,
+  structuredDocumentTypes,
+} from 'utils/separate-pages'
 import { useStoreLink } from 'lib/store/link'
 import { DOCUMENT_TYPES_PAGE_NAME } from 'schemas/global/DetailsPage'
 import { PreviewSuspense } from 'components/PreviewSuspense'
@@ -52,12 +56,17 @@ export default function DynamicPage(props) {
     awardedProjects,
     routeDetail,
     slugAndPages,
+    documentTypesPage,
   } = props
   const router = useRouter()
   const storeLink = useStoreLink((state) => state)
 
   useEffect(() => {
-    storeLink.setLink(slugAndPages?.pages)
+    storeLink.setLink('pages', slugAndPages?.pages)
+    storeLink.setLink('floorPlans', documentTypesPage?.floorPlansRef)
+    storeLink.setLink('projects', documentTypesPage?.projectsRef)
+    storeLink.setLink('blogs', documentTypesPage?.blogRef)
+    storeLink.setLink('detailsPage', globals?.DetailsPage)
   }, [slugAndPages])
 
   if (router.isFallback) {
@@ -168,6 +177,9 @@ export const getStaticProps: GetStaticProps<
     slugAndPages.pages,
     globals?.DetailsPage
   )
+  let documentTypeRef = {}
+  let documentTypeSlugs = {}
+  let restructuredDocumentType = {}
 
   if (_.isEmpty(routeDetail)) {
     return { notFound: true }
@@ -180,6 +192,10 @@ export const getStaticProps: GetStaticProps<
       }
     } else {
       pages = [...(await getAllPages(routeDetail.page))]
+      documentTypeRef = checkLinkType(pages[0].content)
+      documentTypeSlugs = await getDocumentTypeSlugs(documentTypeRef)
+      restructuredDocumentType = structuredDocumentTypes(documentTypeSlugs)
+
       pageProps = await setPropsForPage()
     }
   }
@@ -193,6 +209,7 @@ export const getStaticProps: GetStaticProps<
       token: previewData.token ?? null,
       routeDetail,
       slugAndPages,
+      documentTypesPage: { ...restructuredDocumentType },
       ...pageProps,
     },
   }

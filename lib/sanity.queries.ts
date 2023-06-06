@@ -25,32 +25,70 @@ export const indexQuery = groq`
 export const projectQuery = (props) => {
   const slug = props?.slug || ''
   const ids = props?.ids || []
+  const select = props?.select || ''
+  const byId = props?.byId || false
 
   if (slug) {
     return groq`*[_type == "projects" && slug.current == "${slug}"]`
-  } else if (ids.length > 1) {
-    // else if (!_.isEmpty(ids)) {
-    return groq`*[_type == "projects" && _id in $ids]`
+  } else if (ids.length > 1 || byId) {
+    if (select) {
+      return groq`*[_type == "projects" && _id in $ids]{
+        ${select}
+      }`
+    } else {
+      return groq`*[_type == "projects" && _id in $ids]`
+    }
   }
 
   return groq`*[_type == "projects" && slug.current != null] | order(_createdAt desc)`
 }
 
-export const blogQuery = (blog: string) => {
-  if (blog) {
-    return groq`*[_type == "blogs" && slug.current == "${blog}"]`
+export const blogQuery = (props) => {
+  const slug = props?.slug || ''
+  const ids = props?.ids || []
+  const select = props?.select || ''
+  const byId = props?.byId || false
+
+  if (slug) {
+    return groq`*[_type == "blogs" && slug.current == "${slug}"]`
+  } else if (ids.length > 1 || byId) {
+    if (select) {
+      return groq`*[_type == "blogs" && _id in $ids]{
+      ${select}
+    }`
+    } else {
+      return groq`*[_type == "blogs" && _id in $ids]`
+    }
   }
   return groq`*[_type == "blogs" && slug.current != null]`
 }
 
-export const floorQuery = (floor: string) => {
-  if (floor) {
-    return groq`*[_type == "floors" && slug.current == "${floor}"]{
+export const floorQuery = (props) => {
+  const slug = props?.slug || ''
+  const ids = props?.ids || []
+  const select = props?.select || ''
+  const byId = props?.byId || false
+
+  if (slug) {
+    return groq`*[_type == "floors" && slug.current == "${slug}"]{
       ...,
       facades->{
         listImages,
       },
     }`
+  } else if (ids.length > 1 || byId) {
+    if (select) {
+      return groq`*[_type == "floors" && _id in $ids]{
+        ${select}
+      }`
+    } else {
+      return groq`*[_type == "floors" && _id in $ids]{
+        ...,
+        facades->{
+          listImages,
+        },
+      }`
+    }
   }
   return groq`*[_type == "floors" && slug.current != null]{
       ...,

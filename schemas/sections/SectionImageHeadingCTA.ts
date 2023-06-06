@@ -2,6 +2,7 @@ import { defineField, defineType } from 'sanity'
 import { HeightVariants } from 'components/base/Divider'
 import { HeightVariants as ImageHeightVariants } from 'components/modules/SectionImageHeadingCTA'
 import { enumToArrayOfObjects } from 'lib/utils'
+import link from 'schemas/components/link'
 export default defineType({
     name: 'SectionImageHeadingCTA',
     title: 'SectionImageHeadingCTA',
@@ -34,35 +35,7 @@ export default defineType({
                 collapsible: true,
             },
             fields: [
-                {
-                    name: 'label',
-                    title: 'Name',
-                    type: 'string',
-                },
-                {
-                    name: 'useInternal',
-                    title: 'Use Internal Link Pages',
-                    type: 'boolean',
-                },
-                {
-                    name: 'externalHref',
-                    title: 'External Link',
-                    type: 'url',
-                    hidden: ({ parent }) => parent?.useInternal,
-                },
-                {
-                    name: 'internalHref',
-                    title: 'Internal Link',
-                    type: 'reference',
-                    to: [{ type: 'page' }],
-                    hidden: ({ parent }) => !parent?.useInternal,
-                },
-                {
-                    name: 'isExternal',
-                    title: 'New Tab Link',
-                    type: 'boolean',
-                    initialValue: false,
-                },
+                ...link,
             ],
         }),
         defineField({

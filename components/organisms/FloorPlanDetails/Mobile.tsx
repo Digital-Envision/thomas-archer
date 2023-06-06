@@ -66,7 +66,6 @@ const FloorPlanDetailsMobile = ({
   const handleSelectSize = (index: number) => {
     setSelectImage(() => 0)
     setFloorType(index)
-    console.log('changed')
   }
 
   return (

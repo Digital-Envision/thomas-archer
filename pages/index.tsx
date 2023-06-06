@@ -10,8 +10,10 @@ import {
   getAllPages,
   getAllPagesSlugs,
   getAllPosts,
+  getAllProjects,
   getSanityData,
   getSettings,
+  getDocumentTypeSlugs,
 } from 'lib/sanity.client'
 import { Blog, Post, Project, Settings, Floor } from 'lib/sanity.queries'
 import { useStoreLink, Links as LinkStoreType } from 'lib/store/link'
@@ -19,14 +21,17 @@ import _ from 'lodash'
 import { GetStaticProps } from 'next'
 import { lazy, useEffect } from 'react'
 import { setPropsForPage } from 'utils/page'
-import separatePages from 'utils/separate-pages'
+import separatePages, {
+  checkLinkType,
+  structuredDocumentTypes,
+} from 'utils/separate-pages'
 
 const PreviewIndexPage = lazy(() => import('components/PreviewIndexPage'))
 
 export interface PageProps {
   posts?: Post[]
   pages: any[]
-  globals: any[]
+  globals: any
   settings: Settings
   preview: boolean
   token: string | null
@@ -38,6 +43,11 @@ export interface PageProps {
   slugAndPages?: {
     pages: LinkStoreType
     slug: string[]
+  }
+  documentTypesPage?: {
+    floorPlansRef?: LinkStoreType
+    projectsRef?: LinkStoreType
+    blogRef?: LinkStoreType
   }
 }
 
@@ -61,11 +71,16 @@ export default function HomePage(props: PageProps) {
     blogs,
     floors,
     slugAndPages,
+    documentTypesPage,
   } = props
   const storeLink = useStoreLink((state) => state)
 
   useEffect(() => {
-    storeLink.setLink(slugAndPages?.pages)
+    storeLink.setLink('pages', slugAndPages?.pages)
+    storeLink.setLink('floorPlans', documentTypesPage?.floorPlansRef)
+    storeLink.setLink('projects', documentTypesPage?.projectsRef)
+    storeLink.setLink('blogs', documentTypesPage?.blogRef)
+    storeLink.setLink('detailsPage', globals?.DetailsPage)
   }, [slugAndPages])
 
   if (preview && !_.isEmpty(storeLink?.links)) {
@@ -102,12 +117,17 @@ export const getStaticProps: GetStaticProps<
     getAllGlobals(),
     getAllPagesSlugs(),
   ])
+
   const slugAndPages = separatePages(globals?.Links, pagesSlug)
 
   // get index page reference from settings
   if (!_.isEmpty(settings)) {
     pages = [...(await getAllPages({ _id: settings?.indexPage?._ref }))]
   }
+
+  const documentTypeRef = checkLinkType(pages[0].content)
+  const documentTypeSlugs = await getDocumentTypeSlugs(documentTypeRef)
+  const restructuredDocumentType = structuredDocumentTypes(documentTypeSlugs)
 
   // fetch universal data
   const pageProps = await setPropsForPage()
@@ -121,6 +141,7 @@ export const getStaticProps: GetStaticProps<
       preview,
       slugAndPages,
       token: previewData.token ?? null,
+      documentTypesPage: { ...restructuredDocumentType },
       ...pageProps,
     },
   }

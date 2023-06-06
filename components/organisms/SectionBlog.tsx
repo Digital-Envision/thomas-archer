@@ -8,6 +8,7 @@ import { useRouter } from 'next/router'
 import { BlogListingCardProps } from 'components/modules/BlogListingCard'
 import SectionColCards from './SectionColCards'
 import { LinksInterface } from 'components/base/Link'
+import { LINK_TYPE_NAME } from 'schemas/components/link'
 
 type SectionBlogProps = {
   heading: string
@@ -34,7 +35,6 @@ const SectionBlog: React.FC<SectionBlogProps> = ({
   createdDate,
   ...rest
 }) => {
-  const { asPath } = useRouter()
   const sortedBlogs = _.slice(
     _.orderBy(_blogs?.data, ['createdAt'], ['desc']),
     0,
@@ -50,7 +50,11 @@ const SectionBlog: React.FC<SectionBlogProps> = ({
       button: {
         label: 'Read More',
         useInternal: true,
-        internalHref: `${asPath}/${blog.slug?.current}`,
+        linkType: LINK_TYPE_NAME.blog,
+        blogHref: {
+          _type: 'reference',
+          slug: blog?.slug?.current,
+        },
         externalHref: '',
         isExternal: false,
         mobileOnly: false,
@@ -76,7 +80,7 @@ const SectionBlog: React.FC<SectionBlogProps> = ({
 
       <Box pt={{ base: HeightVariants.less, md: HeightVariants.default }} />
 
-      <SectionColCards ListArticleBlogCards={blogs} />
+      {blogs && <SectionColCards ListArticleBlogCards={blogs} />}
     </Box>
   )
 }
