@@ -11,6 +11,8 @@ import { RouteDetail } from 'utils/interfaces'
 import SectionBreadcrumbs from 'components/modules/SectionBreadcrumbs'
 import IndexPageHead from 'components/IndexPageHead'
 import ExitPreviewButton from 'components/ExitPreviewButton'
+import { ProjectListingCardProps } from 'components/modules/ProjectListingCard'
+import { BlogListingCardProps } from 'components/modules/BlogListingCard'
 
 export interface FloorPageProps {
   settings: any
@@ -20,6 +22,9 @@ export interface FloorPageProps {
   globals?: any
   //settings: Settings
   floors?: Floor
+  projects?: ProjectListingCardProps
+  blogs?: BlogListingCardProps
+  awardedProjects?: ProjectListingCardProps
   routeDetail: RouteDetail
 }
 
@@ -64,7 +69,12 @@ export default function FloorPageTemplate(props: FloorPageProps) {
         )}
       </Box>
 
-      <PageBuilder pages={[{ content: floors?.customPageSection }]} />
+      <PageBuilder
+        pages={[{ content: floors?.customPageSection }]}
+        projects={props.projects}
+        blogs={props.blogs}
+        awardedProjects={props.awardedProjects}
+      />
 
       <Footer
         links={globals.Links}

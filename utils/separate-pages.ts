@@ -144,9 +144,7 @@ const separatePages = (navLinks, pages) => {
               url: `${childrenPage[i].parent}/${link?.href?.internalHref}`,
             }
 
-            subSlug.push(
-              `${childrenPage[i].parent}/${link?.href?.internalHref}`
-            )
+            subSlug.push(`${link?.href?.internalHref}`)
           }
         }
       })

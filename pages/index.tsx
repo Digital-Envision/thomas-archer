@@ -83,7 +83,7 @@ export default function HomePage(props: PageProps) {
     storeLink.setLink('detailsPage', globals?.DetailsPage)
   }, [slugAndPages])
 
-  if (preview && !_.isEmpty(storeLink?.links)) {
+  if (preview && !_.isEmpty(storeLink?.pages)) {
     return (
       <PreviewSuspense fallback={<div>Loading Preview Page</div>}>
         <PreviewIndexPage {...props} />

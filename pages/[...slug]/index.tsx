@@ -73,7 +73,7 @@ export default function DynamicPage(props) {
     return <div></div>
   }
 
-  if (!_.isEmpty(routeDetail?.detailsPage) && !_.isEmpty(storeLink?.links)) {
+  if (!_.isEmpty(routeDetail?.detailsPage) && !_.isEmpty(storeLink?.pages)) {
     switch (routeDetail?.detailsPage) {
       case DOCUMENT_TYPES_PAGE_NAME.Projects:
         if (preview) {
@@ -84,7 +84,14 @@ export default function DynamicPage(props) {
           )
         }
 
-        return <ProjectPageTemplate {...props} />
+        return (
+          <ProjectPageTemplate
+            {...props}
+            blogs={blogs}
+            floors={floors}
+            awardedProjects={awardedProjects}
+          />
+        )
       case DOCUMENT_TYPES_PAGE_NAME.Blog:
         if (preview) {
           return (
@@ -104,11 +111,18 @@ export default function DynamicPage(props) {
           )
         }
 
-        return <FloorPageTemplate {...props} />
+        return (
+          <FloorPageTemplate
+            {...props}
+            projects={projects}
+            blogs={blogs}
+            awardedProjects={awardedProjects}
+          />
+        )
     }
   }
 
-  if (preview && !_.isEmpty(storeLink?.links)) {
+  if (preview && !_.isEmpty(storeLink?.pages)) {
     return (
       <PreviewSuspense fallback={<div>Loading Preview Page</div>}>
         <PreviewIndexPage {...props} />
@@ -116,7 +130,7 @@ export default function DynamicPage(props) {
     )
   }
 
-  if (!_.isEmpty(storeLink?.links))
+  if (!_.isEmpty(storeLink?.pages))
     //applied to other page
     return (
       <IndexPage
@@ -139,6 +153,8 @@ export const getStaticPaths = async () => {
   const links = await getAllGlobals()
   const pagesSlug = await getAllPagesSlugs()
   const separated = separatePages(links?.Links, pagesSlug)
+
+  console.log({ slug: separated.slug })
 
   const paths = separated.slug.map((slug) => {
     return { params: { slug: [`${slug}`] } }
