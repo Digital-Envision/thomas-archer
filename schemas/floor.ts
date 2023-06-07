@@ -1,14 +1,16 @@
+import { DOCUMENT_TYPE_SCHEMA_NAME } from './global/DetailsPage';
 import { HeightVariants } from 'components/base/Divider'
 import { enumToArrayOfObjects } from 'lib/utils'
 import _ from 'lodash'
-import { SEOSchema } from './components/fields'
+import { SEOField, SlugField } from './components/fields'
 import { FloorPlanDetails } from './sections/FloorPlanDetails'
 import { SectionHeroImageDefaultFields } from './sections/SectionHeroImageDefault'
+import { orderRankField } from '@sanity/orderable-document-list';
 
 export default {
   type: 'document',
   title: 'Floor Plans',
-  name: 'floors',
+  name: DOCUMENT_TYPE_SCHEMA_NAME['Floor Plans'],
   fields: [
     {
       name: 'title',
@@ -16,18 +18,7 @@ export default {
       type: 'string',
       validation: (Rule) => Rule.required(),
     },
-    {
-      name: 'slug',
-      description:
-        'page can be access: https://thomas-archer.netlify.app/<route-name>/[slug]',
-      type: 'slug',
-      title: 'Slug',
-      options: {
-        source: 'heading',
-        maxLength: 96,
-        isUnique: (value, context) => context.defaultIsUnique(value, context),
-      },
-    },
+    SlugField,
     {
       name: 'bannerImage',
       title: 'Banner Image',
@@ -244,6 +235,7 @@ export default {
         collapsed: true,
       },
     },
-    SEOSchema,
+    SEOField,
+    orderRankField({ type: DOCUMENT_TYPE_SCHEMA_NAME['Floor Plans'] }),
   ],
 }

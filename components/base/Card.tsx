@@ -6,7 +6,8 @@ export const CardContainer: React.FC<any> = ({ children, ...props }) => {
     <Box
       overflow="hidden"
       borderBottomWidth={1}
-      w={{ base: '420px', sm: '420px', md: '100%', lg: '100%' }}
+      w={'100%'}
+      maxWidth={{ base: '420px', sm: '420px', md: '100%', lg: '100%' }}
       h="auto"
       {...props}
     >

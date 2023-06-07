@@ -69,7 +69,8 @@ const ProjectScroll = ({
             ></Box>
           </Box>
         </Box>
-        {_.sortBy(projects?.data, '_createdAt')?.map((project, key) => {
+        {/* sort projects on groq level by orderRank */}
+        {projects?.data.map((project, key) => {
           return (
             <Box>
               <Box

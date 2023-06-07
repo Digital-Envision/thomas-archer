@@ -6,6 +6,12 @@ export const DOCUMENT_TYPES_PAGE_NAME = {
   Blog: 'blog',
 }
 
+export const DOCUMENT_TYPE_SCHEMA_NAME = {
+  Projects: 'projects',
+  Blog: 'blogs',
+  'Floor Plans': 'floors',
+}
+
 const documentDetailsPage = [
   {
     name: DOCUMENT_TYPES_PAGE_NAME.FloorPlan,

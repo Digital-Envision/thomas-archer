@@ -57,7 +57,11 @@ const SectionBlogListing: React.FC<SectionBlogListingProps> = (props) => {
         condition: `&& slug.current != null`,
         page: 1,
         limit: 12,
-        sortOrder: selectedSort.sortBy === 'Newest' ? 'desc' : 'asc',
+        sortByField: 'createdDate',
+        sortOrder:
+          selectedSort.sortBy === 'Newest' || !selectedSort.sortBy
+            ? 'desc'
+            : 'asc',
       })
 
       setBlogs({
@@ -77,6 +81,7 @@ const SectionBlogListing: React.FC<SectionBlogListingProps> = (props) => {
       condition: `&& slug.current != null`,
       page: currentPagination?.page + 1,
       limit: 12,
+      sortByField: 'createdDate',
       sortOrder:
         selectedSort.sortBy === 'Newest' || !selectedSort.sortBy
           ? 'desc'
@@ -117,7 +122,7 @@ const SectionBlogListing: React.FC<SectionBlogListingProps> = (props) => {
           >
             <AccordionItem key={'sortBy'} border={0}>
               {({ isExpanded }) => (
-                <>
+                <Box pb={isExpanded ? HeightVariants.less : '0px'}>
                   <AccordionButton
                     style={{
                       padding: 0,
@@ -150,7 +155,7 @@ const SectionBlogListing: React.FC<SectionBlogListingProps> = (props) => {
                       setSelectedItem={setSelectedSort}
                     />
                   </AccordionPanel>
-                </>
+                </Box>
               )}
             </AccordionItem>
           </Accordion>
@@ -162,7 +167,7 @@ const SectionBlogListing: React.FC<SectionBlogListingProps> = (props) => {
           <GridItem key={index} colSpan={1}>
             <BlogListingCard
               {...props}
-              link={`${asPath}/blog/${props?.slug?.current}`}
+              link={`${asPath}/${props?.slug?.current}`}
             />
           </GridItem>
         ))}

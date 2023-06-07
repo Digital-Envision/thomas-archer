@@ -1,54 +1,43 @@
-import { SEOSchema } from './components/fields';
+import { orderRankField, orderRankOrdering } from '@sanity/orderable-document-list';
+import { CaptionField, HeadingField, ImageField, SEOField, SlugField, SubHeadingField, TextField } from './components/fields';
+import { DOCUMENT_TYPE_SCHEMA_NAME } from './global/DetailsPage';
 import { listImagesFields } from './sections/SectionGalleryScroll';
-import { headingField, paragraphField } from './sections/SectionHeadingParagraphCTA';
-import { bannerImageField, bannerVideoField, externalVideoField, isExternalVideoField, isVideoField } from "./sections/SectionHeroImageBig"
+import { bannerVideoField, externalVideoField, isExternalVideoField, isVideoField } from "./sections/SectionHeroImageBig"
 import { isSelectedProjectFields, selectedProjectsFields } from './sections/SectionProjectScroll';
 
 export default {
     type: 'document',
     title: 'Projects',
-    name: 'projects',
+    name: DOCUMENT_TYPE_SCHEMA_NAME.Projects,
+    orderings: [orderRankOrdering],
+    // orderings: [{
+    //     title: 'Ordered',
+    //     name: 'ordered',
+    //     by: [{ field: 'orderRank', direction: 'desc' }]
+    // }],
     fields: [
         {
-            name: 'heading',
+            ...HeadingField,
             title: 'Title',
-            type: 'string',
             validation: (rule) => rule.required(),
         },
+        SlugField,
         {
-            name: 'slug',
-            description: 'page can be access: https://thomas-archer.netlify.app/<route-name>/[slug]',
-            type: 'slug',
-            title: 'Slug',
-            options: {
-                source: 'title',
-                maxLength: 96,
-                isUnique: (value, context) => context.defaultIsUnique(value, context),
-            },
-        },
-        {
-            name: 'subHeading',
+            ...SubHeadingField,
             title: 'Suburb',
-            type: 'string'
         },
         {
-            name: 'caption',
+            ...CaptionField,
             title: 'Product Name',
             type: 'string'
         },
         {
-            name: 'paragraph',
+            ...TextField,
             title: 'Paragraph',
-            type: 'text',
-            options: {
-                collapsible: true,
-                collapsed: true,
-            },
         },
         {
-            name: 'image',
+            ...ImageField,
             title: 'Feature Image',
-            type: 'image',
             validation: (rule) => rule.required(),
         },
         {
@@ -158,6 +147,7 @@ export default {
                 collapsed: true,
             },
         },
-        SEOSchema
+        SEOField,
+        orderRankField({ type: DOCUMENT_TYPE_SCHEMA_NAME.Projects }),
     ],
 }

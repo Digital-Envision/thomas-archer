@@ -19,7 +19,7 @@ export default function BlogPageTemplate(props: any) {
   return (
     <Box bgColor="#FFFFFF">
       {preview && <ExitPreviewButton />}
-      <IndexPageHead settings={settings} seo={blog?.seo} />
+      <IndexPageHead settings={settings} pageData={blog} />
       <Navbar
         links={globals.Links}
         enquire={globals.Enquire}
@@ -57,7 +57,7 @@ export default function BlogPageTemplate(props: any) {
         px={{ base: '1rem', md: '4rem' }}
       >
         <Text mb="4" color={'#898989'}>
-          {moment(blog?._createdAt).format('DD MMMM YYYY')}
+          {moment(blog?.createdDate).format('DD MMMM YYYY')}
         </Text>
       </Flex>
 

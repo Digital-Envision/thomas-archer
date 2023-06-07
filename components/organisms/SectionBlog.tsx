@@ -19,6 +19,7 @@ type SectionBlogProps = {
   headingTagLevel: HeadingTagSemantic
   blogs: BlogListingCardProps
   button: LinksInterface
+  createdDate: string
 }
 
 // data is pulled from 3 latest blogs documents
@@ -30,6 +31,7 @@ const SectionBlog: React.FC<SectionBlogProps> = ({
   marginBottom,
   blogs: _blogs,
   button,
+  createdDate,
   ...rest
 }) => {
   const { asPath } = useRouter()
@@ -54,6 +56,7 @@ const SectionBlog: React.FC<SectionBlogProps> = ({
         mobileOnly: false,
       },
       isClickable: true,
+      isShowCreatedAt: true,
     }
   })
 

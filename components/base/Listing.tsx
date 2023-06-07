@@ -36,9 +36,9 @@ export const ListingGrid = ({ children, ...props }) => {
         lg: 'repeat(3, 1fr)',
       }}
       gap={{
-        base: 2,
-        sm: 3,
-        md: 4,
+        base: '4rem',
+        sm: '4rem',
+        md: '4vh',
         lg: '4vh',
       }}
       w={{ md: '100%', lg: '100%' }} // base and sm not 100%

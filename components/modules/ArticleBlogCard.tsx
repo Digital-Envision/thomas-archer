@@ -14,7 +14,8 @@ import moment from 'moment'
 
 export type ArticleBlogCardProps = {
   image?: any // sanity io image
-  _createdAt?: string
+  _createdAt?: string //sanity built in created at timestamp
+  createdDate?: string
   isShowCreatedAt?: boolean
   heading: string
   headingTagLevel: HeadingTagSemantic
@@ -39,6 +40,7 @@ export type ArticleBlogCardProps = {
 const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
   image,
   _createdAt,
+  createdDate,
   isShowCreatedAt = false,
   heading,
   headingTagLevel,
@@ -129,10 +131,10 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
         flexDirection={'column'}
         px={{ base: '2rem', md: parentLength >= 3 ? '2rem' : 0 }}
       >
-        <Box flex="1" overflow="hidden">
-          {_createdAt && isShowCreatedAt && (
+        <Box h="130px">
+          {createdDate && isShowCreatedAt && (
             <Text mb="4" fontSize={'10px'} color={'#898989'}>
-              {moment(_createdAt).format('DD MMMM YYYY')}
+              {moment(createdDate).format('DD MMMM YYYY')}
             </Text>
           )}
           {heading && (

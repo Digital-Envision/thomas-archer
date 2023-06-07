@@ -32,7 +32,7 @@ export default function ProjectPageTemplate(props: any) {
   return (
     <Box bgColor="white">
       {preview && <ExitPreviewButton variant={Variants.black} />}
-      <IndexPageHead settings={settings} seo={project?.seo} />
+      <IndexPageHead settings={settings} pageData={project} />
       <Navbar
         links={globals.Links}
         enquire={globals.Enquire}

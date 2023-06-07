@@ -1,38 +1,17 @@
-import { SEOSchema } from "./components/fields";
+import { CreatedDateField, HeadingField, ImageField, RTFField, SEOField, SlugField } from "./components/fields";
+import { DOCUMENT_TYPE_SCHEMA_NAME } from "./global/DetailsPage";
 import { listImagesFields } from "./sections/SectionGalleryScroll";
 
 export default {
     type: 'document',
     title: 'Blog',
-    name: 'blogs',
+    name: DOCUMENT_TYPE_SCHEMA_NAME.Blog,
     fields: [
-        {
-            name: 'slug',
-            description: 'page can be access: https://thomas-archer.netlify.app/<route-name>/[slug]',
-            type: 'slug',
-            title: 'Slug',
-            options: {
-                source: 'heading',
-                maxLength: 96,
-                isUnique: (value, context) => context.defaultIsUnique(value, context),
-            },
-        },
-        {
-            name: 'heading',
-            type: 'string'
-        },
-        {
-            name: 'content',
-            type: 'array',
-            of: [{ type: 'block' }]
-        },
-        {
-            name: 'image',
-            type: 'image',
-            options: {
-                hotspot: false,
-            },
-        },
+        CreatedDateField,
+        SlugField,
+        HeadingField,
+        RTFField,
+        ImageField,
         {
             name: 'page',
             title: 'Detail Page',
@@ -55,6 +34,6 @@ export default {
                 },
             ]
         },
-        SEOSchema,
+        SEOField,
     ],
 }
