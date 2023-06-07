@@ -10,13 +10,19 @@ import { SEO } from 'utils/interfaces'
 export interface IndexPageHeadProps {
   settings: Settings
   seo?: SEO
+  pageData: any
 }
 
-export default function IndexPageHead({ settings, seo }: IndexPageHeadProps) {
+export default function IndexPageHead({
+  settings,
+  pageData,
+}: IndexPageHeadProps) {
+  const { seo, title: _title, heading } = pageData
   // if seo object is empty, we use default from settings
+
   const seoData = {
-    title: seo?.title || settings?.title || demo.title,
-    description: seo?.description || settings?.description || demo.description,
+    title: seo?.title || `${_title || heading} | ${settings?.title}`,
+    description: seo?.description || settings?.description,
     ogImage: seo?.image || settings?.image,
   }
 

@@ -5,9 +5,11 @@ import { BsArrowRight } from 'react-icons/bs'
 import { blockToPlainText, getImageUrl } from 'lib/utils'
 import { PaginationData } from 'utils/interfaces'
 import { CardContainer, CardHeading } from 'components/base/Card'
+import moment from 'moment'
 
 export type BlogListingCardDataProps = {
   image?: any // sanity io image
+  createdDate: string
   link: string
   heading: string
   content: any[]
@@ -26,6 +28,7 @@ const BlogListingCard: React.FC<BlogListingCardProps['data'][0]> = ({
   link,
   heading,
   content,
+  createdDate,
 }) => {
   return (
     <Link href={link || '#'}>
@@ -40,7 +43,13 @@ const BlogListingCard: React.FC<BlogListingCardProps['data'][0]> = ({
           />
         </Box>
 
-        <Box py="5" h="170px">
+        <Box py="5" h="200px">
+          {createdDate && (
+            <Text mb="4" fontSize={'10px'} color={'#898989'}>
+              {moment(createdDate).format('DD MMMM YYYY')}
+            </Text>
+          )}
+
           <CardHeading>{heading}</CardHeading>
           <Flex flex={1} minHeight="80px" pb="1rem">
             <Text noOfLines={4}>{blockToPlainText(content)}</Text>

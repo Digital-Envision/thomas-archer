@@ -29,7 +29,7 @@ export default function FloorPageTemplate(props: FloorPageProps) {
   return (
     <>
       {preview && <ExitPreviewButton />}
-      <IndexPageHead settings={settings} seo={floors?.seo} />
+      <IndexPageHead settings={settings} pageData={floors} />
       <Navbar
         links={globals.Links}
         enquire={globals.Enquire}

@@ -2,9 +2,12 @@
  * This plugin contains all the logic for setting up the `Settings` singleton
  */
 
+import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list'
 import _ from 'lodash'
 import { definePlugin, type DocumentDefinition } from 'sanity'
 import { type StructureResolver } from 'sanity/desk'
+import { DOCUMENT_TYPE_SCHEMA_NAME } from 'schemas/global/DetailsPage'
+import { DocumentsIcon } from '@sanity/icons'
 
 export const settingsPlugin = definePlugin<{ type: string }>(({ type }) => {
   return {
@@ -37,7 +40,7 @@ export const settingsStructure = (
   topList?: Array<DocumentDefinition>,
   bottomList?: Array<DocumentDefinition>
 ): StructureResolver => {
-  return (S) => {
+  return (S, context) => {
     // // The `Settings` root list item
     const topListItem = topList.map((type) => {
       return S.listItem()
@@ -72,8 +75,26 @@ export const settingsStructure = (
       return list
     })
 
+    const draggableDocs = _.map(DOCUMENT_TYPE_SCHEMA_NAME, (v, k) => {
+      if (DOCUMENT_TYPE_SCHEMA_NAME.Blog === v) return // blog not needed draggable index 
+
+      return orderableDocumentListDeskItem({
+        type: v,
+        title: k + ' Sorting',
+        icon: DocumentsIcon,
+        S,
+        context
+      })
+    })
+
     return S.list()
       .title('Content')
-      .items([...topListItem, S.divider(), ...bottomListItem])
+      .items([
+        ...topListItem,
+        S.divider(),
+        ..._.compact(bottomListItem),
+        S.divider(),
+        ..._.compact(draggableDocs)
+      ])
   }
 }

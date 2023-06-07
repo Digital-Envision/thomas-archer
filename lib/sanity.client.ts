@@ -42,8 +42,10 @@ export const getSanityData = async ({
   params = {},
   page = 1,
   limit = 100,
-  sortByField = '_createdAt',
-  sortOrder = 'desc',
+  sortByField = 'order',
+  sortOrder = 'asc',
+  // sortByField = '_createdAt',
+  // sortOrder = 'desc',
   options = '',
 }) => {
   try {

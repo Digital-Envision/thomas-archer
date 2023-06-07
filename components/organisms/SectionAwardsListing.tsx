@@ -21,10 +21,6 @@ const SectionAwardsListing: React.FC<SectionAwardsListingProps> = (props) => {
   const { asPath } = useRouter()
   const [projects, setProjects] = useState(_projects)
 
-  useEffect(() => {
-    console.log('masuk sini', { projects, _projects })
-  }, [])
-
   const handleViewMore = async () => {
     const currentPagination = projects?.pagination
 
@@ -32,9 +28,11 @@ const SectionAwardsListing: React.FC<SectionAwardsListingProps> = (props) => {
 
     const newProjects = await getSanityData({
       type: 'projects',
-      condition: `&& slug.current != null  && award.awards != null`,
+      condition: `&& slug.current != null  && award.awards != null && !(_id in path("drafts.**"))`,
       page: currentPagination?.page + 1,
       limit: 12,
+      sortByField: 'orderRank',
+      sortOrder: 'asc',
     })
 
     setProjects((prev) => {

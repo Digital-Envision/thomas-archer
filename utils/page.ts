@@ -62,26 +62,34 @@ export const getRouteDetail = (slugs, pages, detailsPage) => {
 export const setPropsForPage = async () => {
     const projects = await getSanityData({
         type: 'projects',
-        condition: `&& slug.current != null`,
+        condition: `&& slug.current != null && !(_id in path("drafts.**"))`,
         limit: 12,
+        sortByField: 'orderRank',
+        sortOrder: 'asc',
     })
 
     const awardedProjects = await getSanityData({
         type: 'projects',
-        condition: `&& slug.current != null && award.awards != null`,
+        condition: `&& slug.current != null && award.awards != null && !(_id in path("drafts.**"))`,
         limit: 12,
+        sortByField: 'orderRank',
+        sortOrder: 'asc',
     })
 
     const blogs = await getSanityData({
         type: 'blogs',
-        condition: `&& slug.current != null`,
+        condition: `&& slug.current != null && !(_id in path("drafts.**"))`,
         limit: 12,
+        sortByField: 'createdDate',
+        sortOrder: 'desc',
     })
 
     const floors = await getSanityData({
         type: 'floors',
-        condition: `&& slug.current != null`,
+        condition: `&& slug.current != null && !(_id in path("drafts.**"))`,
         limit: 12,
+        sortByField: 'orderRank',
+        sortOrder: 'asc',
     })
 
     return {
@@ -131,7 +139,6 @@ export const getDataProjectDetailPage = async ({ slug }) => {
             currentProject?.SectionProjectScroll?.selectedProjects,
             '_ref'
         )
-    // console.log('🤯 selectedProjectsRef', selectedProjectsRef)
 
     // if toggled: selected projects, or else get latest 12 projects
     const projects = !_.isEmpty(selectedProjectsRef)
@@ -149,7 +156,6 @@ export const getDataProjectDetailPage = async ({ slug }) => {
     const selectedProjectsKeys =
         currentProject.SectionProjectScroll?.isSelectedProject &&
         currentProject.SectionProjectScroll?.selectedProjects
-    console.log('🤯 selectedProjectsKeys', selectedProjectsKeys)
 
     const sortedProjects = !_.isEmpty(selectedProjectsKeys)
         ? {

@@ -107,19 +107,23 @@ export default function DynamicPage(props) {
     )
   }
 
-  return (
-    <IndexPage
-      {...props}
-      posts={posts}
-      settings={settings}
-      pages={pages}
-      globals={globals}
-      projects={projects}
-      blogs={blogs}
-      floors={floors}
-      awardedProjects={awardedProjects}
-    />
-  )
+  if (!_.isEmpty(storeLink?.links))
+    //applied to other page
+    return (
+      <IndexPage
+        {...props}
+        posts={posts}
+        settings={settings}
+        pages={pages}
+        globals={globals}
+        projects={projects}
+        blogs={blogs}
+        floors={floors}
+        awardedProjects={awardedProjects}
+      />
+    )
+
+  return <div />
 }
 
 export const getStaticPaths = async () => {

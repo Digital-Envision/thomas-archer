@@ -30,9 +30,11 @@ const SectionProjectListing: React.FC<SectionProjectListingProps> = (props) => {
 
     const newProjects = await getSanityData({
       type: 'projects',
-      condition: `&& slug.current != null`,
+      condition: `&& slug.current != null && !(_id in path("drafts.**"))`,
       page: currentPagination?.page + 1,
       limit: 12,
+      sortByField: 'orderRank',
+      sortOrder: 'asc',
     })
 
     setProjects((prev) => {
@@ -53,7 +55,7 @@ const SectionProjectListing: React.FC<SectionProjectListingProps> = (props) => {
           <GridItem key={index} colSpan={1}>
             <ProjectListingCard
               {...props}
-              link={`${asPath}/project/${props?.slug?.current}`}
+              link={`${asPath}/${props?.slug?.current}`}
             />
           </GridItem>
         ))}
