@@ -79,7 +79,12 @@ export default function ProjectPageTemplate(props: any) {
         <GalleryScroll {...project?.SectionGalleryScroll} />
       )}
 
-      <PageBuilder pages={[{ content: project?.customPageSection }]} />
+      <PageBuilder
+        pages={[{ content: project?.customPageSection }]}
+        blogs={props.blogs}
+        floors={props.floors}
+        awardedProjects={props.awardedProjects}
+      />
 
       {!_.isEmpty(project?.award) && (
         <SectionImageAwards

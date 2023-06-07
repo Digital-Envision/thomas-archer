@@ -1,5 +1,6 @@
 import { getYear } from 'date-fns'
 import { defineField } from 'sanity'
+import link from 'schemas/components/link'
 
 export default defineField({
   name: 'Footer',
@@ -23,38 +24,7 @@ export default defineField({
       of: [
         {
           type: 'object',
-          fields: [
-            {
-              name: 'label',
-              title: 'Name',
-              type: 'string',
-              validation: (rule) => rule.required(),
-            },
-            {
-              name: 'useInternal',
-              title: 'Use Internal Link Pages',
-              type: 'boolean',
-            },
-            {
-              name: 'externalHref',
-              title: 'External Link',
-              type: 'url',
-              hidden: ({ parent }) => parent?.useInternal,
-            },
-            {
-              name: 'internalHref',
-              title: 'Internal Link',
-              type: 'reference',
-              to: [{ type: 'page' }],
-              hidden: ({ parent }) => !parent?.useInternal,
-            },
-            {
-              name: 'isExternal',
-              title: 'New Tab Link',
-              type: 'boolean',
-              initialValue: false,
-            },
-          ],
+          fields: [...link],
         },
       ],
     },

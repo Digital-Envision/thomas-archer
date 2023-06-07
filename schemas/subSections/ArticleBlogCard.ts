@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import link from 'schemas/components/link'
 import { validateVimeoUrl } from 'utils/checkVideoResource'
 
 export default {
@@ -52,35 +53,7 @@ export default {
                 collapsed: true,
             },
             fields: [
-                {
-                    name: 'label',
-                    title: 'Name',
-                    type: 'string',
-                },
-                {
-                    name: 'useInternal',
-                    title: 'Use Internal Link Pages',
-                    type: 'boolean',
-                },
-                {
-                    name: 'externalHref',
-                    title: 'External Link',
-                    type: 'url',
-                    hidden: ({ parent }) => parent?.useInternal,
-                },
-                {
-                    name: 'internalHref',
-                    title: 'Internal Link',
-                    type: 'reference',
-                    to: [{ type: 'page' }],
-                    hidden: ({ parent }) => !parent?.useInternal,
-                },
-                {
-                    name: 'isExternal',
-                    title: 'New Tab Link',
-                    type: 'boolean',
-                    initialValue: false,
-                },
+                ...link
             ],
         },
     ],

@@ -55,7 +55,7 @@ const EnquireFlyout = ({
             <Heading1 mb={'32px'}>{title}</Heading1>
             <Text mb={'24px'}>{description}</Text>
             <Link link={button}>
-              <Button variant={ButtonVariants.black}>{button?.name}</Button>
+              <Button variant={ButtonVariants.black}>{button?.label}</Button>
             </Link>
             <Box mt={'24px'}>
               <Text fontSize={'14px'} fontWeight={700} mb={1}>

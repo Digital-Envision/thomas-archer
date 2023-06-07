@@ -11,8 +11,16 @@ import Bed from 'components/icon/Bed'
 import Bath from 'components/icon/Bath'
 import Car from 'components/icon/Car'
 import { urlForImage } from 'lib/sanity.image'
+import { useStoreLink } from 'lib/store/link'
 
 const FloorList = ({ floor }) => {
+  const floorPlanRef = useStoreLink(
+    (state) => state?.detailsPage?.floorPlan?.parentPage?._ref
+  )
+  const floorPlanParentPage = useStoreLink(
+    (state) => state?.pages[floorPlanRef]?.url
+  )
+
   const floorPlan = floor?.floorPlan?.listSizes[0]
   const [slide, setSlide] = useState(0)
 
@@ -86,7 +94,13 @@ const FloorList = ({ floor }) => {
         px={'20px'}
         pb={'10px'}
       >
-        <Link href={`/view-range/${floor?.slug?.current}`}>
+        <Link
+          href={
+            floorPlanParentPage
+              ? `/${floorPlanParentPage}/${floor?.slug?.current}`
+              : '#'
+          }
+        >
           <Text textDecor={'underline'}>
             {floor?.title}{' '}
             {floor?.floorPlan?.listSizes?.map((type, key) => {

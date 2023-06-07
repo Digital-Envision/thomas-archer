@@ -6,7 +6,7 @@ import _ from 'lodash'
 import { useRouter } from 'next/router'
 
 import AwardListingCard from 'components/modules/AwardListingCard'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { getSanityData } from 'lib/sanity.client'
 import { ListingContainer, ListingGrid } from 'components/base/Listing'
 

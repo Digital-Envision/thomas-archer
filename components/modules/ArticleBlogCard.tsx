@@ -1,7 +1,6 @@
 import { Box, Circle, Flex } from '@chakra-ui/react'
 import Heading3 from '../base/Heading3'
 import Text from '../base/Text'
-import { isEmpty } from 'lodash'
 import Button, { Variants } from 'components/base/Button'
 import { urlForImage } from 'lib/sanity.image'
 import { HeadingTagSemantic } from 'components/base/Heading1'
@@ -158,10 +157,14 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
               Watch Video
             </Button>
           )}
-          {button?.label && (
-            <Link link={button}>
-              <Button variant={Variants.blackLine}>{button?.label}</Button>
-            </Link>
+          {isClickable && button?.label ? (
+            <Button variant={Variants.blackLine}>{button?.label}</Button>
+          ) : (
+            button?.label && (
+              <Link link={button}>
+                <Button variant={Variants.blackLine}>{button?.label}</Button>
+              </Link>
+            )
           )}
         </Flex>
       </Flex>

@@ -7,18 +7,7 @@ import MobileNav from './MobileNav'
 import MobileCollapse from './MobileCollapse'
 import EnquireFlyout from '../EnquireFlyout'
 import Link from 'next/link'
-
-export interface LinksInterface {
-  label: string
-  useInternal: boolean
-  internalHref: {
-    _ref: string
-    _type: string
-  }
-  externalHref: string
-  isExternal: boolean
-  mobileOnly: boolean
-}
+import { LinksInterface } from 'components/base/Link'
 
 export interface NavLinksInterfaces extends LinksInterface {
   children?: Array<LinksInterface>

@@ -1,4 +1,9 @@
-import { getAllGlobals, getAllPagesSlugs, getSanityData, getSanityDataById } from 'lib/sanity.client'
+import {
+    getAllGlobals,
+    getAllPagesSlugs,
+    getSanityData,
+    getSanityDataById,
+} from 'lib/sanity.client'
 import _ from 'lodash'
 import { DOCUMENT_TYPES_PAGE_NAME } from 'schemas/global/DetailsPage'
 import separatePages from './separate-pages'
@@ -105,6 +110,8 @@ export const setPropsForDetailPage = async (props) => {
     const { detailsPage, detailPathId } = routeDetail
     let data = {}
 
+    const documentTypes = await setPropsForPage()
+
     switch (detailsPage) {
         case DOCUMENT_TYPES_PAGE_NAME.FloorPlan:
             data = await getDataFloorDetailPage({ slug: detailPathId })
@@ -119,7 +126,7 @@ export const setPropsForDetailPage = async (props) => {
             data = {}
     }
 
-    return data
+    return { ...data, ...documentTypes }
 }
 
 export const getDataProjectDetailPage = async ({ slug }) => {
@@ -135,23 +142,20 @@ export const getDataProjectDetailPage = async ({ slug }) => {
     // if isSelectedProject toggled, get 3 selected projects
     const selectedProjectsRef =
         currentProject?.SectionProjectScroll?.isSelectedProject &&
-        _.map(
-            currentProject?.SectionProjectScroll?.selectedProjects,
-            '_ref'
-        )
+        _.map(currentProject?.SectionProjectScroll?.selectedProjects, '_ref')
 
     // if toggled: selected projects, or else get latest 12 projects
     const projects = !_.isEmpty(selectedProjectsRef)
         ? ((await getSanityData({
-            type: 'projects',
-            condition: `&& slug.current != null && _id != "${currentProject?._id}" && _id in $ids`,
-            params: { ids: selectedProjectsRef },
-        })) as any)
+              type: 'projects',
+              condition: `&& slug.current != null && _id != "${currentProject?._id}" && _id in $ids`,
+              params: { ids: selectedProjectsRef },
+          })) as any)
         : ((await getSanityData({
-            type: 'projects',
-            condition: `&& slug.current != null && _id != "${currentProject?._id}"`,
-            limit: 12,
-        })) as any)
+              type: 'projects',
+              condition: `&& slug.current != null && _id != "${currentProject?._id}"`,
+              limit: 12,
+          })) as any)
 
     const selectedProjectsKeys =
         currentProject.SectionProjectScroll?.isSelectedProject &&
@@ -159,15 +163,15 @@ export const getDataProjectDetailPage = async ({ slug }) => {
 
     const sortedProjects = !_.isEmpty(selectedProjectsKeys)
         ? {
-            pagination: projects?.pagination,
-            data: _.sortBy(projects.data, (project) => {
-                // this will sort fetched projects, according to configured on selectedProjects array
-                const ref = selectedProjectsKeys.find(
-                    (selected) => selected._ref === project._id
-                )
-                return selectedProjectsKeys.indexOf(ref)
-            }),
-        }
+              pagination: projects?.pagination,
+              data: _.sortBy(projects.data, (project) => {
+                  // this will sort fetched projects, according to configured on selectedProjects array
+                  const ref = selectedProjectsKeys.find(
+                      (selected) => selected._ref === project._id
+                  )
+                  return selectedProjectsKeys.indexOf(ref)
+              }),
+          }
         : projects // projects already sorted on groq level
 
     return { project: currentProject, projects: sortedProjects }
@@ -200,7 +204,6 @@ export const getDataFloorDetailPage = async ({ slug }) => {
 }
 
 export const getPathFromPage = async (_id) => {
-
     const globals = await getAllGlobals()
     const pagesSlug = await getAllPagesSlugs()
     const slugAndPages = separatePages(globals?.Links, pagesSlug)
@@ -213,17 +216,14 @@ export const getPathFromPage = async (_id) => {
     return path
 }
 
-
 export const getPathFromDetailType = async (type) => {
-
     const globals = await getAllGlobals()
     const pagesSlug = await getAllPagesSlugs()
     const slugAndPages = separatePages(globals?.Links, pagesSlug)
 
     const refParentDetailPage = globals?.DetailsPage?.[type]
     const path =
-        slugAndPages?.pages?.[refParentDetailPage?.parentPage?._ref]
-            ?.url
+        slugAndPages?.pages?.[refParentDetailPage?.parentPage?._ref]?.url
 
     return path
 }

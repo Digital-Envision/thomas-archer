@@ -7,6 +7,7 @@ import { Box } from '@chakra-ui/react'
 import { ProjectListingCardProps } from './modules/ProjectListingCard'
 import { BlogListingCardProps } from './modules/BlogListingCard'
 import ExitPreviewButton from './ExitPreviewButton'
+import { useEffect } from 'react'
 
 export interface IndexPageProps {
   preview?: boolean

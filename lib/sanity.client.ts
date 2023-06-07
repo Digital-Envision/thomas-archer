@@ -120,16 +120,26 @@ export async function getAllProjects(props?): Promise<any[]> {
   return []
 }
 
-export async function getAllBlogs(project = ''): Promise<any[]> {
+export async function getAllBlogs(props?): Promise<any[]> {
   if (client) {
-    return (await client.fetch(blogQuery(project))) || []
+    return (
+      (await client.fetch(
+        blogQuery(props),
+        !_.isEmpty(props?.ids) ? { ...props } : undefined
+      )) || []
+    )
   }
   return []
 }
 
-export async function getAllFloors(floors = ''): Promise<any[]> {
+export async function getAllFloors(props?): Promise<any[]> {
   if (client) {
-    return (await client.fetch(floorQuery(floors))) || []
+    return (
+      (await client.fetch(
+        floorQuery(props),
+        !_.isEmpty(props?.ids) ? { ...props } : undefined
+      )) || []
+    )
   }
   return []
 }
@@ -173,13 +183,6 @@ export async function getAllProjectSlugs(): Promise<Pick<Post, 'slug'>[]> {
   }
   return []
 }
-export async function getAllBioSlugs(): Promise<Pick<Post, 'slug'>[]> {
-  if (client) {
-    const slugs = (await client.fetch<string[]>(blogQuery(''))) || []
-    return _.map(slugs, 'slug.current')
-  }
-  return []
-}
 
 export async function getPostBySlug(slug: string): Promise<Post> {
   if (client) {
@@ -203,4 +206,39 @@ export async function getPostAndMoreStories(
     return await client.fetch(postAndMoreStoriesQuery, { slug })
   }
   return { post: null, morePosts: [] }
+}
+
+export const getDocumentTypeSlugs = async (documentTypeRef) => {
+  let documentTypeSlugs = {}
+
+  if (!_.isEmpty(documentTypeRef) && !_.isNull(documentTypeRef)) {
+    if (!_.isEmpty(documentTypeRef.projectType)) {
+      const projectsRef = await getAllProjects({
+        ids: documentTypeRef.projectType,
+        byId: true,
+        select: "'slug': slug.current, _id",
+      })
+      documentTypeSlugs['projectsRef'] = projectsRef
+    }
+
+    if (!_.isEmpty(documentTypeRef.floorPlanType)) {
+      const floorPlansRef = await getAllFloors({
+        ids: documentTypeRef.floorPlanType,
+        byId: true,
+        select: "'slug': slug.current, _id",
+      })
+      documentTypeSlugs['floorPlansRef'] = floorPlansRef
+    }
+
+    if (!_.isEmpty(documentTypeRef.blogType)) {
+      const blogRef = await getAllBlogs({
+        ids: documentTypeRef.blogType,
+        byId: true,
+        select: "'slug': slug.current, _id",
+      })
+      documentTypeSlugs['blogRef'] = blogRef
+    }
+  }
+
+  return documentTypeSlugs
 }

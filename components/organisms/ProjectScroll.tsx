@@ -7,6 +7,7 @@ import Image from 'next/image'
 import ScrollBox from 'components/modules/ScrollBox'
 import { urlForImage } from 'lib/sanity.image'
 import Link from 'next/link'
+import { useStoreLink } from 'lib/store/link'
 
 const ProjectScroll = ({
   projects,
@@ -17,6 +18,13 @@ const ProjectScroll = ({
   paragraph,
   button,
 }) => {
+  const projectRef = useStoreLink(
+    (state) => state?.detailsPage?.projects?.parentPage?._ref
+  )
+  const projectParentPage = useStoreLink(
+    (state) => state?.pages[projectRef]?.url
+  )
+
   const [mediaWidth, setMediaWidth] = useState(0)
 
   useEffect(() => {
@@ -88,8 +96,8 @@ const ProjectScroll = ({
                   {project?.image && (
                     <Link
                       href={
-                        project?.slug?.current
-                          ? `/${project?.slug?.current}`
+                        project?.slug?.current && projectParentPage
+                          ? `/${projectParentPage}/${project?.slug?.current}`
                           : '#'
                       }
                     >
@@ -110,7 +118,9 @@ const ProjectScroll = ({
               {project?.heading && (
                 <Link
                   href={
-                    project?.slug?.current ? `/${project?.slug?.current}` : '#'
+                    project?.slug?.current && projectParentPage
+                      ? `/${projectParentPage}/${project?.slug?.current}`
+                      : '#'
                   }
                 >
                   <Text mt={4} textDecor={'underline'}>

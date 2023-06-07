@@ -1,6 +1,6 @@
-import { HeightVariants } from "components/base/Divider"
-import { enumToArrayOfObjects } from "lib/utils"
-
+import { HeightVariants } from 'components/base/Divider'
+import { enumToArrayOfObjects } from 'lib/utils'
+import link from 'schemas/components/link'
 
 export default {
     type: 'object',
@@ -21,7 +21,7 @@ export default {
             title: 'Image on the right?',
             description:
                 'Position of the image, if toggled on will be on the right',
-            type: 'boolean'
+            type: 'boolean',
         },
         {
             name: 'image',
@@ -39,73 +39,39 @@ export default {
                 collapsible: true,
                 collapsed: true,
             },
-            fields: [
-                {
-                    name: 'label',
-                    title: 'Name',
-                    type: 'string',
-                },
-                {
-                    name: 'useInternal',
-                    title: 'Use Internal Link Pages',
-                    type: 'boolean',
-                },
-                {
-                    name: 'externalHref',
-                    title: 'External Link',
-                    type: 'url',
-                    hidden: ({ parent }) => parent?.useInternal,
-                },
-                {
-                    name: 'internalHref',
-                    title: 'Internal Link',
-                    type: 'reference',
-                    to: [{ type: 'page' }],
-                    hidden: ({ parent }) => !parent?.useInternal,
-                },
-                {
-                    name: 'isExternal',
-                    title: 'New Tab Link',
-                    type: 'boolean',
-                    initialValue: false,
-                },
-            ],
+            fields: [...link],
         },
         {
             title: 'Margin Top',
             name: 'marginTop',
             type: 'string',
             options: {
-                list: [
-                    ...enumToArrayOfObjects(HeightVariants)
-                ],
+                list: [...enumToArrayOfObjects(HeightVariants)],
             },
 
-            layout: 'dropdown'
+            layout: 'dropdown',
         },
         {
             title: 'Margin Bottom',
             name: 'marginBottom',
             type: 'string',
             options: {
-                list: [
-                    ...enumToArrayOfObjects(HeightVariants)
-                ],
+                list: [...enumToArrayOfObjects(HeightVariants)],
             },
 
-            layout: 'dropdown'
+            layout: 'dropdown',
         },
     ],
     preview: {
         select: {
             title: 'heading',
             subtitle: 'label',
-            disabled: 'disabled'
+            disabled: 'disabled',
         },
         prepare({ title, disabled }) {
             return {
-                title: `Section2ColImageTextFeaturedImageLeftRight`
+                title: `Section2ColImageTextFeaturedImageLeftRight`,
             }
-        }
-    }
+        },
+    },
 }
