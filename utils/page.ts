@@ -64,44 +64,67 @@ export const getRouteDetail = (slugs, pages, detailsPage) => {
     return {}
 }
 
+export const callingProps = {
+    projects: async () => {
+        const projects = await getSanityData({
+            type: 'projects',
+            condition: `&& slug.current != null && !(_id in path("drafts.**"))`,
+            limit: 12,
+            sortByField: 'orderRank',
+            sortOrder: 'asc',
+        })
+        const awardedProjects = await getSanityData({
+            type: 'projects',
+            condition: `&& slug.current != null && award.awards != null && !(_id in path("drafts.**"))`,
+            limit: 12,
+            sortByField: 'orderRank',
+            sortOrder: 'asc',
+        })
+
+        return {
+            projects,
+            awardedProjects,
+        }
+    },
+
+    blogs: async () => {
+        const blogs = await getSanityData({
+            type: 'blogs',
+            condition: `&& slug.current != null && !(_id in path("drafts.**"))`,
+            limit: 12,
+            sortByField: 'createdDate',
+            sortOrder: 'desc',
+        })
+
+        return {
+            blogs,
+        }
+    },
+
+    floors: async () => {
+        const floors = await getSanityData({
+            type: 'floors',
+            condition: `&& slug.current != null && !(_id in path("drafts.**"))`,
+            limit: 12,
+            sortByField: 'orderRank',
+            sortOrder: 'asc',
+        })
+
+        return {
+            floors: floors?.data,
+        }
+    },
+}
+
 export const setPropsForPage = async () => {
-    const projects = await getSanityData({
-        type: 'projects',
-        condition: `&& slug.current != null && !(_id in path("drafts.**"))`,
-        limit: 12,
-        sortByField: 'orderRank',
-        sortOrder: 'asc',
-    })
-
-    const awardedProjects = await getSanityData({
-        type: 'projects',
-        condition: `&& slug.current != null && award.awards != null && !(_id in path("drafts.**"))`,
-        limit: 12,
-        sortByField: 'orderRank',
-        sortOrder: 'asc',
-    })
-
-    const blogs = await getSanityData({
-        type: 'blogs',
-        condition: `&& slug.current != null && !(_id in path("drafts.**"))`,
-        limit: 12,
-        sortByField: 'createdDate',
-        sortOrder: 'desc',
-    })
-
-    const floors = await getSanityData({
-        type: 'floors',
-        condition: `&& slug.current != null && !(_id in path("drafts.**"))`,
-        limit: 12,
-        sortByField: 'orderRank',
-        sortOrder: 'asc',
-    })
+    const projects = await callingProps.projects()
+    const blogs = await callingProps.blogs()
+    const floors = await callingProps.floors()
 
     return {
-        projects,
-        awardedProjects,
-        blogs,
-        floors: floors?.data,
+        ...projects,
+        ...blogs,
+        ...floors,
     }
 }
 
@@ -110,14 +133,22 @@ export const setPropsForDetailPage = async (props) => {
     const { detailsPage, detailPathId } = routeDetail
     let data = {}
 
-    const documentTypes = await setPropsForPage()
-
     switch (detailsPage) {
         case DOCUMENT_TYPES_PAGE_NAME.FloorPlan:
             data = await getDataFloorDetailPage({ slug: detailPathId })
+            data = {
+                ...data,
+                ...(await callingProps.projects()),
+                ...(await callingProps.blogs()),
+            }
             break
         case DOCUMENT_TYPES_PAGE_NAME.Projects:
             data = await getDataProjectDetailPage({ slug: detailPathId })
+            data = {
+                ...data,
+                ...(await callingProps.floors()),
+                ...(await callingProps.blogs()),
+            }
             break
         case DOCUMENT_TYPES_PAGE_NAME.Blog:
             data = await getDataBlogDetailPage({ slug: detailPathId })
@@ -126,7 +157,9 @@ export const setPropsForDetailPage = async (props) => {
             data = {}
     }
 
-    return { ...data, ...documentTypes }
+    return {
+        ...data,
+    }
 }
 
 export const getDataProjectDetailPage = async ({ slug }) => {

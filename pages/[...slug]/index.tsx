@@ -154,8 +154,6 @@ export const getStaticPaths = async () => {
   const pagesSlug = await getAllPagesSlugs()
   const separated = separatePages(links?.Links, pagesSlug)
 
-  console.log({ slug: separated.slug })
-
   const paths = separated.slug.map((slug) => {
     return { params: { slug: [`${slug}`] } }
   })
