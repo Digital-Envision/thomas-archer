@@ -14,7 +14,7 @@ import { urlForImage } from 'lib/sanity.image'
 import { ReactSVG } from 'react-svg'
 import { NavLinksInterfaces } from '../Navbar'
 
-const Footer = ({ links, enquire, contact, socialMedia, footer }) => {
+const Footer = ({ links, enquire, contact, socialMedia, footer, hubspot }) => {
   const Links = links || []
 
   const [openDrawer, setOpenDrawer] = useState(false)
@@ -29,6 +29,7 @@ const Footer = ({ links, enquire, contact, socialMedia, footer }) => {
         button={enquire?.button}
         privacyAndPolicy={enquire?.privacyAndPolicy}
         contact={contact}
+        hubspot={hubspot}
       />
       <Box
         as={'footer'}

@@ -8,13 +8,14 @@ import { ProjectListingCardProps } from './modules/ProjectListingCard'
 import { BlogListingCardProps } from './modules/BlogListingCard'
 import ExitPreviewButton from './ExitPreviewButton'
 import { useEffect } from 'react'
+import { Hubspot } from 'utils/interfaces'
 
 export interface IndexPageProps {
   preview?: boolean
   loading?: boolean
   posts: Post[]
   pages?: any[]
-  globals?: any
+  globals?: any & Hubspot
   settings: Settings
   projects?: ProjectListingCardProps
   awardedProjects?: ProjectListingCardProps
@@ -35,6 +36,7 @@ export default function IndexPage(props: IndexPageProps) {
         contact={globals.Contact}
         socialMedia={globals.SocialMedia}
         specialButtons={globals.SpecialButtons}
+        hubspot={globals?.Hubspot}
       />
       <Box flex={1}>
         <PageBuilder pages={pages} {...props} />
@@ -45,6 +47,7 @@ export default function IndexPage(props: IndexPageProps) {
         contact={globals.Contact}
         socialMedia={globals.SocialMedia}
         footer={globals.Footer}
+        hubspot={globals?.Hubspot}
       />
     </Box>
   )

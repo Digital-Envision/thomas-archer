@@ -34,7 +34,8 @@ import Steps from 'components/organisms/Steps'
 import _ from 'lodash'
 import React from 'react'
 
-const PageBuilder = ({ pages, ...rest }) => {
+const PageBuilder = (props) => {
+  const { pages, ...rest } = props
   const page = pages?.[0] //current  page documents
   const content = (page?.content || [])
     .filter((c) => !c.disabled)
@@ -137,7 +138,13 @@ const PageBuilder = ({ pages, ...rest }) => {
           el = <SectionInclusions {...c} key={c?._key} />
           break
         case 'SectionHeadingParagraphContactForm':
-          el = <SectionHeadingParagraphContactForm {...c} key={c?._key} />
+          el = (
+            <SectionHeadingParagraphContactForm
+              {...c}
+              hubspot={props?.globals?.Hubspot}
+              key={c?._key}
+            />
+          )
           break
         case 'fixedComponent':
           switch (c.name) {

@@ -27,6 +27,7 @@ export default function BlogPageTemplate(props: any) {
         socialMedia={globals.SocialMedia}
         specialButtons={globals.SpecialButtons}
         isForceOnLightNavbar={true}
+        hubspot={globals.Hubspot}
       />
 
       <Box pt="150px" />
@@ -86,6 +87,7 @@ export default function BlogPageTemplate(props: any) {
         contact={globals.Contact}
         socialMedia={globals.SocialMedia}
         footer={globals.Footer}
+        hubspot={globals?.Hubspot}
       />
     </Box>
   )

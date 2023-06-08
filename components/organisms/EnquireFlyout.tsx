@@ -32,12 +32,10 @@ const EnquireFlyout = ({
   button,
   privacyAndPolicy,
   contact,
+  hubspot,
 }) => {
-  const region = 'na1'
-  const portalId = '8929845'
-  const formId = 'bdf6ff06-20d1-43c8-94d0-605a164255f1'
+  const { region, portalId, formId } = hubspot?.enquireFlyout
   const target = '#hubspotForm'
-
   useHubspot({ isOpen, region, portalId, formId, target })
 
   return (

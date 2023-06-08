@@ -37,3 +37,17 @@ export interface SanityImage {
 		_type: "reference";
 	}
 }
+
+export interface HubspotForm {
+	formId: string;
+	portalId: string;
+	region: string;
+}
+
+export interface Hubspot {
+	bookingSessionForm: HubspotForm;
+	contactForm: HubspotForm;
+	enquireFlyout: HubspotForm;
+	inclusionsBrochure: HubspotForm;
+	priceList: HubspotForm;
+}

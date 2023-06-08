@@ -30,6 +30,7 @@ const Navbar = ({
   socialMedia,
   specialButtons,
   isForceOnLightNavbar = false,
+  hubspot,
 }) => {
   const Links = links || []
 
@@ -136,6 +137,7 @@ const Navbar = ({
         button={enquire?.button}
         privacyAndPolicy={enquire?.privacyAndPolicy}
         contact={contact}
+        hubspot={hubspot}
       />
       <Box width={'full'} position={'fixed'} height={'auto'} zIndex={99}>
         <Flex

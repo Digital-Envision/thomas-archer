@@ -3,7 +3,13 @@ import React, { useState } from 'react'
 import FloorPlanDetailsDesktop from './Desktop'
 import FloorPlanDetailsMobile from './Mobile'
 
-const FloorPlanDetails = ({ title, floorPlan, marginTop, marginBottom }) => {
+const FloorPlanDetails = ({
+  title,
+  floorPlan,
+  marginTop,
+  marginBottom,
+  hubspot,
+}) => {
   const [floorType, setFloorType] = useState(0)
 
   return (
@@ -27,6 +33,7 @@ const FloorPlanDetails = ({ title, floorPlan, marginTop, marginBottom }) => {
           floorPlan={floorPlan}
           floorType={floorType}
           setFloorType={setFloorType}
+          hubspot={hubspot}
         />
       </Box>
       <Box display={{ base: 'block', lg: 'none' }}>
@@ -35,6 +42,7 @@ const FloorPlanDetails = ({ title, floorPlan, marginTop, marginBottom }) => {
           floorPlan={floorPlan}
           floorType={floorType}
           setFloorType={setFloorType}
+          hubspot={hubspot}
         />
       </Box>
     </Box>

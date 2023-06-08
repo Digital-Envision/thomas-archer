@@ -39,6 +39,7 @@ export default function ProjectPageTemplate(props: any) {
         contact={globals.Contact}
         socialMedia={globals.SocialMedia}
         specialButtons={globals.SpecialButtons}
+        hubspot={globals.Hubspot}
       />
 
       <SectionHeroImageBig
@@ -110,6 +111,7 @@ export default function ProjectPageTemplate(props: any) {
         contact={globals.Contact}
         socialMedia={globals.SocialMedia}
         footer={globals.Footer}
+        hubspot={globals?.Hubspot}
       />
 
       <Modal isOpen={isOpen} onClose={onClose} isCentered>

@@ -41,6 +41,7 @@ export default function FloorPageTemplate(props: FloorPageProps) {
         contact={globals.Contact}
         socialMedia={globals.SocialMedia}
         specialButtons={globals.SpecialButtons}
+        hubspot={globals.Hubspot}
       />
       <Box flex={1}>
         {floors?.bannerImage?.image && (
@@ -59,6 +60,7 @@ export default function FloorPageTemplate(props: FloorPageProps) {
           {...floors}
           marginTop={HeightVariants.more}
           marginBottom={HeightVariants.extra}
+          hubspot={globals?.Hubspot}
         />
         {floors?.facades && floors?.facades?.listImages?.length > 0 && (
           <GalleryScroll
@@ -82,6 +84,7 @@ export default function FloorPageTemplate(props: FloorPageProps) {
         contact={globals.Contact}
         socialMedia={globals.SocialMedia}
         footer={globals.Footer}
+        hubspot={globals?.Hubspot}
       />
     </>
   )
