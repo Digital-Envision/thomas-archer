@@ -3,6 +3,7 @@ import Contact, { contactFieldset } from './global/Contact'
 import DetailsPage from './global/DetailsPage'
 import Enquire, { enquireFieldset } from './global/Enquire'
 import Footer from './global/Footer'
+import Hubspot from './global/Hubspot'
 import Links, { linkFieldset } from './global/Links'
 import SocialMedia, { socialMediaFieldset } from './global/SocialMedia'
 import SpecialButton, { specialButtonFieldset } from './global/SpecialButton'
@@ -19,6 +20,7 @@ export default defineType({
     SocialMedia,
     Footer,
     DetailsPage,
+    Hubspot
   ],
   fieldsets: [
     specialButtonFieldset,

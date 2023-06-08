@@ -1,29 +1,42 @@
 import { Box, Flex } from '@chakra-ui/react'
 import Text from '../base/Text'
-import Heading1 from 'components/base/Heading1'
+import Heading1, { HeadingTagSemantic } from 'components/base/Heading1'
 import React from 'react'
 import { HeightVariants } from 'components/base/Divider'
 import SectionContainer from 'components/base/Section'
 import useHubspot from 'lib/hooks/useHubspot'
+import { Hubspot } from 'utils/interfaces'
 
 type SectionHeadingParagraphContactFormProps = {
   heading: string
+  headingTagLevel?: HeadingTagSemantic
   paragraph: string
   tnc: string
-  onSubmit: (args: any) => void
   marginTop: HeightVariants
   marginBottom: HeightVariants
+  hubspot: Hubspot
 }
 
 const SectionHeadingParagraphContactForm: React.FC<
   SectionHeadingParagraphContactFormProps
-> = ({ heading, paragraph, onSubmit, tnc, marginTop, marginBottom }) => {
-  const region = 'na1'
-  const portalId = '8929845'
-  const formId = '48799ea5-f9d3-4a93-b8eb-c2e7b09f223f'
-  const target = '#hubspotContactForm'
+> = ({
+  heading,
+  headingTagLevel,
+  paragraph,
+  tnc,
+  marginTop,
+  marginBottom,
+  hubspot,
+}) => {
+  const { region, portalId, formId } = hubspot?.contactForm
 
-  useHubspot({ isOpen: true, region, portalId, formId, target })
+  useHubspot({
+    isOpen: true,
+    region,
+    portalId,
+    formId,
+    target: '#hubspotContactForm',
+  })
 
   return (
     // @ts-ignore: 2590
@@ -33,7 +46,7 @@ const SectionHeadingParagraphContactForm: React.FC<
       marginBottom={marginBottom}
     >
       <Flex direction={'column'} flex={1}>
-        <Heading1>{heading}</Heading1>
+        <Heading1 as={headingTagLevel}>{heading}</Heading1>
         <Box pt={HeightVariants.less} />
         <Text>{paragraph}</Text>
         <Box
