@@ -71,15 +71,10 @@ export default function BlogPageTemplate(props: any) {
         </>
       )}
 
-      <Flex
-        mx="auto"
-        maxW="1800px"
-        width={'w-full'}
-        maxWidth={'1800px'}
-        px={{ base: '1rem', md: '4rem' }}
-        direction={'column'}
-      >
-        <CustomPortableText value={blog?.content} />
+      <Flex mx="auto" maxWidth={'1800px'} px={{ base: '1rem', md: '4rem' }}>
+        <Flex width={'w-full'} maxWidth={'1000px'} direction={'column'}>
+          <CustomPortableText value={blog?.content} />
+        </Flex>
       </Flex>
       <Footer
         links={globals.Links}

@@ -31,6 +31,8 @@ import SectionInclusions from 'components/organisms/SectionInclusions'
 import SectionProjectListing from 'components/organisms/SectionProjectListing'
 import SectionVideoParagraphCTA from 'components/organisms/SectionVideoParagraphCTA'
 import Steps from 'components/organisms/Steps'
+import SectionBookingForm from 'components/organisms/SectionBookingForm'
+import SectionParagraph from 'components/modules/SectionParagraph'
 import _ from 'lodash'
 import React from 'react'
 
@@ -145,6 +147,18 @@ const PageBuilder = (props) => {
               key={c?._key}
             />
           )
+          break
+        case 'SectionBookingForm':
+          el = (
+            <SectionBookingForm
+              {...c}
+              hubspot={props?.globals?.Hubspot}
+              key={c?._key}
+            />
+          )
+          break
+        case 'SectionParagraph':
+          el = <SectionParagraph {...c} {...rest} key={c?._key} />
           break
         case 'fixedComponent':
           switch (c.name) {

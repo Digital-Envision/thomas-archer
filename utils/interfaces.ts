@@ -51,3 +51,13 @@ export interface Hubspot {
 	inclusionsBrochure: HubspotForm;
 	priceList: HubspotForm;
 }
+
+export interface ContentItem {
+	_key: string;
+	_type: string;
+	children: any[];
+	markDefs: any[];
+	style: string;
+	level?: number;
+	listItem?: string;
+}

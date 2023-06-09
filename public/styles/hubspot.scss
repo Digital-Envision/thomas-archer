@@ -1,63 +1,103 @@
 .hs-form-field {
-	margin-bottom: 32px;
-	font-family: 'Helvetica Neue LT Std', sans-serif;
+  margin-bottom: 32px;
+  font-family: 'Helvetica Neue LT Std', sans-serif;
 
-	input {
-		border-bottom: 1px solid #898989;
-		outline: none;
-		width: 100%;
-		font-size: 12px;
-		padding: 14px 0px 14px 0px;
-		&:focus {
-			outline: none;
-			border-bottom-color: black;
-			&::placeholder {
-				color: black;
-			}
-		}
-	}
+  input {
+    border-bottom: 1px solid #898989;
+    outline: none;
+    width: 100%;
+    font-size: 12px;
+    padding: 14px 0px 14px 0px;
+    &:focus {
+      outline: none;
+      border-bottom-color: black;
+      &::placeholder {
+        color: black;
+      }
+    }
+  }
 
-	textarea {
-		border-bottom: 1px solid #898989;
-		outline: none;
-		width: 100%;
-		font-size: 12px;
-		padding: 14px 0px 14px 0px;
-		&:focus {
-			outline: none;
-			border-bottom-color: black;
-			&::placeholder {
-				color: black;
-			}
-		}
-	}
+  input[type='checkbox'] {
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    accent-color: black;
+    margin-bottom: 3px;
+  }
+
+  textarea {
+    border-bottom: 1px solid #898989;
+    outline: none;
+    width: 100%;
+    font-size: 12px;
+    padding: 14px 0px 14px 0px;
+    &:focus {
+      outline: none;
+      border-bottom-color: black;
+      &::placeholder {
+        color: black;
+      }
+    }
+  }
+}
+
+.hs-fieldtype-checkbox {
+  .input {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.hs-fieldtype-select {
+  width: 100%;
+  border-bottom-width: thin;
+  border-bottom-color: black;
+
+  .hs-input {
+    width: 100%;
+  }
+
+  select {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+.hs-form-checkbox-display {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+li.hs-form-checkbox::marker {
+  content: none;
 }
 
 .hs-error-msgs {
-	display: none;
+  display: none;
 }
 
 .invalid {
-	border-bottom-color: red !important;
+  border-bottom-color: red !important;
 }
 
 .error {
-	border-bottom-color: red !important;
+  border-bottom-color: red !important;
 }
 
 .hs-button {
-	padding: 10px 24px 6px 24px;
-	border: 1px solid black;
-	border-radius: 25px;
-	font-size: 14px;
-	font-family: 'Helvetica Neue LT Std', sans-serif;
-	background: white;
-	margin-top: 40px;
-	cursor: pointer;
-	transition: all 0.2s;
+  padding: 10px 24px 6px 24px;
+  border: 1px solid black;
+  border-radius: 25px;
+  font-size: 14px;
+  font-family: 'Helvetica Neue LT Std', sans-serif;
+  background: white;
+  margin-top: 40px;
+  cursor: pointer;
+  transition: all 0.2s;
 
-	&:hover {
-		background: black;
-		color: white;
-	}
+  &:hover {
+    background: black;
+    color: white;
+  }
 }

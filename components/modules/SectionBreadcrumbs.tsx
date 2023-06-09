@@ -19,8 +19,6 @@ const SectionBreadcrumbs: React.FC<SectionBreadcrumbsProps> = (props) => {
   const { marginBottom, marginTop, routeDetail } = props
   const { asPath } = useRouter()
 
-  // TODO HOW TO ADJUST [BLOG/PROJECT/] to be linked to the route before that
-
   const pathWithoutQuery = asPath.split('?')[0]
   let pathArray = pathWithoutQuery.split('/')
   pathArray.shift()
@@ -56,21 +54,24 @@ const SectionBreadcrumbs: React.FC<SectionBreadcrumbsProps> = (props) => {
           const lastItem = breadcrumbsNav.length === i + 1
 
           // handle project/blog/floor breadcrumbs
-          const isOnTypeDetail =
-            routeDetail?.isDetailPage && breadcrumbsNav.length === i + 2
+          // const isOnTypeDetail =
+          //   routeDetail?.isDetailPage && breadcrumbsNav.length === i + 2
           const routeHref =
             routeDetail?.isDetailPage &&
             breadcrumbsNav[breadcrumbsNav.length - 3].href
 
-          // console.log('isOnTypeDetail', isOnTypeDetail)
-          // console.log('🔥 breadcrumbs nav', o)
           //not render type detail
-          if (isOnTypeDetail) {
-            return <></>
-          }
+          // if (isOnTypeDetail) {
+          //   return <></>
+          // }
 
           return (
-            <BreadcrumbItem isCurrentPage={lastItem} key={`${label}-${i}`}>
+            <BreadcrumbItem
+              isCurrentPage={lastItem}
+              key={`${label}-${i}`}
+              color={lastItem ? '#000000' : '#898989'}
+              fontSize={'12px'}
+            >
               <BreadcrumbLink href={href}>{label}</BreadcrumbLink>
             </BreadcrumbItem>
           )
