@@ -34,5 +34,7 @@ export default {
         { type: 'SectionBlogListing' },
         { type: 'Section2ColImageTextFeaturedImageLeftRight' },
         { type: 'SectionAwardsListing' },
+        { type: 'SectionBookingForm' },
+        { type: 'SectionParagraph' },
     ],
 }

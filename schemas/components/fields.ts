@@ -1,4 +1,6 @@
 import moment from "moment"
+import { HeightVariants } from "components/base/Divider"
+import { enumToArrayOfObjects } from "lib/utils"
 
 export const SEOField = {
     name: 'seo',
@@ -87,4 +89,27 @@ export const CreatedDateField = {
     type: 'date',
     validation: (rule) => rule.required(),
     initialValue: moment(),
+}
+
+export const MarginTopField = {
+    title: 'Margin Top',
+    name: 'marginTop',
+    type: 'string',
+    options: {
+        list: [
+            ...enumToArrayOfObjects(HeightVariants)
+        ],
+    },
+    layout: 'dropdown'
+}
+export const MarginBottomField = {
+    title: 'Margin Bottom',
+    name: 'marginBottom',
+    type: 'string',
+    options: {
+        list: [
+            ...enumToArrayOfObjects(HeightVariants)
+        ],
+    },
+    layout: 'dropdown'
 }
