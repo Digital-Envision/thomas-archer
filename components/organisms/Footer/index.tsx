@@ -13,6 +13,7 @@ import EnquireFlyout from '../EnquireFlyout'
 import { urlForImage } from 'lib/sanity.image'
 import { ReactSVG } from 'react-svg'
 import { NavLinksInterfaces } from '../Navbar'
+import Divider, { HeightVariants } from 'components/base/Divider'
 
 const Footer = ({ links, enquire, contact, socialMedia, footer, hubspot }) => {
   const Links = links || []
@@ -30,6 +31,13 @@ const Footer = ({ links, enquire, contact, socialMedia, footer, hubspot }) => {
         privacyAndPolicy={enquire?.privacyAndPolicy}
         contact={contact}
         hubspot={hubspot}
+      />
+      <Divider
+        variant={HeightVariants.none}
+        px={{
+          base: '27.58px',
+          md: '75.41px',
+        }}
       />
       <Box
         as={'footer'}

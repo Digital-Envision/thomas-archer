@@ -62,6 +62,7 @@ import SectionVideoParagraphCTA from 'schemas/sections/SectionVideoParagraphCTA'
 import SectionColCards from 'schemas/sections/SectionColCards'
 import SectionBookingForm from 'schemas/sections/SectionBookingForm'
 import SectionParagraph from 'schemas/sections/SectionParagraph'
+import SectionFeaturedImage from 'schemas/sections/SectionFeaturedImage'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -94,6 +95,7 @@ export default defineConfig({
       CTAs,
       Steps,
       FloorPlanListing,
+      SectionFeaturedImage,
       SectionGalleryScroll,
       SectionProjectScroll,
       SectionVideoParagraphCTA,

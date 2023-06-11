@@ -61,7 +61,7 @@ const SectionImageHeadingCTA: React.FC<SectionImageHeadingCTAProps> = (
       marginBottom={marginBottom}
     >
       <Box
-        bgGradient={isOverlay ? 'linear(to-b, #00000073, #00000000)' : ''}
+        bgGradient={isOverlay ? 'linear(to-b, #00000099, #00000099)' : ''}
         width={'full'}
         height={Height[height]}
         position={'absolute'}

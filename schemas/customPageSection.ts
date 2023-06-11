@@ -11,6 +11,7 @@ export default {
         { type: 'CTAs' },
         { type: 'Steps' },
         { type: 'FloorPlanListing' },
+        { type: 'SectionFeaturedImage' },
         { type: 'SectionProjectScroll' },
         { type: 'SectionGalleryScroll' },
         { type: 'SectionVideoParagraphCTA' },

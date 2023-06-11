@@ -4,6 +4,7 @@ import theme from 'styles/theme'
 import '../public/styles/fonts.css'
 import '../public/styles/scrollbox.css'
 import '../public/styles/hubspot.scss'
+import '../public/styles/iframe.scss'
 import { useEffect } from 'react'
 import TagManager from 'react-gtm-module'
 
