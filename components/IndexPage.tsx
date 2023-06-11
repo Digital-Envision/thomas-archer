@@ -1,5 +1,5 @@
 import IndexPageHead from 'components/IndexPageHead'
-import type { Floor, Blog, Post, Project, Settings } from 'lib/sanity.queries'
+import type { Floor, Post, Settings } from 'lib/sanity.queries'
 import PageBuilder from 'components/templates/PageBuilder'
 import Navbar from './organisms/Navbar'
 import Footer from './organisms/Footer'

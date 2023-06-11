@@ -35,6 +35,7 @@ import SectionBookingForm from 'components/organisms/SectionBookingForm'
 import SectionParagraph from 'components/modules/SectionParagraph'
 import _ from 'lodash'
 import React from 'react'
+import SectionFeaturedImage from 'components/modules/SectionFeaturedImage'
 
 const PageBuilder = (props) => {
   const { pages, ...rest } = props
@@ -52,6 +53,9 @@ const PageBuilder = (props) => {
           break
         case 'Steps':
           el = <Steps {...c} key={c?._key} />
+          break
+        case 'SectionFeaturedImage':
+          el = <SectionFeaturedImage {...c} key={c?._key} />
           break
         case 'FloorPlanListing':
           el = <FloorPlanListing floors={rest.floors} {...c} key={c?._key} />

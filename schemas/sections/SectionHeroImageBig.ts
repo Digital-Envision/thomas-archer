@@ -58,7 +58,7 @@ export const externalVideoField = (props?) => defineField({
     title: 'URL External Video',
     type: 'url',
     hidden: ({ parent }) => !(parent?.isExternalVideo && parent?.isVideo),
-    description: 'Make sure you copied the embed video url.',
+    description: 'Make sure you copied the embed video url without the query',
     ...props
 })
 

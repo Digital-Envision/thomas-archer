@@ -54,7 +54,11 @@ export const EmbeddedVideoPlayer = (props) => {
       <iframe
         width={'100vw'}
         height={'100vh'}
-        src={props.externalVideo}
+        src={
+          props.asBackground
+            ? `${props.externalVideo}?autoplay=1&loop=1&background=1`
+            : props.externalVideo
+        }
         frameBorder={0}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         {...props}

@@ -215,12 +215,11 @@ const FloorPlanDetailsDesktop = ({
             (img, key) =>
               img?.image &&
               key < 2 && (
-                <Box>
+                <Box key={key}>
                   <Text textAlign={'center'} fontWeight={500}>
                     {img?.name}
                   </Text>
                   <Img
-                    key={key}
                     src={urlForImage(img?.image).url()}
                     width={'421px'}
                     height={'683px'}
