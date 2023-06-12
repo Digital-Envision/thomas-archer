@@ -13,7 +13,9 @@ type Section2ColImageTextMosaicType2Props = {
   headingTagLevel: HeadingTagSemantic
   paragraph: string
   rightImage?: any // sanity io image
+  rightImageAlt?: string
   leftImage?: any // sanity io image
+  leftImageAlt?: string
   marginTop: HeightVariants
   marginBottom: HeightVariants
   button?: LinksInterface
@@ -28,7 +30,9 @@ const Section2ColImageTextMosaicType2: React.FC<
   marginTop,
   marginBottom,
   leftImage,
+  leftImageAlt,
   rightImage,
+  rightImageAlt,
   button,
 }) => {
   return (
@@ -44,7 +48,11 @@ const Section2ColImageTextMosaicType2: React.FC<
     >
       <Flex flex={1} justify={'end'} maxWidth={'650px'}>
         <Flex direction={'column'} pr={{ base: 0, md: '1rem' }}>
-          <Image objectFit={'cover'} src={getImageUrl(leftImage)} />
+          <Image
+            objectFit={'cover'}
+            src={getImageUrl(leftImage)}
+            alt={leftImageAlt || heading}
+          />
           <Box pt="1.5rem" />
           <Heading1 as={headingTagLevel}>{heading}</Heading1>
           <Box pt="1.5rem" />
@@ -93,7 +101,8 @@ const Section2ColImageTextMosaicType2: React.FC<
           width="100%"
           height={'auto'}
           objectFit={'cover'}
-          src={(rightImage && urlForImage(rightImage)?.url()) || ''}
+          src={getImageUrl(rightImage)}
+          alt={rightImageAlt || heading}
         />
       </Flex>
     </Flex>

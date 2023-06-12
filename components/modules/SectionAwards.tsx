@@ -12,6 +12,7 @@ type SectionAwardsProps = {
   paragraph: string
   onPressMore: () => void
   image?: any // sanity io image
+  alt?: string
   awards: { name: string; description: string }[]
   marginTop: HeightVariants
   marginBottom: HeightVariants
@@ -24,6 +25,7 @@ const SectionAwards: React.FC<SectionAwardsProps> = ({
   paragraph,
   onPressMore,
   image,
+  alt,
   awards,
   marginTop,
   marginBottom,
@@ -64,7 +66,7 @@ const SectionAwards: React.FC<SectionAwardsProps> = ({
           <Flex direction={'row'}>
             {getImageUrl(image) && (
               <Image
-                alt={heading}
+                alt={alt || heading}
                 maxW={'90px'}
                 maxH={'95px'}
                 src={getImageUrl(image)}

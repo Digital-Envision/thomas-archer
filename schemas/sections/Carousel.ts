@@ -1,6 +1,7 @@
 import { defineField, defineType } from 'sanity'
 import { HeightVariants } from 'components/base/Divider'
 import { enumToArrayOfObjects } from 'lib/utils'
+import { ImageAltField, ImageField } from 'schemas/components/fields'
 export default defineType({
     name: 'Carousel',
     title: 'Carousel',
@@ -19,8 +20,14 @@ export default defineType({
             type: 'array',
             of: [
                 {
-                    type: 'image',
-                },
+                    name: 'img',
+                    title: "Image Object",
+                    type: 'object',
+                    fields: [
+                        ImageField,
+                        ImageAltField,
+                    ]
+                }
             ],
             validation: (rule) => rule.required(),
         }),

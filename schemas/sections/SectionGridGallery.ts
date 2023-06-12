@@ -1,5 +1,6 @@
 import { HeightVariants } from 'components/base/Divider';
 import { enumToArrayOfObjects } from 'lib/utils';
+import { ImageAltField, ImageField } from 'schemas/components/fields';
 export default {
     type: 'object',
     name: 'SectionGridGallery',
@@ -41,15 +42,11 @@ export default {
                             ]
                         },
                         {
-                            name: 'image',
-                            title: 'Image',
+                            ...ImageField,
                             description:
                                 'This image will be displayed on the right section.',
-                            type: 'image',
-                            options: {
-                                hotspot: false,
-                            },
                         },
+                        ImageAltField,
                     ]
                 }
             ]

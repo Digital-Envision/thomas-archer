@@ -1,4 +1,4 @@
-import { CreatedDateField, HeadingField, ImageField, RTFField, SEOField, SlugField } from "./components/fields";
+import { CreatedDateField, HeadingField, ImageAltField, ImageField, RTFField, SEOField, SlugField } from "./components/fields";
 import { DOCUMENT_TYPE_SCHEMA_NAME } from "./global/DetailsPage";
 import { listImagesFields } from "./sections/SectionGalleryScroll";
 
@@ -12,6 +12,7 @@ export default {
         HeadingField,
         RTFField,
         ImageField,
+        ImageAltField,
         {
             name: 'page',
             title: 'Detail Page',

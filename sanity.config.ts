@@ -25,7 +25,6 @@ import SectionBlog from 'schemas/sections/SectionBlog'
 import SectionHeadingParagraphContactForm from 'schemas/sections/SectionHeadingParagraphContactForm'
 import SectionAwards from 'schemas/sections/SectionAwards'
 import ArticleBlogCard from 'schemas/subSections/ArticleBlogCard'
-import PortfolioCard from 'schemas/subSections/PortfolioCard'
 import PortfolioListingCard from 'schemas/subSections/PortfolioListingCard'
 import SectionTextFeatured from 'schemas/sections/SectionTextFeatured'
 import SectionImageTextMosaicType1 from 'schemas/sections/SectionImageTextMosaicType1'
@@ -125,7 +124,6 @@ export default defineConfig({
       // -- subSection
       ArticleBlogCard,
       // Margin,
-      // PortfolioCard, // TODO LATER
       PortfolioListingCard,
 
       // -- Dataset,

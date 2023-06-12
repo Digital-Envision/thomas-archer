@@ -1,6 +1,7 @@
 import { CogIcon } from '@sanity/icons'
 import * as demo from 'lib/demo.data'
 import { defineArrayMember, defineField, defineType } from 'sanity'
+import { ImageField } from 'schemas/components/fields'
 
 import OpenGraphInput from './OpenGraphInput'
 
@@ -29,11 +30,9 @@ export default defineType({
       type: 'text',
     }),
     {
-      name: 'image',
-      title: 'Image',
+      ...ImageField,
       description:
         'Used for social media previews when linking to the index page.',
-      type: 'image',
       validation: (rule) => rule.required(),
     },
     // defineField({

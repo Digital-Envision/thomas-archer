@@ -69,6 +69,7 @@ const FloorList = ({ floor }) => {
                   src={urlForImage(floorPlan?.listImages[slide]?.image).url()}
                   width={'202px'}
                   height={'446px'}
+                  alt={floorPlan?.listImages[slide]?.alt}
                 />
                 <Text mb={'18px'}>{floorPlan?.listImages[slide]?.name}</Text>
               </Box>

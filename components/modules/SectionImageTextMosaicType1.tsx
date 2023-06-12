@@ -14,28 +14,14 @@ type SectionImageTextMosaicType1Props = {
   heading: string
   headingTagLevel: HeadingTagSemantic
   paragraph: string
-  rightImageUrl: string
-  leftImageUrl: string
   rightImage?: any // sanity io image
+  rightImageAlt: string
   leftImage?: any // sanity io image
+  leftImageAlt: string
   marginTop: HeightVariants
   marginBottom: HeightVariants
   button: LinksInterface
-  // buttonText: string
 }
-
-/**
- * Usage
- * <SectionImageTextMosaicType1
-    heading="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-    paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-      feugiat, lectus et viverra ullamcorper, nulla dui ullamcorper quam,
-      et dictum arcu ipsum vel risus. Curabitur quis orci viverra,
-      efficitur nunc in."
-    rightImageUrl="https://via.placeholder.com/727x455/"
-    leftImageUrl="https://via.placeholder.com/500x500/"
-  />
- */
 
 const SectionImageTextMosaicType1: React.FC<
   SectionImageTextMosaicType1Props
@@ -43,14 +29,13 @@ const SectionImageTextMosaicType1: React.FC<
   heading,
   headingTagLevel,
   paragraph,
-  rightImageUrl,
-  leftImageUrl,
+  leftImage,
+  leftImageAlt,
+  rightImage,
+  rightImageAlt,
   marginTop,
   marginBottom,
-  leftImage,
-  rightImage,
   button,
-  // buttonText,
 }) => {
   return (
     <Flex
@@ -73,6 +58,7 @@ const SectionImageTextMosaicType1: React.FC<
           width={{ base: '100vw', md: '450px' }}
           objectFit={'cover'}
           src={getImageUrl(leftImage)}
+          alt={leftImageAlt || heading}
         />
       </Flex>
 
@@ -82,6 +68,7 @@ const SectionImageTextMosaicType1: React.FC<
         <Image
           objectFit={'cover'}
           src={getImageUrl(rightImage)}
+          alt={rightImageAlt || heading}
           width="w-full"
           height={'auto'}
         />

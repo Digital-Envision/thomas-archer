@@ -1,5 +1,6 @@
 import { HeightVariants } from "components/base/Divider"
 import { enumToArrayOfObjects } from "lib/utils"
+import { ImageAltField } from "schemas/components/fields"
 import link from "schemas/components/link"
 
 export default {
@@ -36,6 +37,10 @@ export default {
             },
         },
         {
+            ...ImageAltField,
+            name: 'leftImageAlt'
+        },
+        {
             name: 'rightImage',
             title: 'Right Image',
             description:
@@ -44,6 +49,10 @@ export default {
             options: {
                 hotspot: false,
             },
+        },
+        {
+            ...ImageAltField,
+            name: 'rightImageAlt'
         },
         {
             name: 'button',

@@ -1,3 +1,5 @@
+import { ImageAltField, ImageField } from "schemas/components/fields"
+
 export default {
     type: 'object',
     name: 'PortfolioListingCard',
@@ -19,14 +21,8 @@ export default {
             name: 'link',
             type: 'text',
         },
-        {
-            name: 'image',
-            title: 'Image',
-            type: 'image',
-            options: {
-                hotspot: false,
-            },
-        },
+        ImageField,
+        ImageAltField
     ],
     preview: {
         select: {

@@ -13,6 +13,7 @@ type SectionHeadingParagraphCTAImageProps = {
   headingTagLevel: HeadingTagSemantic
   paragraph: string
   image?: SanityFiles | string // sanity io image
+  alt?: string
   marginTop: HeightVariants
   marginBottom: HeightVariants
   button: LinksInterface
@@ -25,6 +26,7 @@ const SectionHeadingParagraphCTAImage: React.FC<
   headingTagLevel,
   paragraph,
   image,
+  alt,
   marginTop,
   marginBottom,
   button,
@@ -76,7 +78,7 @@ const SectionHeadingParagraphCTAImage: React.FC<
           width={'100%'}
           objectFit={'cover'} // TODO CHANGE TO FILL
           src={(image && urlForImage(image).url()) || ''}
-          alt={heading}
+          alt={alt || heading}
         />
       </Flex>
     </Flex>

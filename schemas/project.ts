@@ -1,5 +1,5 @@
 import { orderRankField, orderRankOrdering } from '@sanity/orderable-document-list';
-import { CaptionField, HeadingField, ImageField, SEOField, SlugField, SubHeadingField, TextField } from './components/fields';
+import { CaptionField, HeadingField, ImageAltField, ImageField, SEOField, SlugField, SubHeadingField, TextField } from './components/fields';
 import { DOCUMENT_TYPE_SCHEMA_NAME } from './global/DetailsPage';
 import { listImagesFields } from './sections/SectionGalleryScroll';
 import { bannerVideoField, externalVideoField, isExternalVideoField, isVideoField } from "./sections/SectionHeroImageBig"
@@ -40,6 +40,7 @@ export default {
             title: 'Feature Image',
             validation: (rule) => rule.required(),
         },
+        ImageAltField,
         {
             //only support video -> image should just use featured image
             name: 'video',

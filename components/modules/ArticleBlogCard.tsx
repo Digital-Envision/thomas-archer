@@ -10,9 +10,11 @@ import { HiChevronRight } from 'react-icons/hi2'
 import { useState } from 'react'
 import ModalVideo from './ModalVideo'
 import moment from 'moment'
+import { getImageUrl } from 'lib/utils'
 
 export type ArticleBlogCardProps = {
   image?: any // sanity io image
+  alt?: string
   _createdAt?: string //sanity built in created at timestamp
   createdDate?: string
   isShowCreatedAt?: boolean
@@ -49,6 +51,7 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
   isVideoMode,
   isClickable = false,
   parentLength,
+  alt,
 }) => {
   const [playVideo, setPlayVideo] = useState(false)
 
@@ -92,8 +95,8 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
           bg={'gray.100'}
         >
           <Image
-            src={(image && urlForImage(image).url()) || ''}
-            alt={heading}
+            src={getImageUrl(image)}
+            alt={alt || heading}
             fill
             objectFit="cover"
             objectPosition="center"

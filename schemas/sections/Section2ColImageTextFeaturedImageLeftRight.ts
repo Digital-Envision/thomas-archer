@@ -1,5 +1,6 @@
 import { HeightVariants } from 'components/base/Divider'
 import { enumToArrayOfObjects } from 'lib/utils'
+import { ImageAltField, ImageField } from 'schemas/components/fields'
 import link from 'schemas/components/link'
 
 export default {
@@ -23,14 +24,8 @@ export default {
                 'Position of the image, if toggled on will be on the right',
             type: 'boolean',
         },
-        {
-            name: 'image',
-            title: 'Image',
-            type: 'image',
-            options: {
-                hotspot: false,
-            },
-        },
+        ImageField,
+        ImageAltField,
         {
             name: 'button',
             title: 'Button',

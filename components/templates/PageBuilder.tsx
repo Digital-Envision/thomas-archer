@@ -40,6 +40,7 @@ import SectionFeaturedImage from 'components/modules/SectionFeaturedImage'
 const PageBuilder = (props) => {
   const { pages, ...rest } = props
   const page = pages?.[0] //current  page documents
+
   const content = (page?.content || [])
     .filter((c) => !c.disabled)
     .map((c, i) => {

@@ -1,3 +1,5 @@
+import { ImageAltField, ImageField } from "./components/fields";
+
 export default {
   type: 'document',
   title: 'Facades',
@@ -20,15 +22,11 @@ export default {
           type: 'object',
           fields: [
             {
-              name: 'image',
-              title: 'Image',
+              ...ImageField,
               description:
                 'For better result, Landscape Image: 1024x683px; Portrait Image: 480x720px.',
-              type: 'image',
-              options: {
-                hotspot: false,
-              },
             },
+            ImageAltField,
             {
               name: 'description',
               title: 'Name',

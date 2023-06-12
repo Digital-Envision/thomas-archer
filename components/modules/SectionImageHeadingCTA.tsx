@@ -6,6 +6,7 @@ import { SanityFiles } from 'utils/interfaces'
 import Button, { Variants as ButtonVariants } from 'components/base/Button'
 import Link, { LinksInterface } from 'components/base/Link'
 import { HeadingTagSemantic } from 'components/base/Heading1'
+import { getImageUrl } from 'lib/utils'
 
 const Height = {
   large: {
@@ -53,7 +54,7 @@ const SectionImageHeadingCTA: React.FC<SectionImageHeadingCTAProps> = (
   return (
     <Box
       height={Height[height]}
-      backgroundImage={urlForImage(image).url()}
+      backgroundImage={getImageUrl(image)}
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
       backgroundPosition={'center'}

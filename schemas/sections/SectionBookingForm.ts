@@ -1,4 +1,4 @@
-import { ImageField, MarginBottomField, MarginTopField } from "schemas/components/fields"
+import { ImageAltField, ImageField, MarginBottomField, MarginTopField } from "schemas/components/fields"
 
 export default {
     type: 'object',
@@ -6,6 +6,7 @@ export default {
     title: 'SectionBookingForm',
     fields: [
         ImageField,
+        ImageAltField,
         MarginTopField,
         MarginBottomField,
     ],

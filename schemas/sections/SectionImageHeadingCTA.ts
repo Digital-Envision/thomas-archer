@@ -3,6 +3,7 @@ import { HeightVariants } from 'components/base/Divider'
 import { HeightVariants as ImageHeightVariants } from 'components/modules/SectionImageHeadingCTA'
 import { enumToArrayOfObjects } from 'lib/utils'
 import link from 'schemas/components/link'
+import { ImageAltField, ImageField } from 'schemas/components/fields'
 export default defineType({
     name: 'SectionImageHeadingCTA',
     title: 'SectionImageHeadingCTA',
@@ -48,14 +49,13 @@ export default defineType({
             initialValue: HeightVariants.none,
         }),
         defineField({
-            name: 'image',
-            title: 'Image',
-            type: 'image',
+            ...ImageField,
             options: {
                 hotspot: true,
             },
             validation: (rule) => rule.required(),
         }),
+        ImageAltField,
         defineField({
             name: 'isOverlay',
             title: 'Use Overlay',

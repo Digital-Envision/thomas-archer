@@ -2,17 +2,16 @@ import { Box, Flex, Image } from '@chakra-ui/react'
 import Text from '../base/Text'
 import Button, { Variants } from 'components/base/Button'
 import { HeightVariants } from 'components/base/Divider'
-import { urlForImage } from 'lib/sanity.image'
-import { SanityFiles } from 'utils/interfaces'
-import { PortableText } from '@portabletext/react'
 import Link, { LinksInterface } from 'components/base/Link'
 import CustomPortableText from 'components/base/CustomPortableText'
+import { getImageUrl } from 'lib/utils'
 
 type Section2ColImageTextFeaturedImageLeftRightProps = {
   heading: string
   quotes: any[]
   postedBy: string
-  image?: SanityFiles | string // sanity io image
+  image?: any // sanity io image
+  alt: string
   marginTop: HeightVariants
   marginBottom: HeightVariants
   button: LinksInterface
@@ -26,6 +25,7 @@ const Section2ColImageTextFeaturedImageLeftRight: React.FC<
   quotes,
   postedBy,
   image,
+  alt,
   marginTop,
   marginBottom,
   button,
@@ -82,8 +82,8 @@ const Section2ColImageTextFeaturedImageLeftRight: React.FC<
           width="100%"
           height={'auto'}
           objectFit={'cover'}
-          src={(image && urlForImage(image).url()) || ''}
-          alt={heading}
+          src={getImageUrl(image)}
+          alt={alt || heading}
         />
       </Flex>
     </Flex>
