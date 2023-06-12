@@ -6,12 +6,13 @@ import { HeightVariants } from 'components/base/Divider'
 import SectionContainer from 'components/base/Section'
 import useHubspot from 'lib/hooks/useHubspot'
 import { Hubspot } from 'utils/interfaces'
+import CustomPortableText from 'components/base/CustomPortableText'
 
 type SectionHeadingParagraphContactFormProps = {
   heading: string
   headingTagLevel?: HeadingTagSemantic
   paragraph: string
-  tnc: string
+  tnc: any
   marginTop: HeightVariants
   marginBottom: HeightVariants
   hubspot: Hubspot
@@ -62,13 +63,18 @@ const SectionHeadingParagraphContactForm: React.FC<
       <Flex direction={'column'} flex={1}>
         <Box id="hubspotContactForm" />
 
-        <Text mt={'-2.5rem'} textAlign={'right'}>
+        <Text
+          alignSelf={'flex-end'}
+          mt={'-2.5rem'}
+          textAlign={'right'}
+          as="span"
+        >
           *Required Fields.
         </Text>
 
         <Box pt="1.4rem" />
         <Box pt={HeightVariants.default} />
-        <Text>{tnc}</Text>
+        <CustomPortableText value={tnc} />
       </Flex>
     </SectionContainer>
   )
