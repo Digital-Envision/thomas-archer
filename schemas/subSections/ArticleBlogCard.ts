@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import { ImageAltField, ImageField } from 'schemas/components/fields'
 import link from 'schemas/components/link'
 import { validateVimeoUrl } from 'utils/checkVideoResource'
 
@@ -15,11 +16,8 @@ export default {
             name: 'paragraph',
             type: 'text',
         },
-        {
-            name: 'image',
-            title: 'Image',
-            type: 'image',
-        },
+        ImageField,
+        ImageAltField,
         {
             name: 'isVideoMode',
             title: 'Use Video Mode',

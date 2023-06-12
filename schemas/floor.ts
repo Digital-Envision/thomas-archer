@@ -2,7 +2,7 @@ import { DOCUMENT_TYPE_SCHEMA_NAME } from './global/DetailsPage';
 import { HeightVariants } from 'components/base/Divider'
 import { enumToArrayOfObjects } from 'lib/utils'
 import _ from 'lodash'
-import { SEOField, SlugField } from './components/fields'
+import { ImageAltField, ImageField, SEOField, SlugField } from './components/fields'
 import { FloorPlanDetails } from './sections/FloorPlanDetails'
 import { SectionHeroImageDefaultFields } from './sections/SectionHeroImageDefault'
 import { orderRankField } from '@sanity/orderable-document-list';
@@ -157,13 +157,12 @@ export default {
                           type: 'string',
                         },
                         {
-                          name: 'image',
-                          title: 'Image',
-                          type: 'image',
+                          ...ImageField,
                           options: {
                             hotspot: true,
                           },
                         },
+                        ImageAltField,
                       ],
                     },
                   ],

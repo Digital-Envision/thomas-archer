@@ -1,15 +1,15 @@
 import { HeightVariants } from 'components/base/Divider'
 import { enumToArrayOfObjects } from 'lib/utils'
+import { ImageAltField, ImageField } from 'schemas/components/fields'
 
 export const SectionHeroImageDefaultFields = [
     {
-        name: 'image',
-        title: 'Image',
-        type: 'image',
+        ...ImageField,
         options: {
             hotspot: true,
         },
     },
+    ImageAltField,
     {
         name: 'isOverlay',
         title: 'Use Overlay',

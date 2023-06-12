@@ -1,47 +1,21 @@
 import { Box, Flex, Image, VStack } from '@chakra-ui/react'
 import { HeightVariants } from 'components/base/Divider'
 import { urlForImage } from 'lib/sanity.image'
+import { getImageUrl } from 'lib/utils'
 import { SanityFiles } from 'utils/interfaces'
 import Text from '../base/Text'
 
 type SectionImageAwardsProps = {
   image?: SanityFiles // sanity io image
+  alt?: string
   awards: { name: string; description: string }[]
   marginTop: HeightVariants
   marginBottom: HeightVariants
 }
 
-/**
- * usage:
-    <SectionImageAwards
-        imageUrl="https://via.placeholder.com/1296x730/"
-        awards={[
-          {
-            name: 'Finalist 2021',
-            description: 'HIA Eastern Victorian Custom Build Home $750,001 - $1M',
-          },
-          {
-            name: 'Winner 2020',
-            description: 'HIA Australian Project Home Winner',
-          },
-          {
-            name: 'Winner 2019',
-            description: 'HIA Victorian Project Home',
-          },
-          {
-            name: 'Winner 2019',
-            description: 'HIA Victorian Project Home over $500,001',
-          },
-          {
-            name: 'Winner 2018',
-            description: 'HIA Victorian Project Home over $400,001',
-          },
-        ]}
-      />
- */
-
 const SectionImageAwards: React.FC<SectionImageAwardsProps> = ({
   image,
+  alt,
   awards,
   marginTop,
   marginBottom,
@@ -59,7 +33,8 @@ const SectionImageAwards: React.FC<SectionImageAwardsProps> = ({
     >
       <Box alignSelf={'center'}>
         <Image
-          src={(image && urlForImage(image).url()) || ''}
+          src={getImageUrl(image)}
+          alt={alt}
           objectFit="cover"
           width="100%"
           height="80vh"

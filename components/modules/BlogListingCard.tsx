@@ -9,6 +9,7 @@ import moment from 'moment'
 
 export type BlogListingCardDataProps = {
   image?: any // sanity io image
+  alt: string
   createdDate: string
   link: string
   heading: string
@@ -25,6 +26,7 @@ export type BlogListingCardProps = {
 
 const BlogListingCard: React.FC<BlogListingCardProps['data'][0]> = ({
   image,
+  alt,
   link,
   heading,
   content,
@@ -36,7 +38,7 @@ const BlogListingCard: React.FC<BlogListingCardProps['data'][0]> = ({
         <Box display="flex" justifyContent="center" alignItems="center">
           <Image
             src={getImageUrl(image)}
-            alt={heading}
+            alt={alt || heading}
             objectFit="cover"
             w="full"
             h="300px"

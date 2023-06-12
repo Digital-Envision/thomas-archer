@@ -22,6 +22,7 @@ interface SectionInclusionsSchema {
     _type: 'item'
     heading: string
     image: SanityFiles
+    alt?: string
     paragraph: string
   }[]
   marginBottom: string
@@ -54,13 +55,13 @@ const SectionInclusions: React.FC<SectionInclusionsProps> = ({
         }}
       >
         {!_.isEmpty(items) &&
-          items.map(({ image, heading, paragraph }, index) => (
+          items.map(({ image, alt, heading, paragraph }, index) => (
             <GridItem key={index} colSpan={1}>
               <CardContainer borderBottomWidth={'0px'} minH="450px">
                 <Box display="flex" justifyContent="center" alignItems="center">
                   <Image
                     src={getImageUrl(image)}
-                    alt={heading}
+                    alt={alt || heading}
                     objectFit="cover"
                     w="full"
                     h="420px"

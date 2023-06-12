@@ -72,16 +72,24 @@ export const TextField = {
 
 export const RTFField = {
     name: 'content',
+    title: 'Content',
     type: 'array',
     of: [{ type: 'block' }]
 }
 
 export const ImageField = {
     name: 'image',
+    title: 'Image',
     type: 'image',
     options: {
         hotspot: false,
     },
+}
+
+export const ImageAltField = {
+    name: 'alt',
+    title: 'Image Alt',
+    type: 'string',
 }
 
 export const CreatedDateField = {
@@ -102,6 +110,7 @@ export const MarginTopField = {
     },
     layout: 'dropdown'
 }
+
 export const MarginBottomField = {
     title: 'Margin Bottom',
     name: 'marginBottom',

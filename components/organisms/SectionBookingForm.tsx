@@ -11,7 +11,8 @@ import { getImageUrl } from 'lib/utils'
 type SectionBookingForm = {
   marginTop: HeightVariants
   marginBottom: HeightVariants
-  image: SanityFiles
+  image?: SanityFiles
+  alt?: string
   hubspot: Hubspot
 }
 
@@ -19,6 +20,7 @@ const SectionBookingForm: React.FC<SectionBookingForm> = ({
   marginTop,
   marginBottom,
   image,
+  alt,
   hubspot,
 }) => {
   const { region, portalId, formId } = hubspot?.bookingSessionForm

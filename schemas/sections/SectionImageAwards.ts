@@ -1,19 +1,15 @@
+import { ImageAltField } from './../components/fields';
 import { HeightVariants } from "components/base/Divider"
 import { enumToArrayOfObjects } from "lib/utils"
+import { ImageField } from "schemas/components/fields"
 
 export default {
     type: 'object',
     name: 'SectionImageAwards',
     title: 'SectionImageAwards',
     fields: [
-        {
-            name: 'image',
-            title: 'Image',
-            type: 'image',
-            options: {
-                hotspot: false,
-            },
-        },
+        ImageField,
+        ImageAltField,
         {
             name: 'awards',
             title: 'Awards',

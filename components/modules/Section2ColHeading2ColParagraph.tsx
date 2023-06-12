@@ -21,6 +21,7 @@ type Section2ColHeading2ColParagraphProps = {
   marginTop: HeightVariants
   marginBottom: HeightVariants
   image: SanityFiles | string
+  alt?: string
 }
 
 const Section2ColHeading2ColParagraph: React.FC<
@@ -39,6 +40,7 @@ const Section2ColHeading2ColParagraph: React.FC<
   marginTop,
   marginBottom,
   image,
+  alt,
 }) => {
   return (
     <Flex
@@ -115,6 +117,7 @@ const Section2ColHeading2ColParagraph: React.FC<
               maxH="500px"
               objectFit={'cover'}
               src={(image && urlForImage(image).url()) || ''}
+              alt={alt || leftHeading}
             />
           </Box>
         )}

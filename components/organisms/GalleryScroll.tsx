@@ -3,14 +3,15 @@ import { Box } from '@chakra-ui/react'
 import ScrollBox from 'components/modules/ScrollBox'
 import Text from 'components/base/Text'
 import Image from 'next/image'
-import { urlForImage } from 'lib/sanity.image'
 import { SanityFiles } from 'utils/interfaces'
 import { HeightVariants } from 'components/base/Divider'
+import { getImageUrl } from 'lib/utils'
 
 export interface GalleryScrollProps {
   listImages: {
     description: string
     image: SanityFiles
+    alt?: string
     isVertical?: boolean
     name?: string
   }[]
@@ -18,7 +19,7 @@ export interface GalleryScrollProps {
   marginBottom?: HeightVariants
 }
 
-const HorizontalImage = ({ image, name, description }) => {
+const HorizontalImage = ({ image, alt, name, description }) => {
   return (
     <>
       <Box
@@ -63,7 +64,7 @@ const HorizontalImage = ({ image, name, description }) => {
         >
           <Image
             src={image ? image : '#'}
-            alt={name ? name : ''}
+            alt={alt || name}
             fill
             objectFit="cover"
             objectPosition="center"
@@ -78,7 +79,7 @@ const HorizontalImage = ({ image, name, description }) => {
   )
 }
 
-const VerticalImage = ({ image, name, description }) => {
+const VerticalImage = ({ image, alt, name, description }) => {
   return (
     <>
       <Box
@@ -123,7 +124,7 @@ const VerticalImage = ({ image, name, description }) => {
         >
           <Image
             src={image ? image : '#'}
-            alt={name ? name : ''}
+            alt={alt || name}
             fill
             objectFit="cover"
             objectPosition="center"
@@ -181,14 +182,16 @@ const GalleryScroll: React.FC<GalleryScrollProps> = ({
             <Box key={key}>
               {image?.isVertical && image?.image ? (
                 <VerticalImage
-                  image={urlForImage(image?.image)?.url()}
+                  image={getImageUrl(image?.image)}
+                  alt={image?.alt}
                   name={image?.name}
                   description={image?.description}
                 />
               ) : (
                 image?.image && (
                   <HorizontalImage
-                    image={urlForImage(image?.image)?.url()}
+                    image={getImageUrl(image?.image)}
+                    alt={image?.alt}
                     name={image?.name}
                     description={image?.description}
                   />

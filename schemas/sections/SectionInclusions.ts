@@ -1,5 +1,6 @@
 import { HeightVariants } from 'components/base/Divider';
 import { enumToArrayOfObjects } from 'lib/utils';
+import { ImageAltField, ImageField } from 'schemas/components/fields';
 export default {
     type: 'object',
     name: 'SectionInclusions',
@@ -22,14 +23,8 @@ export default {
                             name: 'paragraph',
                             type: 'text'
                         },
-                        {
-                            name: 'image',
-                            title: 'Image',
-                            type: 'image',
-                            options: {
-                                hotspot: false,
-                            },
-                        },
+                        ImageField,
+                        ImageAltField,
                     ]
                 }
             ]

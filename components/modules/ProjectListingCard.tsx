@@ -10,7 +10,7 @@ import { getImageUrl } from 'lib/utils'
 
 interface ProjectListingCardDataProps {
   image?: any // sanity io image
-  imageUrl?: string // load image from url; test purpose
+  alt?: string
   link: string
   heading: string
   subHeading: string
@@ -27,6 +27,7 @@ export type ProjectListingCardProps = {
 
 const ProjectListingCard: React.FC<ProjectListingCardProps['data'][0]> = ({
   image,
+  alt,
   link,
   heading,
   subHeading,
@@ -38,7 +39,7 @@ const ProjectListingCard: React.FC<ProjectListingCardProps['data'][0]> = ({
         <Box display="flex" justifyContent="center" alignItems="center">
           <Image
             src={getImageUrl(image)}
-            alt={heading}
+            alt={alt || heading}
             objectFit="cover"
             w="full"
             h="300px"

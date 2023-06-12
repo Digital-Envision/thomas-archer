@@ -29,6 +29,7 @@ import { BsChevronUp } from 'react-icons/bs'
 import { HiOutlineChevronDown } from 'react-icons/hi2'
 import { Filter } from 'components/base/Filter'
 import { SanityFiles } from 'utils/interfaces'
+import { getImageUrl } from 'lib/utils'
 
 export interface SectionGridGalleryInterface {
   _key: string
@@ -49,6 +50,7 @@ export interface SectionGridGalleryInterface {
         _type: 'reference'
       }
     }
+    alt: string
     location: string
     name: string
     product: string
@@ -246,11 +248,11 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
         {showedData?.map((item) => (
           <Box onClick={() => handleListItemClick(item)} key={item?._key}>
             <Image
-              key={urlForImage(item.image)?.url()}
+              key={item?._key}
+              alt={item?.alt || item?.name}
               w="100%"
               display="inline-block"
-              src={(item.image && urlForImage(item.image)?.url()) || ''}
-              alt={urlForImage(item.image)?.url()}
+              src={getImageUrl(item?.image)}
               objectFit={'contain'}
             />
           </Box>

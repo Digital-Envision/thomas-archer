@@ -1,5 +1,6 @@
 import { HeightVariants } from 'components/base/Divider'
 import { enumToArrayOfObjects } from 'lib/utils'
+import { ImageAltField, ImageField } from 'schemas/components/fields'
 
 export const listImagesFields = () => ({
     name: 'listImages',
@@ -12,15 +13,11 @@ export const listImagesFields = () => ({
             type: 'object',
             fields: [
                 {
-                    name: 'image',
-                    title: 'Image',
+                    ...ImageField,
                     description:
                         'For better result, Landscape Image: 1024x683px; Portrait Image: 480x720px.',
-                    type: 'image',
-                    options: {
-                        hotspot: false,
-                    },
                 },
+                ImageAltField,
                 {
                     name: 'name',
                     title: 'Name',

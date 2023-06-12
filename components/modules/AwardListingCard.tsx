@@ -12,6 +12,7 @@ import { getImageUrl } from 'lib/utils'
 
 export interface AwardListingCardProps {
   image?: SanityFiles
+  alt?: string
   link: string
   heading: string
   name?: string
@@ -20,6 +21,7 @@ export interface AwardListingCardProps {
 
 const AwardListingCard: React.FC<AwardListingCardProps> = ({
   image,
+  alt,
   link,
   heading,
   name,
@@ -36,7 +38,7 @@ const AwardListingCard: React.FC<AwardListingCardProps> = ({
         >
           <Image
             src={getImageUrl(image)}
-            alt={heading}
+            alt={alt || heading}
             objectFit="cover"
             w="full"
             h="300px"
@@ -48,7 +50,7 @@ const AwardListingCard: React.FC<AwardListingCardProps> = ({
               src={
                 (award?.awardLogo && urlForImage(award?.awardLogo).url()) || ''
               }
-              alt="award?.awardLogo"
+              alt={alt || heading}
               position="absolute"
               top="0px"
               right="1rem"
