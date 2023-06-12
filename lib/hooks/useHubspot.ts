@@ -1,11 +1,11 @@
-import { useEffect } from "react"
+import { useEffect } from 'react'
 
 const useHubspot = ({ isOpen = false, region, portalId, formId, target }) => {
     const loadHubspot = () => {
         // @TS-ignore
         if ((window as any).hbspt) {
             // @TS-ignore
-            ; (window as any).hbspt.forms.create({
+            ;(window as any).hbspt.forms.create({
                 region: region,
                 portalId: portalId,
                 formId: formId,
@@ -25,11 +25,10 @@ const useHubspot = ({ isOpen = false, region, portalId, formId, target }) => {
 
         return () => {
             if (!isOpen) {
-                script.removeEventListener("load", loadHubspot)
+                script.removeEventListener('load', loadHubspot)
             }
-        };
+        }
     }, [isOpen])
-
 }
 
-export default useHubspot;
+export default useHubspot

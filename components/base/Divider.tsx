@@ -12,6 +12,7 @@ type DividerProps = {
   marginTop?: HeightVariants
   marginBottom?: HeightVariants
   px?: object
+  maxW?: string | object
 }
 
 const Divider = ({
@@ -22,9 +23,17 @@ const Divider = ({
     base: '1rem',
     md: '4rem',
   },
+  ...props
 }: DividerProps) => {
   return (
-    <Box pt={marginTop} pb={marginBottom} maxW={'1800px'} mx="auto" px={px}>
+    <Box
+      pt={marginTop}
+      pb={marginBottom}
+      maxW={'1800px'}
+      mx="auto"
+      px={px}
+      {...props}
+    >
       <Box
         height={'1px'}
         marginTop={heightVariant}

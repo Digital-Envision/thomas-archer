@@ -1,9 +1,11 @@
 import _ from 'lodash'
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import NextLink from 'next/link'
 import { useStoreLink } from 'lib/store/link'
-import { useStore } from 'zustand'
 import { LINK_TYPE_NAME } from 'schemas/components/link'
+import { Button } from 'react-scroll'
+import { Box } from '@chakra-ui/react'
+import ModalHubspot from 'components/modules/ModalHubspot'
 
 export interface LinksInterface {
   label: string
@@ -25,6 +27,12 @@ export interface LinksInterface {
   externalHref?: string
   isExternal?: boolean
   mobileOnly?: boolean
+
+  // hubspot
+  useModalHubspot?: boolean
+  region?: string
+  portalId?: string
+  formId?: string
 }
 
 interface Props {
@@ -135,14 +143,36 @@ const LinkType = ({ link, children, ...props }) => {
 }
 
 const Link: React.FC<Props> = ({ link, children, ...props }) => {
-  if (link?.useInternal) {
-    return <LinkType link={link} children={children} {...props} />
-  } else {
+  if (link?.useModalHubspot) {
+    const [isOpen, setIsOpen] = useState(false)
+
     return (
-      <NextLink href={link?.externalHref ? link?.externalHref : '#'} {...props}>
-        {children}
-      </NextLink>
+      <>
+        <ModalHubspot
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          region={link?.region}
+          portalId={link?.portalId}
+          formId={link?.formId}
+        />
+        <Box onClick={() => setIsOpen(true)} cursor={'pointer'}>
+          {children}
+        </Box>
+      </>
     )
+  } else {
+    if (link?.useInternal) {
+      return <LinkType link={link} children={children} {...props} />
+    } else {
+      return (
+        <NextLink
+          href={link?.externalHref ? link?.externalHref : '#'}
+          {...props}
+        >
+          {children}
+        </NextLink>
+      )
+    }
   }
 }
 
