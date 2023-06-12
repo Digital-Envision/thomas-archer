@@ -38,6 +38,7 @@ const Footer = ({ links, enquire, contact, socialMedia, footer, hubspot }) => {
           base: '27.58px',
           md: '75.41px',
         }}
+        maxW={''}
       />
       <Box
         as={'footer'}

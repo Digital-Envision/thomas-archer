@@ -118,7 +118,9 @@ const separatePages = (navLinks, pages) => {
 
     const childrenPage = []
     navLinks?.map((link) => {
-      if (link?.useInternal) {
+      // check if the link is not a modal hubspot
+      // and it use internal pages
+      if (link?.useInternal && !link.useModalHubspot) {
         parentPage[link?.href?._ref] = {
           name: link?.label,
           url: link?.href?.internalHref,
@@ -129,15 +131,20 @@ const separatePages = (navLinks, pages) => {
 
       if (_.isArray(link.children)) {
         childrenPage.push({
-          parent: link?.useInternal ? link?.href?.internalHref : '',
+          parent:
+            link?.useInternal && !link.useModalHubspot
+              ? link?.href?.internalHref
+              : '',
           children: link?.children,
         })
       }
     })
 
     for (let i = 0; i < childrenPage.length; i++) {
+      // check if the link is not a modal hubspot
+      // and it use internal pages
       childrenPage[i].children.map((link) => {
-        if (link?.useInternal) {
+        if (link?.useInternal && !link.useModalHubspot) {
           if (_.isUndefined(parentPage[link?.href?._ref])) {
             subPage[link?.href?._ref] = {
               name: link?.label,
