@@ -17,6 +17,7 @@ export interface SEO {
 		};
 	};
 	title: string;
+	isUseNoIndex: boolean;
 }
 
 
