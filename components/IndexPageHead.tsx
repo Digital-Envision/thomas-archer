@@ -24,9 +24,10 @@ export default function IndexPageHead({
     title: seo?.title || `${_title || heading} | ${settings?.title}`,
     description: seo?.description || settings?.description,
     ogImage: seo?.image || settings?.image,
+    isUseNoIndex: seo?.isUseNoIndex,
   }
 
-  const { title, description, ogImage } = seoData
+  const { title, description, ogImage, isUseNoIndex } = seoData
 
   const router = useRouter()
 
@@ -38,6 +39,8 @@ export default function IndexPageHead({
       <meta property="og:title" content={title} />
 
       <BlogMeta />
+
+      {isUseNoIndex && <meta name="robots" content="noindex" />}
 
       <meta
         key="description"

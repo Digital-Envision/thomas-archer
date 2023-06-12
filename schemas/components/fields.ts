@@ -26,6 +26,11 @@ export const SEOField = {
             title: 'Image',
             type: 'image',
         },
+        {
+            name: 'isUseNoIndex',
+            title: 'Use meta noindex',
+            type: 'boolean',
+        },
     ]
 }
 
