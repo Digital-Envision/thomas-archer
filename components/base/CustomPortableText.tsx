@@ -33,7 +33,7 @@ export const components: PortableTextComponents = {
 
   marks: {
     link: ({ value, children }) => (
-      <Link href={value?.href}>
+      <Link href={value?.href || '#'}>
         <Text size={'16px'} textDecor={'underline'} as="span">
           {children}
         </Text>

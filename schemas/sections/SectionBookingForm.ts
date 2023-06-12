@@ -1,4 +1,4 @@
-import { ImageAltField, ImageField, MarginBottomField, MarginTopField } from "schemas/components/fields"
+import { ImageAltField, ImageField, MarginBottomField, MarginTopField, RTFField } from "schemas/components/fields"
 
 export default {
     type: 'object',
@@ -7,6 +7,11 @@ export default {
     fields: [
         ImageField,
         ImageAltField,
+        {
+            ...RTFField,
+            name: 'tnc',
+            title: 'Terms and Conditions',
+        },
         MarginTopField,
         MarginBottomField,
     ],

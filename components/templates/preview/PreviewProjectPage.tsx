@@ -31,6 +31,8 @@ const PreviewProjectPage = (props) => {
             type: 'projects',
             condition: `&& slug.current != null && _id != "${project?._id}"`,
             limit: 12,
+            sortByField: 'orderRank',
+            sortOrder: 'asc',
           })) as any)
 
       const selectedProjectsKeys =

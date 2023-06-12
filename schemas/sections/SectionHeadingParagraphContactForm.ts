@@ -1,5 +1,6 @@
 import { HeightVariants } from "components/base/Divider"
 import { enumToArrayOfObjects } from "lib/utils"
+import { RTFField } from "schemas/components/fields"
 
 export default {
     type: 'object',
@@ -27,9 +28,9 @@ export default {
             type: 'text',
         },
         {
+            ...RTFField,
             name: 'tnc',
             title: 'Terms and Conditions',
-            type: 'text',
         },
         {
             title: 'Margin Top',
