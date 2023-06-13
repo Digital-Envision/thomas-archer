@@ -259,7 +259,7 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
         ))}
       </Box>
 
-      <Box pt="1rem" />
+      <Box mt={'80px'} />
       <Box>
         {isMore && (
           <Button

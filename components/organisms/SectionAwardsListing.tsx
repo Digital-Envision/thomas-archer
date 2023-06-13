@@ -60,7 +60,7 @@ const SectionAwardsListing: React.FC<SectionAwardsListingProps> = (props) => {
         })}
       </ListingGrid>
 
-      <Box pt="1rem" />
+      <Box mt={'80px'} />
       {projects?.pagination?.isMore && (
         <Button
           type="submit"
