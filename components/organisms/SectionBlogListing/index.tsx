@@ -1,18 +1,14 @@
 import {
   Box,
-  Flex,
-  Grid,
   GridItem,
   Accordion,
   AccordionItem,
   AccordionButton,
   AccordionPanel,
   HStack,
-  StackDivider,
 } from '@chakra-ui/react'
 import Button, { Variants } from 'components/base/Button'
 import { HeightVariants } from 'components/base/Divider'
-import { ProjectListingCardProps } from 'components/modules/ProjectListingCard'
 import _ from 'lodash'
 import { useRouter } from 'next/router'
 import Text from 'components/base/Text'
@@ -173,7 +169,7 @@ const SectionBlogListing: React.FC<SectionBlogListingProps> = (props) => {
         ))}
       </ListingGrid>
 
-      <Box pt="1rem" />
+      <Box mt={'80px'} />
       {blogs?.pagination?.isMore && (
         <Button
           type="submit"
