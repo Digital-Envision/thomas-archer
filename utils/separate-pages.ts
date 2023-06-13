@@ -1,21 +1,21 @@
 // this function to separate the parent and the sub pages;
 import _ from 'lodash'
-import { LINK_TYPE_NAME } from 'schemas/components/link'
+import { LINK_TYPE_NAME } from 'schemas/components/link/link'
 
-// to structured the document types
-// from [
-//   {
-//      slug: "slugger",
-//      _id: "uuid"
-//   }
-// ]
-//
-// to {
-//    _id: {
-//      slug: "slugger"
-//    }
-// }
-//
+/* to structured the document types
+   from [
+     {
+        slug: "slugger",
+        _id: "uuid"
+     }
+   ]
+
+   to {
+      _id: {
+        slug: "slugger"
+      }
+   }
+*/
 export const structuredDocumentTypes = (documentTypesSlugs) => {
   const documentTypesPage = {}
 
@@ -118,9 +118,9 @@ const separatePages = (navLinks, pages) => {
 
     const childrenPage = []
     navLinks?.map((link) => {
-      // check if the link is not a modal hubspot
+      // check if the link is link type
       // and it use internal pages
-      if (link?.useInternal && !link.useModalHubspot) {
+      if (link?.useInternal && link?.type === 'link') {
         parentPage[link?.href?._ref] = {
           name: link?.label,
           url: link?.href?.internalHref,
@@ -132,7 +132,7 @@ const separatePages = (navLinks, pages) => {
       if (_.isArray(link.children)) {
         childrenPage.push({
           parent:
-            link?.useInternal && !link.useModalHubspot
+            link?.useInternal && link?.type === 'link'
               ? link?.href?.internalHref
               : '',
           children: link?.children,
@@ -141,10 +141,10 @@ const separatePages = (navLinks, pages) => {
     })
 
     for (let i = 0; i < childrenPage.length; i++) {
-      // check if the link is not a modal hubspot
+      // check if the link is link type
       // and it use internal pages
       childrenPage[i].children.map((link) => {
-        if (link?.useInternal && !link.useModalHubspot) {
+        if (link?.useInternal && link?.type === 'link') {
           if (_.isUndefined(parentPage[link?.href?._ref])) {
             subPage[link?.href?._ref] = {
               name: link?.label,

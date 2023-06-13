@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 import { BlogListingCardProps } from 'components/modules/BlogListingCard'
 import SectionColCards from './SectionColCards'
 import { LinksInterface } from 'components/base/Link'
-import { LINK_TYPE_NAME } from 'schemas/components/link'
+import { LINK_TYPE_NAME } from 'schemas/components/link/link'
 
 type SectionBlogProps = {
   heading: string

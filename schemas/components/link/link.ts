@@ -1,6 +1,3 @@
-import _ from 'lodash'
-import { hubspotFields } from 'schemas/global/Hubspot'
-
 export const LINK_TYPE_NAME = {
     pages: 'internalHref',
     project: 'projectLinkHref',
@@ -18,7 +15,7 @@ const linkTypes = [
             return (
                 !parent?.useInternal ||
                 parent?.linkType !== LINK_TYPE_NAME.pages ||
-                parent?.useModalHubspot
+                parent?.type !== 'link'
             )
         },
     },
@@ -31,7 +28,7 @@ const linkTypes = [
             return (
                 !parent?.useInternal ||
                 parent?.linkType !== LINK_TYPE_NAME.project ||
-                parent?.useModalHubspot
+                parent?.type !== 'link'
             )
         },
     },
@@ -44,7 +41,7 @@ const linkTypes = [
             return (
                 !parent?.useInternal ||
                 parent?.linkType !== LINK_TYPE_NAME.floorPlans ||
-                parent?.useModalHubspot
+                parent?.type !== 'link'
             )
         },
     },
@@ -57,24 +54,24 @@ const linkTypes = [
             return (
                 !parent?.useInternal ||
                 parent?.linkType !== LINK_TYPE_NAME.blog ||
-                parent?.useModalHubspot
+                parent?.type !== 'link'
             )
         },
     },
 ]
 
-const Link = [
+export const Link = [
     {
         name: 'useInternal',
         title: 'Use Internal Link Pages',
         type: 'boolean',
-        hidden: ({ parent }) => parent?.useModalHubspot,
+        hidden: ({ parent }) => parent?.type !== 'link',
     },
     {
         name: 'externalHref',
         title: 'External Link',
         type: 'url',
-        hidden: ({ parent }) => parent?.useInternal || parent?.useModalHubspot,
+        hidden: ({ parent }) => parent?.useInternal || parent?.type !== 'link',
     },
     {
         name: 'linkType',
@@ -91,7 +88,7 @@ const Link = [
                 { title: 'Blog Pages', value: LINK_TYPE_NAME.blog },
             ],
         },
-        hidden: ({ parent }) => !parent?.useInternal || parent?.useModalHubspot,
+        hidden: ({ parent }) => !parent?.useInternal || parent?.type !== 'link',
     },
     ...linkTypes,
     {
@@ -99,35 +96,7 @@ const Link = [
         title: 'New Tab Link',
         type: 'boolean',
         initialValue: false,
-        hidden: ({ parent }) => parent?.useModalHubspot,
+        hidden: ({ parent }) => parent?.type !== 'link',
     },
 ]
 
-export default [
-    {
-        name: 'label',
-        title: 'Name',
-        type: 'string',
-    },
-    {
-        name: 'useModalHubspot',
-        title: 'Use PopUp Hubspot',
-        type: 'boolean',
-        initialValue: false,
-    },
-    ...Link,
-    ..._.map(hubspotFields, (field) => {
-        return {
-            ..._.omit(field, 'validation'),
-            hidden: ({ parent }) => !parent?.useModalHubspot,
-            validation: (Rule) =>
-                Rule.custom((val, { parent }) => {
-                    if (parent?.useModalHubspot && _.isEmpty(val)) {
-                        return 'Field is required'
-                    }
-
-                    return true
-                }),
-        }
-    }),
-]

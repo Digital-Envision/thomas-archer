@@ -1,46 +1,16 @@
 import _ from 'lodash'
-import React, { useState } from 'react'
+import React from 'react'
 import NextLink from 'next/link'
 import { useStoreLink } from 'lib/store/link'
-import { LINK_TYPE_NAME } from 'schemas/components/link'
-import { Button } from 'react-scroll'
-import { Box } from '@chakra-ui/react'
-import ModalHubspot from 'components/modules/ModalHubspot'
-
-export interface LinksInterface {
-  label: string
-  useInternal?: boolean
-  linkType?: string
-  internalHref?: {
-    _ref: string
-    _type: string
-  }
-  blogHref?: {
-    _ref?: string
-    _type: string
-    slug?: string
-  }
-  floorPlansHref?: {
-    _ref: string
-    _type: string
-  }
-  externalHref?: string
-  isExternal?: boolean
-  mobileOnly?: boolean
-
-  // hubspot
-  useModalHubspot?: boolean
-  region?: string
-  portalId?: string
-  formId?: string
-}
+import { LINK_TYPE_NAME } from 'schemas/components/link/link'
+import { LinksInterface } from '.'
 
 interface Props {
   link: LinksInterface
   children: any
 }
 
-const LinkType = ({ link, children, ...props }) => {
+const LinkTypes = ({ link, children, ...props }) => {
   const store = useStoreLink((state) => state)
   const detailsPage = store?.detailsPage
 
@@ -142,27 +112,9 @@ const LinkType = ({ link, children, ...props }) => {
   }
 }
 
-const Link: React.FC<Props> = ({ link, children, ...props }) => {
-  if (link?.useModalHubspot) {
-    const [isOpen, setIsOpen] = useState(false)
-
-    return (
-      <>
-        <ModalHubspot
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
-          region={link?.region}
-          portalId={link?.portalId}
-          formId={link?.formId}
-        />
-        <Box onClick={() => setIsOpen(true)} cursor={'pointer'}>
-          {children}
-        </Box>
-      </>
-    )
-  } else {
+const LinkType: React.FC<Props> = ({ link, children, ...props }) => {
     if (link?.useInternal) {
-      return <LinkType link={link} children={children} {...props} />
+      return <LinkTypes link={link} children={children} {...props} />
     } else {
       return (
         <NextLink
@@ -173,7 +125,7 @@ const Link: React.FC<Props> = ({ link, children, ...props }) => {
         </NextLink>
       )
     }
-  }
 }
 
-export default Link
+export default LinkType;
+

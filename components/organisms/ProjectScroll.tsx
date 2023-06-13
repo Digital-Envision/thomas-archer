@@ -131,6 +131,59 @@ const ProjectScroll = ({
             </Box>
           )
         })}
+        {projects?.data.map((project, key) => {
+          return (
+            <Box>
+              <Box
+                key={key}
+                height={{ base: '373px', md: '500px' }}
+                _hover={{
+                  userSelect: 'none',
+                }}
+              >
+                <Box
+                  width={{ base: '277px', md: '362px' }}
+                  height={'100%'}
+                  position={'relative'}
+                >
+                  {project?.image && (
+                    <Link
+                      href={
+                        project?.slug?.current && projectParentPage
+                          ? `/${projectParentPage}/${project?.slug?.current}`
+                          : '#'
+                      }
+                    >
+                      <Image
+                        src={
+                          (project?.image &&
+                            urlForImage(project?.image).url()) ||
+                          ''
+                        }
+                        alt={project?.alt || project?.heading}
+                        fill
+                        objectFit="cover"
+                      />
+                    </Link>
+                  )}
+                </Box>
+              </Box>
+              {project?.heading && (
+                <Link
+                  href={
+                    project?.slug?.current && projectParentPage
+                      ? `/${projectParentPage}/${project?.slug?.current}`
+                      : '#'
+                  }
+                >
+                  <Text mt={4} textDecor={'underline'}>
+                    {project?.heading}
+                  </Text>
+                </Link>
+              )}
+            </Box>
+          )
+        })}
         {/* spacing */}
         <Box>
           <Box
