@@ -1,5 +1,12 @@
 import React from 'react'
-import { FlexProps, Icon, Flex, TextProps, Box } from '@chakra-ui/react'
+import {
+  FlexProps,
+  Icon,
+  Flex,
+  TextProps,
+  Box,
+  BoxProps,
+} from '@chakra-ui/react'
 import { ReactNode } from 'react'
 import { HiArrowSmallRight } from 'react-icons/hi2'
 import Text from 'components/base/Text'
@@ -44,13 +51,21 @@ const DropdownItem = ({
           bg: '#FFFFFF',
           border: 0,
         }}
+        role={'group'}
         {...props}
       >
-        <Flex align="center" justifyContent="space-between" width={width}>
+        <Flex align="center" width={width}>
           <Text {...dropdownTextStyle} {...textProps}>
             {children}
           </Text>
-          <Icon as={HiArrowSmallRight} color={'#898989'} fontSize={'18px'} />
+          <Box
+            _groupHover={{ marginRight: '0px' }}
+            ml={'auto'}
+            mr={'4px'}
+            transition={'ease .1s'}
+          >
+            <Icon as={HiArrowSmallRight} color={'#898989'} fontSize={'18px'} />
+          </Box>
         </Flex>
       </Box>
     </Link>

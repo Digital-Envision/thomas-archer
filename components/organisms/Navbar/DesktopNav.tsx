@@ -77,7 +77,6 @@ const DesktopNav: React.FC<Props> = ({
           height={'full'}
           justifyContent={'right'}
           pr={'3.5em'}
-          pt={'4.4em'}
         >
           {NAV_ITEMS?.map((link, key) => {
             return (
@@ -88,13 +87,13 @@ const DesktopNav: React.FC<Props> = ({
                 _hover={{
                   borderBottomColor: 'black',
                 }}
+                pt={'3.6em'}
               >
                 <Link link={link}>
                   <Text
                     fontSize={'14px'}
                     fontWeight={400}
                     lineHeight={'16.8px'}
-                    height={'full'}
                     _hover={{
                       textDecor: 'none',
                     }}
@@ -128,7 +127,7 @@ const DesktopNav: React.FC<Props> = ({
         pr={
           hasSpecialButton1 && hasSpecialButton2 ? 0 : hasSpecialButton1 ? 0 : 3
         }
-        pt={'3.4em'}
+        pt={'2.8em'}
       >
         <Flex
           gap={hasSpecialButton1 && hasSpecialButton2 ? 3 : 1}
@@ -205,7 +204,7 @@ const DesktopNav: React.FC<Props> = ({
           )}
         </Flex>
       </GridItem>
-      <GridItem pt={'3.3em'}>
+      <GridItem pt={'2.8em'}>
         <Button
           variant={
             parentHover

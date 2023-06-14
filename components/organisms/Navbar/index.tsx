@@ -173,23 +173,22 @@ const Navbar = ({
             xl: 'normal',
           }}
         >
-          <Box
-            height={{
-              base: '25.67px',
-              xl: '21.08px',
-            }}
-            width={{
-              base: '228.85px',
-              xl: '189.05px',
-            }}
-            pt={{
-              xl: '3.4em',
-            }}
-          >
-            <Link href={'/'}>
-              <Logo variant={LogoVariantBreakpoint.variant} />
-            </Link>
-          </Box>
+          <Flex py={{ xl: '3.4em' }}>
+            <Box
+              height={{
+                base: '25.67px',
+                xl: '21.08px',
+              }}
+              width={{
+                base: '228.85px',
+                xl: '189.05px',
+              }}
+            >
+              <Link href={'/'}>
+                <Logo variant={LogoVariantBreakpoint.variant} />
+              </Link>
+            </Box>
+          </Flex>
           <Box ml={'auto'}>
             <DesktopNav
               openDrawer={() => setOpenDrawer(true)}
