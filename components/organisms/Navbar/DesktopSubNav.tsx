@@ -49,6 +49,30 @@ const DesktopSubNav: React.FC<Props> = ({
   contact,
   socialMedia,
 }) => {
+  const handleRearrangedGrid = (array) => {
+    if (_.isArray(array)) {
+      const rightItems = array.slice(0, Math.round(array.length / 2))
+      const leftItems = array.slice(Math.round(array.length / 2))
+
+      let right = 0
+      let left = 0
+
+      const gridItems = [...Array(array.length)].map((e, i) => {
+        if (i % 2 === 0) {
+          const rightItem = rightItems[right]
+          right += 1
+          return rightItem
+        }
+
+        const leftItem = leftItems[left]
+        left += 1
+        return leftItem
+      })
+
+      return gridItems
+    }
+  }
+
   return (
     <Box
       bg={'rgba(255,255,255,0.9)'}
@@ -77,7 +101,7 @@ const DesktopSubNav: React.FC<Props> = ({
         </GridItem>
         <GridItem colSpan={7}>
           <SimpleGrid columns={2} spacingX={10} spacingY={1}>
-            {links?.map((link, key) => {
+            {handleRearrangedGrid(links).map((link, key) => {
               return (
                 !link.mobileOnly && (
                   <DropdownItem

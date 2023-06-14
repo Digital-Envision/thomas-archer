@@ -32,6 +32,7 @@ const SectionFeaturedImage = ({ desktopImage, mobileImage, alt }) => {
             base: 'block',
             md: 'none',
           }}
+          px={'1rem'}
         >
           <Img
             src={urlForImage(mobileImage).url()}
