@@ -2,9 +2,20 @@ import { Box, Flex, Img } from '@chakra-ui/react'
 import { urlForImage } from 'lib/sanity.image'
 import React from 'react'
 
-const SectionFeaturedImage = ({ desktopImage, mobileImage, alt }) => {
+const SectionFeaturedImage = ({
+  desktopImage,
+  mobileImage,
+  alt,
+  marginBottom,
+  marginTop,
+}) => {
   return (
-    <Flex alignItems={'center'} justifyContent={'center'}>
+    <Flex
+      alignItems={'center'}
+      justifyContent={'center'}
+      marginTop={marginTop}
+      marginBottom={marginBottom}
+    >
       {desktopImage && (
         <Flex>
           <Box
@@ -12,10 +23,8 @@ const SectionFeaturedImage = ({ desktopImage, mobileImage, alt }) => {
               base: 'none',
               md: 'block',
             }}
-            width={{
-              base: '100%',
-              '2xl': '50vw',
-            }}
+            width={'100vw'}
+            px={'1rem'}
           >
             <Img
               src={urlForImage(desktopImage).url()}
