@@ -49,8 +49,16 @@ const DesktopSubNav: React.FC<Props> = ({
   contact,
   socialMedia,
 }) => {
-  const handleRearrangedGrid = (array) => {
-    if (_.isArray(array)) {
+  const handleRearrangedGrid = (subNav) => {
+    if (_.isArray(subNav)) {
+      const array = subNav.filter((link) => {
+        if (link?.mobileOnly) {
+          return link?.mobileOnly === false
+        }
+
+        return link
+      })
+
       const rightItems = array.slice(0, Math.round(array.length / 2))
       const leftItems = array.slice(Math.round(array.length / 2))
 
