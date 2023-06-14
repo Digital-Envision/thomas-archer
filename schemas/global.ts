@@ -5,6 +5,7 @@ import Enquire, { enquireFieldset } from './global/Enquire'
 import Footer from './global/Footer'
 import Hubspot from './global/Hubspot'
 import Links, { linkFieldset } from './global/Links'
+import Redirect from './global/Redirect'
 import SocialMedia, { socialMediaFieldset } from './global/SocialMedia'
 import SpecialButton, { specialButtonFieldset } from './global/SpecialButton'
 
@@ -20,7 +21,8 @@ export default defineType({
     SocialMedia,
     Footer,
     DetailsPage,
-    Hubspot
+    Hubspot,
+    Redirect
   ],
   fieldsets: [
     specialButtonFieldset,

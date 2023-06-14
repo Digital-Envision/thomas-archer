@@ -106,15 +106,15 @@ export default defineConfig({
       SectionHeadingParagraphCTAType,
       SectionHeadingParagraphCTAImageType,
       DividerType,
-      SectionBlog, // TODO DATASET LATER
+      SectionBlog,
       SectionHeadingParagraphContactForm,
       SectionAwards,
       SectionTextFeatured,
       SectionImageTextMosaicType1,
       SectionImageAwards,
       SectionProjectListing,
-      SectionGridGallery, // TODO DATASET LATER
-      SectionInclusions, // TODO DATASET LATER
+      SectionGridGallery,
+      SectionInclusions,
       SectionBreadcrumbs,
       SectionBlogListing,
       SectionAwardsListing,
