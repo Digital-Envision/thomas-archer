@@ -1,3 +1,5 @@
+import { createClient } from 'next-sanity'
+
 /** @type {import('next').NextConfig} */
 const config = {
   images: {
@@ -20,25 +22,29 @@ const config = {
     NETLIFY_BUILD_HOOK_ID: process.env.NETLIFY_BUILD_HOOK_ID,
   },
   async redirects() {
-    return [
-      {
-        source: '/redirect-me',
-        destination: '/about-thomas-archer/accolades',
-        permanent: true,
-        // destination: '/v1/dev/:slug*',
-      },
-      // {
-      //   source: '/dev1/:slug*',
-      //   destination: '/dev2/:slug*',
-      //   // destination: '/v1/dev/:slug*',
-      //   permanent: false,
-      // },
-      // {
-      //   source: '/dev4/:slug*',
-      //   destination: '/dev5/:slug*',
-      //   permanent: false,
-      // },
-    ]
+    const client = createClient({
+      projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+      dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+      apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2022-11-15',
+      useCdn: process.env.SANITY_REVALIDATE_SECRET
+        ? false
+        : process.env.NODE_ENV === 'production',
+    })
+
+    const data = await client.fetch('*[_type == "global"][0]{Redirect[]}')
+    if (!data?.Redirect) return []
+
+    const redirects = data?.Redirect.map(
+      ({ source, destination, permanent = false }) => {
+        return {
+          source,
+          destination,
+          permanent,
+        }
+      }
+    )
+
+    return redirects
   },
 }
 

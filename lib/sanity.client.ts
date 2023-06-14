@@ -87,6 +87,13 @@ export async function getSettings(): Promise<Settings> {
   return {}
 }
 
+export async function getRedirects(): Promise<any> {
+  if (client) {
+    return (await client.fetch('*[_type == "global"][0]{Redirect}')) || {}
+  }
+  return {}
+}
+
 export async function getAllPosts(): Promise<Post[]> {
   if (client) {
     return (await client.fetch(indexQuery)) || []
