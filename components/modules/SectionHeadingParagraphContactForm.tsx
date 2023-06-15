@@ -5,7 +5,7 @@ import React from 'react'
 import { HeightVariants } from 'components/base/Divider'
 import SectionContainer from 'components/base/Section'
 import useHubspot from 'lib/hooks/useHubspot'
-import { Hubspot } from 'utils/interfaces'
+import { Hubspot, HubspotForm } from 'utils/interfaces'
 import CustomPortableText from 'components/base/CustomPortableText'
 
 type SectionHeadingParagraphContactFormProps = {
@@ -15,7 +15,8 @@ type SectionHeadingParagraphContactFormProps = {
   tnc: any
   marginTop: HeightVariants
   marginBottom: HeightVariants
-  hubspot: Hubspot
+  hubspot: HubspotForm
+  globals: any
 }
 
 const SectionHeadingParagraphContactForm: React.FC<
@@ -28,14 +29,18 @@ const SectionHeadingParagraphContactForm: React.FC<
   marginTop,
   marginBottom,
   hubspot,
+  globals,
 }) => {
-  const { region, portalId, formId } = hubspot?.contactForm
+  //use global?.hubspot as fallback
+  const hubspotData = {
+    region: hubspot?.region || globals?.Hubspot?.contactForm?.region,
+    portalId: hubspot?.portalId || globals?.Hubspot?.contactForm?.portalId,
+    formId: hubspot?.formId || globals?.Hubspot?.contactForm?.formId,
+  }
 
   useHubspot({
+    ...hubspotData,
     isOpen: true,
-    region,
-    portalId,
-    formId,
     target: '#hubspotContactForm',
   })
 

@@ -196,20 +196,12 @@ const PageBuilder = (props) => {
             <SectionHeadingParagraphContactForm
               {...c}
               {...pageProps}
-              hubspot={props?.globals?.Hubspot}
               key={c?._key}
             />
           )
           break
         case 'SectionBookingForm':
-          el = (
-            <SectionBookingForm
-              {...c}
-              {...pageProps}
-              hubspot={props?.globals?.Hubspot}
-              key={c?._key}
-            />
-          )
+          el = <SectionBookingForm {...c} {...pageProps} key={c?._key} />
           break
         case 'SectionParagraph':
           el = <SectionParagraph {...c} {...pageProps} key={c?._key} />

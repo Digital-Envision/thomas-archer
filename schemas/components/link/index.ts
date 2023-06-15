@@ -1,7 +1,7 @@
 import _ from 'lodash'
-import { hubspotFields } from 'schemas/global/Hubspot'
 import { Link } from './link'
 import { FileType } from './file'
+import { hubspotForms } from '../fields'
 
 export default [
     {
@@ -23,7 +23,7 @@ export default [
         initialValue: 'link',
     },
     ...Link,
-    ..._.map(hubspotFields, (field) => {
+    ..._.map(hubspotForms, (field) => {
         return {
             ..._.omit(field, 'validation'),
             hidden: ({ parent }) => parent?.type !== 'modal',

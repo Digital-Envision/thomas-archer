@@ -2,6 +2,7 @@ import moment from "moment"
 import { HeightVariants } from "components/base/Divider"
 import { enumToArrayOfObjects } from "lib/utils"
 import { externalLink, isExternalTab, Link, linkOptions, linkTypeBlogs, linkTypeFloorPlans, linkTypePages, linkTypeProjects, LINK_TYPE_NAME, useInternalLink } from 'schemas/components/link/link'
+import _ from "lodash"
 
 export const SEOField = {
     name: 'seo',
@@ -74,6 +75,17 @@ export const TextField = {
         collapsible: true,
         collapsed: true,
     }
+}
+
+export const HeadingTagLevel = {
+    name: 'headingTagLevel',
+    title: 'Heading Tag Level',
+    type: 'string',
+    options: {
+        list: [
+            'H1', 'H2', 'H3'
+        ],
+    },
 }
 
 const RTFAnnotationLink = {
@@ -176,4 +188,39 @@ export const MarginBottomField = {
         ],
     },
     layout: 'dropdown'
+}
+
+
+export const hubspotForms = [
+    {
+        name: 'region',
+        title: 'Region',
+        type: 'string',
+        initialValue: 'na1',
+        validation: (Rule) => Rule.required(),
+    },
+    {
+        name: 'portalId',
+        title: 'Portal ID',
+        type: 'string',
+        initialValue: '8929845',
+        validation: (Rule) => Rule.required(),
+    },
+    {
+        name: 'formId',
+        title: 'Form ID',
+        type: 'string',
+        validation: (Rule) => Rule.required(),
+    }
+]
+
+export const HubspotField = {
+    name: 'hubspot',
+    title: 'Hubspot Form',
+    type: 'object',
+    options: {
+        collapsible: true,
+        collapsed: true,
+    },
+    fields: hubspotForms
 }
