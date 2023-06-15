@@ -6,7 +6,7 @@ import Heading1 from 'components/base/Heading1'
 import { HeightVariants } from 'components/base/Divider'
 import Heading2 from 'components/base/Heading2'
 import Heading3 from 'components/base/Heading3'
-import Link from 'next/link'
+import Link from './Link'
 
 export const components: PortableTextComponents = {
   block: {
@@ -32,13 +32,20 @@ export const components: PortableTextComponents = {
   },
 
   marks: {
-    link: ({ value, children }) => (
-      <Link href={value?.href || '#'}>
-        <Text size={'16px'} textDecor={'underline'} as="span">
-          {children}
-        </Text>
-      </Link>
-    ),
+    link: ({ value, children }) => {
+      const data = {
+        type: 'link',
+        ...value,
+      }
+
+      return (
+        <Link link={data}>
+          <Text size={'16px'} textDecor={'underline'} as="span">
+            {children}
+          </Text>
+        </Link>
+      )
+    },
   },
   listItem: {
     bullet: ({ children }) => (

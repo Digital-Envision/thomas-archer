@@ -1,6 +1,7 @@
 import moment from "moment"
 import { HeightVariants } from "components/base/Divider"
 import { enumToArrayOfObjects } from "lib/utils"
+import { externalLink, isExternalTab, Link, linkOptions, linkTypeBlogs, linkTypeFloorPlans, linkTypePages, linkTypeProjects, LINK_TYPE_NAME, useInternalLink } from 'schemas/components/link/link'
 
 export const SEOField = {
     name: 'seo',
@@ -75,11 +76,60 @@ export const TextField = {
     }
 }
 
+const RTFAnnotationLink = {
+    name: 'link',
+    type: 'object',
+    title: 'link',
+    fields: [
+        {
+            ...useInternalLink, // return parent?.useInternal
+            hidden: false
+        },
+        {
+            ...externalLink,
+            hidden: ({ parent }) => parent?.useInternal
+        },
+        {
+            ...isExternalTab,
+            hidden: ({ parent }) => parent?.useInternal
+        },
+        {
+            ...linkOptions,
+            hidden: ({ parent }) => !parent?.useInternal
+        },
+        {
+            ...linkTypePages,
+            hidden: ({ parent }) => !parent?.useInternal || parent?.linkType !== LINK_TYPE_NAME.pages,
+        },
+        {
+            ...linkTypeProjects,
+            hidden: ({ parent }) => !parent?.useInternal || parent?.linkType !== LINK_TYPE_NAME.project,
+        },
+        {
+            ...linkTypeFloorPlans,
+            hidden: ({ parent }) => !parent?.useInternal || parent?.linkType !== LINK_TYPE_NAME.floorPlans,
+        },
+        {
+            ...linkTypeBlogs,
+            hidden: ({ parent }) => !parent?.useInternal || parent?.linkType !== LINK_TYPE_NAME.blog,
+        }
+
+    ]
+}
+
 export const RTFField = {
     name: 'content',
     title: 'Content',
     type: 'array',
-    of: [{ type: 'block' }]
+    of: [{
+        type: 'block',
+        styles: [],
+        marks: {
+            annotations: [
+                RTFAnnotationLink
+            ]
+        },
+    }]
 }
 
 export const ImageField = {

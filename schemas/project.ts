@@ -1,5 +1,5 @@
 import { orderRankField, orderRankOrdering } from '@sanity/orderable-document-list';
-import { CaptionField, HeadingField, ImageAltField, ImageField, SEOField, SlugField, SubHeadingField, TextField } from './components/fields';
+import { CaptionField, HeadingField, ImageAltField, ImageField, RTFField, SEOField, SlugField, SubHeadingField, TextField } from './components/fields';
 import { DOCUMENT_TYPE_SCHEMA_NAME } from './global/DetailsPage';
 import { listImagesFields } from './sections/SectionGalleryScroll';
 import { bannerVideoField, externalVideoField, isExternalVideoField, isVideoField } from "./sections/SectionHeroImageBig"
@@ -32,8 +32,8 @@ export default {
             type: 'string'
         },
         {
-            ...TextField,
-            title: 'Paragraph',
+            ...RTFField,
+            title: 'RTF Paragraph'
         },
         {
             ...ImageField,

@@ -58,11 +58,11 @@ export default function ProjectPageTemplate(props: any) {
       />
 
       {(project?.heading ||
-        project?.paragraph ||
+        project?.content ||
         project?.SectionHeadingParagraphCTA?.embeddedVideo) && (
         <SectionHeadingParagraphCTA
           heading={project?.heading}
-          paragraph={project?.paragraph}
+          content={project?.content}
           // if embeddedVideo exist, show view
           {...(project?.SectionHeadingParagraphCTA?.embeddedVideo && {
             customButton: {
