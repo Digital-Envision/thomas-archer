@@ -8,11 +8,13 @@ import Links, { linkFieldset } from './global/Links'
 import Redirect from './global/Redirect'
 import SocialMedia, { socialMediaFieldset } from './global/SocialMedia'
 import SpecialButton, { specialButtonFieldset } from './global/SpecialButton'
+import {EarthGlobeIcon} from '@sanity/icons'
 
 export default defineType({
   type: 'document',
   name: 'global',
   title: 'Global',
+  icon: EarthGlobeIcon,
   fields: [
     SpecialButton,
     Links,
