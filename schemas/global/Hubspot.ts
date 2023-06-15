@@ -1,29 +1,7 @@
 import { defineField } from "sanity"
+import { hubspotForms } from "schemas/components/fields"
 
-export const hubspotFields = [
-    {
-        name: 'region',
-        title: 'Region',
-        type: 'string',
-        initialValue: 'na1',
-        validation: (Rule) => Rule.required(),
-    },
-    {
-        name: 'portalId',
-        title: 'Portal ID',
-        type: 'string',
-        initialValue: '8929845',
-        validation: (Rule) => Rule.required(),
-    },
-    {
-        name: 'formId',
-        title: 'Form ID',
-        type: 'string',
-        validation: (Rule) => Rule.required(),
-    },
-]
-
-const Hubspot = defineField({
+const GlobalHubspot = defineField({
     name: 'Hubspot',
     title: 'Hubspot Form',
     type: 'object',
@@ -36,7 +14,7 @@ const Hubspot = defineField({
             name: 'inclusionsBrochure',
             title: 'Inclusions Brochure',
             type: 'object',
-            fields: hubspotFields,
+            fields: hubspotForms,
             options: {
                 collapsible: true,
                 collapsed: true,
@@ -46,7 +24,7 @@ const Hubspot = defineField({
             name: 'enquireFlyout',
             title: 'Enquire Flyout',
             type: 'object',
-            fields: hubspotFields,
+            fields: hubspotForms,
             options: {
                 collapsible: true,
                 collapsed: true,
@@ -56,7 +34,7 @@ const Hubspot = defineField({
             name: 'priceList',
             title: 'Price List',
             type: 'object',
-            fields: hubspotFields,
+            fields: hubspotForms,
             options: {
                 collapsible: true,
                 collapsed: true,
@@ -66,7 +44,7 @@ const Hubspot = defineField({
             name: 'contactForm',
             title: 'Contact Form',
             type: 'object',
-            fields: hubspotFields,
+            fields: hubspotForms,
             options: {
                 collapsible: true,
                 collapsed: true,
@@ -76,7 +54,7 @@ const Hubspot = defineField({
             name: 'bookingSessionForm',
             title: 'Booking Session Form',
             type: 'object',
-            fields: hubspotFields,
+            fields: hubspotForms,
             options: {
                 collapsible: true,
                 collapsed: true,
@@ -85,4 +63,4 @@ const Hubspot = defineField({
     ],
 })
 
-export default Hubspot
+export default GlobalHubspot

@@ -3,7 +3,7 @@ import Contact, { contactFieldset } from './global/Contact'
 import DetailsPage from './global/DetailsPage'
 import Enquire, { enquireFieldset } from './global/Enquire'
 import Footer from './global/Footer'
-import Hubspot from './global/Hubspot'
+import GlobalHubspot from './global/Hubspot'
 import Links, { linkFieldset } from './global/Links'
 import Redirect from './global/Redirect'
 import SocialMedia, { socialMediaFieldset } from './global/SocialMedia'
@@ -21,7 +21,7 @@ export default defineType({
     SocialMedia,
     Footer,
     DetailsPage,
-    Hubspot,
+    GlobalHubspot,
     Redirect
   ],
   fieldsets: [

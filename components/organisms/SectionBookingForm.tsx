@@ -5,7 +5,7 @@ import React from 'react'
 import { HeightVariants } from 'components/base/Divider'
 import SectionContainer from 'components/base/Section'
 import useHubspot from 'lib/hooks/useHubspot'
-import { Hubspot, SanityFiles } from 'utils/interfaces'
+import { Hubspot, HubspotForm, SanityFiles } from 'utils/interfaces'
 import { getImageUrl } from 'lib/utils'
 import CustomPortableText from 'components/base/CustomPortableText'
 
@@ -14,8 +14,9 @@ type SectionBookingForm = {
   marginBottom: HeightVariants
   image?: SanityFiles
   alt?: string
-  hubspot: Hubspot
+  hubspot: HubspotForm
   tnc: any
+  globals: any
 }
 
 const SectionBookingForm: React.FC<SectionBookingForm> = ({
@@ -23,16 +24,21 @@ const SectionBookingForm: React.FC<SectionBookingForm> = ({
   marginBottom,
   image,
   alt,
-  hubspot,
   tnc,
+  hubspot,
+  globals,
 }) => {
-  const { region, portalId, formId } = hubspot?.bookingSessionForm
+  //use global?.hubspot as fallback
+  const hubspotData = {
+    region: hubspot?.region || globals?.Hubspot?.bookingSessionForm?.region,
+    portalId:
+      hubspot?.portalId || globals?.Hubspot?.bookingSessionForm?.portalId,
+    formId: hubspot?.formId || globals?.Hubspot?.bookingSessionForm?.formId,
+  }
 
   useHubspot({
     isOpen: true,
-    region,
-    portalId,
-    formId,
+    ...hubspotData,
     target: '#hubspotBookingForm',
   })
 

@@ -141,8 +141,8 @@ const FloorPlanDetailsDesktop = ({
             }
           )}
         </Box>
-        {hubspot?.priceList ||
-        hubspot?.inclusionsBrochure ||
+        {floorPlan?.priceList ||
+        floorPlan?.inclusionsBrochure ||
         (_.isArray(floorPlan?.listSizes) &&
           floorPlan?.listSizes[floorType]?.homeFlyer) ? (
           <Flex flexDir={'column'} width={'250px'} mt={'50px'}>
@@ -153,11 +153,13 @@ const FloorPlanDetailsDesktop = ({
               portalId={hubspotModalForm.portalId}
               formId={hubspotModalForm.formId}
             />
-            {hubspot?.priceList && (
+            {floorPlan?.priceList && (
               <Button
                 variant={ButtonVariants.blackLine}
                 mb={'20px'}
-                onClick={() => handleOpenModal(hubspot?.priceList)}
+                onClick={() =>
+                  handleOpenModal(floorPlan?.priceList || hubspot?.priceList)
+                }
               >
                 Download Price List
               </Button>
@@ -190,10 +192,14 @@ const FloorPlanDetailsDesktop = ({
                   </Button>
                 </Link>
               )}
-            {hubspot?.inclusionsBrochure && (
+            {floorPlan?.inclusionsBrochure && (
               <Button
                 variant={ButtonVariants.blackLine}
-                onClick={() => handleOpenModal(hubspot?.inclusionsBrochure)}
+                onClick={() =>
+                  handleOpenModal(
+                    floorPlan?.inclusionsBrochure || hubspot?.inclusionsBrochure
+                  )
+                }
               >
                 Inclusions Brochure
               </Button>
