@@ -142,7 +142,7 @@ export default defineConfig({
   },
   plugins: [
     deskTool({
-      structure: settingsStructure([settingsType], [globalType]),
+      structure: settingsStructure([settingsType, globalType]),
       // `defaultDocumentNode` is responsible for adding a “Preview” tab to the document pane
       defaultDocumentNode: previewDocumentNode({ apiVersion, previewSecretId }),
     }),
