@@ -4,15 +4,15 @@ import { HeightVariants } from 'components/base/Divider'
 import { HeadingTagSemantic } from 'components/base/Heading1'
 import _ from 'lodash'
 import { blockToPlainText } from 'lib/utils'
-import { useRouter } from 'next/router'
 import { BlogListingCardProps } from 'components/modules/BlogListingCard'
 import SectionColCards from './SectionColCards'
 import { LinksInterface } from 'components/base/Link'
 import { LINK_TYPE_NAME } from 'schemas/components/link/link'
+import { PortableTextBlock } from '@portabletext/types'
 
 type SectionBlogProps = {
   heading: string
-  paragraph: string
+  content: PortableTextBlock
   width?: string
   height?: string
   marginTop: HeightVariants
@@ -27,7 +27,7 @@ type SectionBlogProps = {
 const SectionBlog: React.FC<SectionBlogProps> = ({
   heading,
   headingTagLevel,
-  paragraph,
+  content,
   marginTop,
   marginBottom,
   blogs: _blogs,
@@ -74,8 +74,9 @@ const SectionBlog: React.FC<SectionBlogProps> = ({
         isOffset={false}
         heading={heading}
         headingTagLevel={headingTagLevel}
-        paragraph={paragraph}
+        content={content}
         button={button}
+        {...rest}
       />
 
       <Box pt={{ base: HeightVariants.less, md: HeightVariants.default }} />

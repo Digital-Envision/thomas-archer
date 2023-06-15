@@ -1,5 +1,6 @@
 import { HeightVariants } from 'components/base/Divider';
 import { enumToArrayOfObjects } from 'lib/utils';
+import { RTFField } from 'schemas/components/fields';
 import link from 'schemas/components/link';
 export default {
     type: 'object',
@@ -21,8 +22,8 @@ export default {
             },
         },
         {
-            name: 'paragraph',
-            type: 'text',
+            ...RTFField,
+            title: 'RTF Paragraph'
         },
         {
             name: 'button',

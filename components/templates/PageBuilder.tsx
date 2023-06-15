@@ -38,7 +38,7 @@ import React from 'react'
 import SectionFeaturedImage from 'components/modules/SectionFeaturedImage'
 
 const PageBuilder = (props) => {
-  const { pages, ...rest } = props
+  const { pages, ...pageProps } = props
   const page = pages?.[0] //current  page documents
 
   const content = (page?.content || [])
@@ -47,107 +47,155 @@ const PageBuilder = (props) => {
       let el = null
       switch (c._type) {
         case 'Carousel':
-          el = <Carousel {...c} key={c?._key} />
+          el = <Carousel {...c} {...pageProps} key={c?._key} />
           break
         case 'CTAs':
-          el = <CTAs {...c} key={c?._key} />
+          el = <CTAs {...c} {...pageProps} key={c?._key} />
           break
         case 'Steps':
-          el = <Steps {...c} key={c?._key} />
+          el = <Steps {...c} {...pageProps} key={c?._key} />
           break
         case 'SectionFeaturedImage':
-          el = <SectionFeaturedImage {...c} key={c?._key} />
+          el = <SectionFeaturedImage {...c} {...pageProps} key={c?._key} />
           break
         case 'FloorPlanListing':
-          el = <FloorPlanListing floors={rest.floors} {...c} key={c?._key} />
+          el = (
+            <FloorPlanListing
+              {...c}
+              {...pageProps}
+              floors={pageProps.floors}
+              key={c?._key}
+            />
+          )
           break
         case 'SectionGalleryScroll':
-          el = <GalleryScroll {...c} key={c?._key} />
+          el = <GalleryScroll {...c} {...pageProps} key={c?._key} />
           break
         case 'SectionProjectScroll':
-          el = <ProjectScroll {...c} projects={rest.projects} key={c?._key} />
+          el = (
+            <ProjectScroll
+              {...c}
+              {...pageProps}
+              projects={pageProps.projects}
+              key={c?._key}
+            />
+          )
           break
         case 'SectionVideoParagraphCTA':
-          el = <SectionVideoParagraphCTA {...c} key={c?._key} />
+          el = <SectionVideoParagraphCTA {...c} {...pageProps} key={c?._key} />
           break
         case 'SectionHeroImageDefault':
-          el = <SectionHeroImageDefault {...c} key={c?._key} />
+          el = <SectionHeroImageDefault {...c} {...pageProps} key={c?._key} />
           break
         case 'SectionBreadcrumbs':
-          el = <SectionBreadcrumbs {...c} {...rest} page={page} key={c?._key} />
+          el = (
+            <SectionBreadcrumbs
+              {...c}
+              {...pageProps}
+              page={page}
+              key={c?._key}
+            />
+          )
           break
         case 'SectionHeroImageBig':
-          el = <SectionHeroImageBig {...c} key={c?._key} />
+          el = <SectionHeroImageBig {...c} {...pageProps} key={c?._key} />
           break
         case 'SectionHeroVideoBig':
-          el = <SectionHeroVideoBig {...c} key={c?._key} />
+          el = <SectionHeroVideoBig {...c} {...pageProps} key={c?._key} />
           break
         case 'SectionImageHeadingCTA':
-          el = <SectionImageHeadingCTA {...c} key={c?._key} />
+          el = <SectionImageHeadingCTA {...c} {...pageProps} key={c?._key} />
           break
         case 'SectionHeadingParagraphCTA':
-          el = <SectionHeadingParagraphCTA {...c} key={c?._key} />
+          el = (
+            <SectionHeadingParagraphCTA {...c} {...pageProps} key={c?._key} />
+          )
           break
         case 'Section2ColImageTextFeaturedImageLeftRight':
           el = (
-            <Section2ColImageTextFeaturedImageLeftRight {...c} key={c?._key} />
+            <Section2ColImageTextFeaturedImageLeftRight
+              {...c}
+              {...pageProps}
+              key={c?._key}
+            />
           )
           break
         case 'SectionHeadingParagraphCTAImage':
-          el = <SectionHeadingParagraphCTAImage {...c} key={c?._key} />
+          el = (
+            <SectionHeadingParagraphCTAImage
+              {...c}
+              {...pageProps}
+              key={c?._key}
+            />
+          )
           break
         case 'SectionImageTextMosaicType1':
-          el = <SectionImageTextMosaicType1 {...c} key={c?._key} />
+          el = (
+            <SectionImageTextMosaicType1 {...c} {...pageProps} key={c?._key} />
+          )
           break
         case 'SectionTextFeatured':
-          el = <SectionTextFeatured {...c} key={c?._key} />
+          el = <SectionTextFeatured {...c} {...pageProps} key={c?._key} />
           break
         case 'Divider':
-          el = <Divider {...c} key={c?._key} />
+          el = <Divider {...c} {...pageProps} key={c?._key} />
           break
         case 'SectionColCards':
-          el = <SectionColCards {...c} key={c?._key} />
+          el = <SectionColCards {...c} {...pageProps} key={c?._key} />
           break
         case 'Section2ColHeading2ColParagraph':
-          el = <Section2ColHeading2ColParagraph {...c} key={c?._key} />
+          el = (
+            <Section2ColHeading2ColParagraph
+              {...c}
+              {...pageProps}
+              key={c?._key}
+            />
+          )
           break
         case 'Section2ColImageTextMosaicType2':
-          el = <Section2ColImageTextMosaicType2 {...c} key={c?._key} />
+          el = (
+            <Section2ColImageTextMosaicType2
+              {...c}
+              {...pageProps}
+              key={c?._key}
+            />
+          )
           break
         case 'Navbar':
-          el = <Navbar {...c} key={c?._key} />
+          el = <Navbar {...c} {...pageProps} key={c?._key} />
           break
         case 'Footer':
-          el = <Footer {...c} key={c?._key} />
+          el = <Footer {...c} {...pageProps} key={c?._key} />
           break
         case 'SectionAwards':
-          el = <SectionAwards {...c} key={c?._key} />
+          el = <SectionAwards {...c} {...pageProps} key={c?._key} />
           break
         case 'SectionImageAwards':
-          el = <SectionImageAwards {...c} key={c?._key} />
+          el = <SectionImageAwards {...c} {...pageProps} key={c?._key} />
           break
         case 'SectionGridGallery':
-          el = <SectionGridGallery {...c} key={c?._key} />
+          el = <SectionGridGallery {...c} {...pageProps} key={c?._key} />
           break
         case 'SectionAwardsListing':
-          el = <SectionAwardsListing {...c} {...rest} key={c?._key} />
+          el = <SectionAwardsListing {...c} {...pageProps} key={c?._key} />
           break
         case 'SectionBlog':
-          el = <SectionBlog {...c} {...rest} key={c?._key} />
+          el = <SectionBlog {...c} {...pageProps} key={c?._key} />
           break
         case 'SectionBlogListing':
-          el = <SectionBlogListing {...c} {...rest} key={c?._key} />
+          el = <SectionBlogListing {...c} {...pageProps} key={c?._key} />
           break
         case 'SectionProjectListing':
-          el = <SectionProjectListing {...c} {...rest} key={c?._key} />
+          el = <SectionProjectListing {...c} {...pageProps} key={c?._key} />
           break
         case 'SectionInclusions':
-          el = <SectionInclusions {...c} key={c?._key} />
+          el = <SectionInclusions {...c} {...pageProps} key={c?._key} />
           break
         case 'SectionHeadingParagraphContactForm':
           el = (
             <SectionHeadingParagraphContactForm
               {...c}
+              {...pageProps}
               hubspot={props?.globals?.Hubspot}
               key={c?._key}
             />
@@ -157,13 +205,14 @@ const PageBuilder = (props) => {
           el = (
             <SectionBookingForm
               {...c}
+              {...pageProps}
               hubspot={props?.globals?.Hubspot}
               key={c?._key}
             />
           )
           break
         case 'SectionParagraph':
-          el = <SectionParagraph {...c} {...rest} key={c?._key} />
+          el = <SectionParagraph {...c} {...pageProps} key={c?._key} />
           break
         case 'fixedComponent':
           switch (c.name) {

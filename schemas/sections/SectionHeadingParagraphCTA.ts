@@ -1,5 +1,6 @@
 import { HeightVariants } from 'components/base/Divider'
 import { enumToArrayOfObjects } from 'lib/utils'
+import { RTFField } from 'schemas/components/fields'
 import link from 'schemas/components/link'
 
 export const headingField = (title?) => ({
@@ -24,7 +25,10 @@ export const fields = [
             list: ['H1', 'H2', 'H3'],
         },
     },
-    paragraphField(),
+    {
+        ...RTFField,
+        title: 'RTF Paragraph'
+    },
     {
         name: 'isOffset',
         type: 'boolean',

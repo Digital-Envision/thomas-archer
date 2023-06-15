@@ -5,11 +5,13 @@ import Button, { Variants } from 'components/base/Button'
 import Dash from 'components/base/Dash'
 import { HeightVariants } from 'components/base/Divider'
 import Link, { LinksInterface } from 'components/base/Link'
+import CustomPortableText from 'components/base/CustomPortableText'
+import { PortableTextBlock } from '@portabletext/types'
 
 type SectionHeadingParagraphCTAProps = {
   heading: string
   headingTagLevel?: HeadingTagSemantic
-  paragraph: string
+  content: PortableTextBlock
   isOffset?: boolean
   showButton?: boolean
   marginTop?: HeightVariants
@@ -23,7 +25,6 @@ type SectionHeadingParagraphCTAProps = {
 const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
   heading,
   headingTagLevel,
-  paragraph,
   isOffset,
   showButton = true,
   marginTop,
@@ -32,6 +33,7 @@ const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
   button2,
   isEmbed,
   customButton,
+  content,
 }) => {
   const body = (
     <>
@@ -60,10 +62,10 @@ const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
         )}
         <Flex flex={1}>
           <Box pt={2} pr={2}>
-            {paragraph && <Dash width="50px" height="1px" />}
+            {content && <Dash width="50px" height="1px" />}
           </Box>
           <Flex direction={'column'}>
-            {paragraph && <Text>{paragraph}</Text>}
+            {content && <CustomPortableText value={content} />}
             <Box pt={5}>
               {customButton ? (
                 <Button onClick={customButton.fn} variant={Variants.blackLine}>

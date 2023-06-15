@@ -15,7 +15,7 @@ const ProjectScroll = ({
   headingTagLevel,
   marginBottom,
   marginTop,
-  paragraph,
+  content,
   button,
 }) => {
   const projectRef = useStoreLink(
@@ -50,7 +50,7 @@ const ProjectScroll = ({
         isOffset={false}
         heading={heading}
         headingTagLevel={headingTagLevel}
-        paragraph={paragraph}
+        content={content}
         button={button}
       />
       <ScrollBox
