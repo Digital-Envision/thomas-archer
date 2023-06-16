@@ -12,7 +12,8 @@ const ScrollBox = ({
   gap = 8,
   ...props
 }) => {
-  const [scrollInterval, setScrollInterval] = useState(null)
+  const [preventRightClick, setPreventRightClick] = useState(false)
+  const [preventLeftClick, setPreventLeftClick] = useState(false)
 
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const leftButtonRef = useRef<HTMLButtonElement>(null)
@@ -51,6 +52,7 @@ const ScrollBox = ({
   }
 
   const handleScrollRight = () => {
+    setPreventRightClick(true)
     const scrollContainer = scrollContainerRef.current
     scrollContainer.scrollTo({
       left: countScrollRight({
@@ -59,9 +61,13 @@ const ScrollBox = ({
       }),
       behavior: 'smooth',
     })
+    setTimeout(() => {
+      setPreventRightClick(false)
+    }, 300)
   }
 
   const handleScrollLeft = () => {
+    setPreventLeftClick(true)
     const scrollContainer = scrollContainerRef.current
     scrollContainer.scrollTo({
       left: countScrollLeft({
@@ -70,29 +76,21 @@ const ScrollBox = ({
       }),
       behavior: 'smooth',
     })
+    setTimeout(() => {
+      setPreventLeftClick(false)
+    }, 300)
   }
 
   const handleLeftButtonMouseDown = () => {
-    handleScrollLeft()
-    setScrollInterval(
-      setInterval(() => {
-        handleScrollLeft()
-      }, 10)
-    )
+    if (!preventLeftClick) {
+      handleScrollLeft()
+    }
   }
 
   const handleRightButtonMouseDown = () => {
-    handleScrollRight()
-    setScrollInterval(
-      setInterval(() => {
-        handleScrollRight()
-      }, 10)
-    )
-  }
-
-  const handleMouseUp = () => {
-    clearInterval(scrollInterval)
-    setScrollInterval(null)
+    if (!preventRightClick) {
+      handleScrollRight()
+    }
   }
 
   return (
@@ -117,8 +115,7 @@ const ScrollBox = ({
           variant={ButtonIconVariants.state2}
           mr={2}
           ref={leftButtonRef}
-          onMouseDown={handleLeftButtonMouseDown}
-          onMouseUp={handleMouseUp}
+          onClick={handleLeftButtonMouseDown}
         >
           <HiOutlineArrowLeft />
         </ButtonIcon>
@@ -126,8 +123,7 @@ const ScrollBox = ({
           aria-label="project-arrow-right"
           variant={ButtonIconVariants.state2}
           ref={rightButtonRef}
-          onMouseDown={handleRightButtonMouseDown}
-          onMouseUp={handleMouseUp}
+          onClick={handleRightButtonMouseDown}
         >
           <HiOutlineArrowRight />
         </ButtonIcon>
