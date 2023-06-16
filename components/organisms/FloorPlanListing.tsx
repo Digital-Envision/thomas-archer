@@ -21,23 +21,54 @@ const FloorList = ({ floor }) => {
     (state) => state?.pages[floorPlanRef]?.url
   )
 
-  const floorPlan = floor?.floorPlan?.listSizes[0]
+  const [images, setImages] = useState([])
+  const [floorIndex, setFloorIndex] = useState(null)
   const [slide, setSlide] = useState(0)
 
+  const floorPlan =
+    floorIndex !== null ? floor?.floorPlan?.listSizes[floorIndex] : []
+
   const handleNext = () => {
-    if (floorPlan?.listImages[slide + 1]?.image) {
+    if (slide === images.length - 1) {
+      setSlide(0)
+    } else {
       setSlide((count) => count + 1)
     }
   }
 
   const handlePrev = () => {
-    if (floorPlan?.listImages[slide - 1]?.image) {
+    if (slide === 0) {
+      setSlide(images.length - 1)
+    } else {
       setSlide((count) => count - 1)
     }
   }
 
-  return _.isArray(floorPlan?.listImages) &&
-    floorPlan?.listImages?.length > 0 ? (
+  useEffect(() => {
+    if (floor) {
+      const listSizes = floor?.floorPlan?.listSizes
+      for (let i = 0; i < listSizes?.length; i++) {
+        if (listSizes[i]?.listImages) {
+          const listImages = listSizes[i]?.listImages
+          let hasImages = []
+          for (let j = 0; j < listImages?.length; j++) {
+            if (listImages[j]?.image) {
+              hasImages.push(j)
+            }
+          }
+
+          if (!_.isEmpty(hasImages)) {
+            setImages(hasImages)
+            setFloorIndex(i)
+            setSlide(hasImages[0])
+            return
+          }
+        }
+      }
+    }
+  }, [floor])
+
+  return images?.length > 0 && floorIndex !== null ? (
     <>
       <Grid
         templateColumns={'repeat(6, 1fr)'}
@@ -52,6 +83,7 @@ const FloorList = ({ floor }) => {
             variant={ButtonIconVariants.state2}
             bg={'transparent'}
             onClick={handlePrev}
+            visibility={images.length < 2 ? 'hidden' : 'visible'}
           >
             <HiOutlineArrowLeft />
           </ButtonIcon>
@@ -63,15 +95,19 @@ const FloorList = ({ floor }) => {
           justifyContent={'center'}
         >
           {_.isArray(floorPlan?.listImages) &&
-            floorPlan?.listImages[slide]?.image && (
+            floorPlan?.listImages[images[slide]]?.image && (
               <Box mt={'32px'} textAlign={'center'}>
                 <Img
-                  src={urlForImage(floorPlan?.listImages[slide]?.image).url()}
+                  src={urlForImage(
+                    floorPlan?.listImages[images[slide]]?.image
+                  ).url()}
                   width={'202px'}
                   height={'446px'}
-                  alt={floorPlan?.listImages[slide]?.alt}
+                  alt={floorPlan?.listImages[images[slide]]?.alt}
                 />
-                <Text mb={'18px'}>{floorPlan?.listImages[slide]?.name}</Text>
+                <Text mb={'18px'}>
+                  {floorPlan?.listImages[images[slide]]?.name}
+                </Text>
               </Box>
             )}
         </GridItem>
@@ -81,6 +117,7 @@ const FloorList = ({ floor }) => {
             variant={ButtonIconVariants.state2}
             bg={'transparent'}
             onClick={handleNext}
+            visibility={images.length < 2 ? 'hidden' : 'visible'}
           >
             <HiOutlineArrowRight />
           </ButtonIcon>
