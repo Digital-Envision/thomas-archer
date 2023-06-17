@@ -331,6 +331,7 @@ export interface Floor {
       image: SanityFiles
     }[]
   }
+  content: any
   customPageSection?: any
   seo: SEO
 }

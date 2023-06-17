@@ -1,11 +1,17 @@
-import { DOCUMENT_TYPE_SCHEMA_NAME } from './global/DetailsPage';
+import { DOCUMENT_TYPE_SCHEMA_NAME } from './global/DetailsPage'
 import { HeightVariants } from 'components/base/Divider'
 import { enumToArrayOfObjects } from 'lib/utils'
 import _ from 'lodash'
-import { ImageAltField, ImageField, SEOField, SlugField } from './components/fields'
+import {
+  ImageAltField,
+  ImageField,
+  RTFField,
+  SEOField,
+  SlugField,
+} from './components/fields'
 import { FloorPlanDetails } from './sections/FloorPlanDetails'
 import { SectionHeroImageDefaultFields } from './sections/SectionHeroImageDefault'
-import { orderRankField } from '@sanity/orderable-document-list';
+import { orderRankField } from '@sanity/orderable-document-list'
 
 export default {
   type: 'document',
@@ -219,6 +225,10 @@ export default {
         },
         ...FloorPlanDetails,
       ],
+    },
+    {
+      ..._.omit(RTFField, 'title'),
+      title: 'Contact Description',
     },
     {
       name: 'facades',
