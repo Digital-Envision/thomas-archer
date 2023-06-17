@@ -11,7 +11,6 @@ const FloorPlanDetails = ({
   marginBottom,
   hubspot,
   content,
-  ...props
 }) => {
   const [floorType, setFloorType] = useState(0)
   const [images, setImages] = useState([])
