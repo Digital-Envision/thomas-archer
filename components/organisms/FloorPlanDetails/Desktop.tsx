@@ -12,6 +12,7 @@ import React, { useState } from 'react'
 import FloorPlanDetailsModal from './Modal'
 import { getUrlFromSanityFile } from 'lib/utils'
 import Link from 'next/link'
+import CustomPortableText from 'components/base/CustomPortableText'
 
 const FloorPlanDetailsDesktop = ({
   title,
@@ -19,6 +20,8 @@ const FloorPlanDetailsDesktop = ({
   floorType,
   setFloorType,
   hubspot,
+  images,
+  contact,
 }) => {
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [hubspotModalForm, setHubspotModalForm] = useState({
@@ -208,31 +211,32 @@ const FloorPlanDetailsDesktop = ({
         ) : (
           <></>
         )}
-        <Text mt={'40px'}>
-          To find out more, please{' '}
-          <Text as={'span'} textDecor={'underline'}>
-            contact one of our Consultant
-          </Text>
-        </Text>
+        {contact && (
+          <Box mt={'40px'}>
+            <CustomPortableText value={contact} />
+          </Box>
+        )}
       </GridItem>
       <GridItem colSpan={{ lg: 5, xl: 3 }}>
-        <Flex flexDir={'row-reverse'}>
-          {floorPlan?.listSizes[floorType]?.listImages?.map(
-            (img, key) =>
-              img?.image &&
-              key < 2 && (
-                <Box key={key}>
-                  <Text textAlign={'center'} fontWeight={500}>
-                    {img?.name}
-                  </Text>
-                  <Img
-                    src={urlForImage(img?.image).url()}
-                    width={'421px'}
-                    height={'683px'}
-                    alt={img?.name}
-                  ></Img>
-                </Box>
-              )
+        <Flex flexDir={'row'}>
+          {images?.map((img, key) =>
+            img?.image && key < 2 ? (
+              <Box key={key}>
+                <Text textAlign={'center'} fontWeight={500}>
+                  {img?.name}
+                </Text>
+                <Img
+                  src={urlForImage(img?.image).url()}
+                  width={'421px'}
+                  height={'683px'}
+                  alt={img?.name}
+                ></Img>
+              </Box>
+            ) : (
+              <Box key={key}>
+                <Box bg={'transparent'} width={'421px'}></Box>
+              </Box>
+            )
           )}
         </Flex>
       </GridItem>

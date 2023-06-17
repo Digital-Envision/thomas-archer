@@ -32,7 +32,7 @@ export default function FloorPageTemplate(props: FloorPageProps) {
   const { settings, preview, pages, globals, floors, routeDetail } = props // rest should be projects..etc
 
   return (
-    <>
+    <Box bgColor="#FFFFFF">
       {preview && <ExitPreviewButton />}
       <IndexPageHead settings={settings} pageData={floors} />
       <Navbar
@@ -86,6 +86,6 @@ export default function FloorPageTemplate(props: FloorPageProps) {
         footer={globals.Footer}
         hubspot={globals?.Hubspot}
       />
-    </>
+    </Box>
   )
 }

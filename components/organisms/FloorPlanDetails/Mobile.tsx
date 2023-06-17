@@ -22,6 +22,7 @@ import React, { useState } from 'react'
 import FloorPlanDetailsModal from './Modal'
 import { getUrlFromSanityFile } from 'lib/utils'
 import Link from 'next/link'
+import CustomPortableText from 'components/base/CustomPortableText'
 
 const FloorPlanDetailsMobile = ({
   title,
@@ -29,6 +30,8 @@ const FloorPlanDetailsMobile = ({
   floorType,
   setFloorType,
   hubspot,
+  images,
+  contact,
 }) => {
   const [selectImage, setSelectImage] = useState(0)
   const [isOpenModal, setIsOpenModal] = useState(false)
@@ -175,7 +178,7 @@ const FloorPlanDetailsMobile = ({
           mb={'60px'}
         >
           <TabList>
-            {floorPlan?.listSizes[floorType]?.listImages?.map(
+            {images?.map(
               (img, key) =>
                 img?.image && (
                   <Tab
@@ -195,23 +198,18 @@ const FloorPlanDetailsMobile = ({
           </TabList>
         </Tabs>
         <Flex justifyContent={'center'}>
-          {_.isArray(floorPlan?.listSizes[floorType]?.listImages) &&
-            floorPlan?.listSizes[floorType]?.listImages[selectImage] && (
-              <Box>
-                <Img
-                  src={urlForImage(
-                    floorPlan?.listSizes[floorType]?.listImages[selectImage]
-                      ?.image
-                  )?.url()}
-                  width={'347px'}
-                  height={'621px'}
-                  alt={
-                    floorPlan?.listSizes[floorType]?.listImages[selectImage]
-                      ?.name
-                  }
-                ></Img>
-              </Box>
-            )}
+          {_.isArray(images) && images[selectImage] && (
+            <Box>
+              <Img
+                src={urlForImage(images[selectImage]?.image)?.url()}
+                width={'347px'}
+                height={'621px'}
+                alt={
+                  floorPlan?.listSizes[floorType]?.listImages[selectImage]?.name
+                }
+              ></Img>
+            </Box>
+          )}
         </Flex>
       </GridItem>
       <GridItem
@@ -285,12 +283,11 @@ const FloorPlanDetailsMobile = ({
         ) : (
           <></>
         )}
-        <Text mt={'40px'}>
-          To find out more, please{' '}
-          <Text as={'span'} textDecor={'underline'}>
-            contact one of our Consultant
-          </Text>
-        </Text>
+        {contact && (
+          <Box mt={'40px'}>
+            <CustomPortableText value={contact} />
+          </Box>
+        )}
       </GridItem>
     </Grid>
   )
