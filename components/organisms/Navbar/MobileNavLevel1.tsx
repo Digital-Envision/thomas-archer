@@ -9,6 +9,7 @@ import Link, { LinksInterface } from 'components/base/Link'
 
 export interface Props {
   openDrawer?: () => void
+  handleOpenDropdown: () => void
   NAV_ITEMS: Array<NavLinksInterfaces>
   setSubLinks: (
     links: Array<LinksInterface>,
@@ -22,6 +23,7 @@ export interface Props {
 
 const MobileNavLevel1: React.FC<Props> = ({
   openDrawer,
+  handleOpenDropdown,
   NAV_ITEMS,
   setSubLinks,
   specialButtonTwo,
@@ -45,7 +47,7 @@ const MobileNavLevel1: React.FC<Props> = ({
               onClick={() =>
                 link.children
                   ? setSubLinks(link.children, link.label, link.button)
-                  : {}
+                  : handleOpenDropdown()
               }
               width={'auto'}
               paddingX={0}
