@@ -104,6 +104,12 @@ export const pageQuery = (slug: 'string' | { _id: string }) => {
       ...,
       content[]{
         ...,
+        selectedProjects[]->{
+          heading,
+          slug,
+          image,
+          alt,
+        }
       },
     }`
   }
@@ -113,6 +119,12 @@ export const pageQuery = (slug: 'string' | { _id: string }) => {
       ...,
       content[]{
         ...,
+        selectedProjects[]->{
+          heading,
+          slug,
+          image,
+          alt,
+        }
       }
     }`
   }
@@ -121,6 +133,12 @@ export const pageQuery = (slug: 'string' | { _id: string }) => {
       ...,
       content[]{
         ...,
+        selectedProjects[]->{
+          heading,
+          slug,
+          image,
+          alt,
+        }
       }
     }`
 }
