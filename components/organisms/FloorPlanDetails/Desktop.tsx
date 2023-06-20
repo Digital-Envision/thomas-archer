@@ -222,7 +222,7 @@ const FloorPlanDetailsDesktop = ({
           {images?.map((img, key) =>
             img?.image && key < 2 ? (
               <Box key={key}>
-                <Text textAlign={'center'} fontWeight={500}>
+                <Text textAlign={'center'} fontWeight={400}>
                   {img?.name}
                 </Text>
                 <Img

@@ -9,6 +9,7 @@ import Text from 'components/base/Text'
 
 export interface Props {
   NAV_ITEMS: Array<NavLinksInterfaces>
+  handleOpenDropdown: () => void
   title: string
   button: any
   handleBack: () => void
@@ -16,6 +17,7 @@ export interface Props {
 
 const MobileNavLevel2: React.FC<Props> = ({
   NAV_ITEMS,
+  handleOpenDropdown,
   title,
   button,
   handleBack,
@@ -43,6 +45,7 @@ const MobileNavLevel2: React.FC<Props> = ({
                 paddingY={3}
                 paddingX={0}
                 _hover={{}}
+                onClick={handleOpenDropdown}
               >
                 {link.label}
               </DropdownItem>

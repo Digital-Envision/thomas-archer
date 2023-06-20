@@ -88,7 +88,7 @@ export const HeadingTagLevel = {
     },
 }
 
-const RTFAnnotationLink = {
+export const RTFAnnotationLink = {
     name: 'link',
     type: 'object',
     title: 'link',

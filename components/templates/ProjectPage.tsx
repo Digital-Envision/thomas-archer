@@ -18,7 +18,7 @@ import {
 } from '@chakra-ui/react'
 import GalleryScroll from 'components/organisms/GalleryScroll'
 import ProjectScroll from 'components/organisms/ProjectScroll'
-import { EmbeddedVideoPlayer } from 'components/modules/SectionHeroVideoBig'
+import { EmbedVideoPlayer } from 'components/modules/SectionHeroVideoBig'
 import { HeightVariants } from 'components/base/Divider'
 import SectionImageAwards from 'components/modules/SectionImageAwards'
 import ExitPreviewButton from 'components/ExitPreviewButton'
@@ -103,6 +103,7 @@ export default function ProjectPageTemplate(props: any) {
           projects={projects}
           marginTop={HeightVariants.extra}
           marginBottom={HeightVariants.more}
+          projectPage
         />
       )}
       <Footer
@@ -123,7 +124,7 @@ export default function ProjectPageTemplate(props: any) {
             </Box>
           </ModalHeader>
           <ModalBody p={0} m={0} borderRadius="md">
-            <EmbeddedVideoPlayer
+            <EmbedVideoPlayer
               externalVideo={project?.SectionHeadingParagraphCTA?.embeddedVideo}
             />
           </ModalBody>

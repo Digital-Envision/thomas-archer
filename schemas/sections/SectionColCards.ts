@@ -17,7 +17,7 @@ export default {
                     type: 'ArticleBlogCard',
                 },
             ],
-            validation: (Rule) => Rule.max(3).min(2),
+            validation: (Rule) => Rule.max(3).min(1),
         },
         {
             name: 'headingTagLevel',

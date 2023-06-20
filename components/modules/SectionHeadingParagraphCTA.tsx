@@ -11,7 +11,7 @@ import { PortableTextBlock } from '@portabletext/types'
 type SectionHeadingParagraphCTAProps = {
   heading: string
   headingTagLevel?: HeadingTagSemantic
-  content: PortableTextBlock
+  content?: PortableTextBlock
   isOffset?: boolean
   showButton?: boolean
   marginTop?: HeightVariants

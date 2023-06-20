@@ -48,16 +48,20 @@ const Video = ({ withCover, isExternalVideo, externalVideo, video }) => {
       )
 }
 
-export const EmbeddedVideoPlayer = (props) => {
+export const EmbedVideoPlayer = ({
+  asBackground = false,
+  externalVideo,
+  ...props
+}) => {
   return (
     <AspectRatio ratio={16 / 9}>
       <iframe
         width={'100vw'}
         height={'100vh'}
         src={
-          props.asBackground
-            ? `${props.externalVideo}?autoplay=1&loop=1&background=1`
-            : props.externalVideo
+          asBackground
+            ? `${externalVideo}?autoplay=1&loop=1&background=1`
+            : externalVideo
         }
         frameBorder={0}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

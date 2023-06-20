@@ -213,6 +213,7 @@ const Navbar = ({
         <Box height={'87%'}>
           <Collapse in={onOpenDropdown} endingHeight={'100%'}>
             <MobileCollapse
+              handleOpenDropdown={handleOpenDropdown}
               openDrawer={() => setOpenDrawer(true)}
               NAV_ITEMS={Links}
               onOpenLevel2={onOpenLevel2}

@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import React, { useEffect, useState } from 'react'
-import { Box, Flex, Grid, GridItem, Img, SimpleGrid } from '@chakra-ui/react'
+import { Box, Flex, Grid, GridItem, Img } from '@chakra-ui/react'
 import ButtonIcon, {
   Variants as ButtonIconVariants,
 } from 'components/base/ButtonIcon'
@@ -76,6 +76,7 @@ const FloorList = ({ floor }) => {
         justifyContent={'center'}
         bg={'#F5F5F5'}
         px={'16px'}
+        rowGap={'4rem'}
       >
         <GridItem colSpan={1}>
           <ButtonIcon
@@ -96,19 +97,28 @@ const FloorList = ({ floor }) => {
         >
           {_.isArray(floorPlan?.listImages) &&
             floorPlan?.listImages[images[slide]]?.image && (
-              <Box mt={'32px'} textAlign={'center'}>
-                <Img
-                  src={urlForImage(
-                    floorPlan?.listImages[images[slide]]?.image
-                  ).url()}
-                  width={'202px'}
-                  height={'446px'}
-                  alt={floorPlan?.listImages[images[slide]]?.alt}
-                />
-                <Text mb={'18px'}>
-                  {floorPlan?.listImages[images[slide]]?.name}
-                </Text>
-              </Box>
+              <Link
+                href={
+                  floorPlanParentPage
+                    ? `/${floorPlanParentPage}/${floor?.slug?.current}`
+                    : '#'
+                }
+              >
+                <Box mt={'40px'} textAlign={'center'}>
+                  <Text>{floor?.title}</Text>
+                  <Img
+                    src={urlForImage(
+                      floorPlan?.listImages[images[slide]]?.image
+                    ).url()}
+                    width={'202px'}
+                    height={'436px'}
+                    alt={floorPlan?.listImages[images[slide]]?.alt}
+                  />
+                  <Text mb={'18px'}>
+                    {floorPlan?.listImages[images[slide]]?.name}
+                  </Text>
+                </Box>
+              </Link>
             )}
         </GridItem>
         <GridItem colSpan={1} display={'flex'} justifyContent={'right'}>
@@ -123,19 +133,19 @@ const FloorList = ({ floor }) => {
           </ButtonIcon>
         </GridItem>
       </Grid>
-      <Flex
-        alignItems={'center'}
-        justifyContent={'center'}
-        mt={'43px'}
-        borderBottom={'1px solid #D9D9D9'}
-        pb={'10px'}
+      <Link
+        href={
+          floorPlanParentPage
+            ? `/${floorPlanParentPage}/${floor?.slug?.current}`
+            : '#'
+        }
       >
-        <Link
-          href={
-            floorPlanParentPage
-              ? `/${floorPlanParentPage}/${floor?.slug?.current}`
-              : '#'
-          }
+        <Flex
+          alignItems={'center'}
+          justifyContent={'center'}
+          mt={'20px'}
+          borderBottom={'1px solid #D9D9D9'}
+          pb={'15px'}
         >
           <Text textDecor={'underline'}>
             {floor?.title}{' '}
@@ -143,28 +153,28 @@ const FloorList = ({ floor }) => {
               return key > 0 ? ` | ${type?.size}` : type?.size
             })}
           </Text>
-        </Link>
-        <Flex ml={'auto'} alignItems={'center'}>
-          <Box textAlign={'center'}>
-            <Bed />
-            <Text as={'span'} ml={'13px'}>
-              {floorPlan?.roomDetails?.bedRoom}
-            </Text>
-          </Box>
-          <Box mx={'13px'}>
-            <Bath />
-            <Text as={'span'} ml={'13px'}>
-              {floorPlan?.roomDetails?.bathRoom}
-            </Text>
-          </Box>
-          <Box>
-            <Car />
-            <Text as={'span'} ml={'13px'}>
-              {floorPlan?.roomDetails?.carPort}
-            </Text>
-          </Box>
+          <Flex ml={'auto'} alignItems={'center'}>
+            <Box textAlign={'center'}>
+              <Bed />
+              <Text as={'span'} ml={'13px'}>
+                {floorPlan?.roomDetails?.bedRoom}
+              </Text>
+            </Box>
+            <Box mx={'13px'}>
+              <Bath />
+              <Text as={'span'} ml={'13px'}>
+                {floorPlan?.roomDetails?.bathRoom}
+              </Text>
+            </Box>
+            <Box>
+              <Car />
+              <Text as={'span'} ml={'13px'}>
+                {floorPlan?.roomDetails?.carPort}
+              </Text>
+            </Box>
+          </Flex>
         </Flex>
-      </Flex>
+      </Link>
     </>
   ) : (
     <></>

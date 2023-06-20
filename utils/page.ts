@@ -137,6 +137,9 @@ export const setPropsForDetailPage = async (props) => {
     switch (detailsPage) {
         case DOCUMENT_TYPES_PAGE_NAME.FloorPlan:
             data = await getDataFloorDetailPage({ slug: detailPathId })
+            if (_.isEmpty(data)) {
+                break
+            }
             data = {
                 ...data,
                 ...(await callingProps.projects()),
@@ -145,6 +148,9 @@ export const setPropsForDetailPage = async (props) => {
             break
         case DOCUMENT_TYPES_PAGE_NAME.Projects:
             data = await getDataProjectDetailPage({ slug: detailPathId })
+            if (_.isEmpty(data)) {
+                break
+            }
             data = {
                 ...data,
                 ...(await callingProps.floors()),

@@ -67,7 +67,7 @@ export default function BlogPageTemplate(props: any) {
       {!_.isEmpty(blog?.page?.SectionGalleryScroll) && (
         <>
           <GalleryScroll {...blog?.page?.SectionGalleryScroll} />
-          <Box pb={HeightVariants.extra} />
+          <Box pb={HeightVariants.less} />
         </>
       )}
 
