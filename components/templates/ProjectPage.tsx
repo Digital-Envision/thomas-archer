@@ -103,6 +103,7 @@ export default function ProjectPageTemplate(props: any) {
           projects={projects}
           marginTop={HeightVariants.extra}
           marginBottom={HeightVariants.more}
+          projectPage
         />
       )}
       <Footer
