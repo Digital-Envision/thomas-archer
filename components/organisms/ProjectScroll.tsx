@@ -17,6 +17,7 @@ const ProjectScroll = ({
   marginTop,
   content,
   button,
+  selectedProjects,
 }) => {
   const projectRef = useStoreLink(
     (state) => state?.detailsPage?.projects?.parentPage?._ref
@@ -78,7 +79,7 @@ const ProjectScroll = ({
           </Box>
         </Box>
         {/* sort projects on groq level by orderRank */}
-        {projects?.data.map((project, key) => {
+        {selectedProjects?.map((project, key) => {
           return (
             <Box>
               <Box
