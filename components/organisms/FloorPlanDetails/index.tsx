@@ -42,9 +42,6 @@ const FloorPlanDetails = ({
 
   return (
     <Box
-      px={{
-        md: '4rem',
-      }}
       display={{ md: 'flex' }}
       alignItems={'center'}
       justifyContent={'center'}
@@ -55,6 +52,7 @@ const FloorPlanDetails = ({
         display={{ base: 'none', lg: 'flex' }}
         width={'100%'}
         maxW={{ md: '1800px' }}
+        px={{ md: '4rem' }}
         alignItems={{ lg: 'center' }}
         justifyContent={{ lg: 'center' }}
       >
