@@ -75,6 +75,15 @@ export const floorQuery = (props) => {
       facades->{
         listImages,
       },
+      customPageSection[]{
+        ...,
+        selectedProjects[]->{
+          heading,
+          slug,
+          image,
+          alt,
+        }
+      }
     }`
   } else if (ids.length > 1 || byId) {
     if (select) {

@@ -18,6 +18,8 @@ const ProjectScroll = ({
   content,
   button,
   selectedProjects,
+  isSelectedProject,
+  projectPage,
 }) => {
   const projectRef = useStoreLink(
     (state) => state?.detailsPage?.projects?.parentPage?._ref
@@ -27,6 +29,17 @@ const ProjectScroll = ({
   )
 
   const [mediaWidth, setMediaWidth] = useState(0)
+  const [listProjects, setListProjects] = useState([])
+
+  useEffect(() => {
+    if (projectPage) {
+      setListProjects(projects?.data)
+    } else if (!projectPage && isSelectedProject) {
+      setListProjects(selectedProjects)
+    } else {
+      setListProjects(projects?.data)
+    }
+  }, [selectedProjects])
 
   useEffect(() => {
     const handleResize = () => {
@@ -54,104 +67,106 @@ const ProjectScroll = ({
         content={content}
         button={button}
       />
-      <ScrollBox
-        widthImage={mediaWidth > 767 ? 362 : 277}
-        padding={mediaWidth > 767 ? 64 : 18}
-        mt={'66px'}
-      >
-        {/* spacing */}
-        <Box>
-          <Box
-            transition={'all .6s'}
-            height={{ base: '373px', md: '500px' }}
-            _hover={{
-              userSelect: 'none',
-            }}
-          >
+      {!_.isEmpty(listProjects) && (
+        <ScrollBox
+          widthImage={mediaWidth > 767 ? 362 : 277}
+          padding={mediaWidth > 767 ? 64 : 18}
+          mt={'66px'}
+        >
+          {/* spacing */}
+          <Box>
             <Box
-              width={{
-                base: '18px',
-                md: '64px',
+              transition={'all .6s'}
+              height={{ base: '373px', md: '500px' }}
+              _hover={{
+                userSelect: 'none',
               }}
-              height={'100%'}
-              bg={'transparent'}
-            ></Box>
-          </Box>
-        </Box>
-        {/* sort projects on groq level by orderRank */}
-        {selectedProjects?.map((project, key) => {
-          return (
-            <Box>
+            >
               <Box
-                key={key}
-                height={{ base: '373px', md: '500px' }}
-                _hover={{
-                  userSelect: 'none',
+                width={{
+                  base: '18px',
+                  md: '64px',
                 }}
-              >
-                <Box
-                  width={{ base: '277px', md: '362px' }}
-                  height={'100%'}
-                  position={'relative'}
-                >
-                  {project?.image && (
-                    <Link
-                      href={
-                        project?.slug?.current && projectParentPage
-                          ? `/${projectParentPage}/${project?.slug?.current}`
-                          : '#'
-                      }
-                    >
-                      <Image
-                        src={
-                          (project?.image &&
-                            urlForImage(project?.image).url()) ||
-                          ''
-                        }
-                        alt={project?.alt || project?.heading}
-                        fill
-                        objectFit="cover"
-                      />
-                    </Link>
-                  )}
-                </Box>
-              </Box>
-              {project?.heading && (
-                <Link
-                  href={
-                    project?.slug?.current && projectParentPage
-                      ? `/${projectParentPage}/${project?.slug?.current}`
-                      : '#'
-                  }
-                >
-                  <Text mt={4} textDecor={'underline'}>
-                    {project?.heading}
-                  </Text>
-                </Link>
-              )}
+                height={'100%'}
+                bg={'transparent'}
+              ></Box>
             </Box>
-          )
-        })}
-        {/* spacing */}
-        <Box>
-          <Box
-            transition={'all .6s'}
-            height={{ base: '373px', md: '500px' }}
-            _hover={{
-              userSelect: 'none',
-            }}
-          >
-            <Box
-              width={{
-                base: '18px',
-                md: '64px',
-              }}
-              height={'100%'}
-              bg={'transparent'}
-            ></Box>
           </Box>
-        </Box>
-      </ScrollBox>
+          {/* sort projects on groq level by orderRank */}
+          {listProjects?.map((project, key) => {
+            return (
+              <Box>
+                <Box
+                  key={key}
+                  height={{ base: '373px', md: '500px' }}
+                  _hover={{
+                    userSelect: 'none',
+                  }}
+                >
+                  <Box
+                    width={{ base: '277px', md: '362px' }}
+                    height={'100%'}
+                    position={'relative'}
+                  >
+                    {project?.image && (
+                      <Link
+                        href={
+                          project?.slug?.current && projectParentPage
+                            ? `/${projectParentPage}/${project?.slug?.current}`
+                            : '#'
+                        }
+                      >
+                        <Image
+                          src={
+                            (project?.image &&
+                              urlForImage(project?.image).url()) ||
+                            ''
+                          }
+                          alt={project?.alt || project?.heading}
+                          fill
+                          objectFit="cover"
+                        />
+                      </Link>
+                    )}
+                  </Box>
+                </Box>
+                {project?.heading && (
+                  <Link
+                    href={
+                      project?.slug?.current && projectParentPage
+                        ? `/${projectParentPage}/${project?.slug?.current}`
+                        : '#'
+                    }
+                  >
+                    <Text mt={4} textDecor={'underline'}>
+                      {project?.heading}
+                    </Text>
+                  </Link>
+                )}
+              </Box>
+            )
+          })}
+          {/* spacing */}
+          <Box>
+            <Box
+              transition={'all .6s'}
+              height={{ base: '373px', md: '500px' }}
+              _hover={{
+                userSelect: 'none',
+              }}
+            >
+              <Box
+                width={{
+                  base: '18px',
+                  md: '64px',
+                }}
+                height={'100%'}
+                bg={'transparent'}
+              ></Box>
+            </Box>
+          </Box>
+        </ScrollBox>
+      )}
     </Box>
   )
 }
