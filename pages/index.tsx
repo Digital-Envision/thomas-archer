@@ -131,7 +131,6 @@ export const getStaticProps: GetStaticProps<
 
   // fetch universal data
   const pageProps = await setPropsForPage()
-  console.log({ pageProps, pages: pages[0].content })
   // TODO fetch data based on page content, example: if there's SectionProjectLlisting, need to fetch projects
 
   return {
