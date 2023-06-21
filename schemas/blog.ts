@@ -10,7 +10,27 @@ export default {
         CreatedDateField,
         SlugField,
         HeadingField,
-        RTFField,
+        {
+            ...RTFField, of: [
+                {
+                    type: 'block'
+                },
+                {
+                    type: 'image'
+                },
+                {
+                    name: 'externalVideo',
+                    type: 'object',
+                    title: 'Vimeo/YouTube Embed Url',
+                    fields: [
+                        {
+                            name: 'url',
+                            type: 'url',
+                        }
+                    ]
+                }
+            ]
+        },
         ImageField,
         ImageAltField,
         {
