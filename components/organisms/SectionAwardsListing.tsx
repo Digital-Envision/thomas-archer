@@ -1,14 +1,13 @@
-import { Box, Flex, Grid, GridItem } from '@chakra-ui/react'
+import { Box, GridItem } from '@chakra-ui/react'
 import Button, { Variants } from 'components/base/Button'
 import { HeightVariants } from 'components/base/Divider'
 import { ProjectListingCardProps } from 'components/modules/ProjectListingCard'
 import _ from 'lodash'
-import { useRouter } from 'next/router'
-
 import AwardListingCard from 'components/modules/AwardListingCard'
 import { useState } from 'react'
 import { getSanityData } from 'lib/sanity.client'
 import { ListingContainer, ListingGrid } from 'components/base/Listing'
+import { useStoreLink } from 'lib/store/link'
 
 type SectionAwardsListingProps = {
   awardedProjects: ProjectListingCardProps
@@ -17,9 +16,15 @@ type SectionAwardsListingProps = {
 }
 
 const SectionAwardsListing: React.FC<SectionAwardsListingProps> = (props) => {
-  const { marginTop, marginBottom, awardedProjects: _projects } = props
-  const { asPath } = useRouter()
+  const { awardedProjects: _projects } = props
   const [projects, setProjects] = useState(_projects)
+
+  const projectRef = useStoreLink(
+    (state) => state?.detailsPage?.projects?.parentPage?._ref
+  )
+  const projectParentPage = useStoreLink(
+    (state) => state?.pages[projectRef]?.url
+  )
 
   const handleViewMore = async () => {
     const currentPagination = projects?.pagination
@@ -53,7 +58,11 @@ const SectionAwardsListing: React.FC<SectionAwardsListingProps> = (props) => {
             <GridItem key={index} colSpan={1}>
               <AwardListingCard
                 {...props}
-                link={`${asPath}/project/${props?.slug?.current}`}
+                link={
+                  props?.slug?.current && projectParentPage
+                    ? `/${projectParentPage}/${props?.slug?.current}`
+                    : '#'
+                }
               />
             </GridItem>
           )

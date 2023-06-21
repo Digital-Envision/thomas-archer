@@ -1,4 +1,4 @@
-import { CreatedDateField, HeadingField, ImageAltField, ImageField, RTFField, SEOField, SlugField } from "./components/fields";
+import { CreatedDateField, HeadingField, ImageAltField, ImageField, RTFAnnotationLink, RTFField, SEOField, SlugField } from "./components/fields";
 import { DOCUMENT_TYPE_SCHEMA_NAME } from "./global/DetailsPage";
 import { listImagesFields } from "./sections/SectionGalleryScroll";
 
@@ -13,7 +13,12 @@ export default {
         {
             ...RTFField, of: [
                 {
-                    type: 'block'
+                    type: 'block',
+                    marks: {
+                        annotations: [
+                            RTFAnnotationLink
+                        ]
+                    },
                 },
                 {
                     type: 'image'
