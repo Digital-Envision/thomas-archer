@@ -129,11 +129,9 @@ const MobileCollapse: React.FC<Props> = ({
 
       <Box mt={'auto'}>
         <Flex alignItems={'center'}>
-          {socialMedia?.connectWithUs && (
+          {socialMedia?.socialMedia?.length && (
             <Box>
-              <Link link={socialMedia?.connectWithUs}>
-                <Text width={'100px'}>Connect with us</Text>
-              </Link>
+               <Text width={'100px'}>Connect with us</Text>
             </Box>
           )}
           {socialMedia?.socialMedia?.length > 0 && (

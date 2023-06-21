@@ -154,9 +154,9 @@ const DesktopSubNav: React.FC<Props> = ({
         <GridItem colSpan={7}>
           <SimpleGrid columns={2} spacingX={10}>
             <Flex alignItems={'center'}>
-              {socialMedia?.connectWithUs && (
+              {socialMedia?.socialMedia?.length > 0 && (
                 <Box>
-                  <Text textDecor={'underline'}>Connect with us</Text>
+                  <Text>Connect with us</Text>
                 </Box>
               )}
               {socialMedia?.socialMedia?.length > 0 && (
