@@ -206,21 +206,27 @@ export const getStaticProps: GetStaticProps<
       if (pageProps?.blog?.content) {
         documentTypeRef = checkLinkType([
           ...pageProps?.blog?.content,
-          ...pageProps?.blog?.customPageSection,
+          ...(!_.isEmpty(pageProps?.blog?.customPageSection)
+            ? pageProps?.blog?.customPageSection
+            : []),
         ])
         documentTypeSlugs = await getDocumentTypeSlugs(documentTypeRef)
         restructuredDocumentType = structuredDocumentTypes(documentTypeSlugs)
       } else if (pageProps?.project?.content) {
         documentTypeRef = checkLinkType([
           ...pageProps?.project?.content,
-          ...pageProps?.project?.customPageSection,
+          ...(!_.isEmpty(pageProps?.project?.customPageSection)
+            ? pageProps?.project?.customPageSection
+            : []),
         ])
         documentTypeSlugs = await getDocumentTypeSlugs(documentTypeRef)
         restructuredDocumentType = structuredDocumentTypes(documentTypeSlugs)
       } else if (pageProps?.floors?.content) {
         documentTypeRef = checkLinkType([
           ...pageProps?.floors?.content,
-          ...pageProps?.floors?.customPageSection,
+          ...(!_.isEmpty(pageProps?.floors?.customPageSection)
+            ? pageProps?.floors?.customPageSection
+            : []),
         ])
 
         documentTypeSlugs = await getDocumentTypeSlugs(documentTypeRef)
