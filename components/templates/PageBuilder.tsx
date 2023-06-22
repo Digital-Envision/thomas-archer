@@ -36,6 +36,7 @@ import SectionParagraph from 'components/modules/SectionParagraph'
 import _ from 'lodash'
 import React from 'react'
 import SectionFeaturedImage from 'components/modules/SectionFeaturedImage'
+import TransitionFade from 'components/base/TransitionFade'
 
 const PageBuilder = (props) => {
   const { pages, ...pageProps } = props
@@ -219,7 +220,7 @@ const PageBuilder = (props) => {
         default:
           el = null
       }
-      return el
+      return <TransitionFade>{el}</TransitionFade>
     })
 
   return <Box bgColor="#FFFFFF">{content}</Box>
