@@ -66,7 +66,7 @@ const Steps = ({ title, description, steps, marginBottom, marginTop }) => {
             return (
               <GridItem
                 key={key}
-                colSpan={4}
+                colSpan={steps?.length}
                 alignItems={'center'}
                 width={'100%'}
               >

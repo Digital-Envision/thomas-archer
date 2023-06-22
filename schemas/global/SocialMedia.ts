@@ -17,16 +17,6 @@ export default defineField({
   type: 'object',
   fields: [
     {
-      name: 'connectWithUs',
-      title: 'Connect with us',
-      type: 'object',
-      options: {
-        collapsible: true,
-        collapsed: true,
-      },
-      fields: [..._.filter(link, (obj) => !['label'].includes(obj.name))],
-    },
-    {
       name: 'socialMedia',
       title: 'Social Media',
       type: 'array',

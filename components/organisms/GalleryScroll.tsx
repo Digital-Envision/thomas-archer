@@ -64,7 +64,7 @@ const HorizontalImage = ({ image, alt, name, description }) => {
         >
           <Image
             src={image ? image : '#'}
-            alt={alt || name}
+            alt={alt || name || ''}
             fill
             objectFit="cover"
             objectPosition="center"
@@ -124,7 +124,7 @@ const VerticalImage = ({ image, alt, name, description }) => {
         >
           <Image
             src={image ? image : '#'}
-            alt={alt || name}
+            alt={alt || name || ''}
             fill
             objectFit="cover"
             objectPosition="center"
@@ -183,7 +183,7 @@ const GalleryScroll: React.FC<GalleryScrollProps> = ({
               {image?.isVertical && image?.image ? (
                 <VerticalImage
                   image={getImageUrl(image?.image)}
-                  alt={image?.alt}
+                  alt={image?.alt || image?.name || ''}
                   name={image?.name}
                   description={image?.description}
                 />
@@ -191,7 +191,7 @@ const GalleryScroll: React.FC<GalleryScrollProps> = ({
                 image?.image && (
                   <HorizontalImage
                     image={getImageUrl(image?.image)}
-                    alt={image?.alt}
+                    alt={image?.alt || image?.name || ''}
                     name={image?.name}
                     description={image?.description}
                   />

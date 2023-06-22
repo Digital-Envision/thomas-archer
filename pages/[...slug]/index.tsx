@@ -41,7 +41,7 @@ const PreviewFloorPage = lazy(
 )
 
 export default function DynamicPage(props) {
-  //console.log('Dynamic page props', props)
+  // console.log('Dynamic page props', props)
 
   const {
     posts,
@@ -177,7 +177,7 @@ export const getStaticProps: GetStaticProps<
 
   const { preview = false, previewData = {}, params } = ctx
   let pages = []
-  let pageProps = {}
+  let pageProps: any = {}
 
   const [settings, globals = []] = await Promise.all([
     getSettings(),
@@ -201,6 +201,38 @@ export const getStaticProps: GetStaticProps<
     // fetch page based on route or details page
     if (routeDetail.detailsPage) {
       pageProps = await setPropsForDetailPage({ routeDetail })
+
+      // set detail slugs for RTF or customPageSection for detailed page
+      if (pageProps?.blog?.content) {
+        documentTypeRef = checkLinkType([
+          ...pageProps?.blog?.content,
+          ...(!_.isEmpty(pageProps?.blog?.customPageSection)
+            ? pageProps?.blog?.customPageSection
+            : []),
+        ])
+        documentTypeSlugs = await getDocumentTypeSlugs(documentTypeRef)
+        restructuredDocumentType = structuredDocumentTypes(documentTypeSlugs)
+      } else if (pageProps?.project?.content) {
+        documentTypeRef = checkLinkType([
+          ...pageProps?.project?.content,
+          ...(!_.isEmpty(pageProps?.project?.customPageSection)
+            ? pageProps?.project?.customPageSection
+            : []),
+        ])
+        documentTypeSlugs = await getDocumentTypeSlugs(documentTypeRef)
+        restructuredDocumentType = structuredDocumentTypes(documentTypeSlugs)
+      } else if (pageProps?.floors?.content) {
+        documentTypeRef = checkLinkType([
+          ...pageProps?.floors?.content,
+          ...(!_.isEmpty(pageProps?.floors?.customPageSection)
+            ? pageProps?.floors?.customPageSection
+            : []),
+        ])
+
+        documentTypeSlugs = await getDocumentTypeSlugs(documentTypeRef)
+        restructuredDocumentType = structuredDocumentTypes(documentTypeSlugs)
+      }
+
       if (_.isEmpty(pageProps)) {
         return { notFound: true }
       }

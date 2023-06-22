@@ -29,7 +29,11 @@ const SectionColCards: React.FC<Section2ColCardsProps> = ({
       {ListArticleBlogCards.length > 0 && (
         <Grid
           templateColumns={{
-            md: `repeat(${ListArticleBlogCards?.length}, 1fr)`,
+            md: `${
+              ListArticleBlogCards.length > 2
+                ? `repeat(${ListArticleBlogCards?.length}, 1fr)`
+                : 'repeat(2, 1fr)'
+            }`,
           }}
           gap={{ base: 14, md: 5 }}
         >

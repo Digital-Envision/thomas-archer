@@ -13,6 +13,8 @@ import IndexPageHead from 'components/IndexPageHead'
 import ExitPreviewButton from 'components/ExitPreviewButton'
 import { ProjectListingCardProps } from 'components/modules/ProjectListingCard'
 import { BlogListingCardProps } from 'components/modules/BlogListingCard'
+import SectionHeadingParagraphCTA from 'components/modules/SectionHeadingParagraphCTA'
+import { HeadingTagSemantic } from 'components/base/Heading1'
 
 export interface FloorPageProps {
   settings: any
@@ -63,11 +65,19 @@ export default function FloorPageTemplate(props: FloorPageProps) {
           hubspot={globals?.Hubspot}
         />
         {floors?.facades && floors?.facades?.listImages?.length > 0 && (
-          <GalleryScroll
-            listImages={floors?.facades?.listImages}
+          <Box
             marginTop={HeightVariants.extra}
             marginBottom={HeightVariants.extra}
-          />
+          >
+            <SectionHeadingParagraphCTA
+              isOffset={false}
+              heading={'Facade Options'}
+              headingTagLevel={HeadingTagSemantic.H2}
+            />
+            <Box mt={'66px'}>
+              <GalleryScroll listImages={floors?.facades?.listImages} />
+            </Box>
+          </Box>
         )}
       </Box>
 

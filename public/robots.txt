@@ -1,7 +1,7 @@
 User-agent: Googlebot
-Disallow: /
+Allow: /
 
 User-agent: *
 Allow: /
 
-Sitemap: https://thomas-archer.netlify.app/sitemap.xml
+Sitemap: https://thomasarcher.com.au/sitemap.xml

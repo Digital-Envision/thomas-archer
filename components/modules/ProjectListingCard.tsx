@@ -46,7 +46,7 @@ const ProjectListingCard: React.FC<ProjectListingCardProps['data'][0]> = ({
           />
         </Box>
 
-        <Box py="5" h="170px">
+        <Box py="5" h="130px">
           <CardHeading>{heading}</CardHeading>
           <Text fontSize={'14px'} mb="1">
             {subHeading}

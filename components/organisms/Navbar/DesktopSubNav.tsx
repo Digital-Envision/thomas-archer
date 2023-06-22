@@ -10,7 +10,7 @@ import {
 import Button, { Variants as ButtonVariants } from 'components/base/Button'
 import Text from 'components/base/Text'
 import Heading1 from 'components/base/Heading1'
-import React from 'react'
+import React, { useState } from 'react'
 import DropdownItem from 'components/modules/DropdownItem'
 import Link, { LinksInterface } from 'components/base/Link'
 import NextLink from 'next/link'
@@ -49,6 +49,16 @@ const DesktopSubNav: React.FC<Props> = ({
   contact,
   socialMedia,
 }) => {
+  const [onClickLink, setOnClickLink] = useState(false)
+
+  const handleOnClickLink = () => {
+    setOnClickLink(true)
+
+    setTimeout(() => {
+      setOnClickLink(false)
+    }, 600)
+  }
+
   const handleRearrangedGrid = (subNav) => {
     if (_.isArray(subNav)) {
       const array = subNav.filter((link) => {
@@ -97,9 +107,9 @@ const DesktopSubNav: React.FC<Props> = ({
       opacity={0}
       sx={{
         '.nav:hover &': {
-          visibility: 'visible',
-          opacity: 1,
-          zIndex: 99,
+          visibility: !onClickLink && 'visible',
+          opacity: !onClickLink && 1,
+          zIndex: !onClickLink && 99,
         },
       }}
     >
@@ -118,6 +128,7 @@ const DesktopSubNav: React.FC<Props> = ({
                     width={'auto'}
                     paddingX={0}
                     _hover={{}}
+                    onClick={handleOnClickLink}
                   >
                     {link.label}
                   </DropdownItem>
@@ -131,18 +142,21 @@ const DesktopSubNav: React.FC<Props> = ({
         <GridItem colSpan={4}>
           {button && button?.label && (
             <Link link={button}>
-              <Button variant={ButtonVariants.black}>{button?.label}</Button>
+              <Button
+                variant={ButtonVariants.black}
+                onClick={handleOnClickLink}
+              >
+                {button?.label}
+              </Button>
             </Link>
           )}
         </GridItem>
         <GridItem colSpan={7}>
           <SimpleGrid columns={2} spacingX={10}>
             <Flex alignItems={'center'}>
-              {socialMedia?.connectWithUs && (
+              {socialMedia?.socialMedia?.length > 0 && (
                 <Box>
-                  <Link link={socialMedia?.connectWithUs}>
-                    <Text textDecor={'underline'}>Connect with us</Text>
-                  </Link>
+                  <Text>Connect with us</Text>
                 </Box>
               )}
               {socialMedia?.socialMedia?.length > 0 && (
@@ -163,7 +177,12 @@ const DesktopSubNav: React.FC<Props> = ({
                         />
                       )}
                       <Link link={sc}>
-                        <Text textDecor={'underline'}>{sc.label}</Text>
+                        <Text
+                          textDecor={'underline'}
+                          onClick={handleOnClickLink}
+                        >
+                          {sc.label}
+                        </Text>
                       </Link>
                     </>
                   )
@@ -171,7 +190,7 @@ const DesktopSubNav: React.FC<Props> = ({
               </Flex>
             </Flex>
             <NextLink href={`mailto:${contact?.email}`}>
-              <Text>{contact?.email}</Text>
+              <Text onClick={handleOnClickLink}>{contact?.email}</Text>
             </NextLink>
           </SimpleGrid>
         </GridItem>

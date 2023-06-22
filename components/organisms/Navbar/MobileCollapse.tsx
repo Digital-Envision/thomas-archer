@@ -10,6 +10,7 @@ import MobileNavLevel2 from './MobileNavLevel2'
 
 export interface Props {
   openDrawer?: () => void
+  handleOpenDropdown: () => void
   NAV_ITEMS: Array<NavLinksInterfaces>
   onOpenLevel2: boolean
   setOnOpenLevel2: (status: boolean) => void
@@ -39,6 +40,7 @@ export interface Props {
 }
 
 const MobileCollapse: React.FC<Props> = ({
+  handleOpenDropdown,
   openDrawer,
   NAV_ITEMS,
   onOpenLevel2,
@@ -106,6 +108,7 @@ const MobileCollapse: React.FC<Props> = ({
         <Grid templateColumns={'repeat(2, 1fr)'} width={'full'} gap={'10%'}>
           <GridItem>
             <MobileNavLevel1
+              handleOpenDropdown={handleOpenDropdown}
               openDrawer={openDrawer}
               NAV_ITEMS={NAV_ITEMS}
               setSubLinks={handleOpenLevel2}
@@ -114,6 +117,7 @@ const MobileCollapse: React.FC<Props> = ({
           </GridItem>
           <GridItem>
             <MobileNavLevel2
+              handleOpenDropdown={handleOpenDropdown}
               NAV_ITEMS={subLinks}
               title={subTitle}
               button={subButton}
@@ -125,11 +129,9 @@ const MobileCollapse: React.FC<Props> = ({
 
       <Box mt={'auto'}>
         <Flex alignItems={'center'}>
-          {socialMedia?.connectWithUs && (
+          {socialMedia?.socialMedia?.length && (
             <Box>
-              <Link link={socialMedia?.connectWithUs}>
-                <Text width={'100px'}>Connect with us</Text>
-              </Link>
+               <Text width={'100px'}>Connect with us</Text>
             </Box>
           )}
           {socialMedia?.socialMedia?.length > 0 && (
