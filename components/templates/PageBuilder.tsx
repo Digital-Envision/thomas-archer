@@ -36,6 +36,7 @@ import SectionParagraph from 'components/modules/SectionParagraph'
 import _ from 'lodash'
 import React from 'react'
 import SectionFeaturedImage from 'components/modules/SectionFeaturedImage'
+import CodeEmbed from 'components/base/CodeEmbed'
 
 const PageBuilder = (props) => {
   const { pages, ...pageProps } = props
@@ -205,6 +206,9 @@ const PageBuilder = (props) => {
           break
         case 'SectionParagraph':
           el = <SectionParagraph {...c} {...pageProps} key={c?._key} />
+          break
+        case 'CodeEmbed':
+          el = <CodeEmbed {...c} {...pageProps} key={c?._key} />
           break
         case 'fixedComponent':
           switch (c.name) {

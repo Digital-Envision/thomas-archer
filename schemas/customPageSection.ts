@@ -37,5 +37,6 @@ export default {
         { type: 'SectionAwardsListing' },
         { type: 'SectionBookingForm' },
         { type: 'SectionParagraph' },
+        { type: 'CodeEmbed' },
     ],
 }

@@ -62,6 +62,7 @@ import SectionColCards from 'schemas/sections/SectionColCards'
 import SectionBookingForm from 'schemas/sections/SectionBookingForm'
 import SectionParagraph from 'schemas/sections/SectionParagraph'
 import SectionFeaturedImage from 'schemas/sections/SectionFeaturedImage'
+import CodeEmbed from 'schemas/sections/CodeEmbed'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -120,6 +121,10 @@ export default defineConfig({
       SectionAwardsListing,
       SectionBookingForm,
       SectionParagraph,
+      SectionColCards,
+      Section2ColImageTextMosaicType2,
+      Section2ColHeading2ColParagraph,
+      CodeEmbed,
 
       // -- subSection
       ArticleBlogCard,
@@ -131,10 +136,6 @@ export default defineConfig({
       Blog,
       Floors,
       Facades,
-
-      SectionColCards,
-      Section2ColImageTextMosaicType2,
-      Section2ColHeading2ColParagraph,
 
       //template
       customPageSection,
