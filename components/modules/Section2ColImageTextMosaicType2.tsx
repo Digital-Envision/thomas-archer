@@ -1,12 +1,12 @@
-import { Box, Flex, Image } from '@chakra-ui/react'
+import { Box, Flex, Img } from '@chakra-ui/react'
 import Text from '../base/Text'
 import Heading1, { HeadingTagSemantic } from 'components/base/Heading1'
 import Button, { Variants } from 'components/base/Button'
 import Dash from 'components/base/Dash'
 import { HeightVariants } from 'components/base/Divider'
-import { urlForImage } from 'lib/sanity.image'
 import Link, { LinksInterface } from 'components/base/Link'
 import { getImageUrl } from 'lib/utils'
+import SectionContainer from 'components/base/Section'
 
 type Section2ColImageTextMosaicType2Props = {
   heading: string
@@ -36,22 +36,19 @@ const Section2ColImageTextMosaicType2: React.FC<
   button,
 }) => {
   return (
-    <Flex
-      mx={'auto'}
+    <SectionContainer
       direction={{ base: 'column', md: 'row' }}
-      width={'w-full'}
-      maxWidth={'1800px'}
-      px={{ base: '1rem', md: '4rem' }}
       marginTop={marginTop}
       marginBottom={marginBottom}
       justify="end"
     >
-      <Flex flex={1} justify={'end'} maxWidth={'650px'}>
+      <Flex flex={1} justify={'end'}>
         <Flex direction={'column'} pr={{ base: 0, md: '1rem' }}>
-          <Image
+          <Img
             objectFit={'cover'}
             src={getImageUrl(leftImage)}
             alt={leftImageAlt || heading}
+            width="w-full"
           />
           <Box pt="1.5rem" />
           <Heading1 as={headingTagLevel}>{heading}</Heading1>
@@ -63,7 +60,7 @@ const Section2ColImageTextMosaicType2: React.FC<
             pt={2}
             px={{ base: '1rem', md: 0 }}
           >
-            <Box pt={'0.5rem'} pr={2}>
+            <Box pt={1} pr={2}>
               <Dash width="50px" height="1px" />
             </Box>
 
@@ -97,7 +94,7 @@ const Section2ColImageTextMosaicType2: React.FC<
         maxW={'900px'}
         mt={{ base: '0px', sm: '0px', md: '0px', lg: '100px' }}
       >
-        <Image
+        <Img
           width="100%"
           height={'auto'}
           objectFit={'cover'}
@@ -105,7 +102,7 @@ const Section2ColImageTextMosaicType2: React.FC<
           alt={rightImageAlt || heading}
         />
       </Flex>
-    </Flex>
+    </SectionContainer>
   )
 }
 

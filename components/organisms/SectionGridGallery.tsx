@@ -160,76 +160,77 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
         px={['0.2rem', '1rem', '1rem', '3.4rem']}
         zIndex={'dropdown'}
       >
-        <HStack align={'flex-start'} minHeight={'76px'}>
-          <Box minW={'70px'} borderRightWidth={1} borderColor="#000000">
-            <Text
-              textAlign="center"
-              textDecoration="underline"
-              onClick={() => setSelectedFilters({})}
-              cursor="pointer"
-            >
-              View All
-            </Text>
-          </Box>
+        {!_.isEmpty(filters) && (
+          <HStack align={'flex-start'} minHeight={'76px'}>
+            <Box minW={'70px'} borderRightWidth={1} borderColor="#000000">
+              <Text
+                textAlign="center"
+                textDecoration="underline"
+                onClick={() => setSelectedFilters({})}
+                cursor="pointer"
+              >
+                View All
+              </Text>
+            </Box>
 
-          {_.map(filters, (filter) => (
-            <Accordion
-              allowToggle
-              minW={'70px'}
-              style={{ borderColor: null, borderWidth: 0 }}
-              key={filter._key}
-            >
-              <AccordionItem key={filter._key} border={0}>
-                {({ isExpanded }) => (
-                  <Box pb={isExpanded ? HeightVariants.less : '0px'}>
-                    <AccordionButton
-                      style={{
-                        padding: 0,
-                        margin: 0,
-                        borderWidth: 0,
-                        borderColor: '#000000',
-                        borderRightWidth: 1,
-                        paddingRight: 3,
-                      }}
-                      justifyContent="space-between"
-                    >
-                      <Text
-                        fontWeight={isExpanded ? 'bold' : 'light'}
-                        textDecoration={'underline'}
+            {_.map(filters, (filter) => (
+              <Accordion
+                allowToggle
+                minW={'70px'}
+                style={{ borderColor: null, borderWidth: 0 }}
+                key={filter._key}
+              >
+                <AccordionItem key={filter._key} border={0}>
+                  {({ isExpanded }) => (
+                    <Box pb={isExpanded ? HeightVariants.less : '0px'}>
+                      <AccordionButton
+                        style={{
+                          padding: 0,
+                          margin: 0,
+                          borderWidth: 0,
+                          borderColor: '#000000',
+                          borderRightWidth: 1,
+                          paddingRight: 3,
+                        }}
+                        justifyContent="space-between"
                       >
-                        {_.capitalize(filter.name)}
-                      </Text>
-                      {isExpanded ? (
-                        <BsChevronUp color="#D9D9D9" />
-                      ) : (
-                        <HiOutlineChevronDown color="#D9D9D9" />
-                      )}
-                    </AccordionButton>
-                    <AccordionPanel p={0}>
-                      <Filter
-                        filterName={filter.name}
-                        filterItems={filter.filterItems}
-                        value={selectedFilters[filter.name] || ''}
-                        onValueChange={(value) =>
-                          handleFilterChange(filter.name, value)
-                        }
-                        selectedFilters={selectedFilters}
-                        setSelectedFilters={setSelectedFilters}
-                      />
-                    </AccordionPanel>
-                  </Box>
-                )}
-              </AccordionItem>
-            </Accordion>
-          ))}
-        </HStack>
+                        <Text
+                          fontWeight={isExpanded ? 'bold' : 'light'}
+                          textDecoration={'underline'}
+                        >
+                          {_.capitalize(filter.name)}
+                        </Text>
+                        {isExpanded ? (
+                          <BsChevronUp color="#D9D9D9" />
+                        ) : (
+                          <HiOutlineChevronDown color="#D9D9D9" />
+                        )}
+                      </AccordionButton>
+                      <AccordionPanel p={0}>
+                        <Filter
+                          filterName={filter.name}
+                          filterItems={filter.filterItems}
+                          value={selectedFilters[filter.name] || ''}
+                          onValueChange={(value) =>
+                            handleFilterChange(filter.name, value)
+                          }
+                          selectedFilters={selectedFilters}
+                          setSelectedFilters={setSelectedFilters}
+                        />
+                      </AccordionPanel>
+                    </Box>
+                  )}
+                </AccordionItem>
+              </Accordion>
+            ))}
+          </HStack>
+        )}
       </Box>
 
       <Box
         mx="auto"
         alignItems={'center'}
         justifyContent="center"
-        // px={{ base: '1rem', md: '4rem' }}
         w={'100vw'}
         sx={{
           columnCount: {

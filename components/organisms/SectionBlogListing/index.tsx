@@ -101,10 +101,7 @@ const SectionBlogListing: React.FC<SectionBlogListingProps> = (props) => {
             <Text
               textAlign="center"
               textDecoration="underline"
-              onClick={() => {
-                setSelectedSort({})
-              }}
-              // onClick={() => handleFilterChange('sortBy', 'Newest')}
+              onClick={() => setSelectedSort({})}
               cursor="pointer"
             >
               View All
