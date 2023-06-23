@@ -46,7 +46,7 @@ const SectionHeadingParagraphCTAImage: React.FC<
           <Heading1 as={headingTagLevel}>{heading}</Heading1>
           <Flex flex={1} direction={'row'} pt={2} pr={2}>
             <Box pt={2} pr={2}>
-              <Dash width="50px" height="1px" />
+              {paragraph && <Dash width="50px" height="1px" />}
             </Box>
 
             <Box>
