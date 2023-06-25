@@ -1,5 +1,4 @@
 import { toPlainText } from '@portabletext/react'
-import BlogMeta from 'components/BlogMeta'
 import * as demo from 'lib/demo.data'
 import { Settings } from 'lib/sanity.queries'
 import { getImageUrl, origin } from 'lib/utils'
@@ -37,8 +36,6 @@ export default function IndexPageHead({
     <Head>
       <title>{title}</title>
       <meta property="og:title" content={title} />
-
-      <BlogMeta />
 
       {isUseNoIndex && <meta name="robots" content="noindex" />}
 

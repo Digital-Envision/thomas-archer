@@ -6,12 +6,7 @@
 
 import Iframe from 'sanity-plugin-iframe-pane'
 import { DefaultDocumentNodeResolver } from 'sanity/desk'
-import authorType from 'schemas/author'
-import postType from 'schemas/post'
 import pageType from 'schemas/page'
-
-import AuthorAvatarPreviewPane from './AuthorAvatarPreviewPane'
-import PostPreviewPane from './PostPreviewPane'
 import { getPathFromDetailType, getPathFromPage } from 'utils/page'
 import { DOCUMENT_TYPES_PAGE_NAME } from 'schemas/global/DetailsPage'
 
@@ -24,33 +19,6 @@ export const previewDocumentNode = ({
 }): DefaultDocumentNodeResolver => {
   return (S, { schemaType }) => {
     switch (schemaType) {
-      case authorType.name:
-        return S.document().views([
-          S.view.form(),
-          S.view
-            .component(({ document }) => (
-              <AuthorAvatarPreviewPane
-                name={document.displayed.name as any}
-                picture={document.displayed.picture as any}
-              />
-            ))
-            .title('Preview'),
-        ])
-
-      case postType.name:
-        return S.document().views([
-          S.view.form(),
-          S.view
-            .component(({ document }) => (
-              <PostPreviewPane
-                slug={document.displayed.slug?.current}
-                apiVersion={apiVersion}
-                previewSecretId={previewSecretId}
-              />
-            ))
-            .title('Preview'),
-        ])
-
       case pageType.name:
         return S.document().views([
           S.view.form(),
