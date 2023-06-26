@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import { Box, Divider, Flex, Grid } from '@chakra-ui/react'
 import Text from 'components/base/Text'
 import Link from 'next/link'
@@ -41,6 +41,7 @@ const FloorList = ({ floor, _floorIndex, filter }) => {
   }
 
   useEffect(() => {
+    setSlide(0)
     if (filter === 'all') {
       setFloorIndex(_floorIndex)
     } else if (filter === 'single') {
@@ -111,7 +112,19 @@ const FloorList = ({ floor, _floorIndex, filter }) => {
 const FloorPlanListing = ({ floors, marginTop, marginBottom }) => {
   const [filter, setFilter] = useState('all')
   const [mappingFloors, setMappingFloors] = useState([])
-  const [filteringFloors, setFilteringFloors] = useState([])
+  const filteringFloors = useMemo(() => {
+    if (filter === 'all') {
+      return mappingFloors
+    } else if (filter === 'single') {
+      return mappingFloors.filter(
+        (floor) => !_.isNull(floor?.storeyIndex?.singleStorey)
+      )
+    } else if (filter === 'double') {
+      return mappingFloors.filter(
+        (floor) => !_.isNull(floor?.storeyIndex?.doubleStorey)
+      )
+    }
+  }, [filter, mappingFloors])
 
   useEffect(() => {
     if (_.isArray(floors)) {
@@ -160,29 +173,8 @@ const FloorPlanListing = ({ floors, marginTop, marginBottom }) => {
       })
 
       setMappingFloors(mapping)
-      setFilteringFloors(mapping)
     }
   }, [floors])
-
-  const handleFilter = (filterName) => {
-    setFilter(filterName)
-
-    if (!_.isEmpty(mappingFloors)) {
-      if (filterName === 'all') {
-        setFilteringFloors(mappingFloors)
-      } else if (filterName === 'single') {
-        const findSingle = mappingFloors.filter(
-          (floor) => !_.isNull(floor?.storeyIndex?.singleStorey)
-        )
-        setFilteringFloors(findSingle)
-      } else if (filterName === 'double') {
-        const findDouble = mappingFloors.filter(
-          (floor) => !_.isNull(floor?.storeyIndex?.doubleStorey)
-        )
-        setFilteringFloors(findDouble)
-      }
-    }
-  }
 
   return (
     <Box
@@ -195,7 +187,7 @@ const FloorPlanListing = ({ floors, marginTop, marginBottom }) => {
           cursor={'pointer'}
           mt={1}
           fontWeight={filter === 'all' && 700}
-          onClick={() => handleFilter('all')}
+          onClick={() => setFilter('all')}
           userSelect={'none'}
         >
           View all
@@ -210,7 +202,7 @@ const FloorPlanListing = ({ floors, marginTop, marginBottom }) => {
           cursor={'pointer'}
           mt={1}
           fontWeight={filter === 'single' && 700}
-          onClick={() => handleFilter('single')}
+          onClick={() => setFilter('single')}
           userSelect={'none'}
         >
           Single Storey
@@ -225,7 +217,7 @@ const FloorPlanListing = ({ floors, marginTop, marginBottom }) => {
           cursor={'pointer'}
           mt={1}
           fontWeight={filter === 'double' && 700}
-          onClick={() => handleFilter('double')}
+          onClick={() => setFilter('double')}
           userSelect={'none'}
         >
           Double Storey
