@@ -49,6 +49,7 @@ export default function FloorPageTemplate(props: FloorPageProps) {
         {floors?.bannerImage?.image && (
           <SectionHeroImageDefault
             image={floors?.bannerImage?.image}
+            imageMetaData={floors?.bannerImage?.imageMetaData}
             isOverlay={floors?.bannerImage?.isOverlay}
             marginTop={HeightVariants.none}
             marginBottom={HeightVariants.less}

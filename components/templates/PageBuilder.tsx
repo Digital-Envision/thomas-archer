@@ -106,7 +106,11 @@ const PageBuilder = (props) => {
           el = <SectionHeroVideoBig {...c} {...pageProps} key={c?._key} />
           break
         case 'SectionImageHeadingCTA':
-          el = <SectionImageHeadingCTA {...c} {...pageProps} key={c?._key} />
+          el = (
+            <>
+              <SectionImageHeadingCTA {...c} {...pageProps} key={c?._key} />
+            </>
+          )
           break
         case 'SectionHeadingParagraphCTA':
           el = (

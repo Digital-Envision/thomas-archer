@@ -1,5 +1,6 @@
 import _ from 'lodash'
-import { Box, Flex, Grid, GridItem, Img } from '@chakra-ui/react'
+import { Box, Flex, Grid, GridItem } from '@chakra-ui/react'
+import Image, { ImageVariant } from 'components/base/Image'
 import Button, { Variants as ButtonVariants } from 'components/base/Button'
 import Heading2 from 'components/base/Heading2'
 import Heading3 from 'components/base/Heading3'
@@ -219,25 +220,27 @@ const FloorPlanDetailsDesktop = ({
       </GridItem>
       <GridItem colSpan={{ lg: 5, xl: 3 }}>
         <Flex flexDir={'row'}>
-          {images?.map((img, key) =>
-            img?.image && key < 2 ? (
+          {images?.map((img, key) => {
+            return img?.image && key < 2 ? (
               <Box key={key}>
                 <Text textAlign={'center'} fontWeight={400}>
                   {img?.name}
                 </Text>
-                <Img
+                <Image
+                  variant={ImageVariant.ImageChakra}
                   src={urlForImage(img?.image).url()}
+                  lqip={img?.imageMetaData?.metadata?.lqip}
                   width={'421px'}
                   height={'683px'}
                   alt={img?.name}
-                ></Img>
+                ></Image>
               </Box>
             ) : (
               <Box key={key}>
                 <Box bg={'transparent'} width={'421px'}></Box>
               </Box>
             )
-          )}
+          })}
         </Flex>
       </GridItem>
     </Grid>

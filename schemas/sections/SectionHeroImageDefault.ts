@@ -1,6 +1,20 @@
 import { HeightVariants } from 'components/base/Divider'
-import { enumToArrayOfObjects } from 'lib/utils'
+import { enumToArrayOfObjects, getImagesMetaData } from 'lib/utils'
 import { ImageAltField, ImageField } from 'schemas/components/fields'
+
+const name = 'SectionHeroImageDefault'
+
+export const queryImageMetaData = `
+   _type == '${name}' => {
+      ...,
+      "imageMetaData": image.asset->{
+          ${getImagesMetaData}
+      },
+      listImages[]{
+        ...,
+      }
+   }
+`
 
 export const SectionHeroImageDefaultFields = [
     {
@@ -38,7 +52,7 @@ export const SectionHeroImageDefaultFields = [
 ]
 
 export default {
-    name: 'SectionHeroImageDefault',
+    name,
     title: 'SectionHeroImageDefault',
     type: 'object',
     fields: SectionHeroImageDefaultFields,

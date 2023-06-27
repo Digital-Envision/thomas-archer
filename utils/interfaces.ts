@@ -7,58 +7,66 @@ export interface SanityFiles {
 	_type: string
 }
 
-export interface SEO {
-	description: string;
-	image: {
-		_type: "image";
-		asset: {
-			_ref: string;
-			_type: "reference";
-		};
-	};
-	title: string;
-	isUseNoIndex: boolean;
+export interface MetaData {
+	metadata: {
+		lqip: string
+		blurHash: string
+	}
 }
 
+export interface SEO {
+	description: string
+	image: {
+		_type: 'image'
+		asset: {
+			_ref: string
+			_type: 'reference'
+		}
+	}
+	title: string
+	isUseNoIndex: boolean
+}
 
 export interface PaginationData {
-	page: number;
-	limit: number;
-	counts: number;
-	pages: number;
-	isMore: boolean;
+	page: number
+	limit: number
+	counts: number
+	pages: number
+	isMore: boolean
 }
 export interface RouteDetail {
-	route: []; detail: []; isDetailPage: boolean
+	route: []
+	detail: []
+	isDetailPage: boolean
 }
 export interface SanityImage {
-	_type: "image";
+	_type: 'image'
 	asset: {
-		_ref: string;
-		_type: "reference";
+		_ref: string
+		_type: 'reference'
 	}
 }
 
 export interface HubspotForm {
-	formId: string;
-	portalId: string;
-	region: string;
+	formId: string
+	portalId: string
+	region: string
 }
 
 export interface Hubspot {
-	bookingSessionForm: HubspotForm;
-	contactForm: HubspotForm;
-	enquireFlyout: HubspotForm;
-	inclusionsBrochure: HubspotForm;
-	priceList: HubspotForm;
+	bookingSessionForm: HubspotForm
+	contactForm: HubspotForm
+	enquireFlyout: HubspotForm
+	inclusionsBrochure: HubspotForm
+	priceList: HubspotForm
 }
 
 export interface ContentItem {
-	_key: string;
-	_type: string;
-	children: any[];
-	markDefs: any[];
-	style: string;
-	level?: number;
-	listItem?: string;
+	_key: string
+	_type: string
+	children: any[]
+	markDefs: any[]
+	style: string
+	level?: number
+	listItem?: string
 }

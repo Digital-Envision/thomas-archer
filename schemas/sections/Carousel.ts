@@ -1,9 +1,24 @@
 import { defineField, defineType } from 'sanity'
 import { HeightVariants } from 'components/base/Divider'
-import { enumToArrayOfObjects } from 'lib/utils'
+import { enumToArrayOfObjects, getImagesMetaData } from 'lib/utils'
 import { ImageAltField, ImageField } from 'schemas/components/fields'
+
+const name = 'Carousel'
+
+export const queryImageMetaData = `
+   _type == '${name}' => {
+      ...,
+      images[]{
+        ...,
+        "imageMetaData": image.asset->{
+          ${getImagesMetaData}
+        },
+      }
+   }
+`
+
 export default defineType({
-    name: 'Carousel',
+    name,
     title: 'Carousel',
     type: 'object',
     fields: [
@@ -21,13 +36,10 @@ export default defineType({
             of: [
                 {
                     name: 'img',
-                    title: "Image Object",
+                    title: 'Image Object',
                     type: 'object',
-                    fields: [
-                        ImageField,
-                        ImageAltField,
-                    ]
-                }
+                    fields: [ImageField, ImageAltField],
+                },
             ],
             validation: (rule) => rule.required(),
         }),

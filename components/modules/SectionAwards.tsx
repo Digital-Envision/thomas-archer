@@ -1,10 +1,12 @@
-import { Box, Flex, Image, VStack } from '@chakra-ui/react'
+import { Box, Flex, VStack } from '@chakra-ui/react'
+import Image, { ImageVariant } from 'components/base/Image'
 import Text from '../base/Text'
 import Heading1, { HeadingTagSemantic } from 'components/base/Heading1'
 import Button, { Variants } from 'components/base/Button'
 import { HeightVariants } from 'components/base/Divider'
 import { getImageUrl } from 'lib/utils'
 import Link, { LinksInterface } from 'components/base/Link'
+import { MetaData } from 'utils/interfaces'
 
 type SectionAwardsProps = {
   heading: string
@@ -18,6 +20,7 @@ type SectionAwardsProps = {
   marginBottom: HeightVariants
   button: LinksInterface
   anchor?: string
+  imageMetaData: MetaData
 }
 
 const SectionAwards: React.FC<SectionAwardsProps> = ({
@@ -26,6 +29,7 @@ const SectionAwards: React.FC<SectionAwardsProps> = ({
   paragraph,
   onPressMore,
   image,
+  imageMetaData,
   alt,
   awards,
   marginTop,
@@ -69,10 +73,12 @@ const SectionAwards: React.FC<SectionAwardsProps> = ({
           <Flex direction={'row'}>
             {getImageUrl(image) && (
               <Image
+                variant={ImageVariant.ImageChakra}
                 alt={alt || heading}
                 maxW={'90px'}
                 maxH={'95px'}
                 src={getImageUrl(image)}
+                lqip={imageMetaData?.metadata?.lqip}
               />
             )}
             <Box pr={3} />

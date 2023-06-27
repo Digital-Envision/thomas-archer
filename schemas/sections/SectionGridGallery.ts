@@ -1,9 +1,24 @@
-import { HeightVariants } from 'components/base/Divider';
-import { enumToArrayOfObjects } from 'lib/utils';
-import { ImageAltField, ImageField } from 'schemas/components/fields';
+import { HeightVariants } from 'components/base/Divider'
+import { enumToArrayOfObjects, getImagesMetaData } from 'lib/utils'
+import { ImageAltField, ImageField } from 'schemas/components/fields'
+
+const name = 'SectionGridGallery'
+
+export const queryImageMetaData = `
+   _type == '${name}' => {
+      ...,
+      items[]{
+        ...,
+        "imageMetaData": image.asset->{
+          ${getImagesMetaData}
+        },
+      }
+   }
+`
+
 export default {
     type: 'object',
-    name: 'SectionGridGallery',
+    name,
     title: 'SectionGridGallery',
     fields: [
         {
@@ -17,29 +32,30 @@ export default {
                     fields: [
                         {
                             name: 'name',
-                            type: 'string'
+                            type: 'string',
                         },
                         {
                             name: 'location',
-                            type: 'string'
+                            type: 'string',
                         },
                         {
                             name: 'product',
-                            type: 'string'
+                            type: 'string',
                         },
 
-                        {   // should a dependencies from parent filterItems, at least can search the existing filterItems.
+                        {
+                            // should a dependencies from parent filterItems, at least can search the existing filterItems.
                             name: 'tags',
                             type: 'array',
                             options: {
-                                layout: 'tags'
+                                layout: 'tags',
                             },
                             of: [
                                 {
                                     name: 'tag',
-                                    type: 'string'
-                                }
-                            ]
+                                    type: 'string',
+                                },
+                            ],
                         },
                         {
                             ...ImageField,
@@ -47,9 +63,9 @@ export default {
                                 'This image will be displayed on the right section.',
                         },
                         ImageAltField,
-                    ]
-                }
-            ]
+                    ],
+                },
+            ],
         },
         {
             name: 'filters',
@@ -61,7 +77,7 @@ export default {
                     fields: [
                         {
                             name: 'name',
-                            type: 'string'
+                            type: 'string',
                         },
                         {
                             name: 'filterItems',
@@ -69,50 +85,45 @@ export default {
                             of: [
                                 {
                                     name: 'filterItem',
-                                    type: 'string'
-                                }
-                            ]
+                                    type: 'string',
+                                },
+                            ],
                         },
-
-                    ]
-                }
-            ]
+                    ],
+                },
+            ],
         },
         {
             title: 'Margin Top',
             name: 'marginTop',
             type: 'string',
             options: {
-                list: [
-                    ...enumToArrayOfObjects(HeightVariants)
-                ],
+                list: [...enumToArrayOfObjects(HeightVariants)],
             },
 
-            layout: 'dropdown'
+            layout: 'dropdown',
         },
         {
             title: 'Margin Bottom',
             name: 'marginBottom',
             type: 'string',
             options: {
-                list: [
-                    ...enumToArrayOfObjects(HeightVariants)
-                ],
+                list: [...enumToArrayOfObjects(HeightVariants)],
             },
 
-            layout: 'dropdown'
+            layout: 'dropdown',
         },
     ],
     preview: {
         select: {
             title: 'placeholder',
             subtitle: 'label',
-            disabled: 'disabled'
+            disabled: 'disabled',
         },
         prepare({ title, disabled }) {
             return {
-                title: `SectionGridGallery`
+                title: `SectionGridGallery`,
             }
-        }
-    }
+        },
+    },
 }

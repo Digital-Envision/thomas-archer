@@ -1,9 +1,24 @@
-import { ImageAltField, ImageField } from "./components/fields";
+import { getImagesMetaData } from 'lib/utils'
+import { ImageAltField, ImageField } from './components/fields'
+
+const name = 'facades'
+
+export const queryImageMetaData = `
+   _type == '${name}' => {
+      ...,
+      listImages[]{
+        ...,
+        "imageMetaData": image.asset->{
+          ${getImagesMetaData}
+        },
+      }
+   }
+`
 
 export default {
   type: 'document',
   title: 'Facades',
-  name: 'facades',
+  name,
   fields: [
     {
       name: 'name',

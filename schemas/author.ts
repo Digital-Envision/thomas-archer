@@ -1,8 +1,20 @@
 import { UserIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
+import { getImagesMetaData } from 'lib/utils'
+
+const name = 'author'
+
+export const queryImageMetaData = `
+  _type == '${name}' => {
+     ...,
+     "pictureMetaData": picture.asset->{
+       ${getImagesMetaData}
+     },
+  }
+`
 
 export default defineType({
-  name: 'author',
+  name,
   title: 'Author',
   icon: UserIcon,
   type: 'document',

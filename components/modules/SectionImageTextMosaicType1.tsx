@@ -1,22 +1,25 @@
-import { Box, Flex, Image } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
+import Image, { ImageVariant } from 'components/base/Image'
 import Text from '../base/Text'
 import Heading1, { HeadingTagSemantic } from 'components/base/Heading1'
 import Button, { Variants } from 'components/base/Button'
 import Dash from 'components/base/Dash'
 import Divider, { HeightVariants } from 'components/base/Divider'
-import { urlForImage } from 'lib/sanity.image'
 import Link from 'components/base/Link'
 import _ from 'lodash'
 import { getImageUrl } from 'lib/utils'
 import { LinksInterface } from 'components/base/Link'
+import { MetaData } from 'utils/interfaces'
 
 type SectionImageTextMosaicType1Props = {
   heading: string
   headingTagLevel: HeadingTagSemantic
   paragraph: string
   rightImage?: any // sanity io image
+  rightImageMetaData?: MetaData
   rightImageAlt: string
   leftImage?: any // sanity io image
+  leftImageMetaData?: MetaData
   leftImageAlt: string
   marginTop: HeightVariants
   marginBottom: HeightVariants
@@ -31,8 +34,10 @@ const SectionImageTextMosaicType1: React.FC<
   headingTagLevel,
   paragraph,
   leftImage,
+  leftImageMetaData,
   leftImageAlt,
   rightImage,
+  rightImageMetaData,
   rightImageAlt,
   marginTop,
   marginBottom,
@@ -57,10 +62,12 @@ const SectionImageTextMosaicType1: React.FC<
         pr={{ base: 0, md: '1rem' }}
       >
         <Image
+          variant={ImageVariant.ImageChakra}
           height={'auto'}
           width={{ base: '100vw', md: '450px' }}
           objectFit={'cover'}
           src={getImageUrl(leftImage)}
+          lqip={leftImageMetaData?.metadata?.lqip}
           alt={leftImageAlt || heading}
         />
       </Flex>
@@ -69,8 +76,10 @@ const SectionImageTextMosaicType1: React.FC<
 
       <Flex flex={1.2} justify={'center'} direction={'column'}>
         <Image
+          variant={ImageVariant.ImageChakra}
           objectFit={'cover'}
           src={getImageUrl(rightImage)}
+          lqip={rightImageMetaData?.metadata?.lqip}
           alt={rightImageAlt || heading}
           width="w-full"
           height={'auto'}

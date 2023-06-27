@@ -1,8 +1,19 @@
-import moment from "moment"
-import { HeightVariants } from "components/base/Divider"
-import { enumToArrayOfObjects } from "lib/utils"
-import { externalLink, isExternalTab, Link, linkOptions, linkTypeBlogs, linkTypeFloorPlans, linkTypePages, linkTypeProjects, LINK_TYPE_NAME, useInternalLink } from 'schemas/components/link/link'
-import _ from "lodash"
+import moment from 'moment'
+import { HeightVariants } from 'components/base/Divider'
+import { enumToArrayOfObjects } from 'lib/utils'
+import {
+    externalLink,
+    isExternalTab,
+    Link,
+    linkOptions,
+    linkTypeBlogs,
+    linkTypeFloorPlans,
+    linkTypePages,
+    linkTypeProjects,
+    LINK_TYPE_NAME,
+    useInternalLink,
+} from 'schemas/components/link/link'
+import _ from 'lodash'
 
 export const SEOField = {
     name: 'seo',
@@ -33,12 +44,13 @@ export const SEOField = {
             title: 'Use meta noindex',
             type: 'boolean',
         },
-    ]
+    ],
 }
 
 export const SlugField = {
     name: 'slug',
-    description: 'page can be access: https://thomas-archer.netlify.app/<route-name>/[slug]',
+    description:
+        'page can be access: https://thomas-archer.netlify.app/<route-name>/[slug]',
     type: 'slug',
     title: 'Slug',
     options: {
@@ -50,22 +62,22 @@ export const SlugField = {
 
 export const TitleField = {
     name: 'title',
-    type: 'string'
+    type: 'string',
 }
 
 export const HeadingField = {
     name: 'heading',
-    type: 'string'
+    type: 'string',
 }
 
 export const SubHeadingField = {
     name: 'subHeading',
-    type: 'string'
+    type: 'string',
 }
 
 export const CaptionField = {
     name: 'caption',
-    type: 'string'
+    type: 'string',
 }
 
 export const TextField = {
@@ -74,7 +86,7 @@ export const TextField = {
     options: {
         collapsible: true,
         collapsed: true,
-    }
+    },
 }
 
 export const HeadingTagLevel = {
@@ -82,9 +94,7 @@ export const HeadingTagLevel = {
     title: 'Heading Tag Level',
     type: 'string',
     options: {
-        list: [
-            'H1', 'H2', 'H3'
-        ],
+        list: ['H1', 'H2', 'H3'],
     },
 }
 export const ScrollAnchor = {
@@ -100,52 +110,60 @@ export const RTFAnnotationLink = {
     fields: [
         {
             ...useInternalLink, // return parent?.useInternal
-            hidden: false
+            hidden: false,
         },
         {
             ...externalLink,
-            hidden: ({ parent }) => parent?.useInternal
+            hidden: ({ parent }) => parent?.useInternal,
         },
         {
             ...isExternalTab,
-            hidden: ({ parent }) => parent?.useInternal
+            hidden: ({ parent }) => parent?.useInternal,
         },
         {
             ...linkOptions,
-            hidden: ({ parent }) => !parent?.useInternal
+            hidden: ({ parent }) => !parent?.useInternal,
         },
         {
             ...linkTypePages,
-            hidden: ({ parent }) => !parent?.useInternal || parent?.linkType !== LINK_TYPE_NAME.pages,
+            hidden: ({ parent }) =>
+                !parent?.useInternal ||
+                parent?.linkType !== LINK_TYPE_NAME.pages,
         },
         {
             ...linkTypeProjects,
-            hidden: ({ parent }) => !parent?.useInternal || parent?.linkType !== LINK_TYPE_NAME.project,
+            hidden: ({ parent }) =>
+                !parent?.useInternal ||
+                parent?.linkType !== LINK_TYPE_NAME.project,
         },
         {
             ...linkTypeFloorPlans,
-            hidden: ({ parent }) => !parent?.useInternal || parent?.linkType !== LINK_TYPE_NAME.floorPlans,
+            hidden: ({ parent }) =>
+                !parent?.useInternal ||
+                parent?.linkType !== LINK_TYPE_NAME.floorPlans,
         },
         {
             ...linkTypeBlogs,
-            hidden: ({ parent }) => !parent?.useInternal || parent?.linkType !== LINK_TYPE_NAME.blog,
-        }
-    ]
+            hidden: ({ parent }) =>
+                !parent?.useInternal ||
+                parent?.linkType !== LINK_TYPE_NAME.blog,
+        },
+    ],
 }
 
 export const RTFField = {
     name: 'content',
     title: 'Content',
     type: 'array',
-    of: [{
-        type: 'block',
-        styles: [],
-        marks: {
-            annotations: [
-                RTFAnnotationLink
-            ]
+    of: [
+        {
+            type: 'block',
+            styles: [],
+            marks: {
+                annotations: [RTFAnnotationLink],
+            },
         },
-    }]
+    ],
 }
 
 export const ImageField = {
@@ -154,6 +172,7 @@ export const ImageField = {
     type: 'image',
     options: {
         hotspot: false,
+        metadata: ['lqip', 'blurhash'],
     },
 }
 
@@ -175,11 +194,9 @@ export const MarginTopField = {
     name: 'marginTop',
     type: 'string',
     options: {
-        list: [
-            ...enumToArrayOfObjects(HeightVariants)
-        ],
+        list: [...enumToArrayOfObjects(HeightVariants)],
     },
-    layout: 'dropdown'
+    layout: 'dropdown',
 }
 
 export const MarginBottomField = {
@@ -187,13 +204,10 @@ export const MarginBottomField = {
     name: 'marginBottom',
     type: 'string',
     options: {
-        list: [
-            ...enumToArrayOfObjects(HeightVariants)
-        ],
+        list: [...enumToArrayOfObjects(HeightVariants)],
     },
-    layout: 'dropdown'
+    layout: 'dropdown',
 }
-
 
 export const hubspotForms = [
     {
@@ -215,7 +229,7 @@ export const hubspotForms = [
         title: 'Form ID',
         type: 'string',
         validation: (Rule) => Rule.required(),
-    }
+    },
 ]
 
 export const HubspotField = {
@@ -226,5 +240,5 @@ export const HubspotField = {
         collapsible: true,
         collapsed: true,
     },
-    fields: hubspotForms
+    fields: hubspotForms,
 }

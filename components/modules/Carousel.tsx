@@ -1,11 +1,15 @@
 import { Box, Flex } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
-import Image from 'next/image'
-import { SanityFiles } from 'utils/interfaces'
+import Image, { ImageVariant } from 'components/base/Image'
+import { MetaData, SanityFiles } from 'utils/interfaces'
 import { getImageUrl } from 'lib/utils'
 
 type CarouselProps = {
-  images: { image: SanityFiles; alt: string }[]
+  images: {
+    image: SanityFiles
+    imageMetaData: MetaData
+    alt: string
+  }[]
   autoSlide: boolean
 }
 
@@ -43,7 +47,7 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoSlide = false }) => {
         }}
         overflow={'hidden'}
       >
-        {images.map(({ image, alt }, key) => {
+        {images.map(({ image, alt, imageMetaData }, key) => {
           return (
             <Box
               position={'relative'}
@@ -54,11 +58,13 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoSlide = false }) => {
             >
               <Box width={'100vw'}>
                 <Image
+                  variant={ImageVariant.ImageChakra}
                   src={getImageUrl(image)}
+                  lqip={imageMetaData?.metadata?.lqip}
                   alt={alt}
-                  fill
                   objectFit="cover"
                   objectPosition="center"
+                  width={'100%'}
                 />
               </Box>
             </Box>

@@ -1,8 +1,9 @@
-import { Box, Flex, Image, SimpleGrid } from '@chakra-ui/react'
+import { Box, Flex, SimpleGrid } from '@chakra-ui/react'
+import Image, { ImageVariant } from 'components/base/Image'
 import Text from '../base/Text'
 import { HeadingTagSemantic } from 'components/base/Heading1'
 import { HeightVariants } from 'components/base/Divider'
-import { SanityFiles } from 'utils/interfaces'
+import { SanityFiles, MetaData } from 'utils/interfaces'
 import { urlForImage } from 'lib/sanity.image'
 import Heading3 from 'components/base/Heading3'
 import Heading2 from 'components/base/Heading2'
@@ -21,6 +22,7 @@ type Section2ColHeading2ColParagraphProps = {
   marginTop: HeightVariants
   marginBottom: HeightVariants
   image: SanityFiles | string
+  imageMetaData: MetaData
   alt?: string
   anchor?: string
 }
@@ -41,6 +43,7 @@ const Section2ColHeading2ColParagraph: React.FC<
   marginTop,
   marginBottom,
   image,
+  imageMetaData,
   alt,
   anchor,
 }) => {
@@ -116,10 +119,13 @@ const Section2ColHeading2ColParagraph: React.FC<
         {image && (
           <Box display="flex" justifyContent="center" alignItems="center">
             <Image
-              width={'100%'}
+              variant={ImageVariant.ImageChakra}
+              width={'100vw'}
               maxH="500px"
               objectFit={'cover'}
+              objectPosition="center"
               src={(image && urlForImage(image).url()) || ''}
+              lqip={imageMetaData?.metadata?.lqip}
               alt={alt || leftHeading}
             />
           </Box>

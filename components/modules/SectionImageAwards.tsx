@@ -1,8 +1,8 @@
-import { Box, Flex, Image, VStack } from '@chakra-ui/react'
+import { Box, Flex, VStack } from '@chakra-ui/react'
+import Image, { ImageVariant } from 'components/base/Image'
 import { HeightVariants } from 'components/base/Divider'
-import { urlForImage } from 'lib/sanity.image'
 import { getImageUrl } from 'lib/utils'
-import { SanityFiles } from 'utils/interfaces'
+import { MetaData, SanityFiles } from 'utils/interfaces'
 import Text from '../base/Text'
 
 type SectionImageAwardsProps = {
@@ -11,10 +11,12 @@ type SectionImageAwardsProps = {
   awards: { name: string; description: string }[]
   marginTop: HeightVariants
   marginBottom: HeightVariants
+  imageMetaData?: MetaData
 }
 
 const SectionImageAwards: React.FC<SectionImageAwardsProps> = ({
   image,
+  imageMetaData,
   alt,
   awards,
   marginTop,
@@ -33,7 +35,9 @@ const SectionImageAwards: React.FC<SectionImageAwardsProps> = ({
     >
       <Box alignSelf={'center'}>
         <Image
+          variant={ImageVariant.ImageChakra}
           src={getImageUrl(image)}
+          lqip={imageMetaData?.metadata?.lqip}
           alt={alt}
           objectFit="cover"
           width="100%"

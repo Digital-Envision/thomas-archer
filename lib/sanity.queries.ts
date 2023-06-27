@@ -1,7 +1,8 @@
 import _ from 'lodash'
 import { groq } from 'next-sanity'
 import { HeightVariants } from 'components/base/Divider'
-import { SanityFiles, SanityImage, SEO } from 'utils/interfaces'
+import { MetaData, SanityFiles, SanityImage, SEO } from 'utils/interfaces'
+import { imageMetaData } from './image.queries'
 
 const postFields = groq`
   _id,
@@ -72,11 +73,14 @@ export const floorQuery = (props) => {
   if (slug) {
     return groq`*[_type == "floors" && slug.current == "${slug}"]{
       ...,
+      ${imageMetaData},
       facades->{
-        listImages,
+        ...,
+        ${imageMetaData}
       },
       customPageSection[]{
         ...,
+        ${imageMetaData},
         selectedProjects[]->{
           heading,
           slug,
@@ -88,13 +92,15 @@ export const floorQuery = (props) => {
   } else if (ids.length > 1 || byId) {
     if (select) {
       return groq`*[_type == "floors" && _id in $ids]{
-        ${select}
+        ${select},
+        ${imageMetaData}
       }`
     } else {
       return groq`*[_type == "floors" && _id in $ids]{
         ...,
         facades->{
-          listImages,
+          ...,
+          ${imageMetaData}
         },
       }`
     }
@@ -102,7 +108,8 @@ export const floorQuery = (props) => {
   return groq`*[_type == "floors" && slug.current != null]{
       ...,
       facades->{
-        listImages,
+        ...,
+        ${imageMetaData}
       },
     }`
 }
@@ -113,6 +120,7 @@ export const pageQuery = (slug: 'string' | { _id: string }) => {
       ...,
       content[]{
         ...,
+        ${imageMetaData},
         selectedProjects[]->{
           heading,
           slug,
@@ -128,6 +136,7 @@ export const pageQuery = (slug: 'string' | { _id: string }) => {
       ...,
       content[]{
         ...,
+        ${imageMetaData},
         selectedProjects[]->{
           heading,
           slug,
@@ -142,6 +151,7 @@ export const pageQuery = (slug: 'string' | { _id: string }) => {
       ...,
       content[]{
         ...,
+        ${imageMetaData},
         selectedProjects[]->{
           heading,
           slug,
@@ -337,6 +347,7 @@ export interface Floor {
     isOverlay: boolean
     marginTop: HeightVariants
     marginBottom: HeightVariants
+    imageMetaData: MetaData
   }
   floorPlan: {
     listSizes: {
@@ -373,6 +384,7 @@ export interface Floor {
     listImages: {
       description: string
       image: SanityFiles
+      imageMetaData: MetaData
     }[]
   }
   content: any

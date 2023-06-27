@@ -3,7 +3,7 @@ import Button, { Variants as ButtonVariants } from 'components/base/Button'
 import Heading2 from 'components/base/Heading2'
 import Text from 'components/base/Text'
 import React, { useState } from 'react'
-import Image from 'next/image'
+import Image, { ImageVariant } from 'components/base/Image'
 import { HiChevronRight } from 'react-icons/hi2'
 import ModalVideo from 'components/modules/ModalVideo'
 import { urlForImage } from 'lib/sanity.image'
@@ -77,11 +77,27 @@ const SectionVideoParagraphCTA = ({
           >
             {video?.cover && (
               <Image
+                variant={ImageVariant.ImageChakra}
                 alt={'image'}
                 src={`${urlForImage(video?.cover)}`}
-                fill
+                lqip={video?.coverMetaData?.metadata?.lqip}
                 objectFit="cover"
                 objectPosition="center"
+                width={'100%'}
+                minHeight={{
+                  base: '320px',
+                }}
+                height={{
+                  base: 'calc((150vw - 13rem)*.650)',
+                  sm: 'calc((150vw - 15rem)*.650)',
+                  md: 'calc(60vw - 6rem)',
+                  lg: 'calc((67vw - 1rem)*.800)',
+                  xl: 'calc((82vw - 13rem)*.720)',
+                  '2xl': 'calc((82vw - 3rem)*.600)',
+                }}
+                maxH={{
+                  '2xl': 'calc((73vw - 7rem)*.730)',
+                }}
               ></Image>
             )}
           </Box>
