@@ -107,7 +107,6 @@ export default function ProjectPageTemplate(props: any) {
         />
       )}
       <Footer
-        links={globals.Links}
         enquire={globals.Enquire}
         contact={globals.Contact}
         socialMedia={globals.SocialMedia}

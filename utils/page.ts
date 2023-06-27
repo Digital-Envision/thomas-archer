@@ -245,7 +245,11 @@ export const getDataFloorDetailPage = async ({ slug }) => {
 export const getPathFromPage = async (_id) => {
     const globals = await getAllGlobals()
     const pagesSlug = await getAllPagesSlugs()
-    const slugAndPages = separatePages(globals?.Links, pagesSlug)
+    const slugAndPages = separatePages({
+        navLinks: globals?.Links,
+        footerNavLinks: globals?.Footer?.NavLinks,
+        pages: pagesSlug,
+    })
 
     const drafted = _id.split('.')
     const id = drafted.length > 1 ? drafted?.[1] : drafted?.[0]
@@ -258,7 +262,11 @@ export const getPathFromPage = async (_id) => {
 export const getPathFromDetailType = async (type) => {
     const globals = await getAllGlobals()
     const pagesSlug = await getAllPagesSlugs()
-    const slugAndPages = separatePages(globals?.Links, pagesSlug)
+    const slugAndPages = separatePages({
+        navLinks: globals?.Links,
+        footerNavLinks: globals?.Footer?.NavLinks,
+        pages: pagesSlug,
+    })
 
     const refParentDetailPage = globals?.DetailsPage?.[type]
     const path =

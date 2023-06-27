@@ -89,7 +89,6 @@ export default function FloorPageTemplate(props: FloorPageProps) {
       />
 
       <Footer
-        links={globals.Links}
         enquire={globals.Enquire}
         contact={globals.Contact}
         socialMedia={globals.SocialMedia}

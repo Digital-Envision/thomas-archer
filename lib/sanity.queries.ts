@@ -168,6 +168,23 @@ export const globalQuery = () => {
           "internalHref": internalHref->slug.current,
         },
       }
+    },
+    Footer{
+      ...,
+      NavLinks[] {
+        ...,
+        "href": {
+          ...internalHref,
+          "internalHref": internalHref->slug.current,
+        },
+        children[] {
+          ...,
+          "href": {
+            ...internalHref,
+            "internalHref": internalHref->slug.current,
+          },
+        }
+      }
     }
   }`
 }
