@@ -108,7 +108,7 @@ export const checkLinkType = (allComponents) => {
   }
 }
 
-const separatePages = (navLinks, pages) => {
+const separatePages = ({ navLinks, footerNavLinks, pages }) => {
   if (_.isArray(navLinks)) {
     const parentPage = {}
     const subPage = {}
@@ -145,10 +145,57 @@ const separatePages = (navLinks, pages) => {
       // and it use internal pages
       childrenPage[i].children.map((link) => {
         if (link?.useInternal && link?.type === 'link') {
-          if (_.isUndefined(parentPage[link?.href?._ref])) {
+          if (
+            _.isUndefined(parentPage[link?.href?._ref]) &&
+            _.isUndefined(subPage[link?.href?._ref])
+          ) {
             subPage[link?.href?._ref] = {
               name: link?.label,
               url: `${childrenPage[i].parent}/${link?.href?.internalHref}`,
+            }
+
+            subSlug.push(`${link?.href?.internalHref}`)
+          }
+        }
+      })
+    }
+
+    const footerChildren = []
+    if (_.isArray(footerNavLinks)) {
+      footerNavLinks?.map((link) => {
+        if (link?.useInternal && link?.type === 'link') {
+          if (_.isUndefined(parentPage[link?.href?._ref])) {
+            parentPage[link?.href?._ref] = {
+              name: link?.label,
+              url: link?.href?.internalHref,
+            }
+
+            parentSlug.push(link?.href?.internalHref)
+          }
+
+          if (_.isArray(link?.children)) {
+            footerChildren.push({
+              parent:
+                link?.useInternal && link?.type === 'link'
+                  ? link?.href?.internalHref
+                  : '',
+              children: link?.children,
+            })
+          }
+        }
+      })
+    }
+
+    for (let i = 0; i < footerChildren.length; i++) {
+      footerChildren[i].children.map((link) => {
+        if (link?.useInternal && link?.type === 'link') {
+          if (
+            _.isUndefined(parentPage[link?.href?._ref]) &&
+            _.isUndefined(subPage[link?.href?._ref])
+          ) {
+            subPage[link?.href?._ref] = {
+              name: link?.label,
+              url: `${footerChildren[i].parent}/${link?.href?.internalHref}`,
             }
 
             subSlug.push(`${link?.href?.internalHref}`)

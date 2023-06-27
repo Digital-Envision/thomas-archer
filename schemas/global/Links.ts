@@ -10,13 +10,12 @@ export const linkFieldset = {
   },
 }
 
-export default defineField({
+export const NavLinksField = {
   name: 'Links',
   title: 'Links',
   type: 'array',
   validation: (rule) => rule.max(6),
   description: 'Maximum link is 6',
-  fieldset: 'NavLinks',
   of: [
     {
       name: 'Link',
@@ -52,4 +51,9 @@ export default defineField({
       ],
     },
   ],
+}
+
+export default defineField({
+  ...NavLinksField,
+  fieldset: 'NavLinks',
 })

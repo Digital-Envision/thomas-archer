@@ -152,7 +152,11 @@ export default function DynamicPage(props) {
 export const getStaticPaths = async () => {
   const links = await getAllGlobals()
   const pagesSlug = await getAllPagesSlugs()
-  const separated = separatePages(links?.Links, pagesSlug)
+  const separated = separatePages({
+    navLinks: links?.Links,
+    footerNavLinks: links?.Footer?.NavLinks,
+    pages: pagesSlug,
+  })
 
   const paths = separated.slug.map((slug) => {
     return { params: { slug: [`${slug}`] } }
@@ -184,7 +188,11 @@ export const getStaticProps: GetStaticProps<
     getAllGlobals(),
   ])
   const pagesSlug = await getAllPagesSlugs()
-  const slugAndPages = separatePages(globals?.Links, pagesSlug)
+  const slugAndPages = separatePages({
+    navLinks: globals?.Links,
+    footerNavLinks: globals?.Footer?.NavLinks,
+    pages: pagesSlug,
+  })
 
   const routeDetail = getRouteDetail(
     params?.slug,

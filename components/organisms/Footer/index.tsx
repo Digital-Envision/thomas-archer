@@ -15,8 +15,8 @@ import { ReactSVG } from 'react-svg'
 import { NavLinksInterfaces } from '../Navbar'
 import Divider, { HeightVariants } from 'components/base/Divider'
 
-const Footer = ({ links, enquire, contact, socialMedia, footer, hubspot }) => {
-  const Links = links || []
+const Footer = ({ enquire, contact, socialMedia, footer, hubspot }) => {
+  const Links = footer?.NavLinks || []
 
   const [openDrawer, setOpenDrawer] = useState(false)
 

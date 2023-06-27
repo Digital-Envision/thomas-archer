@@ -1,21 +1,15 @@
-import { Button } from '@chakra-ui/react'
 import { PreviewSuspense } from '@sanity/preview-kit'
 import IndexPage from 'components/IndexPage'
 import { BlogListingCardProps } from 'components/modules/BlogListingCard'
 import { ProjectListingCardProps } from 'components/modules/ProjectListingCard'
 import {
-  getAllBlogs,
-  getAllFloors,
   getAllGlobals,
   getAllPages,
   getAllPagesSlugs,
-  getAllPosts,
-  getAllProjects,
-  getSanityData,
   getSettings,
   getDocumentTypeSlugs,
 } from 'lib/sanity.client'
-import { Blog, Post, Project, Settings, Floor } from 'lib/sanity.queries'
+import { Post, Settings, Floor } from 'lib/sanity.queries'
 import { useStoreLink, Links as LinkStoreType } from 'lib/store/link'
 import _ from 'lodash'
 import { GetStaticProps } from 'next'
@@ -64,7 +58,6 @@ export default function HomePage(props: PageProps) {
     posts,
     settings,
     preview,
-    token,
     pages,
     globals,
     projects,
@@ -118,7 +111,11 @@ export const getStaticProps: GetStaticProps<
     getAllPagesSlugs(),
   ])
 
-  const slugAndPages = separatePages(globals?.Links, pagesSlug)
+  const slugAndPages = separatePages({
+    navLinks: globals?.Links,
+    footerNavLinks: globals?.Footer?.NavLinks,
+    pages: pagesSlug,
+  })
 
   // get index page reference from settings
   if (!_.isEmpty(settings)) {

@@ -41,7 +41,6 @@ export default function IndexPage(props: IndexPageProps) {
         <PageBuilder pages={pages} {...props} />
       </Box>
       <Footer
-        links={globals.Links}
         enquire={globals.Enquire}
         contact={globals.Contact}
         socialMedia={globals.SocialMedia}

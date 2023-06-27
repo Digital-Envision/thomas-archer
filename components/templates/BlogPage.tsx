@@ -82,7 +82,6 @@ export default function BlogPageTemplate(props: any) {
         </Flex>
       </Flex>
       <Footer
-        links={globals.Links}
         enquire={globals.Enquire}
         contact={globals.Contact}
         socialMedia={globals.SocialMedia}
