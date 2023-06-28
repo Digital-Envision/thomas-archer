@@ -20,28 +20,9 @@ const FloorList = ({ floor, _floorIndex, filter }) => {
     (state) => state?.pages[floorPlanRef]?.url
   )
 
-  const [slide, setSlide] = useState(0)
-
   const floorPlan = floorIndex !== null ? floor?.listSizes[floorIndex] : []
 
-  const handlePrev = () => {
-    setSlide((prevIndex) => {
-      return prevIndex === 0
-        ? floor?.images[floorIndex].length - 1
-        : prevIndex - 1
-    })
-  }
-
-  const handleNext = () => {
-    setSlide((prevIndex) => {
-      return prevIndex === floor?.images[floorIndex].length - 1
-        ? 0
-        : prevIndex + 1
-    })
-  }
-
   useEffect(() => {
-    setSlide(0)
     if (filter === 'all') {
       setFloorIndex(_floorIndex)
     } else if (filter === 'single') {
@@ -55,10 +36,7 @@ const FloorList = ({ floor, _floorIndex, filter }) => {
     <>
       <Slider
         title={floor?.title}
-        images={floor?.images[floorIndex]}
-        handleNext={handleNext}
-        handlePrev={handlePrev}
-        slide={slide}
+        listImages={floor?.images[floorIndex]}
         href={
           floorPlanParentPage ? `/${floorPlanParentPage}/${floor?.slug}` : '#'
         }
@@ -182,7 +160,7 @@ const FloorPlanListing = ({ floors, marginTop, marginBottom }) => {
       marginTop={marginTop}
       marginBottom={marginBottom}
     >
-      <Flex mb={'60px'} ml={'20px'}>
+      <Flex mb={'30px'}>
         <Text
           cursor={'pointer'}
           mt={1}
@@ -196,7 +174,7 @@ const FloorPlanListing = ({ floors, marginTop, marginBottom }) => {
           orientation="vertical"
           height={'22px'}
           borderColor={'#000000'}
-          mx={2}
+          mx={3}
         />
         <Text
           cursor={'pointer'}
@@ -211,7 +189,7 @@ const FloorPlanListing = ({ floors, marginTop, marginBottom }) => {
           orientation="vertical"
           height={'20px'}
           borderColor={'#000000'}
-          mx={2}
+          mx={3}
         />
         <Text
           cursor={'pointer'}
