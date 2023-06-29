@@ -101,31 +101,31 @@ const Navbar = ({
     }
   )
 
-  useEffect(() => {
-    if (LogoVariantBreakpoint.version === 'desktop') {
-      // Set overflow-y to auto on mount
-      document.documentElement.style.overflowY = 'auto'
-      document.body.style.overflowY = 'auto'
+  // useEffect(() => {
+  //   if (LogoVariantBreakpoint.version === 'desktop') {
+  //     // Set overflow-y to auto on mount
+  //     document.documentElement.style.overflowY = 'auto'
+  //     document.body.style.overflowY = 'auto'
 
-      // Cleanup function to remove styles on unmount
-      return () => {
-        document.documentElement.style.overflowY = 'auto'
-        document.body.style.overflowY = 'auto'
-      }
-    } else {
-      if (onOpenDropdown) {
-        // Set overflow-y to hidden on mount
-        document.documentElement.style.overflowY = 'hidden'
-        document.body.style.overflowY = 'hidden'
+  //     // Cleanup function to remove styles on unmount
+  //     return () => {
+  //       document.documentElement.style.overflowY = 'auto'
+  //       document.body.style.overflowY = 'auto'
+  //     }
+  //   } else {
+  //     if (onOpenDropdown) {
+  //       // Set overflow-y to hidden on mount
+  //       document.documentElement.style.overflowY = 'hidden'
+  //       document.body.style.overflowY = 'hidden'
 
-        // Cleanup function to remove styles on unmount
-        return () => {
-          document.documentElement.style.overflowY = 'auto'
-          document.body.style.overflowY = 'auto'
-        }
-      }
-    }
-  }, [LogoVariantBreakpoint])
+  //       // Cleanup function to remove styles on unmount
+  //       return () => {
+  //         document.documentElement.style.overflowY = 'auto'
+  //         document.body.style.overflowY = 'auto'
+  //       }
+  //     }
+  //   }
+  // }, [LogoVariantBreakpoint])
 
   return (
     <>

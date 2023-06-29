@@ -6,3 +6,9 @@
   NEXT_PUBLIC_SANITY_DATASET="Your Sanity Dataset"
   SANITY_API_WRITE_TOKEN="Your Sanity API Write Token"
   SANITY_API_READ_TOKEN="Your Sanity API Read Token"
+
+[[redirects]]
+  from = "https://thomas-archer.netlify.app/*"
+  to = "https://thomasarcher.com.au"
+  status = 301
+  force = true

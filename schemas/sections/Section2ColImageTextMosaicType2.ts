@@ -1,6 +1,6 @@
 import { HeightVariants } from "components/base/Divider"
 import { enumToArrayOfObjects } from "lib/utils"
-import { ImageAltField } from "schemas/components/fields"
+import { ImageAltField, ScrollAnchor } from "schemas/components/fields"
 import link from "schemas/components/link"
 
 export default {
@@ -8,6 +8,7 @@ export default {
     name: 'Section2ColImageTextMosaicType2',
     title: 'Section2ColImageTextMosaicType2',
     fields: [
+        ScrollAnchor,
         {
             name: 'heading',
             type: 'text',

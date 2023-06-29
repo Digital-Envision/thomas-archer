@@ -86,10 +86,14 @@ const theme = extendTheme({
     },
     styles: {
         global: {
+            "html": {
+                'scroll-padding-top': '200px'
+            },
             "html, body": {
                 bg: "gray.50",
                 fontSize: "md",
                 color: "gray.800",
+                overflow: 'initial'
             },
             "*::placeholder": {
                 color: "gray.400",

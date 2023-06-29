@@ -179,6 +179,8 @@ export const getStaticProps: GetStaticProps<
    * 2. return particular document id and required data
    */
 
+  // return { props: {} }
+
   const { preview = false, previewData = {}, params } = ctx
   let pages = []
   let pageProps: any = {}

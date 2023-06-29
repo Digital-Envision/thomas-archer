@@ -21,6 +21,7 @@ type SectionImageTextMosaicType1Props = {
   marginTop: HeightVariants
   marginBottom: HeightVariants
   button: LinksInterface
+  anchor?: string
 }
 
 const SectionImageTextMosaicType1: React.FC<
@@ -36,6 +37,7 @@ const SectionImageTextMosaicType1: React.FC<
   marginTop,
   marginBottom,
   button,
+  anchor,
 }) => {
   return (
     <Flex
@@ -46,6 +48,7 @@ const SectionImageTextMosaicType1: React.FC<
       marginTop={marginTop}
       marginBottom={marginBottom}
       px={{ base: '1rem', md: 0, lg: 0 }}
+      id={anchor}
     >
       <Flex
         flex={1}

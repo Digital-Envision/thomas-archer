@@ -34,6 +34,7 @@ type SectionImageHeadingCTAProps = {
   marginBottom?: string
   headingTagLevel?: HeadingTagSemantic
   height?: HeightVariants
+  anchor?: string
 }
 
 const SectionImageHeadingCTA: React.FC<SectionImageHeadingCTAProps> = (
@@ -49,6 +50,7 @@ const SectionImageHeadingCTA: React.FC<SectionImageHeadingCTAProps> = (
     marginBottom,
     headingTagLevel,
     height = HeightVariants.large,
+    anchor,
   } = props
 
   return (
@@ -60,6 +62,7 @@ const SectionImageHeadingCTA: React.FC<SectionImageHeadingCTAProps> = (
       backgroundPosition={'center'}
       marginTop={marginTop}
       marginBottom={marginBottom}
+      id={anchor}
     >
       <Box
         bgGradient={isOverlay ? 'linear(to-b, #00000099, #00000099)' : ''}

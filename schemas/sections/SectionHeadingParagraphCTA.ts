@@ -1,6 +1,6 @@
 import { HeightVariants } from 'components/base/Divider'
 import { enumToArrayOfObjects } from 'lib/utils'
-import { RTFField } from 'schemas/components/fields'
+import { HeadingTagLevel, RTFField, ScrollAnchor } from 'schemas/components/fields'
 import link from 'schemas/components/link'
 
 export const headingField = (title?) => ({
@@ -16,15 +16,9 @@ export const paragraphField = (title?) => ({
 })
 
 export const fields = [
+    ScrollAnchor,
     headingField(),
-    {
-        name: 'headingTagLevel',
-        title: 'Heading Tag Level',
-        type: 'string',
-        options: {
-            list: ['H1', 'H2', 'H3'],
-        },
-    },
+    HeadingTagLevel,
     {
         ...RTFField,
         title: 'RTF Paragraph'

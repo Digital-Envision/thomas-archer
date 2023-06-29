@@ -10,6 +10,7 @@ type Section2ColCardsProps = {
   marginBottom?: HeightVariants
   headingTagLevel?: HeadingTagSemantic
   ListArticleBlogCards: ArticleBlogCardProps[]
+  anchor?: string
 }
 
 const SectionColCards: React.FC<Section2ColCardsProps> = ({
@@ -17,6 +18,7 @@ const SectionColCards: React.FC<Section2ColCardsProps> = ({
   marginBottom,
   headingTagLevel,
   ListArticleBlogCards,
+  anchor,
 }) => {
   // TODO ADJUST TO JOINING THE _REF to return the actual data
 
@@ -25,6 +27,7 @@ const SectionColCards: React.FC<Section2ColCardsProps> = ({
       marginTop={marginTop}
       marginBottom={marginBottom}
       px={{ md: ListArticleBlogCards.length > 2 ? '0px' : '76px' }}
+      id={anchor}
     >
       {ListArticleBlogCards.length > 0 && (
         <Grid
