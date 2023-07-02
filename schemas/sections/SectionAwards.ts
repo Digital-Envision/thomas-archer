@@ -1,12 +1,13 @@
 import { HeightVariants } from 'components/base/Divider';
 import { enumToArrayOfObjects } from 'lib/utils';
-import { ImageAltField, ImageField } from 'schemas/components/fields';
+import { ImageAltField, ImageField, ScrollAnchor } from 'schemas/components/fields';
 import link from 'schemas/components/link';
 export default {
     type: 'object',
     name: 'SectionAwards',
     title: 'SectionAwards',
     fields: [
+        ScrollAnchor,
         {
             name: 'heading',
             title: 'Heading',

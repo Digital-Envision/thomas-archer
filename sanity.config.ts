@@ -63,6 +63,7 @@ import SectionBookingForm from 'schemas/sections/SectionBookingForm'
 import SectionParagraph from 'schemas/sections/SectionParagraph'
 import SectionFeaturedImage from 'schemas/sections/SectionFeaturedImage'
 import CodeEmbed from 'schemas/sections/CodeEmbed'
+import ScrollLinks from 'schemas/sections/ScrollLinks'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Next.js Blog with Sanity.io'
@@ -125,6 +126,7 @@ export default defineConfig({
       Section2ColImageTextMosaicType2,
       Section2ColHeading2ColParagraph,
       CodeEmbed,
+      ScrollLinks,
 
       // -- subSection
       ArticleBlogCard,

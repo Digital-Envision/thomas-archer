@@ -1,12 +1,13 @@
 import { HeightVariants } from "components/base/Divider"
 import { enumToArrayOfObjects } from "lib/utils"
-import { ImageAltField, ImageField } from "schemas/components/fields"
+import { ImageAltField, ImageField, ScrollAnchor } from "schemas/components/fields"
 
 export default {
     type: 'object',
     name: 'Section2ColHeading2ColParagraph',
     title: 'Section2ColHeading2ColParagraph',
     fields: [
+        ScrollAnchor,
         {
             name: 'leftHeading',
             type: 'text',

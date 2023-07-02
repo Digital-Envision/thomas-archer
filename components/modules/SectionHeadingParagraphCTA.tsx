@@ -20,6 +20,7 @@ type SectionHeadingParagraphCTAProps = {
   button2?: LinksInterface
   isEmbed?: boolean
   customButton?: any // contain customized button, currenly used on project detail
+  anchor?: string
 }
 
 const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
@@ -34,6 +35,7 @@ const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
   isEmbed,
   customButton,
   content,
+  anchor,
 }) => {
   const body = (
     <>
@@ -110,8 +112,7 @@ const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
       maxWidth={'1800px'}
       direction={{ base: 'column', md: isOffset ? 'column' : 'row' }}
       px={{ base: '1rem', md: '4rem' }}
-      marginTop={marginTop}
-      marginBottom={marginBottom}
+      id={anchor}
     >
       {body}
     </Flex>

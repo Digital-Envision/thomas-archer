@@ -22,6 +22,7 @@ type Section2ColHeading2ColParagraphProps = {
   marginBottom: HeightVariants
   image: SanityFiles | string
   alt?: string
+  anchor?: string
 }
 
 const Section2ColHeading2ColParagraph: React.FC<
@@ -41,6 +42,7 @@ const Section2ColHeading2ColParagraph: React.FC<
   marginBottom,
   image,
   alt,
+  anchor,
 }) => {
   return (
     <Flex
@@ -51,6 +53,7 @@ const Section2ColHeading2ColParagraph: React.FC<
       direction={{ base: 'column', md: 'row' }}
       marginTop={marginTop}
       marginBottom={marginBottom}
+      id={anchor}
     >
       <Flex
         direction={'row'}

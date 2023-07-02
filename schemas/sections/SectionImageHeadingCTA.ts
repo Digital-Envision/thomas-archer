@@ -3,12 +3,13 @@ import { HeightVariants } from 'components/base/Divider'
 import { HeightVariants as ImageHeightVariants } from 'components/modules/SectionImageHeadingCTA'
 import { enumToArrayOfObjects } from 'lib/utils'
 import link from 'schemas/components/link'
-import { ImageAltField, ImageField } from 'schemas/components/fields'
+import { ImageAltField, ImageField, ScrollAnchor } from 'schemas/components/fields'
 export default defineType({
     name: 'SectionImageHeadingCTA',
     title: 'SectionImageHeadingCTA',
     type: 'object',
     fields: [
+        ScrollAnchor,
         defineField({
             name: 'title',
             title: 'Title',

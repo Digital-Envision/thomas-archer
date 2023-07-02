@@ -37,10 +37,11 @@ import _ from 'lodash'
 import React from 'react'
 import SectionFeaturedImage from 'components/modules/SectionFeaturedImage'
 import CodeEmbed from 'components/base/CodeEmbed'
+import ScrollLinks from 'components/modules/ScrollLinks'
 
 const PageBuilder = (props) => {
-  const { pages, ...pageProps } = props
-  const page = pages?.[0] //current  page documents
+  const { pages: _page, ...pageProps } = props
+  const page = _page?.[0] //current  page documents
 
   const content = (page?.content || [])
     .filter((c) => !c.disabled)
@@ -209,6 +210,9 @@ const PageBuilder = (props) => {
           break
         case 'CodeEmbed':
           el = <CodeEmbed {...c} {...pageProps} key={c?._key} />
+          break
+        case 'ScrollLinks':
+          el = <ScrollLinks {...c} {...pageProps} page={page} key={c?._key} />
           break
         case 'fixedComponent':
           switch (c.name) {

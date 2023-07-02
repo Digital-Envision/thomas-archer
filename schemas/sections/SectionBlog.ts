@@ -1,6 +1,6 @@
 import { HeightVariants } from 'components/base/Divider';
 import { enumToArrayOfObjects } from 'lib/utils';
-import { RTFField } from 'schemas/components/fields';
+import { HeadingTagLevel, RTFField } from 'schemas/components/fields';
 import link from 'schemas/components/link';
 export default {
     type: 'object',
@@ -12,12 +12,9 @@ export default {
             type: 'text',
         },
         {
-            name: 'headingTagLevel',
-            title: 'Heading Tag Level',
-            type: 'string',
-            options: {
+            ...HeadingTagLevel, options: {
                 list: [
-                    'H1', 'H2', 'H3'
+                    'H2', 'H3', 'H4'
                 ],
             },
         },

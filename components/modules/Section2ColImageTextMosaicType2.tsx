@@ -19,6 +19,7 @@ type Section2ColImageTextMosaicType2Props = {
   marginTop: HeightVariants
   marginBottom: HeightVariants
   button?: LinksInterface
+  anchor?: string
 }
 
 const Section2ColImageTextMosaicType2: React.FC<
@@ -34,6 +35,7 @@ const Section2ColImageTextMosaicType2: React.FC<
   rightImage,
   rightImageAlt,
   button,
+  anchor,
 }) => {
   return (
     <SectionContainer
@@ -41,6 +43,7 @@ const Section2ColImageTextMosaicType2: React.FC<
       marginTop={marginTop}
       marginBottom={marginBottom}
       justify="end"
+      id={anchor}
     >
       <Flex flex={1} justify={'end'}>
         <Flex direction={'column'} pr={{ base: 0, md: '1rem' }}>

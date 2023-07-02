@@ -17,6 +17,7 @@ type SectionHeadingParagraphCTAImageProps = {
   marginTop: HeightVariants
   marginBottom: HeightVariants
   button: LinksInterface
+  anchor?: string
 }
 
 const SectionHeadingParagraphCTAImage: React.FC<
@@ -30,6 +31,7 @@ const SectionHeadingParagraphCTAImage: React.FC<
   marginTop,
   marginBottom,
   button,
+  anchor,
 }) => {
   return (
     <Flex
@@ -40,6 +42,7 @@ const SectionHeadingParagraphCTAImage: React.FC<
       px={{ base: '1rem', md: '4rem' }}
       marginTop={marginTop}
       marginBottom={marginBottom}
+      id={anchor}
     >
       <Flex flex={1} direction={'row'} align={'center'}>
         <Flex flex={1} direction={'column'} justify={'center'}>

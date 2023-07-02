@@ -1,11 +1,13 @@
 import { HeightVariants } from 'components/base/Divider'
 import { enumToArrayOfObjects } from 'lib/utils'
+import { ScrollAnchor } from 'schemas/components/fields'
 
 export default {
     type: 'object',
     name: 'SectionColCards',
     title: 'SectionColCards',
     fields: [
+        ScrollAnchor,
         {
             name: 'ListArticleBlogCards',
             title: 'List Article Blog Cards',

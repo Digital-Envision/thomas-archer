@@ -38,5 +38,6 @@ export default {
         { type: 'SectionBookingForm' },
         { type: 'SectionParagraph' },
         { type: 'CodeEmbed' },
+        { type: 'ScrollLinks' },
     ],
 }

@@ -17,6 +17,7 @@ type SectionAwardsProps = {
   marginTop: HeightVariants
   marginBottom: HeightVariants
   button: LinksInterface
+  anchor?: string
 }
 
 const SectionAwards: React.FC<SectionAwardsProps> = ({
@@ -30,6 +31,7 @@ const SectionAwards: React.FC<SectionAwardsProps> = ({
   marginTop,
   marginBottom,
   button,
+  anchor,
 }) => {
   return (
     <Flex
@@ -40,6 +42,7 @@ const SectionAwards: React.FC<SectionAwardsProps> = ({
       px={{ base: '1rem', md: '4rem' }}
       marginTop={marginTop}
       marginBottom={marginBottom}
+      id={anchor}
     >
       <Heading1 as={headingTagLevel}>{heading}</Heading1>
       <Flex direction={{ base: 'column', md: 'row' }}>

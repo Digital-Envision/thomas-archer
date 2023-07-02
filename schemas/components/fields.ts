@@ -87,6 +87,11 @@ export const HeadingTagLevel = {
         ],
     },
 }
+export const ScrollAnchor = {
+    name: 'anchor',
+    title: 'Scroll Anchor',
+    type: 'string',
+}
 
 export const RTFAnnotationLink = {
     name: 'link',
@@ -125,7 +130,6 @@ export const RTFAnnotationLink = {
             ...linkTypeBlogs,
             hidden: ({ parent }) => !parent?.useInternal || parent?.linkType !== LINK_TYPE_NAME.blog,
         }
-
     ]
 }
 

@@ -91,7 +91,7 @@ export const callingProps = {
     blogs: async () => {
         const blogs = await getSanityData({
             type: 'blogs',
-            condition: `&& slug.current != null && !(_id in path("drafts.**"))`,
+            condition: `&& slug.current != null`,
             limit: 12,
             sortByField: 'createdDate',
             sortOrder: 'desc',
@@ -187,17 +187,17 @@ export const getDataProjectDetailPage = async ({ slug }) => {
     // if toggled: selected projects, or else get latest 12 projects
     const projects = !_.isEmpty(selectedProjectsRef)
         ? ((await getSanityData({
-              type: 'projects',
-              condition: `&& slug.current != null && _id != "${currentProject?._id}" && _id in $ids`,
-              params: { ids: selectedProjectsRef },
-          })) as any)
+            type: 'projects',
+            condition: `&& slug.current != null && _id != "${currentProject?._id}" && _id in $ids`,
+            params: { ids: selectedProjectsRef },
+        })) as any)
         : ((await getSanityData({
-              type: 'projects',
-              condition: `&& slug.current != null && _id != "${currentProject?._id}"`,
-              limit: 12,
-              sortByField: 'orderRank',
-              sortOrder: 'asc',
-          })) as any)
+            type: 'projects',
+            condition: `&& slug.current != null && _id != "${currentProject?._id}"`,
+            limit: 12,
+            sortByField: 'orderRank',
+            sortOrder: 'asc',
+        })) as any)
 
     const selectedProjectsKeys =
         currentProject.SectionProjectScroll?.isSelectedProject &&
@@ -205,15 +205,15 @@ export const getDataProjectDetailPage = async ({ slug }) => {
 
     const sortedProjects = !_.isEmpty(selectedProjectsKeys)
         ? {
-              pagination: projects?.pagination,
-              data: _.sortBy(projects.data, (project) => {
-                  // this will sort fetched projects, according to configured on selectedProjects array
-                  const ref = selectedProjectsKeys.find(
-                      (selected) => selected._ref === project._id
-                  )
-                  return selectedProjectsKeys.indexOf(ref)
-              }),
-          }
+            pagination: projects?.pagination,
+            data: _.sortBy(projects.data, (project) => {
+                // this will sort fetched projects, according to configured on selectedProjects array
+                const ref = selectedProjectsKeys.find(
+                    (selected) => selected._ref === project._id
+                )
+                return selectedProjectsKeys.indexOf(ref)
+            }),
+        }
         : projects // projects already sorted on groq level
 
     return { project: currentProject, projects: sortedProjects }
