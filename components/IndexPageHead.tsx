@@ -30,12 +30,19 @@ export default function IndexPageHead({
 
   const router = useRouter()
 
+  const canonicalUrl = (
+    `https://thomasarcher.com.au` +
+    (router?.asPath === '/' ? '' : router?.asPath)
+  ).split('?')[0]
+
   //TODO INVESTIGATE BlogMeta Component
 
   return (
     <Head>
       <title>{title}</title>
       <meta property="og:title" content={title} />
+
+      <link rel="canonical" href={canonicalUrl} />
 
       {isUseNoIndex && <meta name="robots" content="noindex" />}
 
