@@ -73,7 +73,8 @@ export default function DynamicPage(props) {
     return <div></div>
   }
 
-  if (!_.isEmpty(routeDetail?.detailsPage) && !_.isEmpty(storeLink?.pages)) {
+  if (!_.isEmpty(routeDetail?.detailsPage)) {
+    // if (!_.isEmpty(routeDetail?.detailsPage) && !_.isEmpty(storeLink?.pages)) {
     switch (routeDetail?.detailsPage) {
       case DOCUMENT_TYPES_PAGE_NAME.Projects:
         if (preview) {
@@ -130,23 +131,21 @@ export default function DynamicPage(props) {
     )
   }
 
-  if (!_.isEmpty(storeLink?.pages))
-    //applied to other page
-    return (
-      <IndexPage
-        {...props}
-        posts={posts}
-        settings={settings}
-        pages={pages}
-        globals={globals}
-        projects={projects}
-        blogs={blogs}
-        floors={floors}
-        awardedProjects={awardedProjects}
-      />
-    )
-
-  return <div />
+  // applied to standard page
+  // if (!_.isEmpty(storeLink?.pages))
+  return (
+    <IndexPage
+      {...props}
+      posts={posts}
+      settings={settings}
+      pages={pages}
+      globals={globals}
+      projects={projects}
+      blogs={blogs}
+      floors={floors}
+      awardedProjects={awardedProjects}
+    />
+  )
 }
 
 export const getStaticPaths = async () => {
@@ -164,7 +163,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: true,
+    fallback: 'blocking',
   }
 }
 

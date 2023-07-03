@@ -28,7 +28,7 @@ const ScrollLinks: React.FC<any> = (props) => {
   return (
     <Box
       width={'w-full'}
-      maxWidth={'1800px'}
+      // maxWidth={'1800px'}
       px={{ base: '1rem', md: '4rem' }}
       mx="auto"
       position="sticky"
