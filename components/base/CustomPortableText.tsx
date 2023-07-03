@@ -67,7 +67,7 @@ export const components: PortableTextComponents = {
 
       return (
         <Link link={data}>
-          <Text size={'16px'} textDecor={'underline'} as="span">
+          <Text fontSize={'16px'} textDecor={'underline'} as="a">
             {children}
           </Text>
         </Link>
