@@ -7,6 +7,7 @@ import {
 import _ from 'lodash'
 
 const ScrollLinks: React.FC<any> = (props) => {
+  const { marginTop, marginBottom } = props
   const anchors = _(props?.page?.content)
     // .filter(['_type', 'SectionHeadingParagraphCTA'])
     .map(({ anchor }, i) => {
@@ -29,7 +30,11 @@ const ScrollLinks: React.FC<any> = (props) => {
     <Box
       width={'w-full'}
       // maxWidth={'1800px'}
-      px={{ base: '1rem', md: '4rem' }}
+      //same with navbar
+      px={{
+        base: '27.58px',
+        md: '70.48px',
+      }}
       mx="auto"
       position="sticky"
       top={'110px'}
@@ -38,6 +43,8 @@ const ScrollLinks: React.FC<any> = (props) => {
       alignItems="center"
       paddingY="1.25rem"
       bgColor="white"
+      marginTop={marginTop}
+      marginBottom={marginBottom}
     >
       <Breadcrumb separator={' '}>{anchors}</Breadcrumb>
     </Box>
