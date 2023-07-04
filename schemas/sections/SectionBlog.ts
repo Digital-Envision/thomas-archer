@@ -11,8 +11,12 @@ export default {
             name: 'heading',
             type: 'text',
         },
+        HeadingTagLevel,
         {
-            ...HeadingTagLevel, options: {
+            ...HeadingTagLevel,
+            title: 'Heading Tag Level for Blog post',
+            name: 'headingTagLevelBlog',
+            options: {
                 list: [
                     'H2', 'H3', 'H4'
                 ],

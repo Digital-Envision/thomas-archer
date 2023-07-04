@@ -1,15 +1,12 @@
+import { MarginBottomField, MarginTopField } from "schemas/components/fields"
 
 export default {
     type: 'object',
     name: 'ScrollLinks',
     title: 'Scroll Links',
     fields: [
-        {
-            name: 'placeholder',
-            type: 'string',
-            description: 'Links will be auto popolated from Scroll Anchor field'
-        },
-
+        MarginTopField,
+        MarginBottomField,
     ],
     preview: {
         select: {

@@ -18,6 +18,7 @@ type SectionBlogProps = {
   marginTop: HeightVariants
   marginBottom: HeightVariants
   headingTagLevel: HeadingTagSemantic
+  headingTagLevelBlog: HeadingTagSemantic
   blogs: BlogListingCardProps
   button: LinksInterface
   createdDate: string
@@ -27,6 +28,7 @@ type SectionBlogProps = {
 const SectionBlog: React.FC<SectionBlogProps> = ({
   heading,
   headingTagLevel,
+  headingTagLevelBlog,
   content,
   marginTop,
   marginBottom,
@@ -81,7 +83,12 @@ const SectionBlog: React.FC<SectionBlogProps> = ({
 
       <Box pt={{ base: HeightVariants.less, md: HeightVariants.default }} />
 
-      {blogs && <SectionColCards ListArticleBlogCards={blogs} />}
+      {blogs && (
+        <SectionColCards
+          headingTagLevel={headingTagLevelBlog}
+          ListArticleBlogCards={blogs}
+        />
+      )}
     </Box>
   )
 }

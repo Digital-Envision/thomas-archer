@@ -87,7 +87,8 @@ const theme = extendTheme({
     styles: {
         global: {
             "html": {
-                'scroll-padding-top': '200px'
+                'scroll-padding-top': '200px',
+                'scroll-behavior': 'smooth'
             },
             "html, body": {
                 bg: "gray.50",
