@@ -61,6 +61,8 @@ export default function DynamicPage(props) {
   const router = useRouter()
   const storeLink = useStoreLink((state) => state)
 
+  console.log({ pages })
+
   useEffect(() => {
     storeLink.setLink('pages', slugAndPages?.pages)
     storeLink.setLink('floorPlans', documentTypesPage?.floorPlansRef)

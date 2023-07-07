@@ -73,14 +73,11 @@ export const floorQuery = (props) => {
   if (slug) {
     return groq`*[_type == "floors" && slug.current == "${slug}"]{
       ...,
-      ${imageMetaData},
       facades->{
         ...,
-        ${imageMetaData}
       },
       customPageSection[]{
         ...,
-        ${imageMetaData},
         selectedProjects[]->{
           heading,
           slug,
@@ -93,14 +90,12 @@ export const floorQuery = (props) => {
     if (select) {
       return groq`*[_type == "floors" && _id in $ids]{
         ${select},
-        ${imageMetaData}
       }`
     } else {
       return groq`*[_type == "floors" && _id in $ids]{
         ...,
         facades->{
           ...,
-          ${imageMetaData}
         },
       }`
     }
@@ -109,46 +104,23 @@ export const floorQuery = (props) => {
       ...,
       facades->{
         ...,
-        ${imageMetaData}
       },
     }`
 }
 
 export const pageQuery = (slug: 'string' | { _id: string }) => {
+  let typeGROQ = ''
   if (typeof slug === 'object' && slug._id) {
-    return groq`*[_type == "page" && _id=="${slug._id}"][]{
-      ...,
-      content[]{
-        ...,
-        ${imageMetaData},
-        selectedProjects[]->{
-          heading,
-          slug,
-          image,
-          alt,
-        }
-      },
-    }`
+    typeGROQ = `*[_type == "page" && _id=="${slug._id}"][]`
+  } else if (slug) {
+    typeGROQ = `*[_type == "page" && slug.current=="${slug}"][]`
+  } else {
+    typeGROQ = `*[_type == "page"][]`
   }
 
-  if (slug) {
-    return groq`*[_type == "page" && slug.current=="${slug}"][]{
+  return groq`${typeGROQ}{
       ...,
-      content[]{
-        ...,
-        ${imageMetaData},
-        selectedProjects[]->{
-          heading,
-          slug,
-          image,
-          alt,
-        }
-      }
-    }`
-  }
-
-  return groq`*[_type == "page"][]{
-      ...,
+      ${imageMetaData},
       content[]{
         ...,
         ${imageMetaData},

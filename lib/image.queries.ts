@@ -22,9 +22,6 @@ import { queryImageMetaData as SectionVideoParagraphCTAMetaData } from 'schemas/
 import { queryImageMetaData as floorMetaData } from 'schemas/floor'
 
 export const imageMetaData = `
-  ${authorQueryImageMetaData},
-  ${facadeQueryImageMetaData},
-  ${blogQueryImageMetaData},
   ${CarouselImageMetaData},
   ${Section2ColHeading2ColParagraphImageMetaData},
   ${Section2ColImageTextFeaturedImageLeftRightImageMetaData},
@@ -42,6 +39,5 @@ export const imageMetaData = `
   ${SectionImageHeadingCTAMetaData},
   ${SectionImageTextMosaicType1MetaData},
   ${SectionInclusionsMetaData},
-  ${SectionVideoParagraphCTAMetaData},
-  ${floorMetaData}
+  ${SectionVideoParagraphCTAMetaData}
 `
