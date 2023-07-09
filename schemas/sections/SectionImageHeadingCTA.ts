@@ -1,7 +1,7 @@
 import { defineField, defineType } from 'sanity'
 import { HeightVariants } from 'components/base/Divider'
 import { HeightVariants as ImageHeightVariants } from 'components/modules/SectionImageHeadingCTA'
-import { enumToArrayOfObjects, getImagesMetaData } from 'lib/utils'
+import { enumToArrayOfObjects } from 'lib/utils'
 import link from 'schemas/components/link'
 import {
   ImageAltField,
@@ -9,16 +9,7 @@ import {
   ScrollAnchor,
 } from 'schemas/components/fields'
 
-const name = 'SectionImageHeadingCTA'
-
-export const queryImageMetaData = `
-    _type == '${name}' => {
-       ...,
-       "imageMetaData": image.asset->{
-         ${getImagesMetaData}
-       },
-    }
-`
+export const name = 'SectionImageHeadingCTA'
 
 export default defineType({
   name,

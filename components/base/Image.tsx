@@ -44,7 +44,14 @@ const Image = ({ variant, lqip, ...props }: ImageProps) => {
             width={'100%'}
             height={'100%'}
           >
-            <Img {...props} src={lqip} loading={'lazy'} placeholder={'blur'} />
+            <Img
+              {...props}
+              src={lqip}
+              loading={'lazy'}
+              placeholder={'blur'}
+              width={'100%'}
+              height={'100%'}
+            />
           </Box>
         </Box>
       )
@@ -64,6 +71,7 @@ const Image = ({ variant, lqip, ...props }: ImageProps) => {
             position={'absolute'}
             placeholder={'blur'}
             top={0}
+            left={0}
             width={'100%'}
             height={'100%'}
           >
@@ -72,6 +80,8 @@ const Image = ({ variant, lqip, ...props }: ImageProps) => {
               src={lqip}
               loading={'lazy'}
               placeholder={'blur'}
+              width={'100%'}
+              height={'100%'}
             />
           </Box>
         </Box>

@@ -2,7 +2,11 @@ import _ from 'lodash'
 import { groq } from 'next-sanity'
 import { HeightVariants } from 'components/base/Divider'
 import { MetaData, SanityFiles, SanityImage, SEO } from 'utils/interfaces'
-import { imageMetaData } from './image.queries'
+import {
+  componentsImagesQuery,
+  facadesImage,
+  floorPlanImages,
+} from './image.queries'
 
 const postFields = groq`
   _id,
@@ -73,11 +77,14 @@ export const floorQuery = (props) => {
   if (slug) {
     return groq`*[_type == "floors" && slug.current == "${slug}"]{
       ...,
+      ${floorPlanImages},
       facades->{
         ...,
+        ${facadesImage}
       },
       customPageSection[]{
         ...,
+        ${componentsImagesQuery},
         selectedProjects[]->{
           heading,
           slug,
@@ -89,22 +96,35 @@ export const floorQuery = (props) => {
   } else if (ids.length > 1 || byId) {
     if (select) {
       return groq`*[_type == "floors" && _id in $ids]{
+        ${floorPlanImages},
         ${select},
+        ${componentsImagesQuery}
       }`
     } else {
       return groq`*[_type == "floors" && _id in $ids]{
         ...,
+        ${floorPlanImages},
         facades->{
           ...,
+          ${facadesImage}
         },
+        customPageSection[]{
+          ...,
+          ${componentsImagesQuery},
+        }
       }`
     }
   }
   return groq`*[_type == "floors" && slug.current != null]{
       ...,
+      ${floorPlanImages},
       facades->{
         ...,
+        ${facadesImage}
       },
+      customPageSection[]{
+        ${componentsImagesQuery}
+      }
     }`
 }
 
@@ -120,10 +140,9 @@ export const pageQuery = (slug: 'string' | { _id: string }) => {
 
   return groq`${typeGROQ}{
       ...,
-      ${imageMetaData},
       content[]{
         ...,
-        ${imageMetaData},
+        ${componentsImagesQuery},
         selectedProjects[]->{
           heading,
           slug,

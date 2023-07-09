@@ -1,4 +1,5 @@
-import { Box, Image, Icon, Flex } from '@chakra-ui/react'
+import { Box, Icon, Flex } from '@chakra-ui/react'
+import Image, { ImageVariant } from 'components/base/Image'
 import Link from 'next/link'
 import Heading3 from '../base/Heading3'
 import Text from '../base/Text'
@@ -10,6 +11,7 @@ import { getImageUrl } from 'lib/utils'
 
 interface ProjectListingCardDataProps {
   image?: any // sanity io image
+  imageMetaData?: string
   alt?: string
   link: string
   heading: string
@@ -27,6 +29,7 @@ export type ProjectListingCardProps = {
 
 const ProjectListingCard: React.FC<ProjectListingCardProps['data'][0]> = ({
   image,
+  imageMetaData,
   alt,
   link,
   heading,
@@ -38,6 +41,8 @@ const ProjectListingCard: React.FC<ProjectListingCardProps['data'][0]> = ({
       <CardContainer>
         <Box display="flex" justifyContent="center" alignItems="center">
           <Image
+            variant={ImageVariant.ImageChakra}
+            lqip={imageMetaData}
             src={getImageUrl(image)}
             alt={alt || heading}
             objectFit="cover"

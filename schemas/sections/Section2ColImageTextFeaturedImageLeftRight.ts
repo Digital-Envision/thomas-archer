@@ -1,18 +1,9 @@
 import { HeightVariants } from 'components/base/Divider'
-import { enumToArrayOfObjects, getImagesMetaData } from 'lib/utils'
+import { enumToArrayOfObjects } from 'lib/utils'
 import { ImageAltField, ImageField } from 'schemas/components/fields'
 import link from 'schemas/components/link'
 
-const name = 'Section2ColImageTextFeaturedImageLeftRight'
-
-export const queryImageMetaData = `
-   _type == '${name}' => {
-      ...,
-      "imageMetaData": image.asset->{
-          ${getImagesMetaData}
-      },
-   }
-`
+export const name = 'Section2ColImageTextFeaturedImageLeftRight'
 
 export default {
     type: 'object',

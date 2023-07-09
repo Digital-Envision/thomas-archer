@@ -1,21 +1,12 @@
 import { HeightVariants } from 'components/base/Divider'
-import { enumToArrayOfObjects, getImagesMetaData } from 'lib/utils'
+import { enumToArrayOfObjects } from 'lib/utils'
 import {
   ImageAltField,
   ImageField,
   ScrollAnchor,
 } from 'schemas/components/fields'
 
-const name = 'Section2ColHeading2ColParagraph'
-
-export const queryImageMetaData = `
-   _type == '${name}' => {
-      ...,
-      "imageMetaData": image.asset->{
-          ${getImagesMetaData}
-      },
-   }
-`
+export const name = 'Section2ColHeading2ColParagraph'
 
 export default {
   type: 'object',

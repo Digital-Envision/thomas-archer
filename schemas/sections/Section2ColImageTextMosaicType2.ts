@@ -2,21 +2,8 @@ import { HeightVariants } from 'components/base/Divider'
 import { enumToArrayOfObjects } from 'lib/utils'
 import { ImageAltField, ScrollAnchor } from 'schemas/components/fields'
 import link from 'schemas/components/link'
-import { getImagesMetaData } from 'lib/utils'
 
-const name = 'Section2ColImageTextMosaicType2'
-
-export const queryImageMetaData = `
-   _type == '${name}' => {
-      ...,
-      "leftImageMetaData": leftImage.asset->{
-          ${getImagesMetaData}
-      },
-      "rightImageMetaData": rightImage.asset->{
-          ${getImagesMetaData}
-      },
-   }
-`
+export const name = 'Section2ColImageTextMosaicType2'
 
 export default {
   type: 'object',

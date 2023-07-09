@@ -1,43 +1,221 @@
-import { queryImageMetaData as authorQueryImageMetaData } from 'schemas/author'
-import { queryImageMetaData as facadeQueryImageMetaData } from 'schemas/facade'
-import { queryImageMetaData as blogQueryImageMetaData } from 'schemas/blog'
-import { queryImageMetaData as CarouselImageMetaData } from 'schemas/sections/Carousel'
-import { queryImageMetaData as Section2ColHeading2ColParagraphImageMetaData } from 'schemas/sections/Section2ColHeading2ColParagraph'
-import { queryImageMetaData as Section2ColImageTextFeaturedImageLeftRightImageMetaData } from 'schemas/sections/Section2ColImageTextFeaturedImageLeftRight'
-import { queryImageMetaData as Section2ColImageTextMosaicType2ImageMetaData } from 'schemas/sections/Section2ColImageTextMosaicType2'
-import { queryImageMetaData as SectionAwardsImageMetaData } from 'schemas/sections/SectionAwards'
-import { queryImageMetaData as SectionBookingFormImageMetaData } from 'schemas/sections/SectionBookingForm'
-import { queryImageMetaData as SectionFeaturedImageImageMetaData } from 'schemas/sections/SectionFeaturedImage'
-import { queryImageMetaData as SectionGalleryScrollImageMetaData } from 'schemas/sections/SectionGalleryScroll'
-import { queryImageMetaData as SectionGridGalleryImageMetaData } from 'schemas/sections/SectionGridGallery'
-import { queryImageMetaData as SectionHeadingParagraphCTAImageImageMetaData } from 'schemas/sections/SectionHeadingParagraphCTAImage'
-import { queryImageMetaData as SectionHeroImageBigMetaData } from 'schemas/sections/SectionHeroImageBig'
-import { queryImageMetaData as SectionHeroImageDefaultMetaData } from 'schemas/sections/SectionHeroImageDefault'
-import { queryImageMetaData as SectionHeroVideoBigMetaData } from 'schemas/sections/SectionHeroVideoBig'
-import { queryImageMetaData as SectionImageAwardsMetaData } from 'schemas/sections/SectionImageAwards'
-import { queryImageMetaData as SectionImageHeadingCTAMetaData } from 'schemas/sections/SectionImageHeadingCTA'
-import { queryImageMetaData as SectionImageTextMosaicType1MetaData } from 'schemas/sections/SectionImageTextMosaicType1'
-import { queryImageMetaData as SectionInclusionsMetaData } from 'schemas/sections/SectionInclusions'
-import { queryImageMetaData as SectionVideoParagraphCTAMetaData } from 'schemas/sections/SectionVideoParagraphCTA'
-import { queryImageMetaData as floorMetaData } from 'schemas/floor'
+// dont add comma at the last list
+const componentWithImages = `
+  'Section2ColHeading2ColParagraph',
+  'Section2ColImageTextFeaturedImageLeftRight',
+  'SectionAwards',
+  'SectionBookingForm',
+  'SectionHeadingParagraphCTAImage',
+  'SectionHeroImageDefault',
+  'SectionImageAwards',
+  'SectionImageHeadingCTA',
+  'Section2ColImageTextMosaicType2',
+  'SectionImageTextMosaicType1',
+  'SectionFeaturedImage',
+  'Carousel',
+  'SectionGalleryScroll',
+  'SectionGridGallery',
+  'SectionInclusions',
+  'SectionHeroImageBig',
+  'SectionHeroVideoBig',
+  'SectionVideoParagraphCTA',
+`
 
-export const imageMetaData = `
-  ${CarouselImageMetaData},
-  ${Section2ColHeading2ColParagraphImageMetaData},
-  ${Section2ColImageTextFeaturedImageLeftRightImageMetaData},
-  ${Section2ColImageTextMosaicType2ImageMetaData},
-  ${SectionAwardsImageMetaData},
-  ${SectionBookingFormImageMetaData},
-  ${SectionFeaturedImageImageMetaData},
-  ${SectionGalleryScrollImageMetaData},
-  ${SectionGridGalleryImageMetaData},
-  ${SectionHeadingParagraphCTAImageImageMetaData},
-  ${SectionHeroImageBigMetaData},
-  ${SectionHeroImageDefaultMetaData},
-  ${SectionHeroVideoBigMetaData},
-  ${SectionImageAwardsMetaData},
-  ${SectionImageHeadingCTAMetaData},
-  ${SectionImageTextMosaicType1MetaData},
-  ${SectionInclusionsMetaData},
-  ${SectionVideoParagraphCTAMetaData}
+// dont add comma at the last list
+export const componentsImagesQuery = `
+  _type in [${componentWithImages}] => {
+    image != null => {
+      "imageMetaData": image.asset->{
+        metadata {
+          blurHash,
+          lqip
+        }
+      }
+    },
+    leftImage != null => {
+      "leftImageMetaData": leftImage.asset->{
+        metadata {
+          blurHash,
+          lqip
+        }
+      }
+    },
+    rightImage != null => {
+      "rightImageMetaData": rightImage.asset->{
+        metadata {
+          blurHash,
+          lqip
+        }
+      }
+    },
+    mobileImage != null => {
+      "mobileImageMetaData": mobileImage.asset->{
+        metadata {
+          blurHash,
+          lqip
+        }
+      }
+    },
+    desktopImage != null => {
+      "desktopImageMetaData": desktopImage.asset->{
+        metadata {
+          blurHash,
+          lqip
+        }
+      }
+    },
+    bannerImage != null => {
+      "bannerImageMetaData": cover.asset->{
+        metadata {
+          blurHash,
+          lqip
+        }
+      }
+    },
+    cover != null => {
+      "coverMetaData": cover.asset->{
+        metadata {
+          blurHash,
+          lqip
+        }
+      }
+    },
+    video != null => {
+      video {
+        ...,
+        cover != null => {
+          "coverMetaData": cover.asset->{
+            metadata {
+              blurHash,
+              lqip
+            }
+          }
+        }
+      }
+    },
+    images != null => {
+      images[] {
+        ...,
+        _type == "img" => {
+          "imageMetaData": image.asset->{
+            metadata {
+              blurHash,
+              lqip
+            }
+          }
+        }
+      }
+    },
+    listImages != null => {
+      listImages[] {
+        ...,
+        _type == "images" => {
+          "imageMetaData": image.asset->{
+            metadata {
+              blurHash,
+              lqip
+            }
+          }
+        }
+      }
+    },
+    items != null => {
+      items[] {
+        ...,
+        _type == "item" => {
+          image != null => {
+            "imageMetaData": image.asset->{
+              metadata {
+                blurHash,
+                lqip
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
+export const facadesImage = `
+   _type == 'facades' => {
+      ...,
+      listImages[]{
+        ...,
+        "imageMetaData": image.asset->{
+            metadata {
+              blurHash,
+              lqip
+            }
+        },
+      }
+   }
+`
+
+export const floorPlanImages = `
+   _type == 'floors' => {
+    bannerImage {
+      ...,
+      "imageMetaData": image.asset->{
+         metadata {
+           blurHash,
+           lqip
+         }
+       },
+     },
+     floorPlan{
+       ...,
+       listSizes[]{
+         ...,
+         listImages[]{
+           ...,
+           "imageMetaData": image.asset->{
+              metadata {
+                blurHash,
+                lqip
+              }
+           },
+         }
+       }
+     }
+   }
+`
+
+export const projectImages = `
+  _type == "projects" => {
+    SectionGalleryScroll != null => {
+      SectionGalleryScroll {
+        ...,
+        listImages[]{
+          ...,
+          "imageMetaData": image.asset->{
+            metadata {
+              blurHash,
+              lqip
+            }
+          }
+        }
+      }
+    },
+    award != null => {
+      award {
+        ...,
+        "awardLogoMetaData": awardLogo.asset->{
+          metadata {
+            blurHash,
+            lqip
+          }
+        },
+        "awardImageMetaData": awardImage.asset->{
+          metadata {
+            blurHash,
+            lqip
+          }
+        }
+      }
+    },
+    customPageSection[] {
+      ...,
+      ${componentsImagesQuery}
+    }
+  }
 `

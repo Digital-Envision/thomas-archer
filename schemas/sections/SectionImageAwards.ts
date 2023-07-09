@@ -1,18 +1,9 @@
 import { ImageAltField } from './../components/fields'
 import { HeightVariants } from 'components/base/Divider'
-import { enumToArrayOfObjects, getImagesMetaData } from 'lib/utils'
+import { enumToArrayOfObjects } from 'lib/utils'
 import { ImageField } from 'schemas/components/fields'
 
-const name = 'SectionImageAwards'
-
-export const queryImageMetaData = `
-   _type == '${name}' => {
-      ...,
-      "imageMetaData": image.asset->{
-          ${getImagesMetaData}
-      },
-   }
-`
+export const name = 'SectionImageAwards'
 
 export default {
     type: 'object',

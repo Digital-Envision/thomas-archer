@@ -1,4 +1,3 @@
-import { getImagesMetaData } from 'lib/utils'
 import _ from 'lodash'
 import {
     HubspotField,
@@ -10,16 +9,7 @@ import {
     RTFField,
 } from 'schemas/components/fields'
 
-const name = 'SectionBookingForm'
-
-export const queryImageMetaData = `
-   _type == '${name}' => {
-      ...,
-      "imageMetaData": image.asset->{
-          ${getImagesMetaData}
-      },
-   }
-`
+export const name = 'SectionBookingForm'
 
 export default {
     type: 'object',
