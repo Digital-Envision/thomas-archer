@@ -1,18 +1,20 @@
-import { Box, Flex, Image } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 import Text from '../base/Text'
 import { HeadingTagSemantic } from 'components/base/Heading1'
 import React from 'react'
 import { HeightVariants } from 'components/base/Divider'
 import SectionContainer from 'components/base/Section'
 import useHubspot from 'lib/hooks/useHubspot'
-import { Hubspot, HubspotForm, SanityFiles } from 'utils/interfaces'
+import { Hubspot, HubspotForm, MetaData, SanityFiles } from 'utils/interfaces'
 import { getImageUrl } from 'lib/utils'
 import CustomPortableText from 'components/base/CustomPortableText'
+import Image, { ImageVariant } from 'components/base/Image'
 
 type SectionBookingForm = {
   marginTop: HeightVariants
   marginBottom: HeightVariants
   image?: SanityFiles
+  imageMetaData?: MetaData
   alt?: string
   hubspot: HubspotForm
   tnc: any
@@ -23,6 +25,7 @@ const SectionBookingForm: React.FC<SectionBookingForm> = ({
   marginTop,
   marginBottom,
   image,
+  imageMetaData,
   alt,
   tnc,
   hubspot,
@@ -68,9 +71,12 @@ const SectionBookingForm: React.FC<SectionBookingForm> = ({
 
       <Flex flex={1} justify={'center'}>
         <Image
+          variant={ImageVariant.ImageChakra}
           width={'100%'}
+          height={'100%'}
           objectFit={'cover'}
           src={getImageUrl(image)}
+          lqip={imageMetaData?.metadata?.lqip}
           alt={alt}
         />
       </Flex>

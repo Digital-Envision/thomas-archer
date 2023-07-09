@@ -3,9 +3,11 @@ import { enumToArrayOfObjects } from 'lib/utils'
 import { ImageAltField, ImageField } from 'schemas/components/fields'
 import link from 'schemas/components/link'
 
+export const name = 'Section2ColImageTextFeaturedImageLeftRight'
+
 export default {
     type: 'object',
-    name: 'Section2ColImageTextFeaturedImageLeftRight',
+    name,
     title: 'Section2ColImageTextFeaturedImageLeftRight',
     fields: [
         {

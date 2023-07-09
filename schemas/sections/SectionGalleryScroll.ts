@@ -1,6 +1,20 @@
 import { HeightVariants } from 'components/base/Divider'
-import { enumToArrayOfObjects } from 'lib/utils'
+import { enumToArrayOfObjects, getImagesMetaData } from 'lib/utils'
 import { ImageAltField, ImageField } from 'schemas/components/fields'
+
+const name = 'SectionGalleryScroll'
+
+export const queryImageMetaData = `
+   _type == '${name}' => {
+      ...,
+      listImages[]{
+        ...,
+        "imageMetaData": image.asset->{
+          ${getImagesMetaData}
+        },
+      }
+   }
+`
 
 export const listImagesFields = () => ({
     name: 'listImages',
@@ -39,7 +53,7 @@ export const listImagesFields = () => ({
 })
 
 export default {
-    name: 'SectionGalleryScroll',
+    name,
     title: 'Gallery Scroll',
     type: 'object',
     fields: [

@@ -1,12 +1,13 @@
-import { HeightVariants } from "components/base/Divider"
-import { enumToArrayOfObjects } from "lib/utils"
-import { ImageAltField, ImageField } from "schemas/components/fields"
-import link from "schemas/components/link"
+import { HeightVariants } from 'components/base/Divider'
+import { enumToArrayOfObjects } from 'lib/utils'
+import { ImageAltField, ImageField } from 'schemas/components/fields'
+import link from 'schemas/components/link'
 
+export const name = 'SectionHeadingParagraphCTAImage'
 
 export default {
     type: 'object',
-    name: 'SectionHeadingParagraphCTAImage',
+    name,
     title: 'SectionHeadingParagraphCTAImage',
     fields: [
         {
@@ -18,9 +19,7 @@ export default {
             title: 'Heading Tag Level',
             type: 'string',
             options: {
-                list: [
-                    'H1', 'H2', 'H3'
-                ],
+                list: ['H1', 'H2', 'H3'],
             },
         },
         {
@@ -29,8 +28,7 @@ export default {
         },
         {
             ...ImageField,
-            description:
-                'This image will be displayed on the right section.',
+            description: 'This image will be displayed on the right section.',
         },
         ImageAltField,
         {
@@ -41,45 +39,41 @@ export default {
                 collapsible: true,
                 collapsed: true,
             },
-            fields: [
-                ...link
-            ],
+            fields: [...link],
         },
         {
             title: 'Margin Top',
             name: 'marginTop',
             type: 'string',
             options: {
-                list: [
-                    ...enumToArrayOfObjects(HeightVariants)
-                ],
+                list: [...enumToArrayOfObjects(HeightVariants)],
             },
 
-            layout: 'dropdown'
+            layout: 'dropdown',
         },
         {
             title: 'Margin Bottom',
             name: 'marginBottom',
             type: 'string',
             options: {
-                list: [
-                    ...enumToArrayOfObjects(HeightVariants)
-                ],
+                list: [...enumToArrayOfObjects(HeightVariants)],
             },
 
-            layout: 'dropdown'
+            layout: 'dropdown',
         },
     ],
     preview: {
         select: {
             title: 'heading',
             subtitle: 'label',
-            disabled: 'disabled'
+            disabled: 'disabled',
         },
         prepare({ title, disabled }) {
             return {
-                title: `SectionHeadingParagraphCTAImage: ${disabled ? 'DISABLED' : title}`
+                title: `SectionHeadingParagraphCTAImage: ${
+                    disabled ? 'DISABLED' : title
+                }`,
             }
-        }
-    }
+        },
+    },
 }

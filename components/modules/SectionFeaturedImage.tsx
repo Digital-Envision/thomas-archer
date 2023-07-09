@@ -1,10 +1,13 @@
-import { Box, Flex, Img } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 import { urlForImage } from 'lib/sanity.image'
 import React from 'react'
+import Image, { ImageVariant } from 'components/base/Image'
 
 const SectionFeaturedImage = ({
   desktopImage,
+  desktopImageMetaData,
   mobileImage,
+  mobileImageMetaData,
   alt,
   marginBottom,
   marginTop,
@@ -26,12 +29,14 @@ const SectionFeaturedImage = ({
             width={'100vw'}
             px={'1rem'}
           >
-            <Img
+            <Image
+              variant={ImageVariant.Img}
               src={urlForImage(desktopImage).url()}
+              lqip={desktopImageMetaData?.metadata?.lqip}
               alt={alt}
               objectFit={'cover'}
               width={'100%'}
-            ></Img>
+            ></Image>
           </Box>
         </Flex>
       )}
@@ -43,12 +48,14 @@ const SectionFeaturedImage = ({
           }}
           px={'1rem'}
         >
-          <Img
+          <Image
+            variant={ImageVariant.Img}
             src={urlForImage(mobileImage).url()}
+            lqip={mobileImageMetaData?.metadata?.lqip}
             alt={alt}
             objectFit={'cover'}
             width={'100vw'}
-          ></Img>
+          ></Image>
         </Box>
       )}
     </Flex>

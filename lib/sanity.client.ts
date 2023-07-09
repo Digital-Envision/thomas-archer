@@ -24,9 +24,16 @@ export const client = projectId
   ? createClient({ projectId, dataset, apiVersion, useCdn })
   : null
 
-export const getSanityDataById = async ({ type, condition = '' }) => {
+export const getSanityDataById = async ({
+  type,
+  condition = '',
+  customQuery = '',
+}) => {
   try {
-    const query = `*[_type == "${type}" ${condition}]`
+    const query = `*[_type == "${type}" ${condition}]{
+      ...,
+      ${customQuery}
+    }`
     const [data] = await client.fetch(query)
 
     return data

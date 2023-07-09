@@ -90,6 +90,7 @@ export default function ProjectPageTemplate(props: any) {
       {!_.isEmpty(project?.award) && (
         <SectionImageAwards
           image={project?.award?.awardImage}
+          imageMetaData={project?.award?.awardImageMetaData}
           awards={project?.award?.awards}
           marginTop={HeightVariants.extra}
           marginBottom={HeightVariants.more}

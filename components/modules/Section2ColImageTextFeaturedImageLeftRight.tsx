@@ -1,10 +1,12 @@
-import { Box, Flex, Image } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
+import Image, { ImageVariant } from 'components/base/Image'
 import Text from '../base/Text'
 import Button, { Variants } from 'components/base/Button'
 import { HeightVariants } from 'components/base/Divider'
 import Link, { LinksInterface } from 'components/base/Link'
 import CustomPortableText from 'components/base/CustomPortableText'
 import { getImageUrl } from 'lib/utils'
+import {MetaData} from 'utils/interfaces'
 
 type Section2ColImageTextFeaturedImageLeftRightProps = {
   heading: string
@@ -16,6 +18,7 @@ type Section2ColImageTextFeaturedImageLeftRightProps = {
   marginBottom: HeightVariants
   button: LinksInterface
   IsImageRight: boolean
+  imageMetaData: MetaData
 }
 
 const Section2ColImageTextFeaturedImageLeftRight: React.FC<
@@ -25,6 +28,7 @@ const Section2ColImageTextFeaturedImageLeftRight: React.FC<
   quotes,
   postedBy,
   image,
+  imageMetaData,
   alt,
   marginTop,
   marginBottom,
@@ -79,10 +83,12 @@ const Section2ColImageTextFeaturedImageLeftRight: React.FC<
 
       <Flex flex={1.3} bgColor="blue.100">
         <Image
+          variant={ImageVariant.ImageChakra}
           width="100%"
           height={'auto'}
           objectFit={'cover'}
           src={getImageUrl(image)}
+          lqip={imageMetaData?.metadata?.lqip}
           alt={alt || heading}
         />
       </Flex>

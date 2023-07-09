@@ -1,7 +1,12 @@
 import _ from 'lodash'
 import { groq } from 'next-sanity'
 import { HeightVariants } from 'components/base/Divider'
-import { SanityFiles, SanityImage, SEO } from 'utils/interfaces'
+import { MetaData, SanityFiles, SanityImage, SEO } from 'utils/interfaces'
+import {
+  componentsImagesQuery,
+  facadesImage,
+  floorPlanImages,
+} from './image.queries'
 
 const postFields = groq`
   _id,
@@ -72,11 +77,14 @@ export const floorQuery = (props) => {
   if (slug) {
     return groq`*[_type == "floors" && slug.current == "${slug}"]{
       ...,
+      ${floorPlanImages},
       facades->{
-        listImages,
+        ...,
+        ${facadesImage}
       },
       customPageSection[]{
         ...,
+        ${componentsImagesQuery},
         selectedProjects[]->{
           heading,
           slug,
@@ -88,60 +96,53 @@ export const floorQuery = (props) => {
   } else if (ids.length > 1 || byId) {
     if (select) {
       return groq`*[_type == "floors" && _id in $ids]{
-        ${select}
+        ${floorPlanImages},
+        ${select},
+        ${componentsImagesQuery}
       }`
     } else {
       return groq`*[_type == "floors" && _id in $ids]{
         ...,
+        ${floorPlanImages},
         facades->{
-          listImages,
+          ...,
+          ${facadesImage}
         },
+        customPageSection[]{
+          ...,
+          ${componentsImagesQuery},
+        }
       }`
     }
   }
   return groq`*[_type == "floors" && slug.current != null]{
       ...,
+      ${floorPlanImages},
       facades->{
-        listImages,
+        ...,
+        ${facadesImage}
       },
+      customPageSection[]{
+        ${componentsImagesQuery}
+      }
     }`
 }
 
 export const pageQuery = (slug: 'string' | { _id: string }) => {
+  let typeGROQ = ''
   if (typeof slug === 'object' && slug._id) {
-    return groq`*[_type == "page" && _id=="${slug._id}"][]{
-      ...,
-      content[]{
-        ...,
-        selectedProjects[]->{
-          heading,
-          slug,
-          image,
-          alt,
-        }
-      },
-    }`
+    typeGROQ = `*[_type == "page" && _id=="${slug._id}"][]`
+  } else if (slug) {
+    typeGROQ = `*[_type == "page" && slug.current=="${slug}"][]`
+  } else {
+    typeGROQ = `*[_type == "page"][]`
   }
 
-  if (slug) {
-    return groq`*[_type == "page" && slug.current=="${slug}"][]{
+  return groq`${typeGROQ}{
       ...,
       content[]{
         ...,
-        selectedProjects[]->{
-          heading,
-          slug,
-          image,
-          alt,
-        }
-      }
-    }`
-  }
-
-  return groq`*[_type == "page"][]{
-      ...,
-      content[]{
-        ...,
+        ${componentsImagesQuery},
         selectedProjects[]->{
           heading,
           slug,
@@ -337,6 +338,7 @@ export interface Floor {
     isOverlay: boolean
     marginTop: HeightVariants
     marginBottom: HeightVariants
+    imageMetaData: MetaData
   }
   floorPlan: {
     listSizes: {
@@ -373,6 +375,7 @@ export interface Floor {
     listImages: {
       description: string
       image: SanityFiles
+      imageMetaData: MetaData
     }[]
   }
   content: any

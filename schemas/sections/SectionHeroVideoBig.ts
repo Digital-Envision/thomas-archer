@@ -1,9 +1,21 @@
 import _ from 'lodash'
 import { defineField, defineType } from 'sanity'
 import { HeightVariants } from 'components/base/Divider'
-import { enumToArrayOfObjects } from 'lib/utils'
+import { enumToArrayOfObjects, getImagesMetaData } from 'lib/utils'
+
+const name = 'SectionHeroVideoBig'
+
+export const queryImageMetaData = `
+   _type == '${name}' => {
+      ...,
+      "coverMetaData": cover.asset->{
+          ${getImagesMetaData}
+      },
+   }
+`
+
 export default defineType({
-    name: 'SectionHeroVideoBig',
+    name,
     title: 'SectionHeroVideoBig',
     type: 'object',
     fields: [

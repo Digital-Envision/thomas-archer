@@ -2,6 +2,8 @@ import { HeightVariants } from 'components/base/Divider'
 import { enumToArrayOfObjects } from 'lib/utils'
 import { ImageAltField, ImageField } from 'schemas/components/fields'
 
+export const name = 'SectionHeroImageDefault'
+
 export const SectionHeroImageDefaultFields = [
     {
         ...ImageField,
@@ -38,7 +40,7 @@ export const SectionHeroImageDefaultFields = [
 ]
 
 export default {
-    name: 'SectionHeroImageDefault',
+    name,
     title: 'SectionHeroImageDefault',
     type: 'object',
     fields: SectionHeroImageDefaultFields,

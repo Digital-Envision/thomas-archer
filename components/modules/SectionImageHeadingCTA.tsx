@@ -1,7 +1,6 @@
 import { Box } from '@chakra-ui/react'
 import Text from 'components/base/Text'
 import React from 'react'
-import { urlForImage } from 'lib/sanity.image'
 import { SanityFiles } from 'utils/interfaces'
 import Button, { Variants as ButtonVariants } from 'components/base/Button'
 import Link, { LinksInterface } from 'components/base/Link'

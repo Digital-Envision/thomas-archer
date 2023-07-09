@@ -56,3 +56,8 @@ export const getUrlFromSanityFile = (file) => {
     const [_file, id, extension] = ref.split('-')
     return `https://cdn.sanity.io/files/${projectId}/${dataset}/${id}.${extension}`
 }
+
+export const getImagesMetaData = `metadata {
+  blurHash,
+  lqip
+}`

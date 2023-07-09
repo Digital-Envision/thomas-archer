@@ -1,6 +1,6 @@
 import { DOCUMENT_TYPE_SCHEMA_NAME } from './global/DetailsPage'
 import { HeightVariants } from 'components/base/Divider'
-import { enumToArrayOfObjects } from 'lib/utils'
+import { enumToArrayOfObjects, getImagesMetaData } from 'lib/utils'
 import _ from 'lodash'
 import {
   ImageAltField,
@@ -13,10 +13,12 @@ import { FloorPlanDetails } from './sections/FloorPlanDetails'
 import { SectionHeroImageDefaultFields } from './sections/SectionHeroImageDefault'
 import { orderRankField } from '@sanity/orderable-document-list'
 
+const name = DOCUMENT_TYPE_SCHEMA_NAME['Floor Plans']
+
 export default {
   type: 'document',
   title: 'Floor Plans',
-  name: DOCUMENT_TYPE_SCHEMA_NAME['Floor Plans'],
+  name,
   fields: [
     {
       name: 'title',

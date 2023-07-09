@@ -1,9 +1,24 @@
-import { HeightVariants } from 'components/base/Divider';
-import { enumToArrayOfObjects } from 'lib/utils';
-import { ImageAltField, ImageField } from 'schemas/components/fields';
+import { HeightVariants } from 'components/base/Divider'
+import { enumToArrayOfObjects, getImagesMetaData } from 'lib/utils'
+import { ImageAltField, ImageField } from 'schemas/components/fields'
+
+const name = 'SectionInclusions'
+
+export const queryImageMetaData = `
+   _type == '${name}' => {
+      ...,
+      items[]{
+        ...,
+        "imageMetaData": image.asset->{
+          ${getImagesMetaData}
+        },
+      }
+   }
+`
+
 export default {
     type: 'object',
-    name: 'SectionInclusions',
+    name,
     title: 'SectionInclusions',
     fields: [
         {
@@ -17,17 +32,17 @@ export default {
                     fields: [
                         {
                             name: 'heading',
-                            type: 'string'
+                            type: 'string',
                         },
                         {
                             name: 'paragraph',
-                            type: 'text'
+                            type: 'text',
                         },
                         ImageField,
                         ImageAltField,
-                    ]
-                }
-            ]
+                    ],
+                },
+            ],
         },
         {
             name: 'brochure',
@@ -45,7 +60,7 @@ export default {
                     options: {
                         accept: '.pdf',
                         // accept: '.png,.jpeg,.jpg,.pdf,.doc,.docx,.xls,.xlsx',
-                        storeOriginalFilename: true
+                        storeOriginalFilename: true,
                     },
                 },
                 {
@@ -53,9 +68,10 @@ export default {
                     title: 'Is File Downloadable?',
                     type: 'boolean',
                     hidden: ({ parent }) => !parent?.file,
-                    description: 'if toggled off, download button will be hidden',
+                    description:
+                        'if toggled off, download button will be hidden',
                 },
-            ]
+            ],
         },
         {
             name: 'button',
@@ -78,36 +94,32 @@ export default {
             name: 'marginTop',
             type: 'string',
             options: {
-                list: [
-                    ...enumToArrayOfObjects(HeightVariants)
-                ],
+                list: [...enumToArrayOfObjects(HeightVariants)],
             },
 
-            layout: 'dropdown'
+            layout: 'dropdown',
         },
         {
             title: 'Margin Bottom',
             name: 'marginBottom',
             type: 'string',
             options: {
-                list: [
-                    ...enumToArrayOfObjects(HeightVariants)
-                ],
+                list: [...enumToArrayOfObjects(HeightVariants)],
             },
 
-            layout: 'dropdown'
+            layout: 'dropdown',
         },
     ],
     preview: {
         select: {
             title: 'placeholder',
             subtitle: 'label',
-            disabled: 'disabled'
+            disabled: 'disabled',
         },
         prepare({ title, disabled }) {
             return {
-                title: `SectionInclusions`
+                title: `SectionInclusions`,
             }
-        }
-    }
+        },
+    },
 }

@@ -1,9 +1,11 @@
-import { ImageAltField, ImageField } from "./components/fields";
+import { ImageAltField, ImageField } from './components/fields'
+
+const name = 'facades'
 
 export default {
   type: 'document',
   title: 'Facades',
-  name: 'facades',
+  name,
   fields: [
     {
       name: 'name',

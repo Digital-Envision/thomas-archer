@@ -1,19 +1,21 @@
 import { Box } from '@chakra-ui/react'
 import React from 'react'
-import Image from 'next/image'
+import Image, { ImageVariant } from 'components/base/Image'
 import { urlForImage } from 'lib/sanity.image'
-import { SanityFiles } from 'utils/interfaces'
+import { MetaData, SanityFiles } from 'utils/interfaces'
 
 type SectionHeroImageDefaultProps = {
   isOverlay?: boolean
   image: SanityFiles
   marginTop?: string
   marginBottom?: string
+  imageMetaData: MetaData
 }
 
 const SectionHeroImageDefault: React.FC<SectionHeroImageDefaultProps> = ({
   isOverlay,
   image,
+  imageMetaData,
   marginTop,
   marginBottom,
 }) => {
@@ -28,12 +30,15 @@ const SectionHeroImageDefault: React.FC<SectionHeroImageDefaultProps> = ({
       <Box zIndex={-1}>
         {image && (
           <Image
-            priority
+            width={'100%'}
+            variant={ImageVariant.ImageChakra}
             src={(image && urlForImage(image)?.url()) || ''}
-            layout={'fill'}
-            objectFit={'cover'}
-            objectPosition={'center'}
+            lqip={imageMetaData?.metadata?.lqip}
             alt={'banner'}
+            objectPosition={'center'}
+            objectFit={'cover'}
+            height={'50vh'}
+            position={'absolute'}
           />
         )}
       </Box>

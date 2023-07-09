@@ -1,9 +1,24 @@
+import { getImagesMetaData } from 'lib/utils'
 import { ImageAltField } from 'schemas/components/fields'
 import { MarginBottomField, MarginTopField } from '../components/fields'
 
+const name = 'SectionFeaturedImage'
+
+export const queryImageMetaData = `
+   _type == '${name}' => {
+      ...,
+      "mobileImageMetaData": mobileImage.asset->{
+          ${getImagesMetaData}
+      },
+      "desktopImageMetaData": desktopImage.asset->{
+          ${getImagesMetaData}
+      },
+   }
+`
+
 export default {
     type: 'object',
-    name: 'SectionFeaturedImage',
+    name,
     title: 'SectionFeaturedImage',
     fields: [
         { ...ImageAltField },

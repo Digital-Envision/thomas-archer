@@ -12,8 +12,8 @@ import {
   AccordionItem,
   AccordionButton,
   AccordionPanel,
-  Image,
 } from '@chakra-ui/react'
+import Image, { ImageVariant } from 'components/base/Image'
 import { HeightVariants } from 'components/base/Divider'
 import Text from 'components/base/Text'
 import _ from 'lodash'
@@ -28,7 +28,7 @@ import { urlForImage } from 'lib/sanity.image'
 import { BsChevronUp } from 'react-icons/bs'
 import { HiOutlineChevronDown } from 'react-icons/hi2'
 import { Filter } from 'components/base/Filter'
-import { SanityFiles } from 'utils/interfaces'
+import { MetaData, SanityFiles } from 'utils/interfaces'
 import { getImageUrl } from 'lib/utils'
 
 export interface SectionGridGalleryInterface {
@@ -50,6 +50,7 @@ export interface SectionGridGalleryInterface {
         _type: 'reference'
       }
     }
+    imageMetaData: MetaData
     alt: string
     location: string
     name: string
@@ -249,11 +250,13 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
         {showedData?.map((item) => (
           <Box onClick={() => handleListItemClick(item)} key={item?._key}>
             <Image
+              variant={ImageVariant.ImageChakra}
               key={item?._key}
               alt={item?.alt || item?.name}
               w="100%"
               display="inline-block"
               src={getImageUrl(item?.image)}
+              lqip={item?.imageMetaData?.metadata?.lqip}
               objectFit={'contain'}
             />
           </Box>
@@ -287,7 +290,9 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
           <ModalBody p={0} m={0}>
             {selectedData?.image && (
               <Image
+                variant={ImageVariant.ImageChakra}
                 src={urlForImage(selectedData?.image)?.url()}
+                lqip={selectedData?.imageMetaData?.metadata?.lqip}
                 alt={urlForImage(selectedData?.image)?.url()}
                 width="100%"
               />

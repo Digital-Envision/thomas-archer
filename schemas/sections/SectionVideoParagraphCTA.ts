@@ -1,7 +1,21 @@
 import { HeightVariants } from 'components/base/Divider'
-import { enumToArrayOfObjects } from 'lib/utils'
+import { enumToArrayOfObjects, getImagesMetaData } from 'lib/utils'
 import link from 'schemas/components/link'
 import { validateVimeoUrl } from 'utils/checkVideoResource'
+
+const name = 'SectionVideoParagraphCTA'
+
+export const queryImageMetaData = `
+   _type == '${name}' => {
+      ...,
+      video{
+        ...,
+        "coverMetaData": cover.asset->{
+          ${getImagesMetaData}
+        },
+      }
+   }
+`
 
 export default {
     name: 'SectionVideoParagraphCTA',
@@ -45,9 +59,7 @@ export default {
             name: 'button',
             title: 'Button',
             type: 'object',
-            fields: [
-                ...link,
-            ],
+            fields: [...link],
         },
         {
             title: 'Margin Top',

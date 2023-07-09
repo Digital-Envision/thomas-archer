@@ -57,6 +57,7 @@ export default function DynamicPage(props) {
     routeDetail,
     slugAndPages,
     documentTypesPage,
+    pageProps,
   } = props
   const router = useRouter()
   const storeLink = useStoreLink((state) => state)
@@ -265,6 +266,7 @@ export const getStaticProps: GetStaticProps<
       routeDetail,
       slugAndPages,
       documentTypesPage: { ...restructuredDocumentType },
+      pageProps,
       ...pageProps,
     },
   }

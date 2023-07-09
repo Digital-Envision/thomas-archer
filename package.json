@@ -30,6 +30,7 @@
     "next": "13.2.4",
     "next-sanity": "4.1.5",
     "react": "^18.2.0",
+    "react-blurhash": "^0.3.0",
     "react-dom": "^18.2.0",
     "react-gtm-module": "^2.0.11",
     "react-hook-form": "^7.43.9",
