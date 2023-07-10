@@ -1,4 +1,5 @@
-import { Box, Image, Icon, Flex, HStack } from '@chakra-ui/react'
+import { Box, Icon, Flex, HStack } from '@chakra-ui/react'
+import Image, { ImageVariant } from 'components/base/Image'
 import Link from 'next/link'
 import Heading3 from '../base/Heading3'
 import Text from '../base/Text'
@@ -12,6 +13,12 @@ import { getImageUrl } from 'lib/utils'
 
 export interface AwardListingCardProps {
   image?: SanityFiles
+  imageMetaData?: {
+    metadata: {
+      lqip: string
+      blurHash: string
+    }
+  }
   alt?: string
   link: string
   heading: string
@@ -21,6 +28,7 @@ export interface AwardListingCardProps {
 
 const AwardListingCard: React.FC<AwardListingCardProps> = ({
   image,
+  imageMetaData,
   alt,
   link,
   heading,
@@ -37,28 +45,32 @@ const AwardListingCard: React.FC<AwardListingCardProps> = ({
           position="relative"
         >
           <Image
+            variant={ImageVariant.ImageChakra}
             src={getImageUrl(image)}
+            lqip={imageMetaData?.metadata?.lqip}
             alt={alt || heading}
             objectFit="cover"
-            w="full"
+            w="100vw"
             h="300px"
             bgColor={'white'}
           />
           {award?.awardLogo && (
-            <Image
-              bg="rgba(255,255,255,1)"
-              src={
-                (award?.awardLogo && urlForImage(award?.awardLogo).url()) || ''
-              }
-              alt={alt || heading}
-              position="absolute"
-              top="0px"
-              right="1rem"
-              maxW="50px"
-              maxH="50px"
-              objectFit="cover"
-              p="5px"
-            />
+            <Box position="absolute" top="0px" right="1rem">
+              <Image
+                variant={ImageVariant.ImageChakra}
+                bg="rgba(255,255,255,1)"
+                src={
+                  (award?.awardLogo && urlForImage(award?.awardLogo).url()) ||
+                  ''
+                }
+                lqip={award?.awardLogoMetaData?.metadata?.lqip}
+                alt={alt || heading}
+                maxW="50px"
+                maxH="50px"
+                objectFit="cover"
+                p="5px"
+              />
+            </Box>
           )}
         </Box>
 

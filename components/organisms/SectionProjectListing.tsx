@@ -6,6 +6,7 @@ import { ListingGrid, ListingContainer } from 'components/base/Listing'
 import ProjectListingCard, {
   ProjectListingCardProps,
 } from 'components/modules/ProjectListingCard'
+import { projectImages } from 'lib/image.queries'
 import { getSanityData } from 'lib/sanity.client'
 import _ from 'lodash'
 import { useRouter } from 'next/router'
@@ -35,6 +36,7 @@ const SectionProjectListing: React.FC<SectionProjectListingProps> = (props) => {
       limit: 12,
       sortByField: 'orderRank',
       sortOrder: 'asc',
+      customQuery: projectImages,
     })
 
     setProjects((prev) => {
@@ -51,14 +53,16 @@ const SectionProjectListing: React.FC<SectionProjectListingProps> = (props) => {
       <Box mt={'2rem'} />
 
       <ListingGrid>
-        {_.toArray(projects?.data)?.map((props, index) => (
-          <GridItem key={index} colSpan={1}>
-            <ProjectListingCard
-              {...props}
-              link={`${asPath}/${props?.slug?.current}`}
-            />
-          </GridItem>
-        ))}
+        {_.toArray(projects?.data)?.map((props, index) => {
+          return (
+            <GridItem key={index} colSpan={1}>
+              <ProjectListingCard
+                {...props}
+                link={`${asPath}/${props?.slug?.current}`}
+              />
+            </GridItem>
+          )
+        })}
       </ListingGrid>
 
       <Box mt={'80px'} />

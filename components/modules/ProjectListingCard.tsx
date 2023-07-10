@@ -11,7 +11,12 @@ import { getImageUrl } from 'lib/utils'
 
 interface ProjectListingCardDataProps {
   image?: any // sanity io image
-  imageMetaData?: string
+  imageMetaData?: {
+    metadata: {
+      lqip: string
+      blurHash: string
+    }
+  }
   alt?: string
   link: string
   heading: string
@@ -42,15 +47,14 @@ const ProjectListingCard: React.FC<ProjectListingCardProps['data'][0]> = ({
         <Box display="flex" justifyContent="center" alignItems="center">
           <Image
             variant={ImageVariant.ImageChakra}
-            lqip={imageMetaData}
+            lqip={imageMetaData?.metadata?.lqip}
             src={getImageUrl(image)}
             alt={alt || heading}
             objectFit="cover"
-            w="full"
+            w="100vw"
             h="300px"
           />
         </Box>
-
         <Box py="5" h="130px">
           <CardHeading>{heading}</CardHeading>
           <Text fontSize={'14px'} mb="1">
@@ -60,7 +64,6 @@ const ProjectListingCard: React.FC<ProjectListingCardProps['data'][0]> = ({
             {caption}
           </Text>
         </Box>
-
         <Flex flex={1} align="center">
           <Text fontSize={'12px'} _hover={{ textDecoration: 'underline' }}>
             Read more

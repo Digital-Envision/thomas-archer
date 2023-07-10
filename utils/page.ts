@@ -1,4 +1,4 @@
-import { componentsImagesQuery } from 'lib/image.queries'
+import { blogImages, componentsImagesQuery } from 'lib/image.queries'
 import {
     getAllFloors,
     getAllGlobals,
@@ -75,6 +75,7 @@ export const callingProps = {
             limit: 12,
             sortByField: 'orderRank',
             sortOrder: 'asc',
+            customQuery: projectImages,
         })
         const awardedProjects = await getSanityData({
             type: 'projects',
@@ -82,6 +83,7 @@ export const callingProps = {
             limit: 12,
             sortByField: 'orderRank',
             sortOrder: 'asc',
+            customQuery: projectImages,
         })
 
         return {
@@ -97,6 +99,7 @@ export const callingProps = {
             limit: 12,
             sortByField: 'createdDate',
             sortOrder: 'desc',
+            customQuery: blogImages,
         })
 
         return {
@@ -196,6 +199,7 @@ export const getDataProjectDetailPage = async ({ slug, customQuery = '' }) => {
               type: 'projects',
               condition: `&& slug.current != null && _id != "${currentProject?._id}" && _id in $ids`,
               params: { ids: selectedProjectsRef },
+              customQuery: customQuery,
           })) as any)
         : ((await getSanityData({
               type: 'projects',
@@ -203,6 +207,7 @@ export const getDataProjectDetailPage = async ({ slug, customQuery = '' }) => {
               limit: 12,
               sortByField: 'orderRank',
               sortOrder: 'asc',
+              customQuery: customQuery,
           })) as any)
 
     const selectedProjectsKeys =

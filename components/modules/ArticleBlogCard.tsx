@@ -5,7 +5,7 @@ import Button, { Variants } from 'components/base/Button'
 import { urlForImage } from 'lib/sanity.image'
 import { HeadingTagSemantic } from 'components/base/Heading1'
 import Link, { LinksInterface } from 'components/base/Link'
-import Image from 'next/image'
+import Image, { ImageVariant } from 'components/base/Image'
 import { HiChevronRight } from 'react-icons/hi2'
 import { useState } from 'react'
 import ModalVideo from './ModalVideo'
@@ -14,6 +14,12 @@ import { getImageUrl } from 'lib/utils'
 
 export type ArticleBlogCardProps = {
   image?: any // sanity io image
+  imageMetaData?: {
+    metadata: {
+      lqip: string
+      blurHash: string
+    }
+  }
   alt?: string
   _createdAt?: string //sanity built in created at timestamp
   createdDate?: string
@@ -40,6 +46,7 @@ export type ArticleBlogCardProps = {
 
 const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
   image,
+  imageMetaData,
   _createdAt,
   createdDate,
   isShowCreatedAt = false,
@@ -97,9 +104,24 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
           <Image
             src={getImageUrl(image)}
             alt={alt || heading}
-            fill
+            variant={ImageVariant.ImageChakra}
+            lqip={imageMetaData?.metadata?.lqip}
             objectFit="cover"
             objectPosition="center"
+            minH={{
+              base: '160.55px',
+            }}
+            height={{
+              base: 'calc((100vw - 8rem)*.650)',
+              sm: 'calc((100vw - 10rem)*.650)',
+              md: 'calc(35vw - 6rem)',
+              lg: 'calc((35vw - 1rem)*.800)',
+              xl: 'calc((50vw - 13rem)*.720)',
+              '2xl': 'calc((50vw - 3rem)*.600)',
+            }}
+            maxH={{
+              '2xl': 'calc((73vw - 7rem)*.730)',
+            }}
           />
           {isVideoMode && video && (
             <Box
