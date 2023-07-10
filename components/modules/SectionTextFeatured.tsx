@@ -3,6 +3,7 @@ import Text from '../base/Text'
 import Heading1 from 'components/base/Heading1'
 import Dash from 'components/base/Dash'
 import { HeightVariants } from 'components/base/Divider'
+import _ from 'lodash'
 
 type SectionTextFeaturedProps = {
   leftHeading: string
@@ -32,7 +33,12 @@ const SectionTextFeatured: React.FC<SectionTextFeaturedProps> = ({
     >
       <Flex>
         <Flex flex={2} px={2}>
-          <Heading1 as="blockquote">{leftHeading}</Heading1>
+          <Heading1
+            as="blockquote"
+            textIndent={_.first(leftHeading) === `“` ? '-8px' : '0px'}
+          >
+            {leftHeading}
+          </Heading1>
         </Flex>
         <Flex display={{ base: 'none', md: 'block' }} flex={1} px={2} />
       </Flex>

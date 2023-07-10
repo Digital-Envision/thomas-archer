@@ -4,4 +4,5 @@ Disallow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://thomas-archer.netlify.app/sitemap.xml
+Sitemap: https://thomasarcher.com.au/sitemap.xml
+Sitemap: https://thomasarcher.com.au/server-sitemap.xml
