@@ -234,6 +234,7 @@ export const getDataBlogDetailPage = async ({ slug }) => {
     const currentBlog = await getSanityDataById({
         type: 'blogs',
         condition: `&& slug.current == "${slug}"`,
+        customQuery: blogImages
     })
 
     if (_.isEmpty(currentBlog)) {

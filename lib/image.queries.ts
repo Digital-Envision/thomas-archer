@@ -250,5 +250,51 @@ export const blogImages = `
           lqip
         }
       }
+    },
+    page != null => {
+      page {
+        ...,
+        SectionGalleryScroll != null => {
+          SectionGalleryScroll {
+            ...,
+            listImages != null => {
+              listImages[] {
+                ...,
+                image != null => {
+                  "imageMetaData": image.asset->{
+                    metadata {
+                      blurHash,
+                      lqip
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    content != null => {
+      content[] {
+        ...,
+        children != null => {
+          _type == "image" => {
+            "imageMetaData": image.asset->{
+              metadata {
+                blurHash,
+                lqip
+              }
+            }
+          }
+        },
+        _type == "image" => {
+          "imageMetaData": asset->{
+            metadata {
+              blurHash,
+              lqip
+            }
+          }
+        }
+      }
     }
 `

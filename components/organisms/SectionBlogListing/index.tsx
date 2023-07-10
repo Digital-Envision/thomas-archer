@@ -22,6 +22,7 @@ import { CollapseRadio } from './CollapseSort'
 import { useEffect, useState } from 'react'
 import { getSanityData } from 'lib/sanity.client'
 import { ListingContainer, ListingGrid } from 'components/base/Listing'
+import { blogImages } from 'lib/image.queries'
 
 type SectionBlogListingProps = {
   heading: string
@@ -51,6 +52,7 @@ const SectionBlogListing: React.FC<SectionBlogListingProps> = (props) => {
       const newBlogs = await getSanityData({
         type: 'blogs',
         condition: `&& slug.current != null`,
+        customQuery: blogImages,
         page: 1,
         limit: 12,
         sortByField: 'createdDate',
@@ -76,6 +78,7 @@ const SectionBlogListing: React.FC<SectionBlogListingProps> = (props) => {
       type: 'blogs',
       condition: `&& slug.current != null`,
       page: currentPagination?.page + 1,
+      customQuery: blogImages,
       limit: 12,
       sortByField: 'createdDate',
       sortOrder:
@@ -156,14 +159,16 @@ const SectionBlogListing: React.FC<SectionBlogListingProps> = (props) => {
       </Box>
 
       <ListingGrid>
-        {_.toArray(blogs?.data)?.map((props, index) => (
-          <GridItem key={index} colSpan={1}>
-            <BlogListingCard
-              {...props}
-              link={`${asPath}/${props?.slug?.current}`}
-            />
-          </GridItem>
-        ))}
+        {_.toArray(blogs?.data)?.map((props, index) => {
+          return (
+            <GridItem key={index} colSpan={1}>
+              <BlogListingCard
+                {...props}
+                link={`${asPath}/${props?.slug?.current}`}
+              />
+            </GridItem>
+          )
+        })}
       </ListingGrid>
 
       <Box mt={'80px'} />
