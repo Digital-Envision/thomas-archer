@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import SectionHeadingParagraphCTA from 'components/modules/SectionHeadingParagraphCTA'
 import { Box } from '@chakra-ui/react'
 import Text from 'components/base/Text'
-import Image from 'next/image'
+import Image, { ImageVariant } from 'components/base/Image'
 import ScrollBox from 'components/modules/ScrollBox'
 import { urlForImage } from 'lib/sanity.image'
 import Link from 'next/link'
@@ -122,9 +122,12 @@ const ProjectScroll = ({
                               urlForImage(project?.image).url()) ||
                             ''
                           }
+                          lqip={project?.imageMetaData?.metadata?.lqip}
+                          variant={ImageVariant.ImageChakra}
                           alt={project?.alt || project?.heading}
-                          fill
                           objectFit="cover"
+                          width={{ base: '277px', md: '362px' }}
+                          height={{ base: '373px', md: '500px' }}
                         />
                       </Link>
                     )}

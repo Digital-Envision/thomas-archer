@@ -6,6 +6,7 @@ import {
   componentsImagesQuery,
   facadesImage,
   floorPlanImages,
+  projectImages,
 } from './image.queries'
 
 const postFields = groq`
@@ -86,6 +87,7 @@ export const floorQuery = (props) => {
         ...,
         ${componentsImagesQuery},
         selectedProjects[]->{
+          ${projectImages},
           heading,
           slug,
           image,
@@ -144,6 +146,7 @@ export const pageQuery = (slug: 'string' | { _id: string }) => {
         ...,
         ${componentsImagesQuery},
         selectedProjects[]->{
+          ${projectImages},
           heading,
           slug,
           image,
@@ -289,6 +292,12 @@ export interface Project {
       _type: 'reference'
     }
   }
+  imageMetaData?: {
+    metadata: {
+      lqip: string
+      blurHash: string
+    }
+  }
   slug: {
     _type: 'slug'
     current: string
@@ -296,7 +305,19 @@ export interface Project {
   subHeading: string
   award: {
     awardImage: Image
+    awardImageMetaData?: {
+      metadata: {
+        lqip: string
+        blurHash: string
+      }
+    }
     awardLogo: Image
+    awardLogoMetaData?: {
+      metadata: {
+        lqip: string
+        blurHash: string
+      }
+    }
     awards: Award[]
   }
 }
@@ -314,6 +335,12 @@ export interface Blog {
     asset: {
       _ref: string
       _type: 'reference'
+    }
+  }
+  imageMetaData?: {
+    metadata: {
+      lqip: string
+      blurHash: string
     }
   }
   slug: {

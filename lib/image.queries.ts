@@ -13,11 +13,14 @@ const componentWithImages = `
   'SectionFeaturedImage',
   'Carousel',
   'SectionGalleryScroll',
+  'SectionProjectScroll',
   'SectionGridGallery',
   'SectionInclusions',
   'SectionHeroImageBig',
   'SectionHeroVideoBig',
   'SectionVideoParagraphCTA',
+  'SectionColCards',
+  'SectionBlog'
 `
 
 // dont add comma at the last list
@@ -118,6 +121,17 @@ export const componentsImagesQuery = `
         }
       }
     },
+    ListArticleBlogCards != null => {
+      ListArticleBlogCards[] {
+        ...,
+        "imageMetaData": image.asset->{
+          metadata {
+            blurHash,
+            lqip
+          }
+        }
+      }
+    },
     items != null => {
       items[] {
         ...,
@@ -213,9 +227,74 @@ export const projectImages = `
         }
       }
     },
+    image != null => {
+      "imageMetaData": image.asset->{
+        metadata {
+          blurHash,
+          lqip
+        }
+      }
+    },
     customPageSection[] {
       ...,
       ${componentsImagesQuery}
     }
   }
+`
+
+export const blogImages = `
+    image != null => {
+      "imageMetaData": image.asset->{
+        metadata {
+          blurHash,
+          lqip
+        }
+      }
+    },
+    page != null => {
+      page {
+        ...,
+        SectionGalleryScroll != null => {
+          SectionGalleryScroll {
+            ...,
+            listImages != null => {
+              listImages[] {
+                ...,
+                image != null => {
+                  "imageMetaData": image.asset->{
+                    metadata {
+                      blurHash,
+                      lqip
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    content != null => {
+      content[] {
+        ...,
+        children != null => {
+          _type == "image" => {
+            "imageMetaData": image.asset->{
+              metadata {
+                blurHash,
+                lqip
+              }
+            }
+          }
+        },
+        _type == "image" => {
+          "imageMetaData": asset->{
+            metadata {
+              blurHash,
+              lqip
+            }
+          }
+        }
+      }
+    }
 `

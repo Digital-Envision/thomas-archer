@@ -54,9 +54,13 @@ export const getSanityData = async ({
   // sortByField = '_createdAt',
   // sortOrder = 'desc',
   options = '',
+  customQuery = '',
 }) => {
   try {
-    const query = `*[_type == "${type}" ${condition}] | order(${sortByField} ${sortOrder})`
+    const query = `*[_type == "${type}" ${condition}]{
+      ...,
+      ${customQuery}
+    } | order(${sortByField} ${sortOrder})`
 
     const slicingQuery = `[$firstIndex..$lastIndex]`
     const slicingParams = {

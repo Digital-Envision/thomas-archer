@@ -1,4 +1,5 @@
-import { Box, Image, Icon, Flex } from '@chakra-ui/react'
+import { Box, Icon, Flex } from '@chakra-ui/react'
+import Image, { ImageVariant } from 'components/base/Image'
 import Link from 'next/link'
 import Text from '../base/Text'
 import { BsArrowRight } from 'react-icons/bs'
@@ -9,6 +10,12 @@ import moment from 'moment'
 
 export type BlogListingCardDataProps = {
   image?: any // sanity io image
+  imageMetaData?: {
+    metadata: {
+      lqip: string
+      blurHash: string
+    }
+  }
   alt: string
   createdDate: string
   link: string
@@ -26,6 +33,7 @@ export type BlogListingCardProps = {
 
 const BlogListingCard: React.FC<BlogListingCardProps['data'][0]> = ({
   image,
+  imageMetaData,
   alt,
   link,
   heading,
@@ -37,10 +45,12 @@ const BlogListingCard: React.FC<BlogListingCardProps['data'][0]> = ({
       <CardContainer>
         <Box display="flex" justifyContent="center" alignItems="center">
           <Image
+            variant={ImageVariant.ImageChakra}
             src={getImageUrl(image)}
+            lqip={imageMetaData?.metadata?.lqip}
             alt={alt || heading}
             objectFit="cover"
-            w="full"
+            w="100vw"
             h="300px"
           />
         </Box>

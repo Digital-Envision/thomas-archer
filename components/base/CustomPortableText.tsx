@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import { Box, ListItem, UnorderedList, Img } from '@chakra-ui/react'
+import Image, { ImageVariant } from './Image'
 import { PortableText as PT, PortableTextComponents } from '@portabletext/react'
 import Text from 'components/base/Text'
 import Heading1 from 'components/base/Heading1'
@@ -46,9 +47,18 @@ export const components: PortableTextComponents = {
   },
 
   types: {
-    image: ({ value }) => (
-      <Img src={getImageUrl(value)} width="w-full" height={'auto'} />
-    ),
+    image: ({ value }) => {
+      return (
+        //<Img src={getImageUrl(value)} width="w-full" height={'auto'} />
+        <Image
+          variant={ImageVariant.ImageChakra}
+          src={getImageUrl(value)}
+          lqip={value?.imageMetaData?.metadata?.lqip}
+          width="w-full"
+          height={'auto'}
+        />
+      )
+    },
     externalVideo: ({ value }) => {
       if (value?.url) {
         return <EmbedVideoPlayer externalVideo={value?.url} />

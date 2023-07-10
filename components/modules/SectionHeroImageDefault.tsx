@@ -29,17 +29,18 @@ const SectionHeroImageDefault: React.FC<SectionHeroImageDefaultProps> = ({
     >
       <Box zIndex={-1}>
         {image && (
-          <Image
-            width={'100%'}
-            variant={ImageVariant.ImageChakra}
-            src={(image && urlForImage(image)?.url()) || ''}
-            lqip={imageMetaData?.metadata?.lqip}
-            alt={'banner'}
-            objectPosition={'center'}
-            objectFit={'cover'}
-            height={'50vh'}
-            position={'absolute'}
-          />
+          <Box position={'absolute'} width={'100%'}>
+            <Image
+              width={'100%'}
+              variant={ImageVariant.ImageChakra}
+              src={(image && urlForImage(image)?.url()) || ''}
+              lqip={imageMetaData?.metadata?.lqip}
+              alt={'banner'}
+              objectPosition={'center'}
+              objectFit={'cover'}
+              height={'50vh'}
+            />
+          </Box>
         )}
       </Box>
       {isOverlay && (
