@@ -67,7 +67,7 @@ export const componentsImagesQuery = `
       }
     },
     bannerImage != null => {
-      "bannerImageMetaData": cover.asset->{
+      "bannerImageMetaData": bannerImage.asset->{
         metadata {
           blurHash,
           lqip

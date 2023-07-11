@@ -33,7 +33,9 @@ const MobileNavLevel2: React.FC<Props> = ({
       >
         Back to Main Menu
       </Text>
-      <Heading1 mb={8}>{title}</Heading1>
+      <Heading1 as={'p'} mb={8}>
+        {title}
+      </Heading1>
       <Stack direction={'column'} spacing={0} width={'full'}>
         {NAV_ITEMS?.map((link, key) => {
           return (

@@ -118,7 +118,7 @@ const LinkType: React.FC<Props> = ({ link, children, ...props }) => {
       <LinkTypes
         link={link}
         children={children}
-        target={link?.isExternal ? '_blank' : '_selft'}
+        target={link?.isExternal ? '_blank' : '_self'}
         {...props}
       />
     )
@@ -126,7 +126,7 @@ const LinkType: React.FC<Props> = ({ link, children, ...props }) => {
     return (
       <NextLink
         href={link?.externalHref ? link?.externalHref : '#'}
-        target={link?.isExternal ? '_blank' : '_selft'}
+        target={link?.isExternal ? '_blank' : '_self'}
         {...props}
       >
         {children}
