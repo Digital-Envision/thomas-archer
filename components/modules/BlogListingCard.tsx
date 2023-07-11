@@ -24,6 +24,7 @@ export type BlogListingCardDataProps = {
   slug?: { current: string }
   width?: string
   height?: string
+  tags?: string[]
 }
 
 export type BlogListingCardProps = {

@@ -242,3 +242,17 @@ export const HubspotField = {
     },
     fields: hubspotForms,
 }
+
+export const TagsField = {
+    name: 'tags',
+    type: 'array',
+    options: {
+        layout: 'tags'
+    },
+    of: [
+        {
+            name: 'tag',
+            type: 'string'
+        }
+    ]
+}

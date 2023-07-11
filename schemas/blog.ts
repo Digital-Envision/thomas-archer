@@ -8,6 +8,7 @@ import {
     RTFField,
     SEOField,
     SlugField,
+    TagsField,
 } from './components/fields'
 import { DOCUMENT_TYPE_SCHEMA_NAME } from './global/DetailsPage'
 import { listImagesFields } from './sections/SectionGalleryScroll'
@@ -56,6 +57,7 @@ export default {
                 },
             ],
         },
+        TagsField,
         ImageField,
         ImageAltField,
         {
@@ -78,6 +80,6 @@ export default {
                 },
             ],
         },
-        SEOField,
+        SEOField
     ],
 }

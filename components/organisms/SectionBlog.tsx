@@ -20,8 +20,10 @@ type SectionBlogProps = {
   headingTagLevel: HeadingTagSemantic
   headingTagLevelBlog: HeadingTagSemantic
   blogs: BlogListingCardProps
+  specificBlogs?: BlogListingCardProps['data'] // speficic blogs: from getDataFromSpecificComponents. IF filterTag applied
   button: LinksInterface
   createdDate: string
+  filterTag: string
 }
 
 // data is pulled from 3 latest blogs documents
@@ -35,13 +37,20 @@ const SectionBlog: React.FC<SectionBlogProps> = ({
   blogs: _blogs,
   button,
   createdDate,
+  filterTag,
+  specificBlogs,
   ...rest
 }) => {
-  const sortedBlogs = _.slice(
-    _.orderBy(_blogs?.data, ['createdAt'], ['desc']),
-    0,
-    3
-  )
+  const sortedBlogs = _(specificBlogs || _blogs?.data) // if specificBlogs exist, use that instead
+    .filter(({ tags }) => {
+      if (_.isEmpty(filterTag)) return true
+      const isMatches = _.isEmpty(_.difference([filterTag], tags))
+
+      if (isMatches) return true
+    })
+    .orderBy(['createdDate'], ['desc'])
+    .slice(0, 3)
+    .value()
 
   // convert blogs to compatible with SectionColCards
   const blogs = _.map(sortedBlogs, (blog) => {
