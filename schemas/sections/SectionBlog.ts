@@ -23,6 +23,11 @@ export default {
             },
         },
         {
+            name: 'filterTag',
+            title: 'Filter Tag',
+            type: 'string'
+        },
+        {
             ...RTFField,
             title: 'RTF Paragraph'
         },

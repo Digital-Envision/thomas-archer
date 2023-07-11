@@ -1,5 +1,6 @@
 import { blogImages, componentsImagesQuery } from 'lib/image.queries'
 import {
+    client,
     getAllFloors,
     getAllGlobals,
     getAllPagesSlugs,
@@ -122,22 +123,27 @@ export const callingProps = {
     },
 }
 
-export const setPropsForPage = async () => {
+export const setPropsForPage = async (page?) => {
     const projects = await callingProps.projects()
     const blogs = await callingProps.blogs()
     const floors = await callingProps.floors()
+
+    const specificComponents = getDataFromSpecificComponents(
+        page?.content
+    )
 
     return {
         ...projects,
         ...blogs,
         ...floors,
+        ...specificComponents
     }
 }
 
 export const setPropsForDetailPage = async (props) => {
     const { routeDetail } = props
     const { detailsPage, detailPathId } = routeDetail
-    let data = {}
+    let data = <any>{}
 
     switch (detailsPage) {
         case DOCUMENT_TYPES_PAGE_NAME.FloorPlan:
@@ -150,6 +156,11 @@ export const setPropsForDetailPage = async (props) => {
                 ...(await callingProps.projects()),
                 ...(await callingProps.blogs()),
             }
+            //inject data with getDataFromSpecificComponents, IF customPageSection exists
+            if (data?.floors?.customPageSection) {
+                data.floors.customPageSection = await getDataFromSpecificComponents(data?.floors?.customPageSection)
+            }
+
             break
         case DOCUMENT_TYPES_PAGE_NAME.Projects:
             data = await getDataProjectDetailPage({
@@ -164,17 +175,25 @@ export const setPropsForDetailPage = async (props) => {
                 ...(await callingProps.floors()),
                 ...(await callingProps.blogs()),
             }
+
+            if (data?.project?.customPageSection) {
+                data.project.customPageSection = await getDataFromSpecificComponents(data?.project?.customPageSection)
+            }
+
             break
         case DOCUMENT_TYPES_PAGE_NAME.Blog:
             data = await getDataBlogDetailPage({ slug: detailPathId })
+
+            if (data?.blog?.customPageSection) {
+                data.blog.customPageSection = await getDataFromSpecificComponents(data?.blog?.customPageSection)
+            }
+
             break
         default:
             data = {}
     }
 
-    return {
-        ...data,
-    }
+    return data
 }
 
 export const getDataProjectDetailPage = async ({ slug, customQuery = '' }) => {
@@ -196,19 +215,19 @@ export const getDataProjectDetailPage = async ({ slug, customQuery = '' }) => {
     // if toggled: selected projects, or else get latest 12 projects
     const projects = !_.isEmpty(selectedProjectsRef)
         ? ((await getSanityData({
-              type: 'projects',
-              condition: `&& slug.current != null && _id != "${currentProject?._id}" && _id in $ids`,
-              params: { ids: selectedProjectsRef },
-              customQuery: customQuery,
-          })) as any)
+            type: 'projects',
+            condition: `&& slug.current != null && _id != "${currentProject?._id}" && _id in $ids`,
+            params: { ids: selectedProjectsRef },
+            customQuery: customQuery,
+        })) as any)
         : ((await getSanityData({
-              type: 'projects',
-              condition: `&& slug.current != null && _id != "${currentProject?._id}"`,
-              limit: 12,
-              sortByField: 'orderRank',
-              sortOrder: 'asc',
-              customQuery: customQuery,
-          })) as any)
+            type: 'projects',
+            condition: `&& slug.current != null && _id != "${currentProject?._id}"`,
+            limit: 12,
+            sortByField: 'orderRank',
+            sortOrder: 'asc',
+            customQuery: customQuery,
+        })) as any)
 
     const selectedProjectsKeys =
         currentProject.SectionProjectScroll?.isSelectedProject &&
@@ -216,15 +235,15 @@ export const getDataProjectDetailPage = async ({ slug, customQuery = '' }) => {
 
     const sortedProjects = !_.isEmpty(selectedProjectsKeys)
         ? {
-              pagination: projects?.pagination,
-              data: _.sortBy(projects.data, (project) => {
-                  // this will sort fetched projects, according to configured on selectedProjects array
-                  const ref = selectedProjectsKeys.find(
-                      (selected) => selected._ref === project._id
-                  )
-                  return selectedProjectsKeys.indexOf(ref)
-              }),
-          }
+            pagination: projects?.pagination,
+            data: _.sortBy(projects.data, (project) => {
+                // this will sort fetched projects, according to configured on selectedProjects array
+                const ref = selectedProjectsKeys.find(
+                    (selected) => selected._ref === project._id
+                )
+                return selectedProjectsKeys.indexOf(ref)
+            }),
+        }
         : projects // projects already sorted on groq level
 
     return { project: currentProject, projects: sortedProjects }
@@ -285,4 +304,24 @@ export const getPathFromDetailType = async (type) => {
         slugAndPages?.pages?.[refParentDetailPage?.parentPage?._ref]?.url
 
     return path
+}
+
+export const getDataFromSpecificComponents = async (pageContent) => {
+    const withSpecificContent = await Promise.all(_.map(pageContent, async (content) => {
+        if (content?._type === 'SectionBlog') {
+            const { filterTag } = content
+            if (filterTag) {
+                const query = `*[_type == "blogs" && "${filterTag}" in tags] | order(slug.current asc)[0..3]`
+                const _blogs = await client.fetch(query)
+                return {
+                    ...content,
+                    specificBlogs: _blogs
+                }
+            }
+        }
+
+        return content
+    }))
+
+    return withSpecificContent
 }

@@ -31,7 +31,7 @@ export default function IndexPageHead({
   const router = useRouter()
 
   const canonicalUrl = (
-    `https://thomasarcher.com.au` +
+    `https://thomasarcher.com.au` + //TODO change to import from NEXT_PUBLIC_DOMAIN_URL
     (router?.asPath === '/' ? '' : router?.asPath)
   ).split('?')[0]
 

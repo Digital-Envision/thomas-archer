@@ -4,8 +4,6 @@ import {
   getAllPages,
   getAllPagesSlugs,
   getDocumentTypeSlugs,
-  getSanityData,
-  getSanityDataById,
   getSettings,
 } from 'lib/sanity.client'
 import { GetStaticProps } from 'next'
@@ -17,6 +15,7 @@ import ProjectPageTemplate from 'components/templates/ProjectPage'
 import BlogPageTemplate from 'components/templates/BlogPage'
 import FloorPageTemplate from 'components/templates/FloorPage'
 import {
+  getDataFromSpecificComponents,
   getRouteDetail,
   setPropsForDetailPage,
   setPropsForPage,
@@ -247,6 +246,13 @@ export const getStaticProps: GetStaticProps<
       }
     } else {
       pages = [...(await getAllPages(routeDetail.page))]
+
+      // inject pages.content data with getDataFromSpecificComponents
+      const newContent = await getDataFromSpecificComponents(
+        pages?.[0]?.content
+      )
+      pages = [{ ...pages?.[0], content: newContent }]
+
       documentTypeRef = checkLinkType(pages[0].content)
       documentTypeSlugs = await getDocumentTypeSlugs(documentTypeRef)
       restructuredDocumentType = structuredDocumentTypes(documentTypeSlugs)

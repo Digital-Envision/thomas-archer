@@ -1,6 +1,7 @@
 import { HeightVariants } from 'components/base/Divider'
 import { enumToArrayOfObjects, getImagesMetaData } from 'lib/utils'
 import { ImageAltField, ImageField } from 'schemas/components/fields'
+import { TagsField } from '../components/fields'
 
 const name = 'SectionGridGallery'
 
@@ -42,21 +43,7 @@ export default {
                             name: 'product',
                             type: 'string',
                         },
-
-                        {
-                            // should a dependencies from parent filterItems, at least can search the existing filterItems.
-                            name: 'tags',
-                            type: 'array',
-                            options: {
-                                layout: 'tags',
-                            },
-                            of: [
-                                {
-                                    name: 'tag',
-                                    type: 'string',
-                                },
-                            ],
-                        },
+                        TagsField,
                         {
                             ...ImageField,
                             description:
