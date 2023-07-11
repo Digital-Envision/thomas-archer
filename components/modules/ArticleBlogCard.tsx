@@ -122,6 +122,7 @@ const ArticleBlogCard: React.FC<ArticleBlogCardProps> = ({
             maxH={{
               '2xl': 'calc((73vw - 7rem)*.730)',
             }}
+            width={'100vw'}
           />
           {isVideoMode && video && (
             <Box
