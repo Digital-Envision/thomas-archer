@@ -113,19 +113,26 @@ const LinkTypes = ({ link, children, ...props }) => {
 }
 
 const LinkType: React.FC<Props> = ({ link, children, ...props }) => {
-    if (link?.useInternal) {
-      return <LinkTypes link={link} children={children} {...props} />
-    } else {
-      return (
-        <NextLink
-          href={link?.externalHref ? link?.externalHref : '#'}
-          {...props}
-        >
-          {children}
-        </NextLink>
-      )
-    }
+  if (link?.useInternal) {
+    return (
+      <LinkTypes
+        link={link}
+        children={children}
+        target={link?.isExternal ? '_blank' : '_selft'}
+        {...props}
+      />
+    )
+  } else {
+    return (
+      <NextLink
+        href={link?.externalHref ? link?.externalHref : '#'}
+        target={link?.isExternal ? '_blank' : '_selft'}
+        {...props}
+      >
+        {children}
+      </NextLink>
+    )
+  }
 }
 
-export default LinkType;
-
+export default LinkType
