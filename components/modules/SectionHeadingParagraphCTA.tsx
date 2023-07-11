@@ -113,6 +113,8 @@ const SectionHeadingParagraphCTA: React.FC<SectionHeadingParagraphCTAProps> = ({
       direction={{ base: 'column', md: isOffset ? 'column' : 'row' }}
       px={{ base: '1rem', md: '4rem' }}
       id={anchor}
+      marginTop={marginTop}
+      marginBottom={marginBottom}
     >
       {body}
     </Flex>

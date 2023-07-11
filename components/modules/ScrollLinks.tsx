@@ -3,6 +3,8 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  Wrap,
+  WrapItem,
 } from '@chakra-ui/react'
 import _ from 'lodash'
 
@@ -13,15 +15,17 @@ const ScrollLinks: React.FC<any> = (props) => {
     .map(({ anchor }, i) => {
       if (anchor)
         return (
-          <BreadcrumbItem
-            paddingRight={'2rem'}
-            key={`${anchor}-${i}`}
-            textDecoration="underline"
-          >
-            <BreadcrumbLink href={`#${anchor}`}>
-              {_.startCase(anchor)}
-            </BreadcrumbLink>
-          </BreadcrumbItem>
+          <WrapItem>
+            <BreadcrumbItem
+              paddingRight={'2rem'}
+              key={`${anchor}-${i}`}
+              textDecoration="underline"
+            >
+              <BreadcrumbLink href={`#${anchor}`}>
+                {_.startCase(anchor)}
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+          </WrapItem>
         )
     })
     .value()
@@ -30,7 +34,7 @@ const ScrollLinks: React.FC<any> = (props) => {
     <Box
       width={'w-full'}
       // maxWidth={'1800px'}
-      //same with navbar
+      // same with navbar
       px={{
         base: '27.58px',
         md: '70.48px',
@@ -46,7 +50,9 @@ const ScrollLinks: React.FC<any> = (props) => {
       marginTop={marginTop}
       marginBottom={marginBottom}
     >
-      <Breadcrumb separator={' '}>{anchors}</Breadcrumb>
+      <Breadcrumb separator={' '}>
+        <Wrap>{anchors}</Wrap>
+      </Breadcrumb>
     </Box>
   )
 }
