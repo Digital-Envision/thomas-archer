@@ -3,29 +3,26 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
-  Wrap,
-  WrapItem,
+  HStack,
 } from '@chakra-ui/react'
 import _ from 'lodash'
 
 const ScrollLinks: React.FC<any> = (props) => {
   const { marginTop, marginBottom } = props
   const anchors = _(props?.page?.content)
-    // .filter(['_type', 'SectionHeadingParagraphCTA'])
     .map(({ anchor }, i) => {
       if (anchor)
         return (
-          <WrapItem>
-            <BreadcrumbItem
-              paddingRight={'2rem'}
-              key={`${anchor}-${i}`}
-              textDecoration="underline"
-            >
-              <BreadcrumbLink href={`#${anchor}`}>
-                {_.startCase(anchor)}
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-          </WrapItem>
+          <BreadcrumbItem
+            paddingRight={'2rem'}
+            key={`${anchor}-${i}`}
+            textDecoration="underline"
+            flexShrink="0"
+          >
+            <BreadcrumbLink href={`#${anchor}`}>
+              {_.startCase(anchor)}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
         )
     })
     .value()
@@ -45,13 +42,14 @@ const ScrollLinks: React.FC<any> = (props) => {
       zIndex={3}
       justifyContent="center"
       alignItems="center"
-      paddingY="1.25rem"
       bgColor="white"
       marginTop={marginTop}
       marginBottom={marginBottom}
     >
       <Breadcrumb separator={' '}>
-        <Wrap>{anchors}</Wrap>
+        <HStack spacing={4} overflowX="auto" paddingY="1.25rem">
+          {anchors}
+        </HStack>
       </Breadcrumb>
     </Box>
   )

@@ -31,9 +31,11 @@ const SectionBreadcrumbs: React.FC<SectionBreadcrumbsProps> = (props) => {
     },
     ...pathArray.map((path, index) => {
       const href = '/' + pathArray.slice(0, index + 1).join('/')
+      const [nonAnchorPath] = _.split(path, '#') // exclude any anchor id
+
       return {
         href,
-        label: _.startCase(path),
+        label: _.startCase(nonAnchorPath),
       }
     }),
   ]
