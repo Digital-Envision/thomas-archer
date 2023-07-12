@@ -29,7 +29,12 @@ import { BsChevronUp } from 'react-icons/bs'
 import { HiOutlineChevronDown } from 'react-icons/hi2'
 import { Filter } from 'components/base/Filter'
 import { MetaData, SanityFiles } from 'utils/interfaces'
-import { getImageUrl } from 'lib/utils'
+import { getImageUrl, isLocal } from 'lib/utils'
+import {
+  FacebookShareButton,
+  PinterestShareButton,
+  TwitterShareButton,
+} from 'next-share'
 
 export interface SectionGridGalleryInterface {
   _key: string
@@ -50,6 +55,7 @@ export interface SectionGridGalleryInterface {
         _type: 'reference'
       }
     }
+    anchor: string
     imageMetaData: MetaData
     alt: string
     location: string
@@ -68,6 +74,7 @@ type SectionGridGalleryProps = {
   image?: SanityFiles
   marginTop: HeightVariants
   marginBottom: HeightVariants
+  _key: string
 }
 
 const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
@@ -75,6 +82,7 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
   filters,
   marginTop,
   marginBottom,
+  _key,
 }) => {
   const [filteredData, setFilteredData] = useState<
     SectionGridGalleryInterface['items']
@@ -89,6 +97,25 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
   const limit = 16
   const [page, setPage] = useState(1)
   const [isMore, setIsMore] = useState(false)
+
+  useEffect(() => {
+    // Lightbox will popup, if SectionGridGallery._key and item.anchor is exist
+    if (window.location.hash) {
+      const anchor = window.location.hash.substring(1)
+
+      const splitted = _.split(anchor, '--')
+      const [galleryKey, itemId] = splitted
+
+      if (galleryKey === _key) {
+        const anchoredItem = _.find(items, {
+          anchor: itemId,
+        }) as SectionGridGalleryInterface['items'][0]
+        if (anchoredItem) {
+          setSelectedData(anchoredItem)
+        }
+      }
+    }
+  }, [])
 
   useEffect(() => {
     // change filter will reset page to 1
@@ -120,15 +147,19 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
 
   const handlePrevious = () => {
     setSelectedData(
-      _.nth(items, _.findIndex(items, { _key: selectedData?._key }) - 1)
+      _.nth(
+        showedData,
+        _.findIndex(showedData, { _key: selectedData?._key }) - 1
+      )
     )
   }
 
   const handleNext = () => {
     setSelectedData(
       _.nth(
-        items,
-        (_.findIndex(items, { _key: selectedData?._key }) + 1) % items.length
+        showedData,
+        (_.findIndex(showedData, { _key: selectedData?._key }) + 1) %
+          showedData.length
       )
     )
   }
@@ -314,7 +345,7 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
                 </Text>
               </Box>
 
-              {/* <Box>
+              <Box>
                 <Text textAlign={'right'}>Share this house</Text>
 
                 <Flex
@@ -322,20 +353,60 @@ const SectionGridGallery: React.FC<SectionGridGalleryProps> = ({
                   justifyContent="center"
                   direction={'row'}
                 >
-                  <ButtonIcon size="xs" aria-label="instagram">
-                    <Instagram />
-                  </ButtonIcon>
-                  <ButtonIcon size="xs" aria-label="facebook">
-                    <Facebook />
-                  </ButtonIcon>
-                  <ButtonIcon size="xs" aria-label="pinterest">
-                    <Pinterest />
-                  </ButtonIcon>
-                  <ButtonIcon size="xs" aria-label="twitter">
-                    <Twitter />
-                  </ButtonIcon>
+                  <FacebookShareButton
+                    // if local, use development url instead, otherwise doesnt work
+                    url={`${
+                      isLocal
+                        ? 'https://development--thomas-archer.netlify.app'
+                        : process.env.NEXT_PUBLIC_DOMAIN_URL
+                    }/gallery/inspiration-moodboards#${_key}--${
+                      selectedData?.anchor
+                    }`}
+                    quote={'insert quote'} // CURRENTLY NOT WORK
+                    hashtag="insert hashtag" // CURRENTLY NOT WORK
+                  >
+                    <ButtonIcon size="xs" aria-label="facebook">
+                      <Facebook />
+                    </ButtonIcon>
+                  </FacebookShareButton>
+
+                  <PinterestShareButton
+                    url={`${
+                      isLocal
+                        ? 'https://development--thomas-archer.netlify.app'
+                        : process.env.NEXT_PUBLIC_DOMAIN_URL
+                    }/gallery/inspiration-moodboards#${_key}--${
+                      selectedData?.anchor
+                    }`}
+                    media={
+                      selectedData && urlForImage(selectedData?.image)?.url()
+                    }
+                    description="insert description" // CURRENTLY NOT WORK
+                  >
+                    <ButtonIcon size="xs" aria-label="pinterest">
+                      <Pinterest />
+                    </ButtonIcon>
+                  </PinterestShareButton>
+
+                  <TwitterShareButton
+                    url={`${
+                      isLocal
+                        ? 'https://development--thomas-archer.netlify.app'
+                        : process.env.NEXT_PUBLIC_DOMAIN_URL
+                    }/gallery/inspiration-moodboards#${_key}--${
+                      selectedData?.anchor
+                    }`}
+                    title={selectedData?.name}
+                    // via="insertViaHere"
+                    // hashtags={['hashtag1', 'hashtag2']}
+                    // related={['related1', 'related2']} // CURRENTLY NOT WORK
+                  >
+                    <ButtonIcon size="xs" aria-label="twitter">
+                      <Twitter />
+                    </ButtonIcon>
+                  </TwitterShareButton>
                 </Flex>
-              </Box> */}
+              </Box>
             </Flex>
           </ModalBody>
           <ModalFooter justifyContent={'space-between'}>
