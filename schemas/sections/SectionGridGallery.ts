@@ -1,6 +1,6 @@
 import { HeightVariants } from 'components/base/Divider'
 import { enumToArrayOfObjects, getImagesMetaData } from 'lib/utils'
-import { ImageAltField, ImageField } from 'schemas/components/fields'
+import { ImageAltField, ImageField, ScrollAnchor } from 'schemas/components/fields'
 import { TagsField } from '../components/fields'
 
 const name = 'SectionGridGallery'
@@ -39,6 +39,7 @@ export default {
                             name: 'location',
                             type: 'string',
                         },
+                        { ...ScrollAnchor, title: 'ItemId' },
                         {
                             name: 'product',
                             type: 'string',

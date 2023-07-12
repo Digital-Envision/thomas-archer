@@ -3,6 +3,8 @@ import { SanityFiles, SanityImage } from 'utils/interfaces'
 import { dataset, projectId } from './sanity.api'
 import { urlForImage } from './sanity.image'
 
+export const isLocal = process.env.NEXT_PUBLIC_DOMAIN_URL === 'http://localhost:3000'
+
 export const enumToArrayOfObjects = (e: any) => {
     return Object.keys(e).map((key) => ({ title: key, value: e[key] }))
 }
