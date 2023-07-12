@@ -16,6 +16,12 @@ type SectionHeroImageBigProps = {
   isExternalVideo: boolean
   externalVideo: string
   bannerImage?: SanityFiles
+  bannerImageMetaData?: {
+    metadata: {
+      blurHash: string
+      lqip: string
+    }
+  }
   bannerVideo?: SanityFiles
   marginBottom?: string
   marginTop?: string
@@ -130,8 +136,6 @@ const SectionHeroImageBig: React.FC<SectionHeroImageBigProps> = (props) => {
       smooth: 'easeInOutQuad',
     })
   }
-
-  console.log({ bannerImage, props })
 
   return isVideo && isExternalVideo && !_.isEmpty(externalVideo) ? (
     <ExternalVideo
