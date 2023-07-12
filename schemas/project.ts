@@ -2,7 +2,7 @@ import { orderRankField, orderRankOrdering } from '@sanity/orderable-document-li
 import { CaptionField, HeadingField, ImageAltField, ImageField, RTFField, SEOField, SlugField, SubHeadingField, TextField } from './components/fields';
 import { DOCUMENT_TYPE_SCHEMA_NAME } from './global/DetailsPage';
 import { listImagesFields } from './sections/SectionGalleryScroll';
-import { bannerVideoField, externalVideoField, isExternalVideoField, isVideoField } from "./sections/SectionHeroImageBig"
+import { bannerVideoField, externalVideoField, isExternalVideoField, isVideoField, quotesField } from "./sections/SectionHeroImageBig"
 import { isSelectedProjectFields, selectedProjectsFields } from './sections/SectionProjectScroll';
 
 export default {
@@ -31,6 +31,7 @@ export default {
             title: 'Product Name',
             type: 'string'
         },
+        { ...quotesField(), description: 'SectionHeroImageBig Quotes' },
         {
             ...RTFField,
             title: 'RTF Paragraph'

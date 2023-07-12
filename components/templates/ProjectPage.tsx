@@ -48,6 +48,7 @@ export default function ProjectPageTemplate(props: any) {
         isExternalVideo={!!project?.video?.externalVideo}
         externalVideo={project?.video?.externalVideo}
         bannerVideo={project?.video?.bannerVideo}
+        quotes={project?.quotes}
         {...project?.SectionHeroImageBig}
       />
 
