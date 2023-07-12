@@ -115,7 +115,9 @@ const DesktopSubNav: React.FC<Props> = ({
     >
       <Grid templateColumns={'repeat(11, 1fr)'} mb={'76px'}>
         <GridItem colSpan={4}>
-          <Heading1 fontSize={'34px'}>{title}</Heading1>
+          <Heading1 as={'p'} fontSize={'34px'}>
+            {title}
+          </Heading1>
         </GridItem>
         <GridItem colSpan={7}>
           <SimpleGrid columns={2} spacingX={10} spacingY={1}>

@@ -3,7 +3,8 @@ import { AspectRatio, Box, Flex } from '@chakra-ui/react'
 import { PortableText } from '@portabletext/react'
 import { urlForImage } from 'lib/sanity.image'
 import Button, { Variants } from 'components/base/Button'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import Vimeo from '@u-wave/react-vimeo'
 import { BsChevronDown } from 'react-icons/bs'
 import { animateScroll } from 'react-scroll'
 import { getVideoUrl } from 'lib/utils'
@@ -15,24 +16,60 @@ type SectionHeroImageBigProps = {
   isExternalVideo: boolean
   externalVideo: string
   bannerImage?: SanityFiles
+  bannerImageMetaData?: {
+    metadata: {
+      blurHash: string
+      lqip: string
+    }
+  }
   bannerVideo?: SanityFiles
   marginBottom?: string
   marginTop?: string
 }
 
-const ExternalVideo = ({ quotes, handleScrollDown, externalVideo, marginTop, marginBottom }) => {
+const ExternalVideo = ({
+  quotes,
+  handleScrollDown,
+  externalVideo,
+  marginTop,
+  marginBottom,
+  bannerImage,
+  bannerImageMetaData,
+}) => {
+  const [showVideo, setShowVideo] = useState(true)
+  const [sourceLoaded, setSourceLoaded] = useState(null)
+
+  useEffect(() => {
+    const src = urlForImage(bannerImage).url()
+    const img = new Image()
+    img.src = src
+    img.onload = () => setSourceLoaded(src)
+  }, [bannerImage])
+
   return (
     <Box
       width={'100vw'}
       height={'100vh'}
       marginTop={marginTop}
       marginBottom={marginBottom}
+      backgroundImage={sourceLoaded || bannerImageMetaData?.metadata?.lqip}
+      transition={'opacity 0.5s'}
+      backgroundRepeat="no-repeat"
+      backgroundSize="cover"
+      backgroundPosition={'center'}
     >
-      <Box className="bg-iframe">
-        <iframe
-          src={`${externalVideo}?background=1&autoplay=1&muted=1&loop=1`}
-          frameBorder={0}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      <Box
+        className="bg-iframe"
+        opacity={showVideo ? 1 : 0}
+        transition={'opacity 0.5s'}
+      >
+        <Vimeo
+          video={externalVideo}
+          autoplay
+          muted
+          background
+          loop
+          onPlaying={() => setShowVideo(true)}
         />
       </Box>
       <Flex
@@ -85,6 +122,7 @@ const SectionHeroImageBig: React.FC<SectionHeroImageBigProps> = (props) => {
     quotes,
     isVideo,
     bannerImage,
+    bannerImageMetaData,
     bannerVideo,
     marginBottom,
     marginTop,
@@ -106,6 +144,8 @@ const SectionHeroImageBig: React.FC<SectionHeroImageBigProps> = (props) => {
       externalVideo={externalVideo}
       marginBottom={marginBottom}
       marginTop={marginTop}
+      bannerImage={bannerImage}
+      bannerImageMetaData={bannerImageMetaData}
     />
   ) : (
     <Box

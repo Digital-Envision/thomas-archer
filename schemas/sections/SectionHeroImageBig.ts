@@ -40,7 +40,7 @@ export const bannerImageField = (props?) =>
         options: {
             hotspot: true,
         },
-        hidden: ({ parent }) => parent?.isVideo,
+        validation: (Rule) => Rule.required(),
         description:
             'You only can choose one, using Video or Image as a banner image',
         ...props,
